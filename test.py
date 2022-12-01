@@ -4,7 +4,7 @@ from PyQt5 import uic
 class MyGUI(QMainWindow):
     def __init__(self):
         super(MyGUI, self).__init__()
-        uic.loadUi("test.ui",self) # file
+        uic.loadUi("Ui_Files/test.ui", self) # file
         self.show()
 
 def main():
