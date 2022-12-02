@@ -6,7 +6,7 @@ from PyQt5 import uic
 class MyGUI(QMainWindow):
     def __init__(self):
         super(MyGUI, self).__init__()
-        uic.loadUi("ui/test.ui", self) # file
+        uic.loadUi("ui/signup.ui", self) # file
         self.show()
 
 def main():
