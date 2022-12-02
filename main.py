@@ -16,8 +16,8 @@ class Signup(QMainWindow):
         print('this is a test\n')
 
     def change(self): # just a test function
-        test = Test()
-        widget.addWidget(test)
+        login = Login()
+        widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1) # -1 also works?
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -25,10 +25,10 @@ class Signup(QMainWindow):
         self.existing_account_button.clicked.connect(self.change)
 
 
-class Test(QMainWindow):
+class Login(QMainWindow):
     def __init__(self):
-        super(Test, self).__init__()
-        loadUi("ui/test.ui", self) # file
+        super(Login, self).__init__()
+        loadUi("ui/login.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on the signup button
 
     def change(self): # just a test function
@@ -37,7 +37,7 @@ class Test(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self): # this function handles the click of the signup button
-        self.pushButton_5.clicked.connect(self.change)
+        self.sign_up_button.clicked.connect(self.change)
 
 
 
@@ -45,8 +45,8 @@ class Test(QMainWindow):
 app = QApplication(sys.argv)
 widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
 
-test = Test()
-widget.addWidget(test) # adding the first window to the stack
+login = Login()
+widget.addWidget(login) # adding the first window to the stack
 
 widget.setFixedHeight(900)
 widget.setFixedWidth(1500)
