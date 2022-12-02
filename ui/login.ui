@@ -44,7 +44,7 @@
      <string>EasyJobs</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="login_button_lable">
+   <widget class="QPushButton" name="login_button">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -62,7 +62,7 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="sign_up_button_lable">
+   <widget class="QPushButton" name="sign_up_button">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -103,7 +103,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="username_lable">
        <property name="font">
         <font>
          <pointsize>17</pointsize>
@@ -127,7 +127,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="password_lable">
        <property name="font">
         <font>
          <pointsize>17</pointsize>
@@ -143,10 +143,10 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="forgotpass_button">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>280</x>
       <y>480</y>
       <width>181</width>
       <height>51</height>
@@ -154,13 +154,13 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>13</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>?שכחת סיסמה</string>
+     <string>Forgot password?</string>
     </property>
     <property name="flat">
      <bool>true</bool>

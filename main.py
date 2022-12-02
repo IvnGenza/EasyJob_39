@@ -8,7 +8,22 @@ class MyGUI(QMainWindow):
         super(MyGUI, self).__init__()
         uic.loadUi("ui/login.ui", self) # file
         self.show()
-        print("Yes")
+        self.handel_buttons()
+      
+    
+    def login_button1(self):
+        print("Login works")
+
+    def handel_buttons(self):
+        self.login_button.clicked.connect(self.login_button1) #function that handles all buttons, calls the buttons functions
+        
+
+
+
+
+
+
+
 
 def main():
     app = QApplication([])
