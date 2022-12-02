@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>forgot_pass_lable</class>
+ <widget class="QMainWindow" name="forgot_pass_lable">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -44,7 +44,7 @@
      <string>EasyJobs</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="login_button_lable">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -62,7 +62,7 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="sign_up_button_lable">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -140,6 +140,29 @@
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>480</y>
+      <width>181</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>?שכחת סיסמה</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -153,8 +176,6 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="../Documents/Visual Studio 2022/Projects/Easyjobs - 39/ui/Images/login image.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
