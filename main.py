@@ -52,4 +52,7 @@ widget.setFixedHeight(900)
 widget.setFixedWidth(1500)
 widget.show() # showing the stack of widgets, first window will be showen first
 
-
+try:
+    sys.exit(app.exec_()) # tring to run the app
+except:
+    print("Exiting")
