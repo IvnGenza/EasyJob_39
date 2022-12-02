@@ -12,3 +12,8 @@ firebaseConfig ={
 };
 
 firebase=pyrebase.initialize_app(firebaseConfig)
+db=firebase.database()
+
+p=db.child("Data").child("Name").get().val()
+
+print(p)
