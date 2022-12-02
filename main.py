@@ -58,5 +58,3 @@ except:
     print("Exiting")
 
 
-#login = Login()
-#widget.addWidget(login)
