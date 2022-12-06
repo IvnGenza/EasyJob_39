@@ -1,4 +1,5 @@
-import database.authentication
+
+from database.authentication import auth,db
 import sys
 import re
 from PyQt5.uic import loadUi
@@ -57,9 +58,9 @@ class Signup(QMainWindow):
         if flag == 0:
 
             try:
-                database.authentication.auth.create_user_with_email_and_password(email,PasswordKey)
+                auth.create_user_with_email_and_password(email,PasswordKey)
+                db.child('Data').child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType})
                 self.change_to_login()
-
 
             except:
                 showError(">> Connection Error! <<")
@@ -134,7 +135,7 @@ class Login(QMainWindow):
         passwordKey=self.password_lable.text()
 
         if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
-             database.authentication.auth.sign_in_with_email_and_password(email,passwordKey)
+             auth.sign_in_with_email_and_password(email,passwordKey)
              print(">> Welcome! <<")
 
         else:   
