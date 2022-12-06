@@ -49,7 +49,7 @@ class Signup(QMainWindow):
             flag = 1
             
         if flag == 0:
-            self.change_login()
+            self.change_to_login()
             database.authentication.auth.create_user_with_email_and_password(email,PasswordKey)
         else:
             self.wrong_data_label.setVisible(True)
@@ -69,7 +69,7 @@ class Signup(QMainWindow):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' #regular expression
         if(re.fullmatch(regex, email)):
              print("Valid Email")
-             return True 
+             return True
  
         else:
             print("Invalid Email")
