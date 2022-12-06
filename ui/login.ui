@@ -167,10 +167,13 @@
     </property>
    </widget>
    <widget class="QLabel" name="wrong_data_label_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>440</y>
+      <x>40</x>
+      <y>430</y>
       <width>250</width>
       <height>100</height>
      </rect>
