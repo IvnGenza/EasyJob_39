@@ -27,7 +27,7 @@ class Signup(QMainWindow):
         UserName=self.username_text_box.text()
         UserType=self.user_type_text_box.currentText()
         ErrorString = ''
-
+        
         if self.checkEmail(email)==False:
              ErrorString+='Invalid Email '
              flag = 1
