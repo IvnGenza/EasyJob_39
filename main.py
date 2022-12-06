@@ -164,8 +164,6 @@ widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
 
 login = Login()
 widget.addWidget(login) # adding the first window to the stack
-widget.setFixedHeight(900)
-widget.setFixedWidth(1500)
 widget.show() # showing the stack of widgets, first window will be showen first
 
 try:
