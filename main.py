@@ -48,12 +48,26 @@ class Signup(QMainWindow):
             ErrorString+='Invalid UserName '
             flag = 1
             
-        if flag == 0:
-            self.change_to_login()
-            database.authentication.auth.create_user_with_email_and_password(email,PasswordKey)
-        else:
+
+        def showError(message):
+
             self.wrong_data_label.setVisible(True)
-            self.wrong_data_label.setText(ErrorString)
+            self.wrong_data_label.setText(message)
+
+        if flag == 0:
+
+            try:
+                database.authentication.auth.create_user_with_email_and_password(email,PasswordKey)
+                self.change_to_login()
+
+
+            except:
+                showError(">> Connection Error! <<")
+
+
+        else:
+            showError(ErrorString)
+
 
 # help func`s for signup class.
 
