@@ -15,11 +15,9 @@ class Signup(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
 
 
-
     def CreateNewAccFunc(self):
         flag=0
 
-        ##confirm
         email = self.Email_text_box.text()
         PasswordKey=self.password_text_box.text()
         FullName=self.full_name_text_box.text()
@@ -106,44 +104,7 @@ class Signup(QMainWindow):
         #self.wrong_input.setVisible(False)
 
 #------------------------------------Login class------------------------------------
-
-    def testInput(self):
-        #checking the the username is valid:
  
-        #helper functions:
-        def checkuser(username): #the username needs to have al alpha-numeric values, cant have numbers
-            if username == '':
-                return False
-            if username.isalpha():
-                return True 
-            return False
-
-        def checkpass(password): #the password needs to have atleast 1 capital letter and atleast 1 number
-            if password == '':
-                return False
-            elif password.islower() or password.isalpha():
-                return False #returns false if there are no uppercase letters or no numbers
-            return True
-
-
-        if checkuser(self.username_text_box.text()): #this is how to check the input field's text
-            print('you inputed the correct username\n') #need to check if the same username already exists in the database
-        else:
-            print('the username cant have numbers')
-
-        if checkpass(self.password_text_box.text()):
-            print('you inputed a correct password\n')
-        else: 
-            print('the password need to have atleast one Capitl letter and atleast one number')
-        
-        #if self.full_name_text_box.text() == "john doe":
-        #    print('you inputed a correct full name\n')
-        
-        #if self.age_text_box.text() >= 18 and self.age_text_box.text() <= 120: #need to add a test that there are no letters in there
-        #    print('you inputed a correct age\n')
-
-        #if self.email_text_box.text() == "johndoe@mail.com":#need to check that the is @ and .com
-        #    print('you inputed a correct email\n')
 
 # This is a Login window object
 class Login(QMainWindow):
