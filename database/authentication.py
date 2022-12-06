@@ -14,8 +14,13 @@ firebaseConfig ={
 'measurementId': "G-4FS7N8MX70"
 };
 
-firebase=pyrebase.initialize_app(firebaseConfig)
-db=firebase.database()
+
+firebase = pyrebase.initialize_app(firebaseConfig)
+db = firebase.database()
+auth = firebase.auth()
+storage = firebase.storage()
+
+
 
 p=db.child("Data").child("Name").get().val()
 
