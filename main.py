@@ -68,7 +68,7 @@ class Signup(QMainWindow):
             showError(ErrorString)
 
 
-# help funcs for signup class.
+#--------------help funcs for signup class-----------------
 
 
     def checkPasswordKey(self, passkey):
