@@ -22,6 +22,7 @@ storage = firebase.storage()
 
 
 
-p=db.child("Data").child("Name").get().val()
+SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
 
-print(p)
+
+print(SomeUser)

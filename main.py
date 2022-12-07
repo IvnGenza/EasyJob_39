@@ -1,4 +1,5 @@
-import database.authentication
+
+from database.authentication import auth,db
 import sys
 import re
 from PyQt5.uic import loadUi
@@ -46,14 +47,28 @@ class Signup(QMainWindow):
             ErrorString+='Invalid UserName '
             flag = 1
             
-        if flag == 0:
-            self.change_to_login()
-            database.authentication.auth.create_user_with_email_and_password(email,PasswordKey)
-        else:
-            self.wrong_data_label.setVisible(True)
-            self.wrong_data_label.setText(ErrorString)
 
-# help func`s for signup class.
+        # this function shows label with error message.
+        def showError(message):
+            self.wrong_data_label.setVisible(True)
+            self.wrong_data_label.setText(message)
+
+        if flag == 0:
+
+            #Putting data base funcs in try/except to prevent app crash on error.
+            try:
+                auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
+                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
+                self.change_to_login()
+
+            except:
+                showError(">> Connection Error! <<")
+
+        else:
+            showError(ErrorString)
+
+
+# help funcs for signup class.
 
 
     def checkPasswordKey(self, passkey):
@@ -67,7 +82,7 @@ class Signup(QMainWindow):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' #regular expression
         if(re.fullmatch(regex, email)):
              print("Valid Email")
-             return True 
+             return True
  
         else:
             print("Invalid Email")
@@ -119,7 +134,7 @@ class Login(QMainWindow):
         passwordKey=self.password_lable.text()
 
         if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
-             database.authentication.auth.sign_in_with_email_and_password(email,passwordKey)
+             auth.sign_in_with_email_and_password(email,passwordKey)
              print(">> Welcome! <<")
 
         else:   
@@ -127,7 +142,7 @@ class Login(QMainWindow):
     
 
      
-#       help func`s for login class.
+#       help funcs for login class.
 
     def checkPasswordKey(self, passkey):
         if passkey == '':
