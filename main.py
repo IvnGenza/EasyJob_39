@@ -28,8 +28,8 @@ class Signup(QMainWindow):
         ErrorString = '' #this string will show the error message when clicking signup, if there are no errors, this will stay empty
         
         if self.checkEmail(email)==False:
-             ErrorString+='Invalid Email '
-             flag = 1
+            ErrorString+='Invalid Email '
+            flag = 1
 
         if self.checkPasswordKey(PasswordKey)==False:
             ErrorString+='Invalid Password '
@@ -125,16 +125,25 @@ class Login(QMainWindow):
         email=self.username_lable.text()
         passwordKey=self.password_lable.text()
 
-        if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
-             auth.sign_in_with_email_and_password(email,passwordKey)
-             print(">> Welcome! <<")
+        # this function shows label with error message.
+        def showError(message):
+            self.wrong_data_label_2.setVisible(True)
+            self.wrong_data_label_2.setText(message)
 
-        else:   
-             self.wrong_data_label_2.setVisible(True)
+        if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
+
+            try: #Putting data base funcs in try/except to prevent app crash on error.
+                auth.sign_in_with_email_and_password(email,passwordKey)
+                print(">> Welcome! <<")
+            except: #if could not login then there is a connection error.
+                showError(">> Conection Error! <<")
+
+        else: #if there is no existing account then show this error message
+            showError("Email or password is invalid.")
     
 
      
-#       help funcs for login class.
+#--------------help funcs for login class-----------------
 
     def checkPasswordKey(self, passkey):
         if passkey == '':

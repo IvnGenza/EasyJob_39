@@ -274,26 +274,32 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>430</y>
-      <width>250</width>
-      <height>100</height>
+      <x>30</x>
+      <y>450</y>
+      <width>200</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>250</width>
-      <height>100</height>
+      <width>200</width>
+      <height>20</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>250</width>
-      <height>100</height>
+      <width>200</width>
+      <height>20</height>
      </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: red</string>
     </property>
     <property name="text">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline; color:#ff0000;&quot;&gt;Email or password is invalid.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline; color:#ff0000;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
