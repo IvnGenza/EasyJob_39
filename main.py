@@ -16,39 +16,37 @@ class Signup(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
 
 
-
     def CreateNewAccFunc(self):
         flag=0
 
-        ##confirm
         email = self.Email_text_box.text()
         PasswordKey=self.password_text_box.text()
         FullName=self.full_name_text_box.text()
-        Age=self.age_text_box.text()
+        Age=self.age_spin_box.text() #age will always be a valid number, there for we dont need to test it
         UserName=self.username_text_box.text()
-        UserType=self.user_type_text_box.currentText()
-        ErrorString = ''
+        UserType=self.user_type_text_box.currentText() #user type only has 2 options, and by default will be student, no need for tests
+        ErrorString = '' #this string will show the error message when clicking signup, if there are no errors, this will stay empty
         
         if self.checkEmail(email)==False:
-             ErrorString+='Invalid Email '
-             flag = 1
+            ErrorString = ''.join((ErrorString,' Email,'))
+            flag = 1
 
         if self.checkPasswordKey(PasswordKey)==False:
-            ErrorString+='Invalid Password '
+            ErrorString = ''.join((ErrorString,' Password,'))
             flag = 1
            
         if self.checkFullName(FullName)==False:
-            ErrorString+='Invalid Name '
+            ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
-    
-        #if self.checkAge(Age)==False:
-        #    ErrorString+='Invalid Age '
-        #    flag = 1
            
         if self.checkUserName(UserName)==False:
-            ErrorString+='Invalid UserName '
+            ErrorString = ''.join((ErrorString,' User Name,'))
             flag = 1
             
+        # formating the error string acording to the users input
+        ErrorString = ''.join(('Invalid ',ErrorString))
+        ErrorString = ErrorString[:-1] + '.' #removing the last ',' and adding a '.' instead 
+
 
         # this function shows label with error message.
         def showError(message):
@@ -85,13 +83,9 @@ class Signup(QMainWindow):
         if(re.fullmatch(regex, email)):
              print("Valid Email")
              return True
- 
         else:
             print("Invalid Email")
             return False
-
-    #def checkAge(self, age):
-    #    return True
 
     def checkFullName(self, fullname):
        if fullname == '':
@@ -117,12 +111,13 @@ class Signup(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.CreateNewAccFunc)
         self.existing_account_button.clicked.connect(self.change_to_login)
-        self.wrong_data_label.setVisible(False)
-        #self.wrong_input.setVisible(False)
+        #self.wrong_data_label.setVisible(False) #not needed beacause the inner text is already blank, there is no text.
+        
 
 #------------------------------------Login class------------------------------------
+ 
 
-
+# This is a Login window object
 class Login(QMainWindow):
     def __init__(self):
         super(Login, self).__init__()
@@ -134,16 +129,25 @@ class Login(QMainWindow):
         email=self.username_lable.text()
         passwordKey=self.password_lable.text()
 
-        if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
-             auth.sign_in_with_email_and_password(email,passwordKey)
-             print(">> Welcome! <<")
+        # this function shows label with error message.
+        def showError(message):
+            self.wrong_data_label_2.setVisible(True)
+            self.wrong_data_label_2.setText(message)
 
-        else:   
-             self.wrong_data_label_2.setVisible(True)
+        if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
+
+            try: #Putting data base funcs in try/except to prevent app crash on error.
+                auth.sign_in_with_email_and_password(email,passwordKey)
+                print(">> Welcome! <<")
+            except: #if could not login then there is a connection error.
+                showError(">> Conection Error! <<")
+
+        else: #if there is no existing account then show this error message
+            showError("Email or password is invalid.")
     
 
      
-#       help funcs for login class.
+#--------------help funcs for login class-----------------
 
     def checkPasswordKey(self, passkey):
         if passkey == '':
