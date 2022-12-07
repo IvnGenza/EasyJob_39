@@ -21,7 +21,7 @@ class Signup(QMainWindow):
         email = self.Email_text_box.text()
         PasswordKey=self.password_text_box.text()
         FullName=self.full_name_text_box.text()
-        Age=self.age_text_box.text()
+        Age=self.age_spin_box.text()
         UserName=self.username_text_box.text()
         UserType=self.user_type_text_box.currentText()
         ErrorString = ''
@@ -47,7 +47,7 @@ class Signup(QMainWindow):
             flag = 1
             
         if flag == 0:
-            self.change_login()
+            self.change_to_login()
             database.authentication.auth.create_user_with_email_and_password(email,PasswordKey)
         else:
             self.wrong_data_label.setVisible(True)
@@ -100,8 +100,8 @@ class Signup(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.CreateNewAccFunc)
         self.existing_account_button.clicked.connect(self.change_to_login)
-        self.wrong_data_label.setVisible(False)
-        #self.wrong_input.setVisible(False)
+        #self.wrong_data_label.setVisible(False) #not needed beacause the inner text is already blank, there is no text.
+        
 
 #------------------------------------Login class------------------------------------
  
