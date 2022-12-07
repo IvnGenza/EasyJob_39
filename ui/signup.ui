@@ -32,7 +32,7 @@
       <x>0</x>
       <y>0</y>
       <width>1231</width>
-      <height>762</height>
+      <height>521</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_4">
@@ -43,192 +43,9 @@
       <number>0</number>
      </property>
      <property name="bottomMargin">
-      <number>150</number>
+      <number>0</number>
      </property>
      <item row="2" column="0">
-      <layout class="QGridLayout" name="gridLayout_6">
-       <property name="bottomMargin">
-        <number>100</number>
-       </property>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="existing_account_button">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>25</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-           <italic>false</italic>
-           <underline>true</underline>
-          </font>
-         </property>
-         <property name="text">
-          <string>already have an account?</string>
-         </property>
-         <property name="flat">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1" alignment="Qt::AlignHCenter">
-        <widget class="QPushButton" name="sign_up_button">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>16</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="acceptDrops">
-          <bool>false</bool>
-         </property>
-         <property name="text">
-          <string>Sign up</string>
-         </property>
-         <property name="autoRepeatDelay">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="blank_label">
-         <property name="minimumSize">
-          <size>
-           <width>500</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>500</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::RightToLeft</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2" alignment="Qt::AlignRight">
-        <widget class="QLabel" name="wrong_data_label">
-         <property name="minimumSize">
-          <size>
-           <width>450</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>450</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>MS Shell Dlg 2</family>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::RightToLeft</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">color: red;
-font-size: 14pt;
-text-align:left;
-
-</string>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
-      <widget class="QLabel" name="easy_job_lable_3">
-       <property name="minimumSize">
-        <size>
-         <width>600</width>
-         <height>150</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>600</width>
-         <height>150</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>MS Shell Dlg 2</family>
-         <pointsize>60</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-         <underline>true</underline>
-         <kerning>true</kerning>
-        </font>
-       </property>
-       <property name="acceptDrops">
-        <bool>false</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LeftToRight</enum>
-       </property>
-       <property name="frameShadow">
-        <enum>QFrame::Plain</enum>
-       </property>
-       <property name="lineWidth">
-        <number>1</number>
-       </property>
-       <property name="midLineWidth">
-        <number>0</number>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;EasyJobs&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
       <layout class="QGridLayout" name="gridLayout_5">
        <property name="leftMargin">
         <number>100</number>
@@ -239,87 +56,6 @@ text-align:left;
        <property name="bottomMargin">
         <number>50</number>
        </property>
-       <item row="0" column="5">
-        <widget class="QLineEdit" name="full_name_text_box">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>250</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="baseSize">
-          <size>
-           <width>120</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="username_lable">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Username:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="4">
-        <widget class="QLabel" name="full_name_lable">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Full Name:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="password_lable">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Password:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-         <property name="margin">
-          <number>0</number>
-         </property>
-        </widget>
-       </item>
        <item row="0" column="3">
         <widget class="QLineEdit" name="password_text_box">
          <property name="minimumSize">
@@ -350,36 +86,6 @@ text-align:left;
          </property>
          <property name="echoMode">
           <enum>QLineEdit::Password</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="username_text_box">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>250</width>
-           <height>30</height>
-          </size>
-         </property>
-         <property name="baseSize">
-          <size>
-           <width>120</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="frame">
-          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -438,6 +144,39 @@ text-align:left;
          </item>
         </widget>
        </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="password_lable">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Password:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="age_lable">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Age:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="1">
         <widget class="QLineEdit" name="Email_text_box">
          <property name="minimumSize">
@@ -486,21 +225,6 @@ text-align:left;
          </property>
         </widget>
        </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="age_lable">
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Age:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="3">
         <widget class="QSpinBox" name="age_spin_box">
          <property name="minimumSize">
@@ -525,6 +249,282 @@ text-align:left;
          </property>
          <property name="maximum">
           <number>120</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLineEdit" name="full_name_text_box">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="full_name_lable">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Full Name:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+         <property name="margin">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="username_lable">
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Username:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="username_text_box">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>250</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>120</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="frame">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="0" column="0" alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+      <widget class="QLabel" name="easy_job_lable_3">
+       <property name="minimumSize">
+        <size>
+         <width>600</width>
+         <height>150</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>600</width>
+         <height>150</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>60</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+         <underline>true</underline>
+         <kerning>true</kerning>
+        </font>
+       </property>
+       <property name="acceptDrops">
+        <bool>false</bool>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="lineWidth">
+        <number>1</number>
+       </property>
+       <property name="midLineWidth">
+        <number>0</number>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;EasyJobs&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <layout class="QGridLayout" name="gridLayout_6">
+       <property name="bottomMargin">
+        <number>80</number>
+       </property>
+       <item row="0" column="1" alignment="Qt::AlignHCenter">
+        <widget class="QPushButton" name="sign_up_button">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="acceptDrops">
+          <bool>false</bool>
+         </property>
+         <property name="text">
+          <string>Sign up</string>
+         </property>
+         <property name="autoRepeatDelay">
+          <number>0</number>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" alignment="Qt::AlignRight">
+        <widget class="QLabel" name="wrong_data_label">
+         <property name="minimumSize">
+          <size>
+           <width>450</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>450</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">color: red;
+font-size: 14pt;
+text-align:left;
+
+</string>
+         </property>
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="existing_account_button">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>200</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+           <italic>false</italic>
+           <underline>true</underline>
+          </font>
+         </property>
+         <property name="text">
+          <string>already have an account?</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignRight">
+        <widget class="QLabel" name="requirements_label_2">
+         <property name="minimumSize">
+          <size>
+           <width>380</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>380</width>
+           <height>30</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>MS Shell Dlg 2</family>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>*password needs to have at least one capital letter and at least one number</string>
          </property>
         </widget>
        </item>
