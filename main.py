@@ -88,11 +88,15 @@ class Signup(QMainWindow):
             return False
 
     def checkFullName(self, fullname):
-       if fullname == '':
+        if fullname == '':
            return False
-       temp = fullname.split(' ')
-       if temp[0].isalpha and temp[1].isalpha():
-           return True
+        temp = fullname.split(' ')
+        if len(temp) > 1: #checks if the name is valid 
+            if temp[0].isalpha and temp[1].isalpha():
+                return True
+        else:
+            print('Invalid FullName')
+            return False
 
     def checkUserName(self, username):
         if username == '':
