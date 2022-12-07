@@ -65,8 +65,8 @@ text-align:center;</string>
    <widget class="QWidget" name="gridLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>250</y>
+      <x>20</x>
+      <y>240</y>
       <width>541</width>
       <height>161</height>
      </rect>
@@ -88,7 +88,7 @@ text-align:center;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>27</pointsize>
+         <pointsize>24</pointsize>
         </font>
        </property>
        <property name="text">
@@ -120,7 +120,7 @@ text-align:center;</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" alignment="Qt::AlignRight">
+     <item row="1" column="0" alignment="Qt::AlignRight|Qt::AlignVCenter">
       <widget class="QLabel" name="label_3">
        <property name="minimumSize">
         <size>
@@ -136,7 +136,7 @@ text-align:center;</string>
        </property>
        <property name="font">
         <font>
-         <pointsize>27</pointsize>
+         <pointsize>24</pointsize>
         </font>
        </property>
        <property name="text">
