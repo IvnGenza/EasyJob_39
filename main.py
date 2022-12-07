@@ -28,21 +28,25 @@ class Signup(QMainWindow):
         ErrorString = '' #this string will show the error message when clicking signup, if there are no errors, this will stay empty
         
         if self.checkEmail(email)==False:
-            ErrorString+='Invalid Email '
+            ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1
 
         if self.checkPasswordKey(PasswordKey)==False:
-            ErrorString+='Invalid Password '
+            ErrorString = ''.join((ErrorString,' Password,'))
             flag = 1
            
         if self.checkFullName(FullName)==False:
-            ErrorString+='Invalid Name '
+            ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
            
         if self.checkUserName(UserName)==False:
-            ErrorString+='Invalid UserName '
+            ErrorString = ''.join((ErrorString,' User Name,'))
             flag = 1
             
+        # formating the error string acording to the users input
+        ErrorString = ''.join(('Invalid ',ErrorString))
+        ErrorString = ErrorString[:-1] + '.' #removing the last ',' and adding a '.' instead 
+
 
         # this function shows label with error message.
         def showError(message):

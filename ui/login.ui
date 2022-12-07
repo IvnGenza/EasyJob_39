@@ -26,10 +26,222 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="wrong_data_label_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>400</y>
+      <width>300</width>
+      <height>35</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>300</width>
+      <height>35</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>300</width>
+      <height>35</height>
+     </size>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: red;
+font-size: 14pt;
+text-align:center;</string>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline; color:#ff0000;&quot;&gt;Email or password is invalid.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline; color:#ff0000;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>250</y>
+      <width>541</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0" alignment="Qt::AlignRight">
+      <widget class="QLabel" name="label_2">
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>27</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Email:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="username_lable">
+       <property name="minimumSize">
+        <size>
+         <width>270</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>17</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0" alignment="Qt::AlignRight">
+      <widget class="QLabel" name="label_3">
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>50</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>27</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Password:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="password_lable">
+       <property name="minimumSize">
+        <size>
+         <width>270</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>35</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>17</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="login_button">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>440</y>
+      <width>115</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>115</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>115</width>
+      <height>40</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>17</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Login</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="forgotpass_button">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>480</y>
+      <width>200</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>200</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>200</width>
+      <height>30</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Forgot password?</string>
+    </property>
+    <property name="flat">
+     <bool>true</bool>
+    </property>
+   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>30</x>
       <y>70</y>
       <width>600</width>
       <height>150</height>
@@ -62,40 +274,10 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="login_button">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>440</y>
-      <width>115</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>115</width>
-      <height>40</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>115</width>
-      <height>40</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>17</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Login</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="sign_up_button">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>340</x>
       <y>440</y>
       <width>115</width>
       <height>40</height>
@@ -120,186 +302,6 @@
     </property>
     <property name="text">
      <string>Sign up</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>140</x>
-      <y>230</y>
-      <width>461</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0" alignment="Qt::AlignVCenter">
-      <widget class="QLabel" name="label_3">
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>27</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Password:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="username_lable">
-       <property name="minimumSize">
-        <size>
-         <width>270</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>17</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>27</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Email:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="password_lable">
-       <property name="minimumSize">
-        <size>
-         <width>270</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>17</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Password</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="forgotpass_button">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>480</y>
-      <width>200</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>200</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>200</width>
-      <height>30</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>13</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Forgot password?</string>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="wrong_data_label_2">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>450</y>
-      <width>200</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>200</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>200</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">color: red</string>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline; color:#ff0000;&quot;&gt;Email or password is invalid.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; text-decoration: underline; color:#ff0000;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>
