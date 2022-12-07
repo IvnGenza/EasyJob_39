@@ -50,27 +50,27 @@ class Signup(QMainWindow):
             flag = 1
             
 
+        # this function shows label with error message.
         def showError(message):
-
             self.wrong_data_label.setVisible(True)
             self.wrong_data_label.setText(message)
 
         if flag == 0:
 
+            #Putting data base funcs in try/except to prevent app crash on error.
             try:
-                auth.create_user_with_email_and_password(email,PasswordKey)
-                db.child('Data').child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType})
+                auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
+                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
                 self.change_to_login()
 
             except:
                 showError(">> Connection Error! <<")
 
-
         else:
             showError(ErrorString)
 
 
-# help func`s for signup class.
+# help funcs for signup class.
 
 
     def checkPasswordKey(self, passkey):
@@ -143,7 +143,7 @@ class Login(QMainWindow):
     
 
      
-#       help func`s for login class.
+#       help funcs for login class.
 
     def checkPasswordKey(self, passkey):
         if passkey == '':
