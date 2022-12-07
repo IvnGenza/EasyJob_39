@@ -22,10 +22,10 @@ class Signup(QMainWindow):
         email = self.Email_text_box.text()
         PasswordKey=self.password_text_box.text()
         FullName=self.full_name_text_box.text()
-        Age=self.age_spin_box.text()
+        Age=self.age_spin_box.text() #age will always be a valid number, there for we dont need to test it
         UserName=self.username_text_box.text()
-        UserType=self.user_type_text_box.currentText()
-        ErrorString = ''
+        UserType=self.user_type_text_box.currentText() #user type only has 2 options, and by default will be student, no need for tests
+        ErrorString = '' #this string will show the error message when clicking signup, if there are no errors, this will stay empty
         
         if self.checkEmail(email)==False:
              ErrorString+='Invalid Email '
@@ -38,10 +38,6 @@ class Signup(QMainWindow):
         if self.checkFullName(FullName)==False:
             ErrorString+='Invalid Name '
             flag = 1
-    
-        #if self.checkAge(Age)==False:
-        #    ErrorString+='Invalid Age '
-        #    flag = 1
            
         if self.checkUserName(UserName)==False:
             ErrorString+='Invalid UserName '
@@ -83,13 +79,9 @@ class Signup(QMainWindow):
         if(re.fullmatch(regex, email)):
              print("Valid Email")
              return True
- 
         else:
             print("Invalid Email")
             return False
-
-    #def checkAge(self, age):
-    #    return True
 
     def checkFullName(self, fullname):
        if fullname == '':
