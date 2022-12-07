@@ -129,7 +129,6 @@ class Login(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on the signup button
 
     def logging(self):
-
         email=self.username_lable.text()
         passwordKey=self.password_lable.text()
 
@@ -144,7 +143,7 @@ class Login(QMainWindow):
                 auth.sign_in_with_email_and_password(email,passwordKey)
                 print(">> Welcome! <<")
             except: #if could not login then there is a connection error.
-                showError(">> Conection Error! <<")
+                showError(">> Connection Error! <<")
 
         else: #if there is no existing account then show this error message
             showError("Email or password is invalid.")
@@ -179,6 +178,42 @@ class Login(QMainWindow):
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
+
+
+    #------------------------------------Homepage class------------------------------------
+
+class Homepage(QMainWindow):
+    def __init__(self):
+        super(Homepage, self).__init__()
+        loadUi("ui/homepage.ui", self) # file
+        #self.handle_buttons() # allows us to listen for clicks on all the buttons
+
+
+    #def homepage_screen(self):
+
+
+
+
+    #--------------help funcs for homepage class-----------------
+    def change_to_login(self): # change to signup screen
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    #def change_to_usersettings(self): # change to signup screen
+    #    usersettings = Usersettings()
+    #    widget.addWidget(usersettings)
+    #    widget.setCurrentIndex(widget.currentIndex()+1)
+
+    #def change_to_search_results(self): # change to signup screen
+    #    search = Search_results()
+    #    widget.addWidget(search)
+    #    widget.setCurrentIndex(widget.currentIndex()+1)
+
+    #def handle_buttons(self): # this function handles the click of the signup button
+    #    self.sign_up_button.clicked.connect(self.change_to_signup)
+    #    self.wrong_data_label_2.setVisible(False)
+    #    self.login_button.clicked.connect(self.logging)
 
 #----------------------------------------Main----------------------------------
 
