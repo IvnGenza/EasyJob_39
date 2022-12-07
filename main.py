@@ -143,6 +143,7 @@ class Login(QMainWindow):
             try: #Putting data base funcs in try/except to prevent app crash on error.
                 auth.sign_in_with_email_and_password(email,passwordKey)
                 print(">> Welcome! <<")
+                self.change_to_homepage() #goes to next screen
             except: #if could not login then there is a connection error.
                 showError(">> Conection Error! <<")
 
@@ -170,15 +171,43 @@ class Login(QMainWindow):
             print("Invalid Email")
             return False
 
-    def change_to_signup(self): # just a test function
+    def change_to_signup(self): # change to signup screen
         signup = Signup()
         widget.addWidget(signup)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_homepage(self): #change to homepage screen
+        homepage = Homepage()
+        widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
+
+
+    #------------------------------------Homepage class------------------------------------
+
+class Homepage(QMainWindow):
+    def __init__(self):
+        super(Homepage, self).__init__()
+        loadUi("ui/homepage.ui", self) # file
+        self.handle_buttons() # allows us to listen for clicks on all the buttons
+
+
+    #def homepage_screen(self):
+
+
+
+
+    #--------------help funcs for login class-----------------
+
+    def handle_buttons(self): # this function handles the click of the signup button
+        self.sign_up_button.clicked.connect(self.change_to_signup)
+        self.wrong_data_label_2.setVisible(False)
+        self.login_button.clicked.connect(self.logging)
+
 
 #----------------------------------------Main----------------------------------
 
