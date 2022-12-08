@@ -201,7 +201,7 @@ class Homepage(QMainWindow):
 
 
     #--------------help funcs for homepage class-----------------
-    def change_to_login(self): # change to signup screen
+    def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
@@ -216,10 +216,12 @@ class Homepage(QMainWindow):
     #    widget.addWidget(search)
     #    widget.setCurrentIndex(widget.currentIndex()+1)
 
-    #def handle_buttons(self): # this function handles the click of the signup button
-    #    self.sign_up_button.clicked.connect(self.change_to_signup)
-    #    self.wrong_data_label_2.setVisible(False)
-    #    self.login_button.clicked.connect(self.logging)
+    def handle_buttons(self): # this function handles the click of the signup button
+        self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
+        self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
+        self.search_button.clicked.connect(self.change_to_search_results) #for search button input
+        self.free_search_button.clicked.connect(self.change_to_search_results)
+        self.advanced_search_button.clicked.connect(self.change_to_search_results)
 
 #----------------------------------------Main----------------------------------
 
