@@ -6,7 +6,7 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from functools import *
-
+UserType = 'Student' #temporay global variable for testing usersettings class
 #------------------------------------Signup class------------------------------------
 
 class Signup(QMainWindow):
@@ -192,34 +192,70 @@ class Homepage(QMainWindow):
     def __init__(self):
         super(Homepage, self).__init__()
         loadUi("ui/homepage.ui", self) # file
-        #self.handle_buttons() # allows us to listen for clicks on all the buttons
+        self.handle_buttons() # allows us to listen for clicks on all the buttons
 
 
     #def homepage_screen(self):
 
 
 
-
     #--------------help funcs for homepage class-----------------
-    def change_to_login(self): # change to signup screen
+    def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    #def change_to_usersettings(self): # change to signup screen
-    #    usersettings = Usersettings()
-    #    widget.addWidget(usersettings)
-    #    widget.setCurrentIndex(widget.currentIndex()+1)
+    def change_to_usersettings(self): # change to signup screen
+        usersettings = Usersettings()
+        widget.addWidget(usersettings)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     #def change_to_search_results(self): # change to signup screen
     #    search = Search_results()
     #    widget.addWidget(search)
     #    widget.setCurrentIndex(widget.currentIndex()+1)
 
-    #def handle_buttons(self): # this function handles the click of the signup button
-    #    self.sign_up_button.clicked.connect(self.change_to_signup)
-    #    self.wrong_data_label_2.setVisible(False)
-    #    self.login_button.clicked.connect(self.logging)
+    def handle_buttons(self): # this function handles the click of the signup button
+        self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
+        self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
+        #self.search_button.clicked.connect(self.change_to_search_results) #for search button input
+        #self.free_search_button.clicked.connect(self.change_to_search_results)
+        #self.advanced_search_button.clicked.connect(self.change_to_search_results)
+
+        #------------------------------------Usersettings class------------------------------------
+
+class Usersettings(QMainWindow):
+    def __init__(self):
+        super(Usersettings, self).__init__()
+        if UserType == 'Student':
+            loadUi("ui/usersettings_student.ui", self) # file
+        else:
+            loadUi("ui/usersettings.ui", self)
+        self.handle_buttons() 
+
+    
+
+
+        #--------------help funcs for usersettings class-----------------
+
+    def change_to_login(self): # change to login screen
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def back_to_homepage(self): # back to previous screen
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def handle_buttons(self): # this function handles the click of the signup button
+        self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
+        self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
+
+
+
+
+
 
 #----------------------------------------Main----------------------------------
 

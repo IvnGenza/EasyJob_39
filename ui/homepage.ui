@@ -79,7 +79,7 @@
      </property>
      <property name="font">
       <font>
-       <pointsize>24</pointsize>
+       <pointsize>29</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -114,6 +114,7 @@
      </property>
      <property name="font">
       <font>
+       <pointsize>19</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -154,6 +155,7 @@
      </property>
      <property name="font">
       <font>
+       <pointsize>19</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -787,7 +789,7 @@ padding:10px;</string>
      <x>0</x>
      <y>0</y>
      <width>1240</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
