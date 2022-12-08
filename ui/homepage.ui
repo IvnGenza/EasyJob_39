@@ -421,7 +421,7 @@ padding:10px;</string>
         </item>
         <item>
          <property name="text">
-          <string>Masters's Degree (2nd)</string>
+          <string>Master's Degree (2nd)</string>
          </property>
         </item>
         <item>
@@ -789,7 +789,7 @@ padding:10px;</string>
      <x>0</x>
      <y>0</y>
      <width>1240</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
