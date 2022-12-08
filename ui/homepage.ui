@@ -32,19 +32,19 @@
       <x>0</x>
       <y>0</y>
       <width>1241</width>
-      <height>80</height>
+      <height>81</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
       <width>1240</width>
-      <height>80</height>
+      <height>81</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>1920</width>
-      <height>80</height>
+      <height>81</height>
      </size>
     </property>
     <property name="styleSheet">
@@ -94,22 +94,22 @@
     <widget class="QPushButton" name="sign_out_button">
      <property name="geometry">
       <rect>
-       <x>1040</x>
+       <x>1080</x>
        <y>0</y>
-       <width>200</width>
-       <height>80</height>
+       <width>160</width>
+       <height>85</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
-       <width>200</width>
-       <height>80</height>
+       <width>160</width>
+       <height>85</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
-       <height>80</height>
+       <width>160</width>
+       <height>85</height>
       </size>
      </property>
      <property name="font">
@@ -120,6 +120,9 @@
      </property>
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>Sign out</string>
@@ -131,22 +134,22 @@
     <widget class="QPushButton" name="user_settings_button">
      <property name="geometry">
       <rect>
-       <x>840</x>
+       <x>860</x>
        <y>0</y>
-       <width>200</width>
-       <height>80</height>
+       <width>220</width>
+       <height>85</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
-       <width>200</width>
-       <height>80</height>
+       <width>220</width>
+       <height>85</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>200</width>
-       <height>80</height>
+       <width>220</width>
+       <height>85</height>
       </size>
      </property>
      <property name="font">
@@ -158,6 +161,9 @@
      <property name="cursor">
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border-right: 2px solid black;</string>
+     </property>
      <property name="text">
       <string>User Settings</string>
      </property>
@@ -168,23 +174,26 @@
     <widget class="Line" name="line">
      <property name="geometry">
       <rect>
-       <x>1050</x>
+       <x>1070</x>
        <y>0</y>
        <width>10</width>
-       <height>80</height>
+       <height>85</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
        <width>10</width>
-       <height>80</height>
+       <height>85</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>10</width>
-       <height>80</height>
+       <height>85</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">margin-left:7px;</string>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
@@ -202,23 +211,26 @@
     <widget class="Line" name="line_2">
      <property name="geometry">
       <rect>
-       <x>820</x>
+       <x>850</x>
        <y>0</y>
        <width>10</width>
-       <height>80</height>
+       <height>85</height>
       </rect>
      </property>
      <property name="minimumSize">
       <size>
        <width>10</width>
-       <height>80</height>
+       <height>85</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>10</width>
-       <height>80</height>
+       <height>85</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">margin-left:7px;</string>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
@@ -237,27 +249,27 @@
    <widget class="QFrame" name="search_frame">
     <property name="geometry">
      <rect>
-      <x>110</x>
+      <x>150</x>
       <y>220</y>
-      <width>1025</width>
+      <width>960</width>
       <height>82</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>1025</width>
+      <width>960</width>
       <height>82</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>1025</width>
+      <width>960</width>
       <height>82</height>
      </size>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: lightgray;
-border-radius: 30px;</string>
+border-radius: 32px;</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -270,23 +282,29 @@ border-radius: 30px;</string>
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1011</width>
+       <width>951</width>
        <height>82</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
       <item>
        <widget class="QPushButton" name="search_button">
         <property name="minimumSize">
          <size>
-          <width>80</width>
-          <height>80</height>
+          <width>70</width>
+          <height>70</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>80</width>
-          <height>80</height>
+          <width>70</width>
+          <height>70</height>
          </size>
         </property>
         <property name="font">
@@ -298,11 +316,16 @@ border-radius: 30px;</string>
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="styleSheet">
+         <string notr="true">border: 2px solid black;
+border-radius: 35px;
+padding:10px;</string>
+        </property>
         <property name="text">
          <string>X</string>
         </property>
         <property name="flat">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -310,14 +333,14 @@ border-radius: 30px;</string>
        <widget class="QComboBox" name="comboBox_job_type">
         <property name="minimumSize">
          <size>
-          <width>225</width>
-          <height>65</height>
+          <width>135</width>
+          <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>225</width>
-          <height>65</height>
+          <width>135</width>
+          <height>35</height>
          </size>
         </property>
         <property name="font">
@@ -325,27 +348,35 @@ border-radius: 30px;</string>
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
         <item>
          <property name="text">
-          <string>type 1</string>
+          <string>Full Time</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>type 2</string>
+          <string>Part Time</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>type 3</string>
+          <string>Seasonal</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>type 4</string>
+          <string>Contract</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Temporary</string>
          </property>
         </item>
        </widget>
@@ -355,19 +386,22 @@ border-radius: 30px;</string>
         <property name="minimumSize">
          <size>
           <width>225</width>
-          <height>65</height>
+          <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>225</width>
-          <height>65</height>
+          <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -404,20 +438,23 @@ border-radius: 30px;</string>
        <widget class="QComboBox" name="comboBox_location">
         <property name="minimumSize">
          <size>
-          <width>225</width>
-          <height>65</height>
+          <width>185</width>
+          <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>225</width>
-          <height>65</height>
+          <width>185</width>
+          <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
          </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="whatsThis">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -427,22 +464,97 @@ border-radius: 30px;</string>
         </property>
         <item>
          <property name="text">
-          <string>location 1</string>
+          <string>Akko</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>location 2</string>
+          <string>Arad</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>location 3</string>
+          <string>Ashdod</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>location 4</string>
+          <string>Ashkelon</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bat Yam</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Beer Sheva</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Bait Shemesh</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dimona</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Eilat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Haifa</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Herzliya</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Jerusalem</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Kfar Saba</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Kiryat Gat</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Lod</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ofakim</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ramat Gan</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Rishon Lezion</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Tel Aviv-Yafo</string>
          </property>
         </item>
        </widget>
@@ -451,42 +563,142 @@ border-radius: 30px;</string>
        <widget class="QComboBox" name="comboBox_role">
         <property name="minimumSize">
          <size>
-          <width>225</width>
-          <height>65</height>
+          <width>285</width>
+          <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>225</width>
-          <height>65</height>
+          <width>285</width>
+          <height>30</height>
          </size>
         </property>
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
         <item>
          <property name="text">
-          <string>role 1</string>
+          <string>Android developer</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>role 2</string>
+          <string>Business systems analyst</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>role 3</string>
+          <string>Cloud engineer</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>role 4</string>
+          <string>Computer hardware engineer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Database administrator</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Flutter/Dart software development</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Full-stack developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Geographic information system</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>iOS developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>IT security analyst</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Java developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Junior web developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Network engineer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Project control officer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Project engineer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Python developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QA manager</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ruby on Rails developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Security operations analyst</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Software engineer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>SQL developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>User interface developer</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>User experience designer </string>
          </property>
         </item>
        </widget>
@@ -498,7 +710,7 @@ border-radius: 30px;</string>
     <property name="geometry">
      <rect>
       <x>720</x>
-      <y>290</y>
+      <y>280</y>
       <width>348</width>
       <height>80</height>
      </rect>
