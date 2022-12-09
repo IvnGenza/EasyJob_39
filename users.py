@@ -55,5 +55,25 @@ class Employer(User):
         self.Usertype = usertype
         self.JobAds = jobAds #JobAds is an array of dicitionaries
 
-    def setJobAds(self, job):
-       self.JobAds.append(job) #job is a dicitionary
+    def AddJobAds(self, job):
+        self.JobAds.append(job) #job is a dicitionary
+
+    def EditJobAds(self, index, job):
+        self.JobAds[index]=job
+
+    def DeleteJobAds(self, index):
+        self.JobAds.pop(index) 
+
+    def GetResume(self, title):
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if job.val()['title'] == title:
+                return db.child('Jobs').child((job.key())).child('resumes').get().val()
+        
+#employer = Employer('max', '20', 'maxl', 'max@max.com', 'Employer', {}) #test 
+#print(employer.GetResume('Job at apple'))
+
+class Admin(User):
+    def __init__(self, fullname, age, username, email, usertype): 
+        super(Admin,self).__init__(fullname, age, username, email)
+        self.Usertype = usertype
