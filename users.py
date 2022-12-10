@@ -45,11 +45,12 @@ class Student(User):
         self.Usertype = usertype
         self.Preferences = preferences #dictionary from database 
     
-    def setPreferences(self, key, value):
-        user = self.SearchUser(self.Email)
-        if user != None:
-            self.Preferences[key] = value #giving the key its value
-            db.child('Users').child((user.key())).child('preferences').update({key:value})
+    #def setPreferences(self, key, value):
+    #    user = self.SearchUser(self.Email)
+    #    if user != None:
+    #        self.Preferences[key] = value #giving the key its value
+    #        db.child('Users').child((user.key())).child('preferences').update({key:value})
+
     # we need to add setResume to class
 
 class Employer(User):
