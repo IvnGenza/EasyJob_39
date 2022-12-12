@@ -141,6 +141,13 @@ class Login(QMainWindow):
 
             try: #Putting data base funcs in try/except to prevent app crash on error.
                 auth.sign_in_with_email_and_password(email,passwordKey)
+
+            # This is a test to find out what user type has entered the program
+                #users = db.child('Users').get()
+                #for user in users.each():
+                #    if user.val()['email'] == email:
+                #        print('\n\nThe users type is: ' + user.val()['usertype'])
+
                 print(">> Welcome! <<")
                 self.change_to_homepage() #goes to next screen
             except: #if could not login then there is a connection error.

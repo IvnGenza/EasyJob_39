@@ -52,5 +52,22 @@ print(SomeUser)
 #        }
 #}
 
+
+#data= [{
+#        "username": "Max",
+#        "resume": "this is my resume, bla bla bla this is some text", 
+#        "email":"Max@Max.com"
+#},{
+#        "username": "Shay",
+#        "resume": "this is my resume, bla bla bla this is some text", 
+#        "email":"Shay@Shay.com"
+#},
+#]    
+
+
+
 ##this addes the above data into the 'Jobs' section of the realtime database
 #db.child('Jobs').push(data)
+
+
+
