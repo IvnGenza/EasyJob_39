@@ -6,7 +6,11 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from functools import *
+from users import Employer
 UserType = 'Student' #temporay global variable for testing usersettings class
+
+
+
 #------------------------------------Signup class------------------------------------
 
 class Signup(QMainWindow):
