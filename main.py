@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from functools import *
 from helperFuncs import *
 UserType = 'Student' #temporay global variable for testing usersettings class
+
 #------------------------------------Signup class------------------------------------
 
 class Signup(QMainWindow):
