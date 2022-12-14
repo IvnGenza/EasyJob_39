@@ -62,7 +62,7 @@ class Signup(QMainWindow):
             #Putting data base funcs in try/except to prevent app crash on error.
             try:
                 auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
-                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
+                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email, 'resume':''}) #Saving new user data in RealTime db.
                 self.change_to_login()
 
             except:
