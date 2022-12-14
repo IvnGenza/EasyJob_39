@@ -190,6 +190,48 @@ class Login(QMainWindow):
         self.login_button.clicked.connect(self.logging)
 
 
+
+
+    #------------------------------------Create/publish job class------------------------------------
+
+
+
+
+
+class adJob(QMainWindow):
+
+    def __init__(self):
+        super(adJob, self).__init__()
+        loadUi("ui/new_ad.ui", self)
+        self.handle_buttons()
+
+    def CreatePost(self):
+
+        fname=self.name_textbox.text()
+        pNumber=self.phone_textbox.text()
+        email=self.email_textbox.text()
+        workExp=self.work_exp_cpmbpBox.currentText()
+        workRate=self.work_rate_comboBox.currentText()
+        workPlace=self.work_place_comboBox.currentText()
+        role=self.role_comboBox.currentText()
+        location=self.location_comboBox.currentText()
+        jobType=self.job_type_comboBox.currentText()
+        degree=self.degree_comboBox.currentText()
+        title=self.title_text_box.text()
+        knowledge=self.knowledge_comboBox.currentText()
+        description=self.description_text_box.text()
+
+
+
+
+
+    def handle_buttons(self):
+
+        self.edit_ad_button.clicked.connect(print('edit ad'))
+        self.delete_ad_botton.clicked.connect(print('delete ad'))
+        self.send_resume_button.clicked.connect(print('send resume'))
+        self.send_message_button.clicked.connect(print('send message'))
+
     #------------------------------------Ad frame class------------------------------------
 
 class AdWidget(QWidget):
@@ -205,7 +247,7 @@ class AdWidget(QWidget):
 
 
 
-
+        #--------------help funcs for usersettings class-----------------
 
     def handle_buttons(self):
         self.edit_ad_button.clicked.connect(print('edit ad'))
@@ -213,7 +255,13 @@ class AdWidget(QWidget):
         self.send_resume_button.clicked.connect(print('send resume'))
         self.send_message_button.clicked.connect(print('send message'))
 
+    def back_to_homepage(self):
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
+
+    
 
 
 
