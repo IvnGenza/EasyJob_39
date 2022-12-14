@@ -1,11 +1,11 @@
 
 from database.authentication import auth,db
 import sys
-import re
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from functools import *
+from helperFuncs import *
 UserType = 'Student' #temporay global variable for testing usersettings class
 #------------------------------------Signup class------------------------------------
 
@@ -27,19 +27,19 @@ class Signup(QMainWindow):
         UserType=self.user_type_text_box.currentText() #user type only has 2 options, and by default will be student, no need for tests
         ErrorString = '' #this string will show the error message when clicking signup, if there are no errors, this will stay empty
         
-        if self.checkEmail(email)==False:
+        if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1
 
-        if self.checkPasswordKey(PasswordKey)==False:
+        if checkPasswordKey(PasswordKey)==False:
             ErrorString = ''.join((ErrorString,' Password,'))
             flag = 1
            
-        if self.checkFullName(FullName)==False:
+        if checkFullName(FullName)==False:
             ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
            
-        if self.checkUserName(UserName)==False:
+        if checkUserName(UserName)==False:
             ErrorString = ''.join((ErrorString,' User Name,'))
             flag = 1
             
@@ -69,43 +69,6 @@ class Signup(QMainWindow):
 
 
 #--------------help funcs for signup class-----------------
-
-
-    def checkPasswordKey(self, passkey):
-        if passkey == '':
-            return False
-        elif passkey.islower() or passkey.isalpha():
-            return False #returns false if there are no uppercase letters or no numbers
-        return True
-
-    def checkEmail(self, email):  #checks email validation
-        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' #regular expression
-        if(re.fullmatch(regex, email)):
-             print("Valid Email")
-             return True
-        else:
-            print("Invalid Email")
-            return False
-
-    def checkFullName(self, fullname):
-        if fullname == '':
-           return False
-        temp = fullname.split(' ')
-        if len(temp) > 1: #checks if the name is valid 
-            if temp[0].isalpha and temp[1].isalpha():
-                return True
-        else:
-            print('Invalid FullName')
-            return False
-
-    def checkUserName(self, username):
-        if username == '':
-            return False
-        if username.isalpha():
-            return True 
-        return False
-
-
 
     def change_to_login(self): # just a test function
         login = Login()
@@ -137,7 +100,7 @@ class Login(QMainWindow):
             self.wrong_data_label_2.setVisible(True)
             self.wrong_data_label_2.setText(message)
 
-        if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
+        if checkPasswordKey(passwordKey) and checkEmail(email):
 
             try: #Putting data base funcs in try/except to prevent app crash on error.
                 auth.sign_in_with_email_and_password(email,passwordKey)
@@ -159,23 +122,6 @@ class Login(QMainWindow):
 
      
 #--------------help funcs for login class-----------------
-
-    def checkPasswordKey(self, passkey):
-        if passkey == '':
-            return False
-        elif passkey.islower() or passkey.isalpha():
-            return False #returns false if there are no uppercase letters or no numbers
-        return True
-
-    def checkEmail(self, email):
-        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' #regular expression
-        if(re.fullmatch(regex, email)):
-             print("Valid Email")
-             return True 
- 
-        else:
-            print("Invalid Email")
-            return False
 
     def change_to_signup(self): # change to signup screen
         signup = Signup()
