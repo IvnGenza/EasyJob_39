@@ -261,7 +261,7 @@ class AdWidget(QWidget):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
 
-    
+
 
 
 
