@@ -4,7 +4,7 @@ import sys
 import re
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget
 from functools import *
 from users import Employer
 UserType = 'Student' #temporay global variable for testing usersettings class
@@ -190,6 +190,33 @@ class Login(QMainWindow):
         self.login_button.clicked.connect(self.logging)
 
 
+    #------------------------------------Ad frame class------------------------------------
+
+class AdWidget(QWidget):
+
+    def __init__(self, id_widget=0, parent=None):
+        super(AdWidget,self).__init__(parent)
+        loadUi("ui/Ad_frame.ui",self)
+        self.handle.buttons()
+        
+
+
+
+
+
+
+
+
+    def handle_buttons(self):
+        self.edit_ad_button.clicked.connect(print('edit ad'))
+        self.delete_ad_botton.clicked.connect(print('delete ad'))
+        self.send_resume_button.clicked.connect(print('send resume'))
+        self.send_message_button.clicked.connect(print('send message'))
+
+
+
+
+
     #------------------------------------Homepage class------------------------------------
 
 class Homepage(QMainWindow):
@@ -197,6 +224,13 @@ class Homepage(QMainWindow):
         super(Homepage, self).__init__()
         loadUi("ui/homepage.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
+
+
+    def new_ad(self):
+        print('+1')
+        
+
+
 
 
     #def homepage_screen(self):
@@ -214,6 +248,11 @@ class Homepage(QMainWindow):
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+
+
+
+        
+
     #def change_to_search_results(self): # change to signup screen
     #    search = Search_results()
     #    widget.addWidget(search)
@@ -222,10 +261,12 @@ class Homepage(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
-        #self.search_button.clicked.connect(self.change_to_search_results) #for search button input
+        #self.search_button.clicked.connect(self.new_ad) #for search button input
         #self.free_search_button.clicked.connect(self.change_to_search_results)
         #self.advanced_search_button.clicked.connect(self.change_to_search_results)
+        self.new_ad_button.clicked.connect(self.new_ad)
 
+    
         #------------------------------------Usersettings class------------------------------------
 
 class Usersettings(QMainWindow):
@@ -237,7 +278,6 @@ class Usersettings(QMainWindow):
             loadUi("ui/usersettings.ui", self)
         self.handle_buttons() 
 
-    
 
 
         #--------------help funcs for usersettings class-----------------

@@ -755,7 +755,7 @@ padding:10px;</string>
               <x>0</x>
               <y>0</y>
               <width>1248</width>
-              <height>468</height>
+              <height>480</height>
              </rect>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -785,7 +785,7 @@ padding:10px;</string>
             </spacer>
            </item>
            <item>
-            <widget class="QPushButton" name="new_ad_Button">
+            <widget class="QPushButton" name="new_ad_button">
              <property name="text">
               <string>New ad</string>
              </property>
@@ -806,7 +806,7 @@ padding:10px;</string>
      <x>0</x>
      <y>0</y>
      <width>1290</width>
-     <height>27</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
