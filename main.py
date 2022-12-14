@@ -127,20 +127,20 @@ class Login(QMainWindow):
         super(Login, self).__init__()
         loadUi("ui/login.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on the signup button
-
+#
     def logging(self):
         email=self.username_lable.text()
-        passwordKey=self.password_lable.text()
-
+        password=self.password_lable.text()
+        print("Successfully logged in")
         # this function shows label with error message.
         def showError(message):
             self.wrong_data_label_2.setVisible(True)
             self.wrong_data_label_2.setText(message)
 
-        if self.checkPasswordKey(passwordKey) and self.checkEmail(email):
+        if self.checkPasswordKey(password) and self.checkEmail(email):
 
             try: #Putting data base funcs in try/except to prevent app crash on error.
-                auth.sign_in_with_email_and_password(email,passwordKey)
+                auth.sign_in_with_email_and_password(email,password)
                 print(">> Welcome! <<")
                 self.change_to_homepage() #goes to next screen
             except: #if could not login then there is a connection error.
@@ -179,11 +179,16 @@ class Login(QMainWindow):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
-
+    def change_to_forget_password(self):
+        forget_pass = Password()
+        widget.addWidget(forget_pass)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
+        self.forgotpass_button.clicked.connect(self.change_to_forget_password)
+
 
 
     #------------------------------------Homepage class------------------------------------
@@ -254,7 +259,46 @@ class Usersettings(QMainWindow):
 
 
 
+class Password(QMainWindow):
+    def __init__(self):
+        super(Password, self).__init__()
+        loadUi("ui/inputpassword.ui", self)  # file
+        self.ok.clicked.connect(self.change_to_signup)
 
+    def change_to_signup(self):
+        
+        signup = Signup()
+        widget.addWidget(signup)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+    #check
+    def checkPasswordKey(self, passkey):
+        if passkey == '':
+            return False
+        elif passkey!=" ":
+            countL=0
+            countN=0
+            index=0
+            for letter in passkey:
+                if 'A'<=passkey<='Z':
+                    countL+=1
+                    index+=1
+                if '1'<=letter<='9':
+                    countL += 1
+                    index += 1
+            if countN>=1 and countN>=1 :
+                return True
+        else:
+            return False
+        #passkey.islower() or passkey.isalpha():
+         #   return False  # returns false if there are no uppercase letters or no numbers
+        #return True
+    def check(self):
+        password = self.inputpassword.text()
+        if self.checkPasswordKey(password):
+            # update the data base
+            self.change_to_signup()  # goes to next screen
+        else:
+            self.error.setText("Error! invalid Password")
 
 
 #----------------------------------------Main----------------------------------
@@ -264,7 +308,7 @@ app = QApplication(sys.argv)
 widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
 
 login = Login()
-widget.addWidget(login) # adding the first window to the stack
+widget.addWidget(login) # adding the first window to the stack we can flip it by this way
 widget.show() # showing the stack of widgets, first window will be showen first
 
 try:
