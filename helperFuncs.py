@@ -51,7 +51,7 @@ def checkUserName(username):
 
 def checkTitle(title):
     '''gets a string and checks if its length is too long (longer than 40).'''
-    if len(title)>40:
+    if len(title)>40 or len(title)==0:
         return False
     return True
 
