@@ -172,7 +172,7 @@ class NewAd(QMainWindow):
 
         description=self.description_text_box.text()
 
-        knowledge = {
+        knowledge = [
         'Java',
         'Python',
         'Javascript',
@@ -181,12 +181,61 @@ class NewAd(QMainWindow):
         'Swift',
         'Rust',
         'C and C++',
-        'HTML','SQL',
+        'HTML',
+        'SQL',
         'CSS',
         'PHP',
         'TypeScript',
         'Perl'
-        }
+        ]
+
+        if self.Javascript_checkbox.isChecked() != True:
+            knowledge.remove('Javascript')
+
+        if self.Python_checkbox.isChecked() != True:
+            knowledge.remove('Python')
+
+        if self.Kotlin_checkbox.isChecked() != True:
+            knowledge.remove('Kotlin')
+
+        if self.Go_checkbox.isChecked() != True:
+            knowledge.remove('Go')
+
+        if self.Swift_checkbox.isChecked() != True:
+            knowledge.remove('Swift')
+
+        if self.C_checkbox.isChecked() != True:
+            knowledge.remove('C and C++')
+
+        if self.SQL_checkbox.isChecked() != True:
+            knowledge.remove('SQL')
+
+        if self.CSS_checkbox.isChecked() != True:
+            knowledge.remove('CSS')
+
+        if self.PHP_checkbox.isChecked() != True:
+            knowledge.remove('PHP')
+
+        if self.TypeScript_checkbox.isChecked() != True:
+            knowledge.remove('TypeScript')
+
+        if self.Perl_checkbox.isChecked() != True:
+            knowledge.remove('Perl')
+
+        if self.Java_checkbox.isChecked() != True:
+            knowledge.remove('Java')
+
+        if self.HTML_checkbox.isChecked() != True:
+            knowledge.remove('HTML')
+
+
+
+
+
+
+
+
+
 
 
 
