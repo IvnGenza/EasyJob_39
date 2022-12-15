@@ -280,7 +280,7 @@ class Password(QMainWindow):
             index=0
             for letter in passkey:
                 if 'A'<=passkey<='Z':
-                    countL+=1
+                    countL+=1 #.
                     index+=1
                 if '1'<=letter<='9': #check for password.
                     countL += 1
