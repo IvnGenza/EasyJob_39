@@ -38,11 +38,11 @@ class Signup(QMainWindow):
         if checkPasswordKey(PasswordKey)==False:
             ErrorString = ''.join((ErrorString,' Password,'))
             flag = 1
-           
+
         if checkFullName(FullName)==False:
             ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
-           
+
         if checkUserName(UserName)==False:
             ErrorString = ''.join((ErrorString,' User Name,'))
             flag = 1
@@ -124,7 +124,7 @@ class Login(QMainWindow):
             showError("Email or password is invalid.")
     
 
-     
+
 #--------------help funcs for login class-----------------
 
     def change_to_signup(self): # change to signup screen
@@ -143,6 +143,11 @@ class Login(QMainWindow):
         self.login_button.clicked.connect(self.logging)
 
 
+    def change_forgetpassword(self):
+        password = Password()
+        widget.addWidget(password)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 
 #------------------------------Create/publish job class-----------------------------
@@ -157,6 +162,10 @@ class NewAd(QMainWindow):
 
     def CreateAd(self):
 
+        def showError(message):
+            self.wrong_data_label_3.setVisible(True)
+            self.wrong_data_label_3.setText(message) 
+
         fname=self.name_textbox.text()      #
         Pnumber=self.phone_textbox.text()   #
         email=self.email_textbox.text()     #
@@ -168,7 +177,6 @@ class NewAd(QMainWindow):
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
         title=self.title_text_box.text()         #
-        Java=self.Java_checkBox
         description=self.description_text_box.toPlainText()
         ErrorString = ''
 
@@ -229,6 +237,9 @@ class NewAd(QMainWindow):
             knowledge.remove('HTML')
 
 
+
+
+
         flag = 0
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
@@ -265,7 +276,7 @@ class NewAd(QMainWindow):
                     "title": title,
                     "description": description, 
                     "contactInfo": [fname, Pnumber, email], 
-                    "knowledge": ["C++","Java","PHP"],
+                    "knowledge": knowledge,
                     "preferences": {
                         "workExperience": workExp,
                         "daysPerWeek": workRate, 
@@ -281,28 +292,26 @@ class NewAd(QMainWindow):
                 }
                 db.child('Jobs').push(data)
                 self.back_to_homepage()    
-            except:
-                print('connection error something went wrong')      
-                #showError(">> Connection Error! <<")        
+            except:    
+                showError(">> Connection Error! <<")        
         else:
-            print(ErrorString)      
+            showError(ErrorString)      
 
-            #showError(ErrorString)  
 
 
 
 
         #--------------help funcs for Create/publish job class-----------------
 
+    def handle_buttons(self):
+        self.publish_button.clicked.connect(self.CreateAd)
+        self.cancel_button.clicked.connect(self.back_to_homepage)
 
     def back_to_homepage(self):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def handle_buttons(self):
-        self.publish_button.clicked.connect(self.CreateAd)
-    #    self.cancel_button.clicked.connect(self.back_to_homepage)   #  Need fix
 
 
 #------------------------------------Ad Widget class------------------------------------
@@ -385,7 +394,51 @@ class Homepage(QMainWindow):
         #self.advanced_search_button.clicked.connect(self.change_to_search_results)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
 
-    
+#-------------------------------Password class------------------------------------
+class Password(QMainWindow):
+    def __init__(self):
+        super(Password, self).__init__()
+        loadUi("ui/inputpassword.ui", self)  # file
+        self.ok.clicked.connect(self.change_to_signup)
+
+    def change_to_signup(self):
+
+        signup = Signup()
+        widget.addWidget(signup)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+    # check
+    def checkPasswordKey(self, passkey):
+        if passkey == '':
+            return False
+        elif passkey != " ":
+            countL = 0
+            countN = 0
+            index = 0
+            for letter in passkey:
+                if 'A' <= passkey <= 'Z':
+                    countL += 1  # .
+                    index += 1
+                if '1' <= letter <= '9':  # check for password.
+                    countL += 1
+                    index += 1
+            if countN >= 1 and countN >= 1:
+                return True
+        else:
+            return False
+        # passkey.islower() or passkey.isalpha():
+        #   return False  # returns false if there are no uppercase letters or no numbers
+        # return True
+
+    def check(self):
+        password = self.inputpassword.text()
+        if self.checkPasswordKey(password):
+            # update the data base
+            self.change_to_signup()  # goes to next screen
+        else:
+            self.error.setText("Error! invalid Password")
+
+
 #------------------------------------Usersettings class------------------------------------
 
 class Usersettings(QMainWindow):
@@ -414,6 +467,7 @@ class Usersettings(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
+
 
 
 
