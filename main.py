@@ -172,7 +172,7 @@ class NewAd(QMainWindow):
         description=self.description_text_box.text()
 
 
-
+        flag = 0
 
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
@@ -196,14 +196,31 @@ class NewAd(QMainWindow):
         ErrorString = ErrorString[:-1] + '.'      
 
         def showError(message): return
-        #    self.wrong_data_label.setVisible(True)    #
-        #    self.wrong_data_label.setText(message)    #   Qt Designer   
+            #self.wrong_data_label.setVisible(True)    #
+            #self.wrong_data_label.setText(message)    #   Qt Designer   
+
         if flag == 0:        
 
             try:
-                #
-                #       db
-                #
+                #data={
+                #    "title": str(title),
+                #    "description": str(description), 
+                #    "contactInfo": [str(fname), str(Pnumber), str(email)], 
+                #    "knowledge": ["C++","Java","PHP"],
+                #    "preferences": {
+                #        "workExperience": str(workExp),
+                #        "daysPerWeek": str(workRate), 
+                #        "workingFrom": str(workPlace)
+                #        },
+                #    "resumes": [],
+                #    "search": {
+                #        "role": str(role), 
+                #        "location": str(location), 
+                #        "degree": str(degree), 
+                #        "jobType": str(jobType)
+                #        }
+                #}
+                #db.child('Jobs').push(data)
                 self.back_to_homepage()        
             except:
                 showError(">> Connection Error! <<")        
