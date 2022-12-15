@@ -143,6 +143,11 @@ class Login(QMainWindow):
         self.login_button.clicked.connect(self.logging)
 
 
+    def change_forgetpassword(self):
+        password = Password()
+        widget.addWidget(password)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 
 #------------------------------Create/publish job class-----------------------------
@@ -391,7 +396,51 @@ class Homepage(QMainWindow):
         #self.advanced_search_button.clicked.connect(self.change_to_search_results)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
 
-    
+#-------------------------------Password class------------------------------------
+class Password(QMainWindow):
+    def __init__(self):
+        super(Password, self).__init__()
+        loadUi("ui/inputpassword.ui", self)  # file
+        self.ok.clicked.connect(self.change_to_signup)
+
+    def change_to_signup(self):
+
+        signup = Signup()
+        widget.addWidget(signup)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+    # check
+    def checkPasswordKey(self, passkey):
+        if passkey == '':
+            return False
+        elif passkey != " ":
+            countL = 0
+            countN = 0
+            index = 0
+            for letter in passkey:
+                if 'A' <= passkey <= 'Z':
+                    countL += 1  # .
+                    index += 1
+                if '1' <= letter <= '9':  # check for password.
+                    countL += 1
+                    index += 1
+            if countN >= 1 and countN >= 1:
+                return True
+        else:
+            return False
+        # passkey.islower() or passkey.isalpha():
+        #   return False  # returns false if there are no uppercase letters or no numbers
+        # return True
+
+    def check(self):
+        password = self.inputpassword.text()
+        if self.checkPasswordKey(password):
+            # update the data base
+            self.change_to_signup()  # goes to next screen
+        else:
+            self.error.setText("Error! invalid Password")
+
+
 #------------------------------------Usersettings class------------------------------------
 
 class Usersettings(QMainWindow):
@@ -420,6 +469,7 @@ class Usersettings(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
+
 
 
 
