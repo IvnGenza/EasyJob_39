@@ -223,7 +223,7 @@ class NewAd(QMainWindow):
 
     def handle_buttons(self):
         self.publish_button.clicked.connect(self.back_to_homepage)
-        self.cancle_botton.clicked.connect(self.back_to_homepage)
+    #    self.cancel_button.clicked.connect(self.back_to_homepage)   #  Need fix
 
 
 #------------------------------------Ad Widget class------------------------------------
@@ -268,13 +268,6 @@ class Homepage(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
 
 
-    def new_ad(self):
-        print('+1')
-        
-
-
-
-
     #def homepage_screen(self):
 
 
@@ -292,7 +285,10 @@ class Homepage(QMainWindow):
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-
+    def change_to_NewAd(self):
+        ad = NewAd()
+        widget.addWidget(ad)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 
         
@@ -308,7 +304,7 @@ class Homepage(QMainWindow):
         #self.search_button.clicked.connect(self.new_ad) #for search button input
         #self.free_search_button.clicked.connect(self.change_to_search_results)
         #self.advanced_search_button.clicked.connect(self.change_to_search_results)
-        self.new_ad_button.clicked.connect(self.new_ad)
+        self.new_ad_button.clicked.connect(self.change_to_NewAd)
 
     
 #------------------------------------Usersettings class------------------------------------
