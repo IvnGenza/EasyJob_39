@@ -5,3 +5,5 @@
 /.vs
 /.pyc
 /.idea
+/__pycache__
+/database/__pycache__

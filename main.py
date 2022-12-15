@@ -261,9 +261,6 @@ class NewAd(QMainWindow):
         ErrorString = ''.join(('Invalid ',ErrorString))
         ErrorString = ErrorString[:-1] + '.'      
 
-        #def showError(message): return
-            #self.wrong_data_label.setVisible(True)    #
-            #self.wrong_data_label.setText(message)    #   Qt Designer   
 
         if flag == 0:        
 

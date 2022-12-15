@@ -70,7 +70,7 @@
          </font>
         </property>
         <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="styleSheet">
          <string notr="true">color: red;
@@ -80,7 +80,7 @@ text-align:left;
 </string>
         </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -1076,7 +1076,7 @@ text-align:left;
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="d_2">
+           <widget class="QTextEdit" name="description_text_box">
             <property name="minimumSize">
              <size>
               <width>700</width>
