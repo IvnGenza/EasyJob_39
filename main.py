@@ -179,6 +179,7 @@ class NewAd(QMainWindow):
         title=self.title_text_box.text()         #
         description=self.description_text_box.toPlainText()
         ErrorString = ''
+        flag = 0
 
         knowledge = [
         'Java',
@@ -237,10 +238,6 @@ class NewAd(QMainWindow):
             knowledge.remove('HTML')
 
 
-
-
-
-        flag = 0
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1        
@@ -251,6 +248,10 @@ class NewAd(QMainWindow):
 
         if checkTitle(title)==False:
             ErrorString = ''.join((ErrorString,' Title,'))
+            flag = 1
+            
+        if checkDescription(description)==False:
+            ErrorString = ''.join((ErrorString,' Description,'))
             flag = 1
 
         if checkPhoneNumber(Pnumber)==False:
