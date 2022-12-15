@@ -3,7 +3,7 @@ from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox
 from functools import *
 from users import Employer
 from helperFuncs import *
@@ -168,12 +168,78 @@ class NewAd(QMainWindow):
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
         title=self.title_text_box.text()         #
-        #knowledge=self.knowledge_comboBox.currentText()
+        Java=self.Java_checkBox
+
         description=self.description_text_box.toPlainText()
-        ErrorString = ''
+
+        knowledge = [
+        'Java',
+        'Python',
+        'Javascript',
+        'Kotlin',
+        'Go',
+        'Swift',
+        'Rust',
+        'C and C++',
+        'HTML',
+        'SQL',
+        'CSS',
+        'PHP',
+        'TypeScript',
+        'Perl'
+        ]
+
+        if self.Javascript_checkbox.isChecked() != True:
+            knowledge.remove('Javascript')
+
+        if self.Python_checkbox.isChecked() != True:
+            knowledge.remove('Python')
+
+        if self.Kotlin_checkbox.isChecked() != True:
+            knowledge.remove('Kotlin')
+
+        if self.Go_checkbox.isChecked() != True:
+            knowledge.remove('Go')
+
+        if self.Swift_checkbox.isChecked() != True:
+            knowledge.remove('Swift')
+
+        if self.C_checkbox.isChecked() != True:
+            knowledge.remove('C and C++')
+
+        if self.SQL_checkbox.isChecked() != True:
+            knowledge.remove('SQL')
+
+        if self.CSS_checkbox.isChecked() != True:
+            knowledge.remove('CSS')
+
+        if self.PHP_checkbox.isChecked() != True:
+            knowledge.remove('PHP')
+
+        if self.TypeScript_checkbox.isChecked() != True:
+            knowledge.remove('TypeScript')
+
+        if self.Perl_checkbox.isChecked() != True:
+            knowledge.remove('Perl')
+
+        if self.Java_checkbox.isChecked() != True:
+            knowledge.remove('Java')
+
+        if self.HTML_checkbox.isChecked() != True:
+            knowledge.remove('HTML')
+
+
+
+
+
+
+
+
+
+
+
 
         flag = 0
-
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1        
