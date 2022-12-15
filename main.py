@@ -38,11 +38,11 @@ class Signup(QMainWindow):
         if checkPasswordKey(PasswordKey)==False:
             ErrorString = ''.join((ErrorString,' Password,'))
             flag = 1
-           
+
         if checkFullName(FullName)==False:
             ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
-           
+
         if checkUserName(UserName)==False:
             ErrorString = ''.join((ErrorString,' User Name,'))
             flag = 1
