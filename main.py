@@ -447,7 +447,9 @@ class Password(QMainWindow):
 
     def check(self):
         password = self.inputpassword.text()
-        if checkPasswordKey(password):
+        #autpassword=self.lineEdit().text()
+        #check if the password is equal to second password
+        if checkPasswordKey(password) :
             # update the data base
             self.change_to_login()  # goes to next screen
         else:
