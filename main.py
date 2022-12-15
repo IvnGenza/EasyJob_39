@@ -394,7 +394,7 @@ class Password(QMainWindow):
     def __init__(self):
         super(Password, self).__init__()
         loadUi("ui/inputpassword.ui", self)  # file
-        #self.ok.clicked.connect(self.change_to_signup)
+        self.handle_buttons()
 
     # def change_to_signup(self):
 
@@ -409,7 +409,7 @@ class Password(QMainWindow):
         try:
             auth.send_password_reset_email(email)
             self.error.setVisible(True)
-            self.error.setText(">> Successful! Nice:) <<")
+            self.error.setText(">> Successful! <<")
 
         except:
             self.error.setVisible(True)
@@ -418,9 +418,9 @@ class Password(QMainWindow):
         #--------------help funcs for Password class-----------------
 
     def handle_buttons(self):
-        self.send_email_button.clicked.connect(self.forgetPass)
-        self.back_login_botton.clicked.connect(self.change_to_login)
 
+        self.back_login_botton.clicked.connect(self.change_to_login)
+        self.send_email_botton.clicked.connect(self.change_to_login)
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
