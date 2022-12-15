@@ -20,14 +20,36 @@ db = firebase.database()
 auth = firebase.auth()
 storage = firebase.storage()
 
+users = db.child('Users').get()
+for user in users.each():
+        if user.val()['email'] == 'student1@mail.com':
+            user.updatePassword('Qwerty123')
 
 
-SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
+
+'''    def send_password_reset_email(self, email):
+        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getOobConfirmationCode?key={0}".format(self.api_key)
+        headers = {"content-type": "application/json; charset=UTF-8"}
+        data = json.dumps({"requestType": "PASSWORD_RESET", "email": email})
+        request_object = requests.post(request_ref, headers=headers, data=data)
+        raise_detailed_error(request_object)
+        return request_object.json()
+
+    def verify_password_reset_code(self, reset_code, new_password):
+        request_ref = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/resetPassword?key={0}".format(self.api_key)
+        headers = {"content-type": "application/json; charset=UTF-8"}
+        data = json.dumps({"oobCode": reset_code, "newPassword": new_password})
+        request_object = requests.post(request_ref, headers=headers, data=data)
+        raise_detailed_error(request_object)
+        return request_object.json()
+
+'''
+
+#SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
 
 
-print(SomeUser)
 
-print('123')
+
 #pushing some job adds to the database, you can use these lines, 
 #just change up the information and run THIS file. 
 #or you can take these lines elsewhere and run there. 

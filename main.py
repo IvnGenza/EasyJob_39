@@ -402,7 +402,7 @@ class Password(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
     # check
-    def checkPasswordKey(self, passkey):
+    def checkPasswordKey(self, passkey,email):
         if passkey == '':
             return False
         elif passkey != " ":
