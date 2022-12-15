@@ -455,7 +455,7 @@ class Password(QMainWindow):
         else:
             self.error.setText("Error! invalid Password")
 
-#
+##
 #----------------------------------------Main----------------------------------
 
 
