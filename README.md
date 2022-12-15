@@ -4,6 +4,11 @@
 omershay1212@gmail.com or omersh9@ac.sce.ac.il
 
 עומר שי 
-מקסים סובוטין 
+מקסים סובוטין - maximsu@ac.sce.ac.il
 איבן גנזה 
 שי חחיאשוילי 
+
+
+בהרצה הראשונה של האפליקציה יש להריץ את השורה הבאה בטרמינל:
+
+python -m pip install -r requirements.txt
