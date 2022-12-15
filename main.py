@@ -457,7 +457,7 @@ class Password(QMainWindow):
 
 #after push it will appear
 #----------------------------------------Main----------------------------------
-
+#
 
 app = QApplication(sys.argv)
 widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
