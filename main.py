@@ -282,7 +282,7 @@ class Password(QMainWindow):
                 if 'A'<=passkey<='Z':
                     countL+=1
                     index+=1
-                if '1'<=letter<='9': #check for password
+                if '1'<=letter<='9': #check for password.
                     countL += 1
                     index += 1
             if countN>=1 and countN>=1 :
