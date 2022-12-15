@@ -61,10 +61,11 @@ def checkPhoneNumber(number):
 
 
     
-    #regex = '051/054/052/050/055/056/057/058/059'
+    regex = '^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{4})[-. )]*(\d{3})[-. ]*(?: *x(\d+))?\s*$'
 
-    #if re.match(str(number)[:3],regex) != True:         #regular expression
-    #    return False
+
+    if re.match(number,regex) != True:         #regular expression
+        return False
     
     if len(str(number)) != 10:      # Check if number have a correct length.
         return False

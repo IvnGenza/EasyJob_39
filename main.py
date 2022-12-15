@@ -169,8 +169,8 @@ class NewAd(QMainWindow):
         degree=self.degree_comboBox.currentText()
         title=self.title_text_box.text()         #
         Java=self.Java_checkBox
-
         description=self.description_text_box.toPlainText()
+        ErrorString = ''
 
         knowledge = [
         'Java',
@@ -192,51 +192,41 @@ class NewAd(QMainWindow):
         if self.Javascript_checkbox.isChecked() != True:
             knowledge.remove('Javascript')
 
-        if self.Python_checkbox.isChecked() != True:
+        if self.Python_checkBox.isChecked() != True:
             knowledge.remove('Python')
 
-        if self.Kotlin_checkbox.isChecked() != True:
+        if self.Kotlin_checkBox.isChecked() != True:
             knowledge.remove('Kotlin')
 
-        if self.Go_checkbox.isChecked() != True:
+        if self.Go_checkBox.isChecked() != True:
             knowledge.remove('Go')
 
-        if self.Swift_checkbox.isChecked() != True:
+        if self.Swift_checkBox.isChecked() != True:
             knowledge.remove('Swift')
 
-        if self.C_checkbox.isChecked() != True:
+        if self.C_checkBox.isChecked() != True:
             knowledge.remove('C and C++')
 
-        if self.SQL_checkbox.isChecked() != True:
+        if self.SQL_checkBox.isChecked() != True:
             knowledge.remove('SQL')
 
-        if self.CSS_checkbox.isChecked() != True:
+        if self.CSS_checkBox.isChecked() != True:
             knowledge.remove('CSS')
 
-        if self.PHP_checkbox.isChecked() != True:
+        if self.PHP_checkBox.isChecked() != True:
             knowledge.remove('PHP')
 
-        if self.TypeScript_checkbox.isChecked() != True:
+        if self.TypeScript_checkBox.isChecked() != True:
             knowledge.remove('TypeScript')
 
-        if self.Perl_checkbox.isChecked() != True:
+        if self.Perl_checkBox.isChecked() != True:
             knowledge.remove('Perl')
 
-        if self.Java_checkbox.isChecked() != True:
+        if self.Java_checkBox.isChecked() != True:
             knowledge.remove('Java')
 
-        if self.HTML_checkbox.isChecked() != True:
+        if self.HTML_checkBox.isChecked() != True:
             knowledge.remove('HTML')
-
-
-
-
-
-
-
-
-
-
 
 
         flag = 0
