@@ -162,6 +162,10 @@ class NewAd(QMainWindow):
 
     def CreateAd(self):
 
+        def showError(message):
+            self.wrong_data_label_3.setVisible(True)
+            self.wrong_data_label_3.setText(message) 
+
         fname=self.name_textbox.text()      #
         Pnumber=self.phone_textbox.text()   #
         email=self.email_textbox.text()     #
@@ -236,13 +240,6 @@ class NewAd(QMainWindow):
 
 
 
-
-
-
-
-
-
-
         flag = 0
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
@@ -291,28 +288,26 @@ class NewAd(QMainWindow):
                 }
                 db.child('Jobs').push(data)
                 self.back_to_homepage()    
-            except:
-                print('connection error something went wrong')      
-                #showError(">> Connection Error! <<")        
+            except:    
+                showError(">> Connection Error! <<")        
         else:
-            print(ErrorString)      
+            showError(ErrorString)      
 
-            #showError(ErrorString)  
 
 
 
 
         #--------------help funcs for Create/publish job class-----------------
 
+    def handle_buttons(self):
+        self.publish_button.clicked.connect(self.CreateAd)
+        self.cancel_button.clicked.connect(self.back_to_homepage)
 
     def back_to_homepage(self):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def handle_buttons(self):
-        self.publish_button.clicked.connect(self.CreateAd)
-    #    self.cancel_button.clicked.connect(self.back_to_homepage)   #  Need fix
 
 
 #------------------------------------Ad Widget class------------------------------------
