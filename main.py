@@ -413,12 +413,12 @@ class Password(QMainWindow):
     def __init__(self):
         super(Password, self).__init__()
         loadUi("ui/inputpassword.ui", self)  # file
-        self.ok.clicked.connect(self.change_to_signup)
+        self.ok.clicked.connect(self.check)
 
-    def change_to_signup(self):
+    def change_to_login(self):
 
-        signup = Signup()
-        widget.addWidget(signup)
+        login = Login()
+        widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
     # check
@@ -448,9 +448,8 @@ class Password(QMainWindow):
     def check(self):
         password = self.inputpassword.text()
         if checkPasswordKey(password):
-            print("hi")
             # update the data base
-            self.change_to_signup()  # goes to next screen
+            self.change_to_login()  # goes to next screen
         else:
             self.error.setText("Error! invalid Password")
 
