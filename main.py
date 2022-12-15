@@ -1,12 +1,16 @@
 
 from database.authentication import auth,db
 import sys
-import re
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox
 from functools import *
+from users import Employer
+from helperFuncs import *
 UserType = 'Student' #temporay global variable for testing usersettings class
+
+
+
 #------------------------------------Signup class------------------------------------
 
 class Signup(QMainWindow):
@@ -27,19 +31,19 @@ class Signup(QMainWindow):
         UserType=self.user_type_text_box.currentText() #user type only has 2 options, and by default will be student, no need for tests
         ErrorString = '' #this string will show the error message when clicking signup, if there are no errors, this will stay empty
         
-        if self.checkEmail(email)==False:
+        if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1
 
-        if self.checkPasswordKey(PasswordKey)==False:
+        if checkPasswordKey(PasswordKey)==False:
             ErrorString = ''.join((ErrorString,' Password,'))
             flag = 1
            
-        if self.checkFullName(FullName)==False:
+        if checkFullName(FullName)==False:
             ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
            
-        if self.checkUserName(UserName)==False:
+        if checkUserName(UserName)==False:
             ErrorString = ''.join((ErrorString,' User Name,'))
             flag = 1
             
@@ -58,7 +62,7 @@ class Signup(QMainWindow):
             #Putting data base funcs in try/except to prevent app crash on error.
             try:
                 auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
-                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
+                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email, 'resume':''}) #Saving new user data in RealTime db.
                 self.change_to_login()
 
             except:
@@ -69,43 +73,6 @@ class Signup(QMainWindow):
 
 
 #--------------help funcs for signup class-----------------
-
-
-    def checkPasswordKey(self, passkey):
-        if passkey == '':
-            return False
-        elif passkey.islower() or passkey.isalpha():
-            return False #returns false if there are no uppercase letters or no numbers
-        return True
-
-    def checkEmail(self, email):  #checks email validation
-        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' #regular expression
-        if(re.fullmatch(regex, email)):
-             print("Valid Email")
-             return True
-        else:
-            print("Invalid Email")
-            return False
-
-    def checkFullName(self, fullname):
-        if fullname == '':
-           return False
-        temp = fullname.split(' ')
-        if len(temp) > 1: #checks if the name is valid 
-            if temp[0].isalpha and temp[1].isalpha():
-                return True
-        else:
-            print('Invalid FullName')
-            return False
-
-    def checkUserName(self, username):
-        if username == '':
-            return False
-        if username.isalpha():
-            return True 
-        return False
-
-
 
     def change_to_login(self): # just a test function
         login = Login()
@@ -127,20 +94,27 @@ class Login(QMainWindow):
         super(Login, self).__init__()
         loadUi("ui/login.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on the signup button
-#
+
     def logging(self):
         email=self.username_lable.text()
-        password=self.password_lable.text()
-        print("Successfully logged in")
+        passwordKey=self.password_lable.text()
+
         # this function shows label with error message.
         def showError(message):
             self.wrong_data_label_2.setVisible(True)
             self.wrong_data_label_2.setText(message)
 
-        if self.checkPasswordKey(password) and self.checkEmail(email):
+        if checkPasswordKey(passwordKey) and checkEmail(email):
 
             try: #Putting data base funcs in try/except to prevent app crash on error.
-                auth.sign_in_with_email_and_password(email,password)
+                auth.sign_in_with_email_and_password(email,passwordKey)
+
+            # This is a test to find out what user type has entered the program
+                #users = db.child('Users').get()
+                #for user in users.each():
+                #    if user.val()['email'] == email:
+                #        print('\n\nThe users type is: ' + user.val()['usertype'])
+
                 print(">> Welcome! <<")
                 self.change_to_homepage() #goes to next screen
             except: #if could not login then there is a connection error.
@@ -153,23 +127,6 @@ class Login(QMainWindow):
      
 #--------------help funcs for login class-----------------
 
-    def checkPasswordKey(self, passkey):
-        if passkey == '':
-            return False
-        elif passkey.islower() or passkey.isalpha():
-            return False #returns false if there are no uppercase letters or no numbers
-        return True
-
-    def checkEmail(self, email):
-        regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' #regular expression
-        if(re.fullmatch(regex, email)):
-             print("Valid Email")
-             return True 
- 
-        else:
-            print("Invalid Email")
-            return False
-
     def change_to_signup(self): # change to signup screen
         signup = Signup()
         widget.addWidget(signup)
@@ -179,19 +136,202 @@ class Login(QMainWindow):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
-    def change_to_forget_password(self):
-        forget_pass = Password()
-        widget.addWidget(forget_pass)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
-        self.forgotpass_button.clicked.connect(self.change_to_forget_password)
+        self.forgotpass_button.clicked.connect(self.change_forgetpassword)
+
+    def change_forgetpassword(self):
+        password = Password()
+        widget.addWidget(password)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+
+#------------------------------Create/publish job class-----------------------------
+
+
+class NewAd(QMainWindow):
+
+    def __init__(self):
+        super(NewAd, self).__init__()
+        loadUi("ui/new_ad.ui", self)
+        self.handle_buttons()
+
+    def CreateAd(self):
+
+        fname=self.name_textbox.text()      #
+        Pnumber=self.phone_textbox.text()   #
+        email=self.email_textbox.text()     #
+        workExp=self.work_exp_cpmbpBox.currentText()
+        workRate=self.work_rate_comboBox.currentText()
+        workPlace=self.work_place_comboBox.currentText()
+        role=self.role_comboBox.currentText()
+        location=self.location_comboBox.currentText()
+        jobType=self.job_type_comboBox.currentText()
+        degree=self.degree_comboBox.currentText()
+        title=self.title_text_box.text()         #
+        Java=self.Java_checkBox
+
+        description=self.description_text_box.text()
+
+        knowledge = [
+        'Java',
+        'Python',
+        'Javascript',
+        'Kotlin',
+        'Go',
+        'Swift',
+        'Rust',
+        'C and C++',
+        'HTML',
+        'SQL',
+        'CSS',
+        'PHP',
+        'TypeScript',
+        'Perl'
+        ]
+
+        if self.Javascript_checkbox.isChecked() != True:
+            knowledge.remove('Javascript')
+
+        if self.Python_checkbox.isChecked() != True:
+            knowledge.remove('Python')
+
+        if self.Kotlin_checkbox.isChecked() != True:
+            knowledge.remove('Kotlin')
+
+        if self.Go_checkbox.isChecked() != True:
+            knowledge.remove('Go')
+
+        if self.Swift_checkbox.isChecked() != True:
+            knowledge.remove('Swift')
+
+        if self.C_checkbox.isChecked() != True:
+            knowledge.remove('C and C++')
+
+        if self.SQL_checkbox.isChecked() != True:
+            knowledge.remove('SQL')
+
+        if self.CSS_checkbox.isChecked() != True:
+            knowledge.remove('CSS')
+
+        if self.PHP_checkbox.isChecked() != True:
+            knowledge.remove('PHP')
+
+        if self.TypeScript_checkbox.isChecked() != True:
+            knowledge.remove('TypeScript')
+
+        if self.Perl_checkbox.isChecked() != True:
+            knowledge.remove('Perl')
+
+        if self.Java_checkbox.isChecked() != True:
+            knowledge.remove('Java')
+
+        if self.HTML_checkbox.isChecked() != True:
+            knowledge.remove('HTML')
 
 
 
-    #------------------------------------Homepage class------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+        if checkEmail(email)==False:
+            ErrorString = ''.join((ErrorString,' Email,'))
+            flag = 1        
+
+
+        if checkFullName(fname)==False:
+            ErrorString = ''.join((ErrorString,' Full Name,'))
+            flag = 1
+
+        if checkTitle(title)==False:
+            ErrorString = ''.join((ErrorString,' Title,'))
+            flag = 1
+
+        if checkPhoneNumber(Pnumber)==False:
+            ErrorString = ''.join((ErrorString,' Phone Number,'))
+            flag = 1
+            
+
+        ErrorString = ''.join(('Invalid ',ErrorString))
+        ErrorString = ErrorString[:-1] + '.'      
+
+        def showError(message): return
+        #    self.wrong_data_label.setVisible(True)    #
+        #    self.wrong_data_label.setText(message)    #   Qt Designer   
+        if flag == 0:        
+
+            try:
+                #
+                #       db
+                #
+                self.back_to_homepage()        
+            except:
+                showError(">> Connection Error! <<")        
+        else:
+            showError(ErrorString)        
+
+
+
+
+        #--------------help funcs for Create/publish job class-----------------
+
+
+    def back_to_homepage(self):
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def handle_buttons(self):
+        self.publish_button.clicked.connect(self.back_to_homepage)
+    #    self.cancel_button.clicked.connect(self.back_to_homepage)   #  Need fix
+
+
+#------------------------------------Ad Widget class------------------------------------
+
+class AdWidget(QWidget):
+
+    def __init__(self, id_widget=0, parent=None):
+        super(AdWidget,self).__init__(parent)
+        loadUi("ui/Ad_frame.ui",self)
+        self.handle.buttons()
+        
+
+
+
+
+
+
+        #--------------help funcs for Ad Widget class-----------------
+
+    def handle_buttons(self):
+        self.edit_ad_button.clicked.connect(print('edit ad'))
+        self.delete_ad_botton.clicked.connect(print('delete ad'))
+        self.send_resume_button.clicked.connect(print('send resume'))
+        self.send_message_button.clicked.connect(print('send message'))
+
+    def back_to_homepage(self):
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+
+
+
+
+
+#------------------------------------Homepage class------------------------------------
 
 class Homepage(QMainWindow):
     def __init__(self):
@@ -204,7 +344,9 @@ class Homepage(QMainWindow):
 
 
 
-    #--------------help funcs for homepage class-----------------
+        #--------------help funcs for homepage class-----------------
+
+
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
@@ -215,6 +357,14 @@ class Homepage(QMainWindow):
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_NewAd(self):
+        ad = NewAd()
+        widget.addWidget(ad)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+
+        
+
     #def change_to_search_results(self): # change to signup screen
     #    search = Search_results()
     #    widget.addWidget(search)
@@ -223,11 +373,13 @@ class Homepage(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
-        #self.search_button.clicked.connect(self.change_to_search_results) #for search button input
+        #self.search_button.clicked.connect(self.new_ad) #for search button input
         #self.free_search_button.clicked.connect(self.change_to_search_results)
         #self.advanced_search_button.clicked.connect(self.change_to_search_results)
+        self.new_ad_button.clicked.connect(self.change_to_NewAd)
 
-        #------------------------------------Usersettings class------------------------------------
+    
+#------------------------------------Usersettings class------------------------------------
 
 class Usersettings(QMainWindow):
     def __init__(self):
@@ -238,7 +390,6 @@ class Usersettings(QMainWindow):
             loadUi("ui/usersettings.ui", self)
         self.handle_buttons() 
 
-    
 
 
         #--------------help funcs for usersettings class-----------------
@@ -257,8 +408,7 @@ class Usersettings(QMainWindow):
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
 
-
-
+#-----------------------------Password---------------------------
 class Password(QMainWindow):
     def __init__(self):
         super(Password, self).__init__()
@@ -266,32 +416,34 @@ class Password(QMainWindow):
         self.ok.clicked.connect(self.change_to_signup)
 
     def change_to_signup(self):
-        
+
         signup = Signup()
         widget.addWidget(signup)
         widget.setCurrentIndex(widget.currentIndex() + 1)
-    #check
+
+    # check
     def checkPasswordKey(self, passkey):
         if passkey == '':
             return False
-        elif passkey!=" ":
-            countL=0
-            countN=0
-            index=0
+        elif passkey != " ":
+            countL = 0
+            countN = 0
+            index = 0
             for letter in passkey:
-                if 'A'<=passkey<='Z':
-                    countL+=1 #.
-                    index+=1
-                if '1'<=letter<='9': #check for password.
+                if 'A' <= passkey <= 'Z':
+                    countL += 1  # .
+                    index += 1
+                if '1' <= letter <= '9':  # check for password.
                     countL += 1
                     index += 1
-            if countN>=1 and countN>=1 :
+            if countN >= 1 and countN >= 1:
                 return True
         else:
             return False
-        #passkey.islower() or passkey.isalpha():
-         #   return False  # returns false if there are no uppercase letters or no numbers
-        #return True
+        # passkey.islower() or passkey.isalpha():
+        #   return False  # returns false if there are no uppercase letters or no numbers
+        # return True
+
     def check(self):
         password = self.inputpassword.text()
         if self.checkPasswordKey(password):
@@ -308,7 +460,7 @@ app = QApplication(sys.argv)
 widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
 
 login = Login()
-widget.addWidget(login) # adding the first window to the stack we can flip it by this way
+widget.addWidget(login) # adding the first window to the stack
 widget.show() # showing the stack of widgets, first window will be showen first
 
 try:
