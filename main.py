@@ -3,7 +3,7 @@ from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox
 from functools import *
 from users import Employer
 from helperFuncs import *
@@ -168,8 +168,27 @@ class NewAd(QMainWindow):
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
         title=self.title_text_box.text()         #
-        knowledge=self.knowledge_comboBox.currentText()
+        Java=self.Java_checkBox
+
         description=self.description_text_box.text()
+
+        knowledge = {
+        'Java',
+        'Python',
+        'Javascript',
+        'Kotlin',
+        'Go',
+        'Swift',
+        'Rust',
+        'C and C++',
+        'HTML','SQL',
+        'CSS',
+        'PHP',
+        'TypeScript',
+        'Perl'
+        }
+
+
 
 
 
