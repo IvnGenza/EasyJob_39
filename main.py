@@ -3,7 +3,7 @@ from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox
 from functools import *
 from users import Employer
 from helperFuncs import *
@@ -145,47 +145,173 @@ class Login(QMainWindow):
 
 
 
-    #------------------------------------Create/publish job class------------------------------------
+#------------------------------Create/publish job class-----------------------------
 
 
-
-
-
-class adJob(QMainWindow):
+class NewAd(QMainWindow):
 
     def __init__(self):
-        super(adJob, self).__init__()
+        super(NewAd, self).__init__()
         loadUi("ui/new_ad.ui", self)
         self.handle_buttons()
 
-    def CreatePost(self):
+    def CreateAd(self):
 
-        fname=self.name_textbox.text()
-        pNumber=self.phone_textbox.text()
-        email=self.email_textbox.text()
-        workExp=self.work_exp_cpmbpBox.currentText()
+        fname=self.name_textbox.text()      #
+        Pnumber=self.phone_textbox.text()   #
+        email=self.email_textbox.text()     #
+        workExp=self.work_exp_comboBox.currentText()
         workRate=self.work_rate_comboBox.currentText()
         workPlace=self.work_place_comboBox.currentText()
         role=self.role_comboBox.currentText()
         location=self.location_comboBox.currentText()
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
-        title=self.title_text_box.text()
-        knowledge=self.knowledge_comboBox.currentText()
-        description=self.description_text_box.text()
+        title=self.title_text_box.text()         #
+        Java=self.Java_checkBox
+
+        description=self.description_text_box.toPlainText()
+
+        knowledge = [
+        'Java',
+        'Python',
+        'Javascript',
+        'Kotlin',
+        'Go',
+        'Swift',
+        'Rust',
+        'C and C++',
+        'HTML',
+        'SQL',
+        'CSS',
+        'PHP',
+        'TypeScript',
+        'Perl'
+        ]
+
+        if self.Javascript_checkbox.isChecked() != True:
+            knowledge.remove('Javascript')
+
+        if self.Python_checkbox.isChecked() != True:
+            knowledge.remove('Python')
+
+        if self.Kotlin_checkbox.isChecked() != True:
+            knowledge.remove('Kotlin')
+
+        if self.Go_checkbox.isChecked() != True:
+            knowledge.remove('Go')
+
+        if self.Swift_checkbox.isChecked() != True:
+            knowledge.remove('Swift')
+
+        if self.C_checkbox.isChecked() != True:
+            knowledge.remove('C and C++')
+
+        if self.SQL_checkbox.isChecked() != True:
+            knowledge.remove('SQL')
+
+        if self.CSS_checkbox.isChecked() != True:
+            knowledge.remove('CSS')
+
+        if self.PHP_checkbox.isChecked() != True:
+            knowledge.remove('PHP')
+
+        if self.TypeScript_checkbox.isChecked() != True:
+            knowledge.remove('TypeScript')
+
+        if self.Perl_checkbox.isChecked() != True:
+            knowledge.remove('Perl')
+
+        if self.Java_checkbox.isChecked() != True:
+            knowledge.remove('Java')
+
+        if self.HTML_checkbox.isChecked() != True:
+            knowledge.remove('HTML')
 
 
 
 
+
+
+
+
+
+
+
+
+        flag = 0
+        if checkEmail(email)==False:
+            ErrorString = ''.join((ErrorString,' Email,'))
+            flag = 1        
+
+        if checkFullName(fname)==False:
+            ErrorString = ''.join((ErrorString,' Full Name,'))
+            flag = 1
+
+        if checkTitle(title)==False:
+            ErrorString = ''.join((ErrorString,' Title,'))
+            flag = 1
+
+        if checkPhoneNumber(Pnumber)==False:
+            ErrorString = ''.join((ErrorString,' Phone Number,'))
+            flag = 1
+            
+
+        ErrorString = ''.join(('Invalid ',ErrorString))
+        ErrorString = ErrorString[:-1] + '.'      
+
+        #def showError(message): return
+            #self.wrong_data_label.setVisible(True)    #
+            #self.wrong_data_label.setText(message)    #   Qt Designer   
+
+        if flag == 0:        
+
+            try:
+                data={
+                    "title": title,
+                    "description": description, 
+                    "contactInfo": [fname, Pnumber, email], 
+                    "knowledge": ["C++","Java","PHP"],
+                    "preferences": {
+                        "workExperience": workExp,
+                        "daysPerWeek": workRate, 
+                        "workingFrom": workPlace
+                        },
+                    "resumes": [],
+                    "search": {
+                        "role": role, 
+                        "location": location, 
+                        "degree": degree, 
+                        "jobType": jobType
+                        }
+                }
+                db.child('Jobs').push(data)
+                self.back_to_homepage()    
+            except:
+                print('connection error something went wrong')      
+                #showError(">> Connection Error! <<")        
+        else:
+            print(ErrorString)      
+
+            #showError(ErrorString)  
+
+
+
+
+        #--------------help funcs for Create/publish job class-----------------
+
+
+    def back_to_homepage(self):
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self):
+        self.publish_button.clicked.connect(self.CreateAd)
+    #    self.cancel_button.clicked.connect(self.back_to_homepage)   #  Need fix
 
-        self.edit_ad_button.clicked.connect(print('edit ad'))
-        self.delete_ad_botton.clicked.connect(print('delete ad'))
-        self.send_resume_button.clicked.connect(print('send resume'))
-        self.send_message_button.clicked.connect(print('send message'))
 
-    #------------------------------------Ad frame class------------------------------------
+#------------------------------------Ad Widget class------------------------------------
 
 class AdWidget(QWidget):
 
@@ -200,7 +326,7 @@ class AdWidget(QWidget):
 
 
 
-        #--------------help funcs for usersettings class-----------------
+        #--------------help funcs for Ad Widget class-----------------
 
     def handle_buttons(self):
         self.edit_ad_button.clicked.connect(print('edit ad'))
@@ -218,7 +344,7 @@ class AdWidget(QWidget):
 
 
 
-    #------------------------------------Homepage class------------------------------------
+#------------------------------------Homepage class------------------------------------
 
 class Homepage(QMainWindow):
     def __init__(self):
@@ -227,18 +353,13 @@ class Homepage(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
 
 
-    def new_ad(self):
-        print('+1')
-        
-
-
-
-
     #def homepage_screen(self):
 
 
 
-    #--------------help funcs for homepage class-----------------
+        #--------------help funcs for homepage class-----------------
+
+
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
@@ -249,7 +370,10 @@ class Homepage(QMainWindow):
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-
+    def change_to_NewAd(self):
+        ad = NewAd()
+        widget.addWidget(ad)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 
         
@@ -265,10 +389,10 @@ class Homepage(QMainWindow):
         #self.search_button.clicked.connect(self.new_ad) #for search button input
         #self.free_search_button.clicked.connect(self.change_to_search_results)
         #self.advanced_search_button.clicked.connect(self.change_to_search_results)
-        self.new_ad_button.clicked.connect(self.new_ad)
+        self.new_ad_button.clicked.connect(self.change_to_NewAd)
 
     
-        #------------------------------------Usersettings class------------------------------------
+#------------------------------------Usersettings class------------------------------------
 
 class Usersettings(QMainWindow):
     def __init__(self):

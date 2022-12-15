@@ -46,3 +46,32 @@ def checkUserName(username):
         return True 
     return False
 
+
+
+
+def checkTitle(title):
+    '''gets a string and checks if its length is too long.'''
+    if len(title)>40:
+        return False
+    return True
+
+
+
+def checkPhoneNumber(number):
+
+
+    
+    #regex = '051/054/052/050/055/056/057/058/059'
+
+    #if re.match(str(number)[:3],regex) != True:         #regular expression
+    #    return False
+    
+    if len(str(number)) != 10:      # Check if number have a correct length.
+        return False
+
+    return True
+
+
+
+
+
