@@ -58,11 +58,13 @@ def checkTitle(title):
 
 
 def checkPhoneNumber(number):
-    
-    regex = '051/054/052/050/055/056/057/058/059'
 
-    if re.match(str(number)[:3],regex) != True:         #regular expression
-        return False
+
+    
+    #regex = '051/054/052/050/055/056/057/058/059'
+
+    #if re.match(str(number)[:3],regex) != True:         #regular expression
+    #    return False
     
     if len(str(number)) != 10:      # Check if number have a correct length.
         return False

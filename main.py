@@ -160,7 +160,7 @@ class NewAd(QMainWindow):
         fname=self.name_textbox.text()      #
         Pnumber=self.phone_textbox.text()   #
         email=self.email_textbox.text()     #
-        workExp=self.work_exp_cpmbpBox.currentText()
+        workExp=self.work_exp_comboBox.currentText()
         workRate=self.work_rate_comboBox.currentText()
         workPlace=self.work_place_comboBox.currentText()
         role=self.role_comboBox.currentText()
@@ -168,16 +168,15 @@ class NewAd(QMainWindow):
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
         title=self.title_text_box.text()         #
-        knowledge=self.knowledge_comboBox.currentText()
-        description=self.description_text_box.text()
-
+        #knowledge=self.knowledge_comboBox.currentText()
+        description=self.description_text_box.toPlainText()
+        ErrorString = ''
 
         flag = 0
 
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1        
-
 
         if checkFullName(fname)==False:
             ErrorString = ''.join((ErrorString,' Full Name,'))
@@ -195,37 +194,40 @@ class NewAd(QMainWindow):
         ErrorString = ''.join(('Invalid ',ErrorString))
         ErrorString = ErrorString[:-1] + '.'      
 
-        def showError(message): return
+        #def showError(message): return
             #self.wrong_data_label.setVisible(True)    #
             #self.wrong_data_label.setText(message)    #   Qt Designer   
 
         if flag == 0:        
 
             try:
-                #data={
-                #    "title": str(title),
-                #    "description": str(description), 
-                #    "contactInfo": [str(fname), str(Pnumber), str(email)], 
-                #    "knowledge": ["C++","Java","PHP"],
-                #    "preferences": {
-                #        "workExperience": str(workExp),
-                #        "daysPerWeek": str(workRate), 
-                #        "workingFrom": str(workPlace)
-                #        },
-                #    "resumes": [],
-                #    "search": {
-                #        "role": str(role), 
-                #        "location": str(location), 
-                #        "degree": str(degree), 
-                #        "jobType": str(jobType)
-                #        }
-                #}
-                #db.child('Jobs').push(data)
-                self.back_to_homepage()        
+                data={
+                    "title": title,
+                    "description": description, 
+                    "contactInfo": [fname, Pnumber, email], 
+                    "knowledge": ["C++","Java","PHP"],
+                    "preferences": {
+                        "workExperience": workExp,
+                        "daysPerWeek": workRate, 
+                        "workingFrom": workPlace
+                        },
+                    "resumes": [],
+                    "search": {
+                        "role": role, 
+                        "location": location, 
+                        "degree": degree, 
+                        "jobType": jobType
+                        }
+                }
+                db.child('Jobs').push(data)
+                self.back_to_homepage()    
             except:
-                showError(">> Connection Error! <<")        
+                print('connection error something went wrong')      
+                #showError(">> Connection Error! <<")        
         else:
-            showError(ErrorString)        
+            print(ErrorString)      
+
+            #showError(ErrorString)  
 
 
 
@@ -239,7 +241,7 @@ class NewAd(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self):
-        self.publish_button.clicked.connect(self.back_to_homepage)
+        self.publish_button.clicked.connect(self.CreateAd)
     #    self.cancel_button.clicked.connect(self.back_to_homepage)   #  Need fix
 
 
