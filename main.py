@@ -141,9 +141,10 @@ class Login(QMainWindow):
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
+        self.forgotpass_button.clicked.connect(self.change_to_forgetpassword)
 
 
-    def change_forgetpassword(self):
+    def change_to_forgetpassword(self):
         password = Password()
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
@@ -393,44 +394,69 @@ class Password(QMainWindow):
     def __init__(self):
         super(Password, self).__init__()
         loadUi("ui/inputpassword.ui", self)  # file
-        self.ok.clicked.connect(self.change_to_signup)
+        #self.ok.clicked.connect(self.change_to_signup)
 
-    def change_to_signup(self):
+    # def change_to_signup(self):
 
-        signup = Signup()
-        widget.addWidget(signup)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
+    #     signup = Signup()
+    #     widget.addWidget(signup)
+    #     widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    # check
-    def checkPasswordKey(self, passkey,email):
-        if passkey == '':
-            return False
-        elif passkey != " ":
-            countL = 0
-            countN = 0
-            index = 0
-            for letter in passkey:
-                if 'A' <= passkey <= 'Z':
-                    countL += 1  # .
-                    index += 1
-                if '1' <= letter <= '9':  # check for password.
-                    countL += 1
-                    index += 1
-            if countN >= 1 and countN >= 1:
-                return True
-        else:
-            return False
-        # passkey.islower() or passkey.isalpha():
-        #   return False  # returns false if there are no uppercase letters or no numbers
-        # return True
+    def forgetPass(self):
 
-    def check(self):
-        password = self.inputpassword.text()
-        if self.checkPasswordKey(password):
-            # update the data base
-            self.change_to_signup()  # goes to next screen
-        else:
-            self.error.setText("Error! invalid Password")
+        email=self.email_textbox.text()
+
+        try:
+            auth.send_password_reset_email(email)
+            self.error.setVisible(True)
+            self.error.setText(">> Successful! Nice:) <<")
+
+        except:
+            self.error.setVisible(True)
+            self.error.setText(">> Error! invalid Email :( <<")
+
+        #--------------help funcs for Password class-----------------
+
+    def handle_buttons(self):
+        self.send_email_button.clicked.connect(self.forgetPass)
+        self.back_login_botton.clicked.connect(self.change_to_login)
+
+    def change_to_login(self): # change to login screen
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+
+    # # check
+    # def checkPasswordKey(self, passkey,asd):
+    #     if passkey == '':
+    #         return False
+    #     elif passkey != " ":
+    #         countL = 0
+    #         countN = 0
+    #         index = 0
+    #         for letter in passkey:
+    #             if 'A' <= passkey <= 'Z':
+    #                 countL += 1  # .
+    #                 index += 1
+    #             if '1' <= letter <= '9':  # check for password.
+    #                 countL += 1
+    #                 index += 1
+    #         if countN >= 1 and countN >= 1:
+    #             return True
+    #     else:
+    #         return False
+    #     # passkey.islower() or passkey.isalpha():
+    #     #   return False  # returns false if there are no uppercase letters or no numbers
+    #     # return True
+
+    # def check(self):
+    #     password = self.inputpassword.text()
+    #     if self.checkPasswordKey(password):
+    #         # update the data base
+    #         self.change_to_signup()  # goes to next screen
+    #     else:
+    #         self.error.setText("Error! invalid Password")
 
 
 #------------------------------------Usersettings class------------------------------------
