@@ -422,31 +422,33 @@ class Password(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
     # check
-    def checkPasswordKey(self, passkey):
-        if passkey == '':
-            return False
-        elif passkey != " ":
-            countL = 0
-            countN = 0
-            index = 0
-            for letter in passkey:
-                if 'A' <= passkey <= 'Z':
-                    countL += 1  # .
-                    index += 1
-                if '1' <= letter <= '9':  # check for password.
-                    countL += 1
-                    index += 1
-            if countN >= 1 and countN >= 1:
-                return True
-        else:
-            return False
+    #def checkPasswordKey(self, passkey):
+        #if passkey == '':
+         #   return False
+        #elif passkey != " ":
+            #countL = 0
+            #countN = 0
+            #index = 0
+            #for letter in passkey:
+                #if 'A' <= passkey <= 'Z':
+               #     countL += 1  # .
+              #      index += 1
+             #   if '1' <= letter <= '9':  # check for password.
+            #        countL += 1
+           #         index += 1
+          #  if countN >= 1 and countN >= 1:
+
+         #       return True
+        #else:
+            #return False
         # passkey.islower() or passkey.isalpha():
         #   return False  # returns false if there are no uppercase letters or no numbers
         # return True
 
     def check(self):
         password = self.inputpassword.text()
-        if self.checkPasswordKey(password):
+        if checkPasswordKey(password):
+            print("hi")
             # update the data base
             self.change_to_signup()  # goes to next screen
         else:

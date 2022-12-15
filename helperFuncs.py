@@ -9,6 +9,7 @@ def checkPasswordKey(passkey):
     '''gets a string. checks that the given password has atleast one capital letter and atleast one number.'''
     if passkey == '':
         return False
+
     elif (passkey.islower() or passkey.isalpha() or passkey.isnumeric()):
         return False #returns false if there are no uppercase letters or no numbers
     return True
