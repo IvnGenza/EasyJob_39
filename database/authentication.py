@@ -20,10 +20,10 @@ db = firebase.database()
 auth = firebase.auth()
 storage = firebase.storage()
 
-users = db.child('Users').get()
-for user in users.each():
-        if user.val()['email'] == 'student1@mail.com':
-            user.updatePassword('Qwerty123')
+#users = db.child('Users').get()
+#for user in users.each():
+#        if user.val()['email'] == 'student1@mail.com':
+#            user.updatePassword('Qwerty123')
 
 
 
