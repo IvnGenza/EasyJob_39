@@ -145,24 +145,21 @@ class Login(QMainWindow):
 
 
 
-    #------------------------------------Create/publish job class------------------------------------
+#------------------------------Create/publish job class-----------------------------
 
 
-
-
-
-class adJob(QMainWindow):
+class NewAd(QMainWindow):
 
     def __init__(self):
-        super(adJob, self).__init__()
+        super(NewAd, self).__init__()
         loadUi("ui/new_ad.ui", self)
         self.handle_buttons()
 
-    def CreatePost(self):
+    def CreateAd(self):
 
-        fname=self.name_textbox.text()
-        pNumber=self.phone_textbox.text()
-        email=self.email_textbox.text()
+        fname=self.name_textbox.text()      #
+        Pnumber=self.phone_textbox.text()   #
+        email=self.email_textbox.text()     #
         workExp=self.work_exp_cpmbpBox.currentText()
         workRate=self.work_rate_comboBox.currentText()
         workPlace=self.work_place_comboBox.currentText()
@@ -170,22 +167,66 @@ class adJob(QMainWindow):
         location=self.location_comboBox.currentText()
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
-        title=self.title_text_box.text()
+        title=self.title_text_box.text()         #
         knowledge=self.knowledge_comboBox.currentText()
         description=self.description_text_box.text()
 
 
 
 
+        if checkEmail(email)==False:
+            ErrorString = ''.join((ErrorString,' Email,'))
+            flag = 1        
+
+
+        if checkFullName(fname)==False:
+            ErrorString = ''.join((ErrorString,' Full Name,'))
+            flag = 1
+
+        if checkTitle(title)==False:
+            ErrorString = ''.join((ErrorString,' Title,'))
+            flag = 1
+
+        if checkPhoneNumber(Pnumber)==False:
+            ErrorString = ''.join((ErrorString,' Phone Number,'))
+            flag = 1
+            
+
+        ErrorString = ''.join(('Invalid ',ErrorString))
+        ErrorString = ErrorString[:-1] + '.'      
+
+        def showError(message): return
+        #    self.wrong_data_label.setVisible(True)    #
+        #    self.wrong_data_label.setText(message)    #   Qt Designer   
+        if flag == 0:        
+
+            try:
+                #
+                #       db
+                #
+                self.back_to_homepage()        
+            except:
+                showError(">> Connection Error! <<")        
+        else:
+            showError(ErrorString)        
+
+
+
+
+        #--------------help funcs for Create/publish job class-----------------
+
+
+    def back_to_homepage(self):
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self):
+        self.publish_button.clicked.connect(self.back_to_homepage)
+        self.cancle_botton.clicked.connect(self.back_to_homepage)
 
-        self.edit_ad_button.clicked.connect(print('edit ad'))
-        self.delete_ad_botton.clicked.connect(print('delete ad'))
-        self.send_resume_button.clicked.connect(print('send resume'))
-        self.send_message_button.clicked.connect(print('send message'))
 
-    #------------------------------------Ad frame class------------------------------------
+#------------------------------------Ad Widget class------------------------------------
 
 class AdWidget(QWidget):
 
@@ -200,7 +241,7 @@ class AdWidget(QWidget):
 
 
 
-        #--------------help funcs for usersettings class-----------------
+        #--------------help funcs for Ad Widget class-----------------
 
     def handle_buttons(self):
         self.edit_ad_button.clicked.connect(print('edit ad'))
@@ -218,7 +259,7 @@ class AdWidget(QWidget):
 
 
 
-    #------------------------------------Homepage class------------------------------------
+#------------------------------------Homepage class------------------------------------
 
 class Homepage(QMainWindow):
     def __init__(self):
@@ -238,7 +279,9 @@ class Homepage(QMainWindow):
 
 
 
-    #--------------help funcs for homepage class-----------------
+        #--------------help funcs for homepage class-----------------
+
+
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
@@ -268,7 +311,7 @@ class Homepage(QMainWindow):
         self.new_ad_button.clicked.connect(self.new_ad)
 
     
-        #------------------------------------Usersettings class------------------------------------
+#------------------------------------Usersettings class------------------------------------
 
 class Usersettings(QMainWindow):
     def __init__(self):
