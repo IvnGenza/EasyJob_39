@@ -241,6 +241,10 @@ class NewAd(QMainWindow):
         if checkTitle(title)==False:
             ErrorString = ''.join((ErrorString,' Title,'))
             flag = 1
+            
+        if checkDescription(description)==False:
+            ErrorString = ''.join((ErrorString,' Description,'))
+            flag = 1
 
         if checkPhoneNumber(Pnumber)==False:
             ErrorString = ''.join((ErrorString,' Phone Number,'))
