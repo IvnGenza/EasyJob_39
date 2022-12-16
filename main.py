@@ -420,7 +420,7 @@ class Password(QMainWindow):
     def handle_buttons(self):
 
         self.back_login_botton.clicked.connect(self.change_to_login)
-        self.send_email_botton.clicked.connect(self.change_to_login)
+        self.send_email_botton.clicked.connect(self.forgetPass)
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
