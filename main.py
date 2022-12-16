@@ -198,7 +198,7 @@ class NewAd(QMainWindow):
         'TypeScript',
         'Perl'
         ]
-
+        
         if self.Javascript_checkbox.isChecked() != True:
             knowledge.remove('Javascript')
 
@@ -396,11 +396,6 @@ class Password(QMainWindow):
         loadUi("ui/inputpassword.ui", self)  # file
         self.handle_buttons()
 
-    # def change_to_signup(self):
-
-    #     signup = Signup()
-    #     widget.addWidget(signup)
-    #     widget.setCurrentIndex(widget.currentIndex() + 1)
 
     def forgetPass(self):
 
