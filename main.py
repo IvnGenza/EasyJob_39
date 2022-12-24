@@ -473,7 +473,7 @@ class Password(QMainWindow):
 class Usersettings(QMainWindow):
     def __init__(self):
         super(Usersettings, self).__init__()
-        if UserType == 'Student':
+        if userObj.Usertype == 'Student':
             loadUi("ui/usersettings_student.ui", self) # file
         else:
             loadUi("ui/usersettings.ui", self)
