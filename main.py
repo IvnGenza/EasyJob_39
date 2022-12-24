@@ -5,9 +5,10 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox
 from functools import *
-from users import Employer
+from users import *
 from helperFuncs import *
-UserType = 'Student' #temporay global variable for testing usersettings class
+
+userObj = None #global parameter
 
 
 
@@ -96,6 +97,7 @@ class Login(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on the signup button
 
     def logging(self):
+        global userObj #using global parameter
         email=self.username_lable.text()
         passwordKey=self.password_lable.text()
 
@@ -108,13 +110,22 @@ class Login(QMainWindow):
 
             try: #Putting data base funcs in try/except to prevent app crash on error.
                 auth.sign_in_with_email_and_password(email,passwordKey)
-
+                users = db.child('Users').get()
+                for user in users.each():
+                    if user.val()['email'] == email:
+                        if user.val()['usertype'] == 'Student': #user
+                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'])
+                        if user.val()['usertype'] == 'Employer':
+                            userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer', {})
+                        if user.val()['usertype'] == 'Admin':
+                            userObj= Admin(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Admin')
+                
             # This is a test to find out what user type has entered the program
                 #users = db.child('Users').get()
                 #for user in users.each():
                 #    if user.val()['email'] == email:
                 #        print('\n\nThe users type is: ' + user.val()['usertype'])
-
+                print(userObj.Fullname)
                 print(">> Welcome! <<")
                 self.change_to_homepage() #goes to next screen
             except: #if could not login then there is a connection error.
