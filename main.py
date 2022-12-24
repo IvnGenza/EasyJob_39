@@ -113,7 +113,7 @@ class Login(QMainWindow):
                 users = db.child('Users').get()
                 for user in users.each():
                     if user.val()['email'] == email:
-                        if user.val()['usertype'] == 'Student':
+                        if user.val()['usertype'] == 'Student': #user
                             userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'])
                         if user.val()['usertype'] == 'Employer':
                             userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer', {})
