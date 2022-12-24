@@ -45,13 +45,17 @@ class Student(User):
         self.Usertype = usertype
         self.Preferences = preferences #dictionary from database 
     
-    #def setPreferences(self, key, value):
-    #    user = self.SearchUser(self.Email)
-    #    if user != None:
-    #        self.Preferences[key] = value #giving the key its value
-    #        db.child('Users').child((user.key())).child('preferences').update({key:value})
+    def setPreferences(self, key, value):
+        user = self.SearchUser(self.Email)
+        if user != None:
+            self.Preferences[key] = value #giving the key its value
+            db.child('Users').child((user.key())).child('preferences').update({key:value})
 
-    # we need to add setResume to class
+    def setResume(self, res):
+        user = self.SearchUser(self.Email)
+        if user != None:
+            self.resume = res #setting the new resume string to database and saving it in object
+            db.child('Users').child((user.key())).child('resume').update(res)
 
 class Employer(User):
     def __init__(self, fullname, age, username, email, usertype, jobAds): 
@@ -76,6 +80,10 @@ class Employer(User):
         
 #employer = Employer('max', '20', 'maxl', 'max@max.com', 'Employer', {}) #test 
 #print(employer.GetResume('Job at apple'))
+#student = Student('max', '23', 'maxl', 'max@max.com', 'Employer', {}) #test 
+#student.setPreferences('role','junior')
+
+
 
 class Admin(User):
     def __init__(self, fullname, age, username, email, usertype): 
