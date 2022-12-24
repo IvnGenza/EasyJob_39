@@ -48,12 +48,15 @@ storage = firebase.storage()
 #}
 
 
-
-
-
-
 ##this addes the above data into the 'Jobs' section of the realtime database
-#db.child('Jobs').push(data)
+    #db.child('Jobs').push(data)
+
+##this addes data into the 'Users' section of the realtime database into each user in a specific key
+#users = db.child('Users').get()
+#for user in users.each():
+    #db.child('Users').child((user.key())).child('preferences').push(data)
+
+
 
 
 
