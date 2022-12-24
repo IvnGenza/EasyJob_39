@@ -212,6 +212,9 @@ class NewAd(QMainWindow):
         
         if self.Javascript_checkbox.isChecked() != True:
             knowledge.remove('Javascript')
+    
+        if self.Rust_checkBox.isChecked() != True:
+            knowledge.remove('Rust')
 
         if self.Python_checkBox.isChecked() != True:
             knowledge.remove('Python')
