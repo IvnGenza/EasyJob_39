@@ -363,6 +363,7 @@ class Homepage(QMainWindow):
         super(Homepage, self).__init__()
         loadUi("ui/homepage.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
+        self.advancedSearchWindow = None # this is a place holder for the advanced search small window
 
     def SearchJob(self, JobType, Degree, Location, Role):
         jobs = db.child('Jobs').get()
@@ -399,6 +400,15 @@ class Homepage(QMainWindow):
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_advanced_search(self):
+        if self.advancedSearchWindow is None:
+            self.advancedSearchWindow = AdvancedSearch()
+            self.advancedSearchWindow.show()
+        else:
+            self.advancedSearchWindow.close()  # Close window.
+            self.advancedSearchWindow = None  # Discard reference.
+
+
 
         
 
@@ -413,7 +423,7 @@ class Homepage(QMainWindow):
         self.search_button.clicked.connect(self.Search) #for search function
         #self.search_button.clicked.connect(self.new_ad) #for search button input
         #self.free_search_button.clicked.connect(self.change_to_search_results)
-        #self.advanced_search_button.clicked.connect(self.change_to_search_results)
+        self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
 
 #-------------------------------Password class------------------------------------
@@ -513,7 +523,18 @@ class Usersettings(QMainWindow):
 
 
 
+#------------------------------------advanced search class------------------------------------
 
+class AdvancedSearch(QMainWindow):
+    def __init__(self):
+        super(AdvancedSearch, self).__init__()
+        loadUi("ui/advancedSearch.ui", self) 
+        self.handle_buttons() 
+
+    def handle_buttons(self): 
+        #this button should call a function that saves the data and passes into the search engine
+        #self.save_settings_button.clicked.connect(self.foo) #saves the preferences of the advanced search
+        pass
 
 
 #----------------------------------------Main----------------------------------

@@ -322,6 +322,11 @@ text-align:left;
             </property>
             <item>
              <property name="text">
+              <string>No work experience</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
               <string>At least one year</string>
              </property>
             </item>
@@ -333,11 +338,6 @@ text-align:left;
             <item>
              <property name="text">
               <string>At least five years</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>No exp needed</string>
              </property>
             </item>
            </widget>
@@ -431,12 +431,12 @@ text-align:left;
             </property>
             <item>
              <property name="text">
-              <string>Hybrid work</string>
+              <string>Home</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Relocation</string>
+              <string>Hybrid work</string>
              </property>
             </item>
             <item>
@@ -446,12 +446,12 @@ text-align:left;
             </item>
             <item>
              <property name="text">
-              <string>Home</string>
+              <string>Optional</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Optional</string>
+              <string>Relocation</string>
              </property>
             </item>
            </widget>
