@@ -384,7 +384,7 @@ class Homepage(QMainWindow):
 
         #--------------help funcs for homepage class-----------------
 
-
+       
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
