@@ -361,15 +361,19 @@ class AdWidget(QWidget):
 class Homepage(QMainWindow):
     def __init__(self):
         super(Homepage, self).__init__()
-        loadUi("ui/homepage.ui", self) # file
+        loadUi("ui/homepage - Copy.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
+        
 
     def SearchJob(self, JobType, Degree, Location, Role):
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if job.val()['search']['degree'] == Degree or job.val()['search']['jobType']==JobType or job.val()['search']['location']==Location or job.val()['search']['role']==Role:
+                self.listWidget.clear() #this clears all of the lists items
                 print(job.val()['description'])
+                
+                #self.listWidget.addItem(job.val()['description'].append(' | ').append(job.val()['title']))
         return None
 
     def Search(self):
@@ -425,6 +429,16 @@ class Homepage(QMainWindow):
         #self.free_search_button.clicked.connect(self.change_to_search_results)
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
+        
+        #this gets an item from the list widget
+        #abcd = self.listWidget.item(0)
+
+        #this connects every list widget to a function when clicked
+        #self.listWidget.itemClicked.connect(self.change_to_usersettings)
+
+        #this adds an item to the list widget
+        #self.listWidget.addItem('test test test')
+
 
 #-------------------------------Password class------------------------------------
 class Password(QMainWindow):
