@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>787</width>
-    <height>548</height>
+    <width>850</width>
+    <height>650</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>850</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>850</width>
+    <height>650</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -41,6 +53,11 @@
        <height>16777215</height>
       </size>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <property name="title">
       <string>GroupBox</string>
      </property>
@@ -50,8 +67,21 @@
       </property>
       <item>
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>24</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="statusTip">
+         <string/>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <property name="text">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; text-decoration: underline;&quot;&gt;Ad`s name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; text-decoration: underline;&quot;&gt;Ad`s name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
       </item>
@@ -63,7 +93,7 @@
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>40</height>
+          <height>20</height>
          </size>
         </property>
        </spacer>
@@ -71,14 +101,24 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="edit_ad_button">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Edit</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_3">
+         <widget class="QPushButton" name="delete_ad_button">
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Delete</string>
           </property>
@@ -87,18 +127,158 @@
        </layout>
       </item>
       <item>
-       <widget class="QUndoView" name="undoView">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <layout class="QVBoxLayout" name="verticalLayout_3"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
         </property>
-        <property name="minimumSize">
+        <property name="text">
+         <string>Title:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="title_textBox">
+        <property name="maximumSize">
          <size>
-          <width>0</width>
-          <height>0</height>
+          <width>16777215</width>
+          <height>30</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Description:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="description_textBox">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>150</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="html">
+         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; font-weight:600;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Required Knowledge:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="knowledge_textBox">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Details:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="details_textBox">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>60</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Contact Information:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTextBrowser" name="contact_info_textBox">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
         </property>
        </widget>
       </item>
@@ -107,15 +287,52 @@
         <property name="spacing">
          <number>0</number>
         </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
         <item>
-         <widget class="QPushButton" name="pushButton">
+         <widget class="QPushButton" name="send_resume_button">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Send resume</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="send_message_button">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>Send message</string>
           </property>
