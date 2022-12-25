@@ -365,7 +365,20 @@ class Homepage(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
 
-    #def homepage_screen(self):
+    def SearchJob(self, JobType, Degree, Location, Role):
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if job.val()['search']['degree'] == Degree or job.val()['search']['jobType']==JobType or job.val()['search']['location']==Location or job.val()['search']['role']==Role:
+                print(job.val()['description'])
+        return None
+
+    def Search(self):
+        if userObj.Usertype == 'Student':
+            jobtype = self.comboBox_job_type.currentText()
+            degree = self.comboBox_degree.currentText()
+            location = self.comboBox_location.currentText()
+            role = self.comboBox_role.currentText()
+            self.SearchJob(jobtype, degree, location, role)
 
 
 
@@ -407,6 +420,7 @@ class Homepage(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
+        self.search_button.clicked.connect(self.Search) #for search function
         #self.search_button.clicked.connect(self.new_ad) #for search button input
         #self.free_search_button.clicked.connect(self.change_to_search_results)
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
