@@ -3,7 +3,7 @@ from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget
 from functools import *
 from users import *
 from helperFuncs import *
@@ -361,19 +361,27 @@ class AdWidget(QWidget):
 class Homepage(QMainWindow):
     def __init__(self):
         super(Homepage, self).__init__()
-        loadUi("ui/homepage - Copy.ui", self) # file
+        loadUi("ui/homepage.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
         
 
     def SearchJob(self, JobType, Degree, Location, Role):
+        flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+        self.no_jobs_found_label.setText('') #setting the error message to be empty at the start
+        self.listWidget.clear() #this clears all of the lists items
+
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if job.val()['search']['degree'] == Degree or job.val()['search']['jobType']==JobType or job.val()['search']['location']==Location or job.val()['search']['role']==Role:
-                self.listWidget.clear() #this clears all of the lists items
-                print(job.val()['description'])
                 
+                #print(job.val()['description'])
+                flag = 1
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+
+        if flag == 0:
+            self.no_jobs_found_label.setText('could not find jobs that fit your search')
+
         return None
 
     def Search(self):
@@ -537,7 +545,7 @@ class Usersettings(QMainWindow):
 
 
 
-#------------------------------------advanced search class------------------------------------
+#------------------------------------Advanced search class------------------------------------
 
 class AdvancedSearch(QMainWindow):
     def __init__(self):
