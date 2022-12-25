@@ -369,14 +369,48 @@ class Homepage(QMainWindow):
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
 
 
-    def SearchJob(self, JobType, Degree, Location, Role):
-        flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+    
+
+    def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
+        jobtype = self.comboBox_job_type.currentText()
+        degree = self.comboBox_degree.currentText()
+        location = self.comboBox_location.currentText()
+        role = self.comboBox_role.currentText()
+
         self.no_jobs_found_label.setText('') #setting the error message to be empty at the start
         self.listWidget.clear() #this clears all of the lists items
 
+        if self.advancedSearchWindow == None:
+            self.SearchJob(jobtype, degree, location, role)
+        else:
+            workExperience = self.advancedSearchWindow.searchData['workExperience']
+            daysPerWeek = self.advancedSearchWindow.searchData['daysPerWeek']
+            workingFrom = self.advancedSearchWindow.searchData['workingFrom']
+            knowledge = self.advancedSearchWindow.searchData['knowledge'] #knowledge is an array
+            self.AdvancedSearchJob(jobtype, degree, location, role, workExperience, daysPerWeek, workingFrom, knowledge)
+
+
+
+        
+    def SearchAllJobs(self): #this method searches for all the jobs in the database and adds them to the job list
+        self.listWidget.clear() #this clears all of the lists items
         jobs = db.child('Jobs').get()
         for job in jobs.each():
-            if job.val()['search']['degree'] == Degree or job.val()['search']['jobType']==JobType or job.val()['search']['location']==Location or job.val()['search']['role']==Role:
+            self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+
+
+
+    def SearchJob(self, JobType, Degree, Location, Role):
+        flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if (
+                job.val()['search']['degree'] == Degree or 
+                job.val()['search']['jobType'] == JobType or 
+                job.val()['search']['location'] == Location or 
+                job.val()['search']['role'] == Role
+                ):
                 
                 #print(job.val()['description'])
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
@@ -387,24 +421,31 @@ class Homepage(QMainWindow):
         if flag == 0:
             self.no_jobs_found_label.setText('could not find jobs that fit your search')
 
-        return None
 
 
-    def SearchAllJobs(self):
-        self.listWidget.clear() #this clears all of the lists items
+    def AdvancedSearchJob(self, JobType, Degree, Location, Role, WorkExperience, DaysPerWeek, WorkingFrom, Knowledge):
+        flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+
         jobs = db.child('Jobs').get()
         for job in jobs.each():
-            self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+            if (
+                job.val()['search']['degree'] == Degree or 
+                job.val()['search']['jobType'] == JobType or 
+                job.val()['search']['location'] == Location or 
+                job.val()['search']['role'] == Role or 
+                job.val()['preferences']['workExperience'] == WorkExperience or 
+                job.val()['preferences']['daysPerWeek'] == DaysPerWeek or 
+                job.val()['preferences']['workingFrom'] == WorkingFrom or 
+                all(elem in job.val()['knowledge'] for elem in Knowledge) #"all" checks if the database list contains all elements in in the Knowledge parameter list
+                ): 
 
+                flag = 1 #flag = 1 means that we found at least one job ad that fits the description
 
-    def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
-        jobtype = self.comboBox_job_type.currentText()
-        degree = self.comboBox_degree.currentText()
-        location = self.comboBox_location.currentText()
-        role = self.comboBox_role.currentText()
-        self.SearchJob(jobtype, degree, location, role)
+                #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
+                self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
-
+        if flag == 0:
+            self.no_jobs_found_label.setText('could not find jobs that fit your search')
 
         #--------------help funcs for homepage class-----------------
 
@@ -425,12 +466,12 @@ class Homepage(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def change_to_advanced_search(self):
-        if self.advancedSearchWindow is None:
+        #if self.advancedSearchWindow is None:
             self.advancedSearchWindow = AdvancedSearch()
             self.advancedSearchWindow.show()
-        else:
-            self.advancedSearchWindow.close()  # Close window.
-            self.advancedSearchWindow = None  # Discard reference.
+        #else:
+        #    self.advancedSearchWindow.close()  # Close window.
+        #    self.advancedSearchWindow = None  # Discard reference.
 
 
 
@@ -438,7 +479,6 @@ class Homepage(QMainWindow):
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
         self.search_button.clicked.connect(self.Search) #for search function
-        #self.search_button.clicked.connect(self.new_ad) #for search button input
         self.free_search_button.clicked.connect(self.SearchAllJobs)
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
@@ -557,11 +597,77 @@ class AdvancedSearch(QMainWindow):
         super(AdvancedSearch, self).__init__()
         loadUi("ui/advancedSearch.ui", self) 
         self.handle_buttons() 
+        self.searchData = { #this is the data the user inputs in the adfances search window
+            'workExperience':'',    
+            'daysPerWeek':'',    
+            'workingFrom':'',    
+            'knowledge':[]    
+        }
+
+    def saveAdvancedSearch(self):
+        workExp=self.comboBox_work_experience.currentText()
+        workRate=self.comboBox_work_days.currentText()
+        workPlace=self.comboBox_working_from.currentText()
+
+        knowledge = ['Java','Python','Javascript','Kotlin','Go','Swift','Rust','C and C++','HTML','SQL','CSS','PHP','TypeScript','Perl']
+        
+        if self.checkBox_javascript.isChecked() != True:
+            knowledge.remove('Javascript')
+    
+        if self.checkBox_rust.isChecked() != True:
+            knowledge.remove('Rust')
+
+        if self.checkBox_python.isChecked() != True:
+            knowledge.remove('Python')
+
+        if self.checkBox_kotlin.isChecked() != True:
+            knowledge.remove('Kotlin')
+
+        if self.checkBox_go.isChecked() != True:
+            knowledge.remove('Go')
+
+        if self.checkBox_swift.isChecked() != True:
+            knowledge.remove('Swift')
+
+        if self.checkBox_c_cpp.isChecked() != True:
+            knowledge.remove('C and C++')
+
+        if self.checkBox_sql.isChecked() != True:
+            knowledge.remove('SQL')
+
+        if self.checkBox_css.isChecked() != True:
+            knowledge.remove('CSS')
+
+        if self.checkBox_php.isChecked() != True:
+            knowledge.remove('PHP')
+
+        if self.checkBox_typescript.isChecked() != True:
+            knowledge.remove('TypeScript')
+
+        if self.checkBox_perl.isChecked() != True:
+            knowledge.remove('Perl')
+
+        if self.checkBox_java.isChecked() != True:
+            knowledge.remove('Java')
+
+        if self.checkBox_html.isChecked() != True:
+            knowledge.remove('HTML')
+
+
+        #saveing the data from the window in a dictionary and returning the dictionary
+        self.searchData['workExperience'] = workExp
+        self.searchData['daysPerWeek'] = workRate
+        self.searchData['workingFrom'] = workPlace
+        self.searchData['knowledge'] = knowledge
+
+        self.close() 
+        
+
 
     def handle_buttons(self): 
         #this button should call a function that saves the data and passes into the search engine
-        #self.save_settings_button.clicked.connect(self.foo) #saves the preferences of the advanced search
-        pass
+        self.save_settings_button.clicked.connect(self.saveAdvancedSearch) #saves the preferences of the advanced search
+        
 
 
 #----------------------------------------Main----------------------------------
