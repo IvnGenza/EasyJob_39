@@ -368,6 +368,7 @@ class Homepage(QMainWindow):
         if userObj.Usertype == 'Student' or userObj.Usertype == 'Admin': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
 
+
     def SearchJob(self, JobType, Degree, Location, Role):
         flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
         self.no_jobs_found_label.setText('') #setting the error message to be empty at the start
@@ -387,6 +388,14 @@ class Homepage(QMainWindow):
             self.no_jobs_found_label.setText('could not find jobs that fit your search')
 
         return None
+
+
+    def SearchAllJobs(self):
+        self.listWidget.clear() #this clears all of the lists items
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+
 
     def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
         jobtype = self.comboBox_job_type.currentText()
@@ -425,19 +434,12 @@ class Homepage(QMainWindow):
 
 
 
-        
-
-    #def change_to_search_results(self): # change to signup screen
-    #    search = Search_results()
-    #    widget.addWidget(search)
-    #    widget.setCurrentIndex(widget.currentIndex()+1)
-
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
         self.search_button.clicked.connect(self.Search) #for search function
         #self.search_button.clicked.connect(self.new_ad) #for search button input
-        #self.free_search_button.clicked.connect(self.change_to_search_results)
+        self.free_search_button.clicked.connect(self.SearchAllJobs)
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
         
