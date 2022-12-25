@@ -466,12 +466,9 @@ class Homepage(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def change_to_advanced_search(self):
-        #if self.advancedSearchWindow is None:
-            self.advancedSearchWindow = AdvancedSearch()
-            self.advancedSearchWindow.show()
-        #else:
-        #    self.advancedSearchWindow.close()  # Close window.
-        #    self.advancedSearchWindow = None  # Discard reference.
+        self.advancedSearchWindow = AdvancedSearch()
+        self.advancedSearchWindow.show()
+       
 
 
 
