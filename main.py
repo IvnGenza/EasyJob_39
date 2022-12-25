@@ -8,7 +8,7 @@ from functools import *
 from users import *
 from helperFuncs import *
 
-userObj = None #global parameter
+userObj = None #global parameter, this will hold the current user object like student, employer and admin.
 
 
 
@@ -365,6 +365,8 @@ class Homepage(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
         
+        if userObj.Usertype == 'Student' or userObj.Usertype == 'Admin': #if the user is NOT an employer, hide the "add new job ad" button
+            self.new_ad_button.hide() #on buttons we can use the hide method to hide them
 
     def SearchJob(self, JobType, Degree, Location, Role):
         flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
@@ -376,7 +378,9 @@ class Homepage(QMainWindow):
             if job.val()['search']['degree'] == Degree or job.val()['search']['jobType']==JobType or job.val()['search']['location']==Location or job.val()['search']['role']==Role:
                 
                 #print(job.val()['description'])
-                flag = 1
+                flag = 1 #flag = 1 means that we found at least one job ad that fits the description
+
+                #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
         if flag == 0:
@@ -384,13 +388,12 @@ class Homepage(QMainWindow):
 
         return None
 
-    def Search(self):
-        if userObj.Usertype == 'Student':
-            jobtype = self.comboBox_job_type.currentText()
-            degree = self.comboBox_degree.currentText()
-            location = self.comboBox_location.currentText()
-            role = self.comboBox_role.currentText()
-            self.SearchJob(jobtype, degree, location, role)
+    def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
+        jobtype = self.comboBox_job_type.currentText()
+        degree = self.comboBox_degree.currentText()
+        location = self.comboBox_location.currentText()
+        role = self.comboBox_role.currentText()
+        self.SearchJob(jobtype, degree, location, role)
 
 
 

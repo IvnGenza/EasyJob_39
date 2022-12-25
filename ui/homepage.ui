@@ -854,13 +854,8 @@ padding:10px;</string>
                   <cursorShape>PointingHandCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font:20px;</string>
+                  <string notr="true">font:24px;</string>
                  </property>
-                 <item>
-                  <property name="text">
-                   <string>Title | location | role | work from | degree </string>
-                  </property>
-                 </item>
                 </widget>
                </item>
               </layout>
