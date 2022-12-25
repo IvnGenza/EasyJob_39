@@ -373,7 +373,7 @@ class Homepage(QMainWindow):
                 self.listWidget.clear() #this clears all of the lists items
                 print(job.val()['description'])
                 
-                #self.listWidget.addItem(job.val()['description'].append(' | ').append(job.val()['title']))
+                self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
         return None
 
     def Search(self):
@@ -388,7 +388,7 @@ class Homepage(QMainWindow):
 
         #--------------help funcs for homepage class-----------------
 
-
+       
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
@@ -559,6 +559,7 @@ widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
 
 login = Login()
 widget.addWidget(login) # adding the first window to the stack
+widget.move(320, 135)
 widget.show() # showing the stack of widgets, first window will be showen first
 
 try:
