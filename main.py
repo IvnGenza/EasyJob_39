@@ -364,12 +364,16 @@ class Homepage(QMainWindow):
         loadUi("ui/homepage - Copy.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
+        
 
     def SearchJob(self, JobType, Degree, Location, Role):
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if job.val()['search']['degree'] == Degree or job.val()['search']['jobType']==JobType or job.val()['search']['location']==Location or job.val()['search']['role']==Role:
+                self.listWidget.clear() #this clears all of the lists items
                 print(job.val()['description'])
+                
+                #self.listWidget.addItem(job.val()['description'].append(' | ').append(job.val()['title']))
         return None
 
     def Search(self):
@@ -434,6 +438,7 @@ class Homepage(QMainWindow):
 
         #this adds an item to the list widget
         #self.listWidget.addItem('test test test')
+
 
 #-------------------------------Password class------------------------------------
 class Password(QMainWindow):
