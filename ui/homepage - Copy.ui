@@ -817,12 +817,7 @@ padding:10px;</string>
                </property>
                <item>
                 <property name="text">
-                 <string>this is the first itme</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>this is the second item</string>
+                 <string>Title | location | role | work from | degree </string>
                 </property>
                </item>
               </widget>
