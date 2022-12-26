@@ -625,12 +625,12 @@ class Usersettings(QMainWindow):
 
 #------------------------------------Advanced search class------------------------------------
 
-class AdvancedSearch(QMainWindow):
+class AdvancedSearch(QMainWindow): #in the homepage, when the advanced search is clicked, this class is called, it allows us to filter the search with additional information that a regular search does not have.
     def __init__(self):
         super(AdvancedSearch, self).__init__()
         loadUi("ui/advancedSearch.ui", self) 
         self.handle_buttons() 
-        self.searchData = { #this is the data the user inputs in the advanced search window
+        self.searchData = { #this is the data the user inputs in the advanced search window, we then pass this data to the homepage inorder to filter the search with this additional information
             'workExperience':'',   
             'daysPerWeek':'',    
             'workingFrom':'',    
