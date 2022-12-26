@@ -469,9 +469,11 @@ class Homepage(QMainWindow):
         self.advancedSearchWindow = AdvancedSearch()
         self.advancedSearchWindow.show()
        
-    def change_to_AdPopup(self):
+    def change_to_AdPopup(self, item): #change to the ad window
         self.adpopup = AdPopup()
+        self.adpopup.SetParameters(item.text())
         self.adpopup.show()
+
 
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -674,9 +676,26 @@ class AdvancedSearch(QMainWindow):
 class AdPopup(QMainWindow):
     def __init__(self):
         super(AdPopup, self).__init__()
-        loadUi("ui/ad_frame.ui", self) 
-        self.handle_buttons() 
+        loadUi("ui/ad_frame.ui", self)
+        #self.handle_buttons() 
 
+    def SetParameters(self,item):
+        print(item)
+        title = (item.split(' | '))[0]
+        print(title)
+
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if job.val()['title'] == title:
+                self.title_textBox.setText(job.val()['title'])
+                self.description_textBox.setText(job.val()['description'])
+                self.knowledge_textBox.setText(job.val()['knowledge'][0])
+                self.details_textBox.setText(job.val()['search']['degree']+'\n'+job.val()['search']['jobType']+'\n'+job.val()['search']['location']+'\n'+job.val()['search']['role'])
+                self.contact_info_textBox.setText(job.val()['contactInfo'][0])
+
+        
+
+    
     #def handlebuttons(self):
 
 
