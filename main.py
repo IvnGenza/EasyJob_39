@@ -64,7 +64,7 @@ class Signup(QMainWindow):
             try:
                 auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
                 if UserType == 'Student':
-                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email,'preferences':{}, 'resume':''}) #Saving new user data in RealTime db.
+                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email,'preferences':{'location':'','role':'','workingFrom':'',}, 'resume':''}) #Saving new user data in RealTime db.
                 else:
                     db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
                 self.change_to_login()
