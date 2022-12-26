@@ -78,7 +78,7 @@ class Signup(QMainWindow):
     def change_to_login(self): # just a test function
         login = Login()
         widget.addWidget(login)
-        widget.setCurrentIndex(widget.currentIndex()+1) # -1 also works?
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.CreateNewAccFunc)
@@ -469,12 +469,13 @@ class Homepage(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def change_to_advanced_search(self):
-        #if self.advancedSearchWindow is None:
-            self.advancedSearchWindow = AdvancedSearch()
-            self.advancedSearchWindow.show()
-        #else:
-        #    self.advancedSearchWindow.close()  # Close window.
-        #    self.advancedSearchWindow = None  # Discard reference.
+        self.advancedSearchWindow = AdvancedSearch()
+        self.advancedSearchWindow.show()
+       
+    def change_to_AdPopup(self, item): #change to the ad window
+        self.adpopup = AdPopup()
+        self.adpopup.SetParameters(item.text())
+        self.adpopup.show()
 
 
 
@@ -485,6 +486,7 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs)
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
+        self.listWidget.itemClicked.connect(self.change_to_AdPopup)
         
         #this gets an item from the list widget
         #abcd = self.listWidget.item(0)
@@ -671,6 +673,38 @@ class AdvancedSearch(QMainWindow):
         #this button should call a function that saves the data and passes into the search engine
         self.save_settings_button.clicked.connect(self.saveAdvancedSearch) #saves the preferences of the advanced search
         
+    
+    #------------------------------------Advanced search class------------------------------------
+
+class AdPopup(QMainWindow):
+    def __init__(self):
+        super(AdPopup, self).__init__()
+        loadUi("ui/ad_frame.ui", self)
+        #self.handle_buttons() 
+
+    def SetParameters(self,item):
+        print(item)
+        title = (item.split(' | '))[0]
+        #print(title)
+        temp =''
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if job.val()['title'] == title:
+                self.title_textBox.setText(job.val()['title'])
+                self.description_textBox.setText(job.val()['description'])
+                for x in job.val()['knowledge']:
+                    temp += x+' , '
+                temp = temp[:-2] + ' '
+                self.knowledge_textBox.setText(temp)
+
+                self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
+                    ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
+                self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
+
+        
+
+    
+    #def handlebuttons(self):
 
 
 #----------------------------------------Main----------------------------------
