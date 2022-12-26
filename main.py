@@ -78,7 +78,7 @@ class Signup(QMainWindow):
     def change_to_login(self): # just a test function
         login = Login()
         widget.addWidget(login)
-        widget.setCurrentIndex(widget.currentIndex()+1) # -1 also works?
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.CreateNewAccFunc)
