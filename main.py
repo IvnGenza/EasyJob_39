@@ -361,12 +361,15 @@ class AdWidget(QWidget):
 class Homepage(QMainWindow):
     def __init__(self):
         super(Homepage, self).__init__()
-        loadUi("ui/homepage.ui", self) # file
+        if userObj.Usertype == 'Admin':
+            loadUi("ui/homepage_admin.ui", self) # file
+        else:
+            loadUi("ui/homepage.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
-        
-        if userObj.Usertype == 'Student' or userObj.Usertype == 'Admin': #if the user is NOT an employer, hide the "add new job ad" button
+        if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
+        
 
 
     
