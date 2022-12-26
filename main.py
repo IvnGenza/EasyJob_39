@@ -723,11 +723,14 @@ class DeletePopup(QMainWindow):
         self.handle_buttons() 
 
     def delete_account(self):
+        #key = ''
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['email'] == self.deleteUser.Email: 
-                user.delete_user() #needs to be a different function -- fix!
-                self.close()
+                db.child('Users').child(user.key()).remove() #needs to be a different function -- fix!
+                self.close() 
+                
+        
     def handle_buttons(self):
         self.yes_button.clicked.connect(self.delete_account)
 #----------------------------------------Main----------------------------------
