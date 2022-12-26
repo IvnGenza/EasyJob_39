@@ -367,9 +367,9 @@ class Homepage(QMainWindow):
             loadUi("ui/homepage.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
+        self.userpopup = None #this is a place holder for a user info popup window
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
-        
 
 
     
@@ -450,6 +450,23 @@ class Homepage(QMainWindow):
         if flag == 0:
             self.no_jobs_found_label.setText('could not find jobs that fit your search')
 
+
+    def SearchUser(self):
+        flag = 0
+        self.listWidget_users.clear()
+        self.no_jobs_found_label.setText('')
+        userName = self.username_textBox.text()
+
+        users = db.child('Users').get()
+        for user in users.each():
+            index = user.val()['username'].find(userName)
+            if index != -1 and user.val()['username'] != 'Admin':
+                flag = 1
+                self.listWidget_users.addItem(user.val()['username'])
+        
+        if flag == 0:
+            self.no_jobs_found_label.setText('could not find users that fit your search')
+
         #--------------help funcs for homepage class-----------------
 
        
@@ -477,6 +494,11 @@ class Homepage(QMainWindow):
         self.adpopup.SetParameters(item.text())
         self.adpopup.show()
 
+    def change_to_UserPopup(self, item): #change to the ad window
+        self.userpopup = UserPopup()
+        self.userpopup.show()
+        self.userpopup.SetParameters(item.text())
+        #print(item.text())
 
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -487,7 +509,9 @@ class Homepage(QMainWindow):
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
         self.listWidget.itemClicked.connect(self.change_to_AdPopup)
-        
+        self.search_username_button.clicked.connect(self.SearchUser)
+        self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
+
         #this gets an item from the list widget
         #abcd = self.listWidget.item(0)
 
@@ -602,8 +626,8 @@ class AdvancedSearch(QMainWindow):
         super(AdvancedSearch, self).__init__()
         loadUi("ui/advancedSearch.ui", self) 
         self.handle_buttons() 
-        self.searchData = { #this is the data the user inputs in the adfances search window
-            'workExperience':'',    
+        self.searchData = { #this is the data the user inputs in the advanced search window
+            'workExperience':'',   
             'daysPerWeek':'',    
             'workingFrom':'',    
             'knowledge':[]    
@@ -706,6 +730,40 @@ class AdPopup(QMainWindow):
     
     #def handlebuttons(self):
 
+#----------------------------------------User popup----------------------------------
+
+class UserPopup(QMainWindow):
+    def __init__(self):
+        super(UserPopup, self).__init__()
+        loadUi("ui/User_frame_student.ui", self) #frist we assume its a student user
+        self.handle_buttons() 
+
+    def SetParameters(self, UserName):
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['username'] == UserName: #if the usernames match do this:
+                if user.val()['usertype'] == 'Student': #then we check, if the account is actualy a sturent, if not we change the ui file
+                    self.resume_textBox.setText(user.val()['resume']) #only students have resumes in the database, employers dont have it
+                else:
+                    loadUi("ui/User_frame_employer.ui", self)
+
+                #adding all the data from the data base into the ui window based on the current user (username)
+                self.fullname_textBox.setText(user.val()['fullname'])
+                self.username_textBox.setText(user.val()['username'])
+                self.email_textBox.setText(user.val()['email'])
+                self.age_textBox.setText(user.val()['age'])
+                self.usertype_textBox.setText(user.val()['usertype'])
+
+
+    def SendMessage(self):
+        pass
+
+    def DeleteAccount(self):
+        pass
+
+    def handle_buttons(self): # this function handles the click of the signup button
+        self.send_message_button.clicked.connect(self.SendMessage) #calls a function that send a message to the user
+        self.delete_account_button.clicked.connect(self.DeleteAccount) #calls a function that deletes the given account
 
 #----------------------------------------Main----------------------------------
 
