@@ -63,7 +63,10 @@ class Signup(QMainWindow):
             #Putting data base funcs in try/except to prevent app crash on error.
             try:
                 auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
-                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email, 'resume':''}) #Saving new user data in RealTime db.
+                if UserType == 'Student':
+                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email,'preferences':{}, 'resume':''}) #Saving new user data in RealTime db.
+                else:
+                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
                 self.change_to_login()
 
             except:
@@ -509,8 +512,9 @@ class Homepage(QMainWindow):
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
         self.listWidget.itemClicked.connect(self.change_to_AdPopup)
-        self.search_username_button.clicked.connect(self.SearchUser)
-        self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
+        if userObj.Usertype == 'Admin':
+            self.search_username_button.clicked.connect(self.SearchUser)
+            self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
 
         #this gets an item from the list widget
         #abcd = self.listWidget.item(0)
