@@ -682,16 +682,21 @@ class AdPopup(QMainWindow):
     def SetParameters(self,item):
         print(item)
         title = (item.split(' | '))[0]
-        print(title)
-
+        #print(title)
+        temp =''
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if job.val()['title'] == title:
                 self.title_textBox.setText(job.val()['title'])
                 self.description_textBox.setText(job.val()['description'])
-                self.knowledge_textBox.setText(job.val()['knowledge'][0])
-                self.details_textBox.setText(job.val()['search']['degree']+'\n'+job.val()['search']['jobType']+'\n'+job.val()['search']['location']+'\n'+job.val()['search']['role'])
-                self.contact_info_textBox.setText(job.val()['contactInfo'][0])
+                for x in job.val()['knowledge']:
+                    temp += x+' , '
+                temp = temp[:-2] + ' '
+                self.knowledge_textBox.setText(temp)
+
+                self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
+                    ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
+                self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
 
         
 
