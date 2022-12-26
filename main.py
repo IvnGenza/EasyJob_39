@@ -477,8 +477,8 @@ class Homepage(QMainWindow):
         self.adpopup.SetParameters(item.text())
         self.adpopup.show()
 
-
-
+    
+        
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
@@ -574,6 +574,12 @@ class Usersettings(QMainWindow):
             loadUi("ui/usersettings.ui", self)
         self.handle_buttons() 
 
+    def change_to_deletePopup(self):
+        print('lol')
+        global userObj
+        print('dick')
+        self.deletepopup = DeletePopup(userObj)
+        self.deletepopup.show()
 
 
         #--------------help funcs for usersettings class-----------------
@@ -591,7 +597,7 @@ class Usersettings(QMainWindow):
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
-
+        self.delete_account_button.clicked.connect(self.change_to_deletePopup)
 
 
 
@@ -674,7 +680,7 @@ class AdvancedSearch(QMainWindow):
         self.save_settings_button.clicked.connect(self.saveAdvancedSearch) #saves the preferences of the advanced search
         
     
-    #------------------------------------Advanced search class------------------------------------
+    #------------------------------------AdPopup class------------------------------------
 
 class AdPopup(QMainWindow):
     def __init__(self):
@@ -685,7 +691,7 @@ class AdPopup(QMainWindow):
     def SetParameters(self,item):
         print(item)
         title = (item.split(' | '))[0]
-        #print(title)
+        
         temp =''
         jobs = db.child('Jobs').get()
         for job in jobs.each():
@@ -707,6 +713,23 @@ class AdPopup(QMainWindow):
     #def handlebuttons(self):
 
 
+#------------------------------------DeletePopup class------------------------------------
+
+class DeletePopup(QMainWindow):
+    def __init__(self,User):
+        super(DeletePopup, self).__init__()
+        loadUi("ui/Delete_Popup.ui", self)
+        self.deleteUser = User
+        self.handle_buttons() 
+
+    def delete_account(self):
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == self.deleteUser.Email: 
+                user.delete_user() #needs to be a different function -- fix!
+                self.close()
+    def handle_buttons(self):
+        self.yes_button.clicked.connect(self.delete_account)
 #----------------------------------------Main----------------------------------
 
 
