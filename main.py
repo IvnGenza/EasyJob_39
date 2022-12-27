@@ -849,6 +849,46 @@ class DeletePopup(QMainWindow):
     def handle_buttons(self):
         self.yes_button.clicked.connect(self.delete_account)
         self.no_button.clicked.connect(self.noButton)
+
+
+        
+
+#-------------------------------My Ads Resume Frame--------------------------------
+
+class MyAdsResumePopup(QMainWindow):
+    def __init__(self):
+        super(MyAdsResumePopup, self).__init__()
+        loadUi("ui/My_Ads_Resume_Frame.ui", self)
+        self.handle_buttons() 
+
+    def SetParameters(self, UserEmail):
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == UserEmail: #if the emails match do this:
+                #adding all the data from the data base into the ui window based on the current user (username)
+                self.fullname_textBox.setText(user.val()['fullname'])
+                self.username_textBox.setText(user.val()['username'])
+                self.email_textBox.setText(user.val()['email'])
+                self.age_textBox.setText(user.val()['age'])
+                self.resume_textBox.setText(user.val()['resume'])
+
+    def AcceptResume():
+        pass
+    
+    def RejectResume():
+        pass
+    
+    def SendMessage():
+        pass
+
+    def handle_buttons(self):
+        self.accept_resume_button.clicked.connect(self.AcceptResume)
+        self.reject_resume_button.clicked.connect(self.RejectResume)
+        self.send_message_button.clicked.connect(self.SendMessage)
+
+
+
+
 #----------------------------------------Main----------------------------------
 
 
