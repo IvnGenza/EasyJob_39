@@ -522,7 +522,6 @@ class Homepage(QMainWindow):
 
         if userObj.Usertype == 'Admin': #only the admin has these buttons, thats why we check if the current user is admin or not
             self.search_username_button.clicked.connect(self.SearchUser)
-            print(123)
             self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
 
         #this gets an item from the list widget
