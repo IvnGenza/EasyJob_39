@@ -294,7 +294,7 @@ class NewAd(QMainWindow):
                         "daysPerWeek": workRate, 
                         "workingFrom": workPlace
                         },
-                    "resumes": [],
+                    "resumes": [''],
                     "search": {
                         "role": role, 
                         "location": location, 
@@ -371,7 +371,8 @@ class Homepage(QMainWindow):
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
         self.userpopup = None #this is a place holder for a user info popup window
-        
+        self.adpopup = None #this is a place holder for a job ad info popup window
+
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
     
@@ -717,17 +718,30 @@ class AdvancedSearch(QMainWindow): #in the homepage, when the advanced search is
 class AdPopup(QMainWindow):
     def __init__(self):
         super(AdPopup, self).__init__()
-        loadUi("ui/ad_frame.ui", self)
-        #self.handle_buttons() 
+        loadUi("ui/Ad_frame.ui", self)
+        self.handle_buttons() 
+        self.jobReference = ''
+        self.error_success_message.setText('')
+
+        if userObj.Usertype == 'Student': #students cant edit or delete ads, only employer and admin can, thats why we disable the buttons
+            self.edit_ad_button.hide()
+            self.delete_ad_button.hide()
+        elif userObj.Usertype == 'Admin' or userObj.Usertype == 'Employer': #the admin and employers cant send a resume, so we disable the button if the user is an admin
+            self.send_resume_button.hide()
+        
+
 
     def SetParameters(self,item):
         print(item)
         title = (item.split(' | '))[0]
-        #print(title)
         temp =''
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if job.val()['title'] == title:
+                if userObj.Usertype == 'Employer' and job.val()['contactInfo'][2] != userObj.Email:
+                    self.edit_ad_button.hide()
+                    self.delete_ad_button.hide()
+
                 self.title_textBox.setText(job.val()['title'])
                 self.description_textBox.setText(job.val()['description'])
                 for x in job.val()['knowledge']:
@@ -738,11 +752,34 @@ class AdPopup(QMainWindow):
                 self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
                     ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
-
+                
+                #saving the key of the job from the database for later use in sendResume, sendMessage, editAd and deleteAd functions.
+                self.jobReference = job.key()
         
+    def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
+        count,flag = 0,0
+        for resume in db.child('Jobs').child(self.jobReference).child('resumes').get():
+            if resume.val() == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
+                flag = 1
+                self.error_success_message.setText("you have already submited your resume to this job ad")
+                break
+            if resume.val() == '':
+                break #when the ad is first created, the resumes array in the database will have an empty string in index 0, there for we need to check if the current resume array is empty or not by checking for the empty string.
+            count += 1
 
+        if flag == 0:
+            data = {count:userObj.Email}
+            db.child('Jobs').child(self.jobReference).child('resumes').update(data)
+            self.error_success_message.setText('resume submitted successfully')
+                
+
+
+    def SendMessage(self):
+        pass
     
-    #def handlebuttons(self):
+    def handle_buttons(self):
+        self.send_resume_button.clicked.connect(self.SendResume)
+        self.send_message_button.clicked.connect(self.SendMessage)
 
 #----------------------------------------User popup----------------------------------
 
