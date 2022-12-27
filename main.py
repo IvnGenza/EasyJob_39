@@ -376,7 +376,8 @@ class Homepage(QMainWindow):
 
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
-    
+            self.my_ads_button.hide() #only for employer 
+            self.line_4.hide() 
     
     #--------------------Main Functionality Functions-----------------------#
 
@@ -509,6 +510,11 @@ class Homepage(QMainWindow):
         self.userpopup.SetParameters(item.text())
         self.userpopup.show()
 
+    def change_to_my_ads(self): #change to my ads window for employer
+        myads = MyAds()
+        widget.addWidget(myads)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for user settings button 
@@ -516,7 +522,7 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
-        
+        self.my_ads_button.clicked.connect(self.change_to_my_ads)
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
 
@@ -849,7 +855,94 @@ class DeletePopup(QMainWindow):
     def handle_buttons(self):
         self.yes_button.clicked.connect(self.delete_account)
         self.no_button.clicked.connect(self.noButton)
-#----------------------------------------Main----------------------------------
+
+#----------------------------------------MyAds---------------------------------------
+class MyAds(QMainWindow):
+    def __init__(self):
+        super(MyAds, self).__init__()
+        loadUi("ui/My_Ads.ui", self)
+        self.handle_buttons()
+        self.ShowAds()
+
+    def ShowAds(self):
+        flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+        self.listWidget.clear()
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if job.val()['contactInfo'][2] == userObj.Email: 
+                flag = 1 #flag = 1 means that we found at least one job ad that fits the description
+                #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
+                self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+
+        if flag == 0:
+            self.error_message_text.setText('You have no job ads!') #if no job was found, paste the error message 
+
+
+    def change_to_login(self): # change to login screen
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_usersettings(self): # change to user settings screen
+        usersettings = Usersettings()
+        widget.addWidget(usersettings)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_homepage(self):
+        homepage = Homepage()
+        widget.addWidget(homepage)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_myAdsDetails(self):
+        myAdsDetails = MyAdsDetails()
+        widget.addWidget(myAdsDetails)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_NewAd(self): # open the new add screen (only by employer)
+        ad = NewAd()
+        widget.addWidget(ad)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def handle_buttons(self):
+        self.sign_out_button.clicked.connect(self.change_to_login)
+        self.user_settings_button.clicked.connect(self.change_to_usersettings)
+        self.back_button.clicked.connect(self.change_to_homepage)
+        self.my_ads_button.clicked.connect(self.change_to_myAdsDetails)
+        self.new_ad_button.clicked.connect(self.change_to_NewAd)
+
+#----------------------------------------DeletePopup----------------------------------
+class MyAdsDetails(QMainWindow):
+    def __init__(self):
+        super(MyAdsDetails, self).__init__()
+        loadUi("ui/My_Ads_Details.ui", self)
+        self.handle_buttons()
+        self.ShowResume()
+
+
+    def ShowResume(self):
+        flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+        self.listWidget.clear()
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            if job.val()['contactInfo'][2] == userObj.Email: 
+                flag = 1 #flag = 1 means that we found at least one job ad that fits the description
+                #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
+                self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+
+        if flag == 0:
+            self.listWidget.addItem('No resumes at the moment..')  # if employer doesnt have resumes we print a message
+
+    def change_to_MyAds(self):
+        myads = MyAds()
+        widget.addWidget(myads)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+
+    def handle_buttons(self):
+        self.back_button.clicked.connect(self.change_to_MyAds)
+        self.edit_button.clicked.connect()
+        self.delete_button.clicked.connect()
+#----------------------------------------Main-----------------------------------------
 
 
 app = QApplication(sys.argv)
