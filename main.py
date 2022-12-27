@@ -9,7 +9,7 @@ from users import *
 from helperFuncs import *
 
 userObj = None #global parameter, this will hold the current user object like student, employer and admin.
-
+CURRENTUSER = None
 
 
 #------------------------------------Signup class------------------------------------
@@ -112,7 +112,8 @@ class Login(QMainWindow):
         if checkPasswordKey(passwordKey) and checkEmail(email):
 
             try: #Putting data base funcs in try/except to prevent app crash on error.
-                auth.sign_in_with_email_and_password(email,passwordKey)
+                global CURRENTUSER
+                CURRENTUSER = auth.sign_in_with_email_and_password(email,passwordKey)
                 users = db.child('Users').get()
                 for user in users.each():
                     if user.val()['email'] == email:
@@ -607,9 +608,7 @@ class Usersettings(QMainWindow):
         self.handle_buttons() 
 
     def change_to_deletePopup(self):
-        print('lol')
         global userObj
-        print('dick')
         self.deletepopup = DeletePopup(userObj)
         self.deletepopup.show()
 
@@ -823,21 +822,22 @@ class DeletePopup(QMainWindow):
         self.handle_buttons() 
 
     def delete_account(self):
+        global CURRENTUSER
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['email'] == self.deleteUser.Email: 
-                user1 = auth.get_user_by_email(user.val()['email'])
-                auth.delete_user(user1.uid)
+                auth.delete_user_account(CURRENTUSER['idToken'])
                 db.child('Users').child(user.key()).remove() 
-         
-        #user_auth = auth.child('Users').get()
-        #for user_auth in users.each():
-        #    if user_auth.val()['email'] == self.deleteUser.Email: 
-        #        auth.child('Users').child(user.key()).remove()       
-        #        self.close()
+                self.close()
+                self.change_to_login()
 
     def noButton(self):
         self.close()
+    
+    def change_to_login(self): # change to login screen
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
     def handle_buttons(self):
         self.yes_button.clicked.connect(self.delete_account)
