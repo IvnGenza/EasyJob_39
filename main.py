@@ -9,8 +9,8 @@ from users import *
 from helperFuncs import *
 
 userObj = None #global parameter, this will hold the current user object like student, employer and admin.
-CURRENTUSER = None
-
+CURRENTUSER = None #global parameter for auth 
+ 
 
 #------------------------------------Signup class------------------------------------
 
@@ -825,15 +825,15 @@ class DeletePopup(QMainWindow):
         self.deleteUser = User
         self.handle_buttons() 
 
-    def delete_account(self):
+    def delete_account(self): #deleting the current user
         global CURRENTUSER
         users = db.child('Users').get()
-        for user in users.each():
+        for user in users.each(): #this is loop to find the user we want to delete
             if user.val()['email'] == self.deleteUser.Email: 
-                auth.delete_user_account(CURRENTUSER['idToken'])
-                db.child('Users').child(user.key()).remove() 
+                auth.delete_user_account(CURRENTUSER['idToken']) #we delete the user from auth with his id
+                db.child('Users').child(user.key()).remove()  # we deletethe user from database
                 self.close()
-                self.change_to_login()
+                self.change_to_login() #when we delete the account we go back to login screen
 
     def noButton(self):
         self.close()
