@@ -63,7 +63,10 @@ class Signup(QMainWindow):
             #Putting data base funcs in try/except to prevent app crash on error.
             try:
                 auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
-                db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email, 'resume':''}) #Saving new user data in RealTime db.
+                if UserType == 'Student':
+                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email,'preferences':{'location':'','role':'','workingFrom':'',}, 'resume':''}) #Saving new user data in RealTime db.
+                else:
+                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
                 self.change_to_login()
 
             except:
@@ -291,7 +294,7 @@ class NewAd(QMainWindow):
                         "daysPerWeek": workRate, 
                         "workingFrom": workPlace
                         },
-                    "resumes": [],
+                    "resumes": [''],
                     "search": {
                         "role": role, 
                         "location": location, 
@@ -367,43 +370,49 @@ class Homepage(QMainWindow):
             loadUi("ui/homepage.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
+        self.userpopup = None #this is a place holder for a user info popup window
+        self.adpopup = None #this is a place holder for a job ad info popup window
+
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
-        
-
-
     
+    
+    #--------------------Main Functionality Functions-----------------------#
 
     def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
+        #saving the data that was submited in the search bar
         jobtype = self.comboBox_job_type.currentText()
         degree = self.comboBox_degree.currentText()
         location = self.comboBox_location.currentText()
         role = self.comboBox_role.currentText()
 
         self.no_jobs_found_label.setText('') #setting the error message to be empty at the start
-        self.listWidget.clear() #this clears all of the lists items
+        self.listWidget.clear() #this clears all of the lists items (all previous job ads that were found)
 
+        #if the advanced search window was opened atleast ones, then get the data that was inside that window, else just do a regular search with the regular search bar
         if self.advancedSearchWindow == None:
-            self.SearchJob(jobtype, degree, location, role)
+            self.SearchJob(jobtype, degree, location, role) #regular search 
         else:
+            #getting the data from the advanced search popup window
             workExperience = self.advancedSearchWindow.searchData['workExperience']
             daysPerWeek = self.advancedSearchWindow.searchData['daysPerWeek']
             workingFrom = self.advancedSearchWindow.searchData['workingFrom']
             knowledge = self.advancedSearchWindow.searchData['knowledge'] #knowledge is an array
-            self.AdvancedSearchJob(jobtype, degree, location, role, workExperience, daysPerWeek, workingFrom, knowledge)
+            self.AdvancedSearchJob(jobtype, degree, location, role, workExperience, daysPerWeek, workingFrom, knowledge) #advanced search
 
 
 
         
     def SearchAllJobs(self): #this method searches for all the jobs in the database and adds them to the job list
         self.listWidget.clear() #this clears all of the lists items
+        #for every job in the data base, add it to the list of jobs on the screen
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
 
 
-    def SearchJob(self, JobType, Degree, Location, Role):
+    def SearchJob(self, JobType, Degree, Location, Role): #this functions performs a regular search in the data base, all the jobs that fit the description will be added to the list of jobs on the homepage screen.
         flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
 
         jobs = db.child('Jobs').get()
@@ -413,7 +422,7 @@ class Homepage(QMainWindow):
                 job.val()['search']['jobType'] == JobType or 
                 job.val()['search']['location'] == Location or 
                 job.val()['search']['role'] == Role
-                ):
+                ): #for now the description is atleast on of the 4 search criteria must be meet, maybe later we will change it to all of the 4 criteria must be meet all together.
                 
                 #print(job.val()['description'])
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
@@ -422,11 +431,11 @@ class Homepage(QMainWindow):
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
         if flag == 0:
-            self.no_jobs_found_label.setText('could not find jobs that fit your search')
+            self.no_jobs_found_label.setText('could not find jobs that fit your search') #if no job was found, paste the error message 
 
 
 
-    def AdvancedSearchJob(self, JobType, Degree, Location, Role, WorkExperience, DaysPerWeek, WorkingFrom, Knowledge):
+    def AdvancedSearchJob(self, JobType, Degree, Location, Role, WorkExperience, DaysPerWeek, WorkingFrom, Knowledge): #this function is used in the advances search, its exactly like the regular search with the only difference beening that the criteria for the search in the data base also includes the additional information found inside the advanced search window.
         flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
 
         jobs = db.child('Jobs').get()
@@ -448,7 +457,24 @@ class Homepage(QMainWindow):
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
         if flag == 0:
-            self.no_jobs_found_label.setText('could not find jobs that fit your search')
+            self.no_jobs_found_label.setText('could not find jobs that fit your search') #if no job was found, paste the error message 
+
+
+    def SearchUser(self): #this function can only be called by the admin, in his version of the homepage, this fucntion works like the regular searches, but instead of searching for jobs, it searches for users in the database.
+        flag = 0
+        self.listWidget_users.clear()
+        self.no_jobs_found_label.setText('')
+        userName = self.username_textBox.text()
+
+        users = db.child('Users').get()
+        for user in users.each():
+            index = user.val()['username'].find(userName) #if the loop finds a user that has a username that is the same as the username that was clicked then add that username to the list of user names
+            if index != -1 and user.val()['username'] != 'Admin':
+                flag = 1
+                self.listWidget_users.addItem(user.val()['username'])
+        
+        if flag == 0:
+            self.no_jobs_found_label.setText('could not find users that fit your search') #if no user was found, paste the error message 
 
         #--------------help funcs for homepage class-----------------
 
@@ -458,36 +484,42 @@ class Homepage(QMainWindow):
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_usersettings(self): # change to signup screen
+    def change_to_usersettings(self): # change to user settings screen
         usersettings = Usersettings()
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_NewAd(self):
+    def change_to_NewAd(self): # open the new add screen (only by employer)
         ad = NewAd()
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_advanced_search(self):
+    def change_to_advanced_search(self): # open the advanced settings screen
         self.advancedSearchWindow = AdvancedSearch()
         self.advancedSearchWindow.show()
        
-    def change_to_AdPopup(self, item): #change to the ad window
+    def change_to_AdPopup(self, item): #open the ad popup window when an ad is clicked
         self.adpopup = AdPopup()
         self.adpopup.SetParameters(item.text())
         self.adpopup.show()
 
-    
-        
+
+
     def handle_buttons(self): # this function handles the click of the signup button
-        self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
-        self.user_settings_button.clicked.connect(self.change_to_usersettings) #for settings button input
-        self.search_button.clicked.connect(self.Search) #for search function
-        self.free_search_button.clicked.connect(self.SearchAllJobs)
-        self.advanced_search_button.clicked.connect(self.change_to_advanced_search)
-        self.new_ad_button.clicked.connect(self.change_to_NewAd)
-        self.listWidget.itemClicked.connect(self.change_to_AdPopup)
-        
+        self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
+        self.user_settings_button.clicked.connect(self.change_to_usersettings) #for user settings button 
+        self.search_button.clicked.connect(self.Search) #this is for the main search function
+        self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
+        self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
+        self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
+
+        if userObj.Usertype == 'Employer':
+            self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
+
+        if userObj.Usertype == 'Admin': #only the admin has these buttons, thats why we check if the current user is admin or not
+            self.search_username_button.clicked.connect(self.SearchUser)
+            self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
+
         #this gets an item from the list widget
         #abcd = self.listWidget.item(0)
 
@@ -603,25 +635,27 @@ class Usersettings(QMainWindow):
 
 #------------------------------------Advanced search class------------------------------------
 
-class AdvancedSearch(QMainWindow):
+class AdvancedSearch(QMainWindow): #in the homepage, when the advanced search is clicked, this class is called, it allows us to filter the search with additional information that a regular search does not have.
     def __init__(self):
         super(AdvancedSearch, self).__init__()
         loadUi("ui/advancedSearch.ui", self) 
         self.handle_buttons() 
-        self.searchData = { #this is the data the user inputs in the adfances search window
-            'workExperience':'',    
+        self.searchData = { #this is the data the user inputs in the advanced search window, we then pass this data to the homepage inorder to filter the search with this additional information
+            'workExperience':'',   
             'daysPerWeek':'',    
             'workingFrom':'',    
             'knowledge':[]    
         }
 
     def saveAdvancedSearch(self):
+        #getting the information from the advanced search window
         workExp=self.comboBox_work_experience.currentText()
         workRate=self.comboBox_work_days.currentText()
         workPlace=self.comboBox_working_from.currentText()
 
         knowledge = ['Java','Python','Javascript','Kotlin','Go','Swift','Rust','C and C++','HTML','SQL','CSS','PHP','TypeScript','Perl']
         
+        #these if statments checks what languages did the user choose in the advanced search window
         if self.checkBox_javascript.isChecked() != True:
             knowledge.remove('Javascript')
     
@@ -671,12 +705,12 @@ class AdvancedSearch(QMainWindow):
         self.searchData['workingFrom'] = workPlace
         self.searchData['knowledge'] = knowledge
 
-        self.close() 
+        self.close() #close the popup window
         
 
 
     def handle_buttons(self): 
-        #this button should call a function that saves the data and passes into the search engine
+        #this button calls a function that saves the aditional data and passes it into the search engine
         self.save_settings_button.clicked.connect(self.saveAdvancedSearch) #saves the preferences of the advanced search
         
     
@@ -685,17 +719,31 @@ class AdvancedSearch(QMainWindow):
 class AdPopup(QMainWindow):
     def __init__(self):
         super(AdPopup, self).__init__()
-        loadUi("ui/ad_frame.ui", self)
-        #self.handle_buttons() 
+        loadUi("ui/Ad_frame.ui", self)
+        self.handle_buttons() 
+        self.jobReference = ''
+        self.error_success_message.setText('')
+
+        if userObj.Usertype == 'Student': #students cant edit or delete ads, only employer and admin can, thats why we disable the buttons
+            self.edit_ad_button.hide()
+            self.delete_ad_button.hide()
+        elif userObj.Usertype == 'Admin' or userObj.Usertype == 'Employer': #the admin and employers cant send a resume, so we disable the button if the user is an admin
+            self.send_resume_button.hide()
+        
+
 
     def SetParameters(self,item):
         print(item)
         title = (item.split(' | '))[0]
-        
+        #print(title)
         temp =''
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if job.val()['title'] == title:
+                if userObj.Usertype == 'Employer' and job.val()['contactInfo'][2] != userObj.Email:
+                    self.edit_ad_button.hide()
+                    self.delete_ad_button.hide()
+
                 self.title_textBox.setText(job.val()['title'])
                 self.description_textBox.setText(job.val()['description'])
                 for x in job.val()['knowledge']:
@@ -706,14 +754,66 @@ class AdPopup(QMainWindow):
                 self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
                     ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
-
+                
+                #saving the key of the job from the database for later use in sendResume, sendMessage, editAd and deleteAd functions.
+                self.jobReference = job.key()
         
+    def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
+        count,flag = 0,0
+        for resume in db.child('Jobs').child(self.jobReference).child('resumes').get():
+            if resume.val() == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
+                flag = 1
+                self.error_success_message.setText("you have already submited your resume to this job ad")
+                break
+            if resume.val() == '':
+                break #when the ad is first created, the resumes array in the database will have an empty string in index 0, there for we need to check if the current resume array is empty or not by checking for the empty string.
+            count += 1
 
+        if flag == 0:
+            data = {count:userObj.Email}
+            db.child('Jobs').child(self.jobReference).child('resumes').update(data)
+            self.error_success_message.setText('resume submitted successfully')
+                
+
+
+    def SendMessage(self):
+        pass
     
-    #def handlebuttons(self):
+    def handle_buttons(self):
+        self.send_resume_button.clicked.connect(self.SendResume)
+        self.send_message_button.clicked.connect(self.SendMessage)
+
+#----------------------------------------User popup----------------------------------
+
+class UserPopup(QMainWindow): #this is a popup window that we see when the admin clickes on some user from the user's list, in this popup window there is all the information about this specific user from the database
+    def __init__(self):
+        super(UserPopup, self).__init__()
+        loadUi("ui/User_frame_student.ui", self) #frist we assume its a student user
+        self.handle_buttons() 
+
+    def SetParameters(self, UserName):
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['username'] == UserName: #if the usernames match do this:
+                if user.val()['usertype'] == 'Student': #then we check, if the account is actualy a sturent, if not we change the ui file
+                    self.resume_textBox.setText(user.val()['resume']) #only students have resumes in the database, employers dont have it
+                else:
+                    loadUi("ui/User_frame_employer.ui", self)
+
+                #adding all the data from the data base into the ui window based on the current user (username)
+                self.fullname_textBox.setText(user.val()['fullname'])
+                self.username_textBox.setText(user.val()['username'])
+                self.email_textBox.setText(user.val()['email'])
+                self.age_textBox.setText(user.val()['age'])
+                self.usertype_textBox.setText(user.val()['usertype'])
 
 
-#------------------------------------DeletePopup class------------------------------------
+    def SendMessage(self):
+        pass
+
+    def DeleteAccount(self):
+        pass
+
 
 class DeletePopup(QMainWindow):
     def __init__(self,User):
@@ -726,12 +826,20 @@ class DeletePopup(QMainWindow):
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['email'] == self.deleteUser.Email: 
-                db.child('Users').child(user.key()).remove() #needs to be a different function -- fix!
-                self.close() 
-                
-        
+                db.child('Users').child(user.key()).remove() 
+         
+        user_auth = auth.child('Users').get()
+        for user_auth in users.each():
+            if user_auth.val()['email'] == self.deleteUser.Email: 
+                auth.child('Users').child(user.key()).remove()       
+                self.close()
+
+    def noButton(self):
+        self.close()
+
     def handle_buttons(self):
         self.yes_button.clicked.connect(self.delete_account)
+        self.no_button.clicked.connect(self.noButton)
 #----------------------------------------Main----------------------------------
 
 
@@ -740,7 +848,7 @@ widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
 
 login = Login()
 widget.addWidget(login) # adding the first window to the stack
-widget.move(320, 135)
+widget.move(320, 135) # places the page at the center of the screen
 widget.show() # showing the stack of widgets, first window will be showen first
 
 try:
