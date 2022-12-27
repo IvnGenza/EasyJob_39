@@ -504,7 +504,10 @@ class Homepage(QMainWindow):
         self.adpopup.SetParameters(item.text())
         self.adpopup.show()
 
-
+    def change_to_UserPopup(self, item): #open the ad popup window when an ad is clicked
+        self.userpopup = UserPopup()
+        self.userpopup.SetParameters(item.text())
+        self.userpopup.show()
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
