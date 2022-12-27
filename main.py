@@ -893,8 +893,9 @@ class MyAds(QMainWindow):
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_myAdsDetails(self):
+    def change_to_myAdsDetails(self,item):
         myAdsDetails = MyAdsDetails()
+        myAdsDetails.ShowResume(item.text())
         widget.addWidget(myAdsDetails)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
@@ -907,28 +908,43 @@ class MyAds(QMainWindow):
         self.sign_out_button.clicked.connect(self.change_to_login)
         self.user_settings_button.clicked.connect(self.change_to_usersettings)
         self.back_button.clicked.connect(self.change_to_homepage)
-        self.my_ads_button.clicked.connect(self.change_to_myAdsDetails)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
-
+        self.listWidget.itemClicked.connect(self.change_to_myAdsDetails) 
 #----------------------------------------DeletePopup----------------------------------
 class MyAdsDetails(QMainWindow):
     def __init__(self):
         super(MyAdsDetails, self).__init__()
         loadUi("ui/My_Ads_Details.ui", self)
         self.handle_buttons()
-        self.ShowResume()
+        self.ResumeFramePopup=None
 
 
-    def ShowResume(self):
+    def ShowResume(self,item):
+        title = (item.split(' | '))[0]
         flag = 0 #flag will help us keep track of the jobs we found, if we didnt find any jobs then flag will stay 0 and then show an error message
+        temp=''
         self.listWidget.clear()
         jobs = db.child('Jobs').get()
         for job in jobs.each():
-            if job.val()['contactInfo'][2] == userObj.Email: 
+            if job.val()['title'] == title: 
+                self.title_textBox.setText(job.val()['title'])
+                self.description_textBox.setText(job.val()['description'])
+                for x in job.val()['knowledge']:
+                    temp += x+' , '
+                temp = temp[:-2] + ' '
+                self.knowledge_textBox.setText(temp)
+                self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
+                    ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
+                self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
+
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
                 #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
-                self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
-
+                users = db.child('Users').get()
+                for resume in db.child('Jobs').child(job.key()).child('resumes').get():
+                    for user in users.each():
+                        if resume.val() == user.val()['email']:    
+                            self.listWidget.addItem(user.val()['fullname']+' | '+user.val()['email']+' | '+user.val()['age'])
+                break
         if flag == 0:
             self.listWidget.addItem('No resumes at the moment..')  # if employer doesnt have resumes we print a message
 
@@ -937,11 +953,15 @@ class MyAdsDetails(QMainWindow):
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_ResumeFramePopup(self): # open the advanced settings screen
+        self.ResumeFramePopup = MyAdsResumePopup()
+        self.ResumeFramePopup.show()
+
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
-        self.edit_button.clicked.connect()
-        self.delete_button.clicked.connect()
+        #self.edit_button.clicked.connect()
+        #self.delete_button.clicked.connect()
 #----------------------------------------Main-----------------------------------------
 
 
