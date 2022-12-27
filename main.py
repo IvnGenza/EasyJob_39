@@ -828,11 +828,11 @@ class DeletePopup(QMainWindow):
             if user.val()['email'] == self.deleteUser.Email: 
                 db.child('Users').child(user.key()).remove() 
          
-        user_auth = auth.child('Users').get()
-        for user_auth in users.each():
-            if user_auth.val()['email'] == self.deleteUser.Email: 
-                auth.child('Users').child(user.key()).remove()       
-                self.close()
+        #user_auth = auth.child('Users').get()
+        #for user_auth in users.each():
+        #    if user_auth.val()['email'] == self.deleteUser.Email: 
+        #        auth.child('Users').child(user.key()).remove()       
+        #        self.close()
 
     def noButton(self):
         self.close()
