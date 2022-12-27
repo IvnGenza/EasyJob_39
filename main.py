@@ -959,12 +959,10 @@ class MyAdsDetails(QMainWindow):
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
+        self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
         #self.edit_button.clicked.connect()
         #self.delete_button.clicked.connect()
-#----------------------------------------Main-----------------------------------------
 
-
-        
 
 #-------------------------------My Ads Resume Frame--------------------------------
 
