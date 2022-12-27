@@ -826,6 +826,8 @@ class DeletePopup(QMainWindow):
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['email'] == self.deleteUser.Email: 
+                user1 = auth.get_user_by_email(user.val()['email'])
+                auth.delete_user(user1.uid)
                 db.child('Users').child(user.key()).remove() 
          
         #user_auth = auth.child('Users').get()
