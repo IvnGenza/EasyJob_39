@@ -813,7 +813,11 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
     def DeleteAccount(self):
         pass
 
+    def handle_buttons(self): # this function handles the click of the signup button
+        self.send_message_button.clicked.connect(self.SendMessage) #calls a function that send a message to the user
+        self.delete_account_button.clicked.connect(self.DeleteAccount) #calls a function that deletes the given account
 
+    #----------------------------------------DeletePopup----------------------------------
 class DeletePopup(QMainWindow):
     def __init__(self,User):
         super(DeletePopup, self).__init__()
