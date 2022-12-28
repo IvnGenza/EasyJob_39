@@ -969,7 +969,7 @@ class MyAdsDetails(QMainWindow):
                     for user in users.each():
                         if resume.val()["email"] == user.val()['email']:    
                             self.listWidget.addItem(user.val()['fullname']+' | '+user.val()['email']+' | '+user.val()['age'])
-                break
+                #break
         if flag == 0:
             self.listWidget.addItem('No resumes at the moment..')  # if employer doesnt have resumes we print a message
 
@@ -1012,6 +1012,8 @@ class MyAdsResumePopup(QMainWindow):
         self.handle_buttons() 
         self.usersEmail=''
         self.Jobreference=None
+
+
     def SetParameters(self, item, jobreference):
         self.Jobreference = jobreference
         #finds the correct user that has the email that appears in the resumes list, then enter that user's data into the popup window
@@ -1032,9 +1034,19 @@ class MyAdsResumePopup(QMainWindow):
         for resume in db.child('Jobs').child(self.Jobreference).child('resumes').get():
             if resume.val()['email'] != self.usersEmail: 
                 count+=1
+            else:
+                try:
+                    if resume.val()['status'] == "False":
+                        data = {count:{"email":self.usersEmail,"status":"True"}}
+                        db.child('Jobs').child(self.Jobreference).child('resumes').update(data)  
+                        self.error_success_message.setText('Successfuly accepted the resume')
+                    else:
+                        self.error_success_message.setText('The resume has already been accepted')
+                except:
+                    self.error_success_message.setText('Something when wrong, try again later')
+                
+                break
 
-        data = {count:{"email":self.usersEmail,"status":"True"}}
-        db.child('Jobs').child(self.Jobreference).child('resumes').update(data)     
     
     def RejectResume(self):
         pass
