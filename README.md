@@ -3,10 +3,10 @@
 הפרויקט מנוהל ע״י קבוצה 39: 
 omershay1212@gmail.com or omersh9@ac.sce.ac.il
 
-עומר שי 
+עומר שי - omersh9@ac.sce.ac.il
 מקסים סובוטין - maximsu@ac.sce.ac.il
 איבן גנזה 
-שי חחיאשוילי 
+שי חחיאשוילי - shayha2@ac.sce.ac.il
 
 
 בהרצה הראשונה של האפליקציה יש להריץ את השורה הבאה בטרמינל:
