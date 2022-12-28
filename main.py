@@ -1032,7 +1032,7 @@ class StudentResume(QMainWindow):
         loadUi("ui/student_resume.ui", self)
         self.handle_buttons() 
         self.save_changes_button.hide()
-
+        #self.resume_textBox.setText(userObj.resume)
     
     def change_to_usersettings(self): # change to user settings screen
         usersettings = Usersettings()
@@ -1046,11 +1046,12 @@ class StudentResume(QMainWindow):
         if self.save_changes_button.clicked:
             self.edit_button.show() 
             self.save_changes_button.hide()
+            userObj.setResume(self.resume_textBox.text())
+            self.resume_textBox.setReadOnly(True) 
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_usersettings)
-        #self.save_changes_button.clicked.connect()
-        #self.edit_button.clicked.connect()
+        self.edit_button.clicked.connect(self.edit_resume)
 
 #----------------------------------------Main----------------------------------
 
