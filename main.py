@@ -663,6 +663,11 @@ class Usersettings(QMainWindow):
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
+        if userObj.Usertype == 'Admin':
+            #hiding the buttons because the admin cant change the password, delete the account or see his jobs
+            self.change_password_button.hide()
+            self.delete_account_button.hide()
+            self.my_job_ads_button.hide()
 
 #------------------------------------Advanced search class------------------------------------
 
