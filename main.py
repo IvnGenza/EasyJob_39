@@ -1047,11 +1047,6 @@ class MyAdsResumePopup(QMainWindow):
                 
                 break
 
-     
-        #    data = {count:{"email":self.usersEmail,"status":"True"}}
-        #    db.child('Jobs').child(self.Jobreference).child('resumes').update(data)  
-
- 
     
     def RejectResume(self):
         pass
