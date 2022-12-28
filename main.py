@@ -1006,7 +1006,7 @@ class MyAdsResumePopup(QMainWindow):
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
-            break
+            
 
     def AcceptResume():
         pass
@@ -1049,10 +1049,6 @@ class StudentResume(QMainWindow):
         self.edit_button.show() 
         self.save_changes_button.hide()
         abc = self.resume_textBox.toPlainText()
-        #users = db.child('Users').get()
-        #for user in users.each():
-        #    if user.val()['email'] == userObj.Email:
-        #        db.child('Users').child(user.key()).update({'resume':abc})
         userObj.setResume(abc)
         self.resume_textBox.setReadOnly(True)
 
