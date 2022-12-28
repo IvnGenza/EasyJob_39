@@ -117,7 +117,7 @@ class Login(QMainWindow):
                 for user in users.each():
                     if user.val()['email'] == email:
                         if user.val()['usertype'] == 'Student': #user
-                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'])
+                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume'])
                         if user.val()['usertype'] == 'Employer':
                             userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer', {})
                         if user.val()['usertype'] == 'Admin':

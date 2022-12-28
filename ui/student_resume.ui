@@ -96,36 +96,49 @@
        </layout>
       </item>
       <item>
-       <widget class="QTextEdit" name="resume_textBox">
-        <property name="cursor" stdset="0">
-         <cursorShape>IBeamCursor</cursorShape>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="leftMargin">
+         <number>10</number>
         </property>
-        <property name="styleSheet">
-         <string notr="true">font:20px;</string>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
+        <property name="topMargin">
          <number>0</number>
         </property>
-        <property name="readOnly">
-         <bool>true</bool>
+        <property name="rightMargin">
+         <number>10</number>
         </property>
-        <property name="html">
-         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+        <item>
+         <widget class="QTextEdit" name="resume_textBox">
+          <property name="cursor" stdset="0">
+           <cursorShape>IBeamCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">font:20px;</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
+          </property>
+          <property name="lineWidth">
+           <number>0</number>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="html">
+           <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:20px; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:20px;&quot;&gt;das asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asddas asdasd asdadf adfad adf ad fadf asd&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="cursorWidth">
-         <number>1</number>
-        </property>
-       </widget>
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="cursorWidth">
+           <number>1</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">

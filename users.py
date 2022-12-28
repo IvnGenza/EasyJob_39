@@ -40,11 +40,12 @@ class User():
             db.child('Users').child((user.key())).update({"email":temp})
 
 class Student(User):
-    def __init__(self, fullname, age, username, email, usertype, preferences): 
+    def __init__(self, fullname, age, username, email, usertype, preferences, resume): 
         super(Student,self).__init__(fullname, age, username, email)
         self.Usertype = usertype
         self.Preferences = preferences #dictionary from database 
-    
+        self.Resume = resume
+
     def setPreferences(self, key, value):
         user = self.SearchUser(self.Email)
         if user != None:
@@ -54,8 +55,8 @@ class Student(User):
     def setResume(self, res):
         user = self.SearchUser(self.Email)
         if user != None:
-            self.resume = res #setting the new resume string to database and saving it in object
-            db.child('Users').child((user.key())).child('resume').update(res)
+            self.Resume = res #setting the new resume string to database and saving it in object
+            db.child('Users').child((user.key())).update({'resume':res})
 
 class Employer(User):
     def __init__(self, fullname, age, username, email, usertype, jobAds): 
@@ -80,8 +81,9 @@ class Employer(User):
         
 #employer = Employer('max', '20', 'maxl', 'max@max.com', 'Employer', {}) #test 
 #print(employer.GetResume('Job at apple'))
-#student = Student('max', '23', 'maxl', 'max@max.com', 'Employer', {}) #test 
-#student.setPreferences('role','junior')
+
+#student = Student('max', '23', 'maxl', 'max@max.com', 'Student', {}) #test 
+#student.setResume('i have a resume')
 
 
 
