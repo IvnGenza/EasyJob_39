@@ -952,8 +952,9 @@ class MyAdsDetails(QMainWindow):
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_ResumeFramePopup(self): # open the advanced settings screen
+    def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
+        self.ResumeFramePopup.SetParameters(item.text())
         self.ResumeFramePopup.show()
 
 
@@ -972,16 +973,19 @@ class MyAdsResumePopup(QMainWindow):
         loadUi("ui/My_Ads_Resume_Frame.ui", self)
         self.handle_buttons() 
 
-    def SetParameters(self, UserEmail):
+    def SetParameters(self, item):
+        #finds the correct user that has the email that appears in the resumes list, then enter that user's data into the popup window
+        usersEmail = (item.split(' | '))[1]
         users = db.child('Users').get()
         for user in users.each():
-            if user.val()['email'] == UserEmail: #if the emails match do this:
+            if user.val()['email'] == usersEmail: #if the emails match do this:
                 #adding all the data from the data base into the ui window based on the current user (username)
                 self.fullname_textBox.setText(user.val()['fullname'])
                 self.username_textBox.setText(user.val()['username'])
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
+            break
 
     def AcceptResume():
         pass
