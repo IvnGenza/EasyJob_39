@@ -649,14 +649,20 @@ class Usersettings(QMainWindow):
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_forgetpassword(self):
+        password = Password()
+        widget.addWidget(password)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
-        self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
+        self.change_password_button.clicked.connect(self.change_to_forgetpassword)
         if userObj.Usertype == 'Student':
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
-
+        if userObj.Usertype == 'Employer':
+            self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
 
 #------------------------------------Advanced search class------------------------------------
 
