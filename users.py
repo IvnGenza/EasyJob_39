@@ -56,7 +56,7 @@ class Student(User):
         user = self.SearchUser(self.Email)
         if user != None:
             self.Resume = res #setting the new resume string to database and saving it in object
-            db.child('Users').child((user.key())).update({'resume':res})
+            db.child('Users').child(user.key()).update({'resume':res})
 
 class Employer(User):
     def __init__(self, fullname, age, username, email, usertype, jobAds): 

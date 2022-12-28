@@ -1032,7 +1032,7 @@ class StudentResume(QMainWindow):
         loadUi("ui/student_resume.ui", self)
         self.handle_buttons() 
         self.save_changes_button.hide()
-
+        #self.resume_textBox.setText(userObj.resume)
     
     def change_to_usersettings(self): # change to user settings screen
         usersettings = Usersettings()
@@ -1043,14 +1043,22 @@ class StudentResume(QMainWindow):
         self.edit_button.hide() #we hide edit button
         self.save_changes_button.show() #we unhide the save changes button
         self.resume_textBox.setReadOnly(False) 
-        if self.save_changes_button.clicked:
-            self.edit_button.show() 
-            self.save_changes_button.hide()
+
+    def save_changes(self):
+        self.edit_button.show() 
+        self.save_changes_button.hide()
+        abc = self.resume_textBox.toPlainText()
+        #users = db.child('Users').get()
+        #for user in users.each():
+        #    if user.val()['email'] == userObj.Email:
+        #        db.child('Users').child(user.key()).update({'resume':abc})
+        userObj.setResume(abc)
+        self.resume_textBox.setReadOnly(True)
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_usersettings)
-        #self.save_changes_button.clicked.connect()
-        #self.edit_button.clicked.connect()
+        self.edit_button.clicked.connect(self.edit_resume)
+        self.save_changes_button.clicked.connect(self.save_changes)
 
 #----------------------------------------Main----------------------------------
 
