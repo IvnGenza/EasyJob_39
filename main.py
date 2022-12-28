@@ -117,7 +117,7 @@ class Login(QMainWindow):
                 for user in users.each():
                     if user.val()['email'] == email:
                         if user.val()['usertype'] == 'Student': #user
-                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume'])
+                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume']) 
                         if user.val()['usertype'] == 'Employer':
                             userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer', {})
                         if user.val()['usertype'] == 'Admin':
@@ -294,7 +294,7 @@ class NewAd(QMainWindow):
                         "daysPerWeek": workRate, 
                         "workingFrom": workPlace
                         },
-                    "resumes": [''],
+                    "resumes": [{"email":"none","status":"False"}], 
                     "search": {
                         "role": role, 
                         "location": location, 
@@ -791,16 +791,16 @@ class AdPopup(QMainWindow):
     def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
         count,flag = 0,0
         for resume in db.child('Jobs').child(self.jobReference).child('resumes').get():
-            if resume.val() == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
+            if resume.val()["email"] == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
                 flag = 1
                 self.error_success_message.setText("you have already submited your resume to this job ad")
                 break
-            if resume.val() == '':
+            if resume.val()["email"] == 'none':
                 break #when the ad is first created, the resumes array in the database will have an empty string in index 0, there for we need to check if the current resume array is empty or not by checking for the empty string.
             count += 1
 
         if flag == 0:
-            data = {count:userObj.Email}
+            data = {count:{"email":userObj.Email,"status":"False"}}
             db.child('Jobs').child(self.jobReference).child('resumes').update(data)
             self.error_success_message.setText('resume submitted successfully')
                 
@@ -941,7 +941,7 @@ class MyAdsDetails(QMainWindow):
         self.handle_buttons()
         self.save_changes_button.hide()
         self.ResumeFramePopup=None
-
+        self.jobreference=None
 
     def ShowResume(self,item):
         title = (item.split(' | '))[0]
@@ -960,13 +960,14 @@ class MyAdsDetails(QMainWindow):
                 self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
                     ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
+                self.jobreference = job.key() #we catch the job for later use in next classes
 
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
                 #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
                 users = db.child('Users').get()
                 for resume in db.child('Jobs').child(job.key()).child('resumes').get():
                     for user in users.each():
-                        if resume.val() == user.val()['email']:    
+                        if resume.val()["email"] == user.val()['email']:    
                             self.listWidget.addItem(user.val()['fullname']+' | '+user.val()['email']+' | '+user.val()['age'])
                 break
         if flag == 0:
@@ -979,7 +980,7 @@ class MyAdsDetails(QMainWindow):
 
     def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
-        self.ResumeFramePopup.SetParameters(item.text())
+        self.ResumeFramePopup.SetParameters(item.text(),self.jobreference)
         self.ResumeFramePopup.show()
 
     #def edit_job(self): #function to edit job ad, needs more work
@@ -1009,13 +1010,15 @@ class MyAdsResumePopup(QMainWindow):
         super(MyAdsResumePopup, self).__init__()
         loadUi("ui/My_Ads_Resume_Frame.ui", self)
         self.handle_buttons() 
-
-    def SetParameters(self, item):
+        self.usersEmail=''
+        self.Jobreference=None
+    def SetParameters(self, item, jobreference):
+        self.Jobreference = jobreference
         #finds the correct user that has the email that appears in the resumes list, then enter that user's data into the popup window
-        usersEmail = (item.split(' | '))[1]
+        self.usersEmail = (item.split(' | '))[1]
         users = db.child('Users').get()
         for user in users.each():
-            if user.val()['email'] == usersEmail: #if the emails match do this:
+            if user.val()['email'] == self.usersEmail: #if the emails match do this:
                 #adding all the data from the data base into the ui window based on the current user (username)
                 self.fullname_textBox.setText(user.val()['fullname'])
                 self.username_textBox.setText(user.val()['username'])
@@ -1025,7 +1028,13 @@ class MyAdsResumePopup(QMainWindow):
             
 
     def AcceptResume(self):
-        pass
+        count = 0
+        for resume in db.child('Jobs').child(self.Jobreference).child('resumes').get():
+            if resume.val()['email'] != self.usersEmail: 
+                count+=1
+
+        data = {count:{"email":self.usersEmail,"status":"True"}}
+        db.child('Jobs').child(self.Jobreference).child('resumes').update(data)     
     
     def RejectResume(self):
         pass
