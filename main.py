@@ -1049,7 +1049,22 @@ class MyAdsResumePopup(QMainWindow):
 
     
     def RejectResume(self):
-        pass
+        count = 0
+        for resume in db.child('Jobs').child(self.Jobreference).child('resumes').get():
+            if resume.val()['email'] != self.usersEmail: 
+                count+=1
+            else:
+                try:
+                    if resume.val()['status'] == "True":
+                        data = {count:{"email":self.usersEmail,"status":"False"}}
+                        db.child('Jobs').child(self.Jobreference).child('resumes').update(data)  
+                        self.error_success_message.setText('Successfuly rejected the resume')
+                    else:
+                        self.error_success_message.setText('The resume has already been rejected')
+                except:
+                    self.error_success_message.setText('Something when wrong, try again later')
+                
+                break
     
     def SendMessage(self):
         pass
