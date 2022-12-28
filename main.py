@@ -1,4 +1,5 @@
 
+from pickle import FALSE
 from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
@@ -959,15 +960,15 @@ class MyAdsDetails(QMainWindow):
         self.ResumeFramePopup.SetParameters(item.text())
         self.ResumeFramePopup.show()
 
-    #def edit_func(self): #function to edit job ad, needs more work
+    #def edit_job(self): #function to edit job ad, needs more work
     #    self.edit_button.hide() #hides the edit button
     #    self.save_changes_button.show() #unhides the save changes button
     #    #makes all areas editable
     #    self.title_textBox.setReadOnly(False)
-    #    self.description_textBox(False)
-    #    self.knowledge_textBox(False)
-    #    self.details_textBox(False)
-    #    self.contact_info_textBox(False)
+    #    self.description_textBox.setReadOnly(False)
+    #    self.knowledge_textBox.setReadOnly(False)
+    #    self.details_textBox.setReadOnly(False)
+    #    self.contact_info_textBox.setReadOnly(False)
     #    if self.save_changes_button.clicked:
     #        self.save_changes_button.hide() #we hide the save changes button
     #        self.edit_button.show() #we unhide the edit button
@@ -975,7 +976,7 @@ class MyAdsDetails(QMainWindow):
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
-        self.edit_button.clicked.connect(self.edit_func)
+        #self.edit_button.clicked.connect(self.edit_job)
         #self.delete_button.clicked.connect()
 
 
@@ -1033,3 +1034,15 @@ try:
     sys.exit(app.exec_()) # tring to run the app
 except:
     print("Exiting")
+
+
+
+def edit_resume(self):
+    self.edit_button.hide() #we hide edit button
+    self.save_changes_button.show() #we unhide the save changes button
+    self.resume_textBox.setReadOnly(False) 
+    if self.save_changes_button.clicked:
+        self.edit_button.show() 
+        self.save_changes_button.hide()
+
+
