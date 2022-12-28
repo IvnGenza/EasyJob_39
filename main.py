@@ -1018,13 +1018,13 @@ class MyAdsResumePopup(QMainWindow):
                 self.resume_textBox.setText(user.val()['resume'])
             
 
-    def AcceptResume():
+    def AcceptResume(self):
         pass
     
-    def RejectResume():
+    def RejectResume(self):
         pass
     
-    def SendMessage():
+    def SendMessage(self):
         pass
 
     def handle_buttons(self):
