@@ -1040,7 +1040,14 @@ class StudentResume(QMainWindow):
         usersettings = Usersettings()
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
-
+    
+    def edit_resume(self):
+        self.edit_button.hide() #we hide edit button
+        self.save_changes_button.show() #we unhide the save changes button
+        self.resume_textBox.setReadOnly(False) 
+        if self.save_changes_button.clicked:
+            self.edit_button.show() 
+            self.save_changes_button.hide()
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_usersettings)
@@ -1065,12 +1072,6 @@ except:
 
 
 
-def edit_resume(self):
-    self.edit_button.hide() #we hide edit button
-    self.save_changes_button.show() #we unhide the save changes button
-    self.resume_textBox.setReadOnly(False) 
-    if self.save_changes_button.clicked:
-        self.edit_button.show() 
-        self.save_changes_button.hide()
+
 
 
