@@ -1,5 +1,3 @@
-
-from pickle import FALSE
 from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
