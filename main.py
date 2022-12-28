@@ -909,12 +909,14 @@ class MyAds(QMainWindow):
         self.back_button.clicked.connect(self.change_to_homepage)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
         self.listWidget.itemClicked.connect(self.change_to_myAdsDetails) 
-#----------------------------------------DeletePopup----------------------------------
+
+#----------------------------------------MyAdsDetails----------------------------------
 class MyAdsDetails(QMainWindow):
     def __init__(self):
         super(MyAdsDetails, self).__init__()
         loadUi("ui/My_Ads_Details.ui", self)
         self.handle_buttons()
+        self.save_changes_button.hide()
         self.ResumeFramePopup=None
 
 
@@ -957,11 +959,24 @@ class MyAdsDetails(QMainWindow):
         self.ResumeFramePopup.SetParameters(item.text())
         self.ResumeFramePopup.show()
 
+    #def edit_func(self): #function to edit job ad, needs more work
+    #    self.edit_button.hide() #hides the edit button
+    #    self.save_changes_button.show() #unhides the save changes button
+    #    #makes all areas editable
+    #    self.title_textBox.setReadOnly(False)
+    #    self.description_textBox(False)
+    #    self.knowledge_textBox(False)
+    #    self.details_textBox(False)
+    #    self.contact_info_textBox(False)
+    #    if self.save_changes_button.clicked:
+    #        self.save_changes_button.hide() #we hide the save changes button
+    #        self.edit_button.show() #we unhide the edit button
+
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
-        #self.edit_button.clicked.connect()
+        self.edit_button.clicked.connect(self.edit_func)
         #self.delete_button.clicked.connect()
 
 
