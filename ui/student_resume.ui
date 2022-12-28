@@ -143,7 +143,7 @@ p, li { white-space: pre-wrap; }
          <number>0</number>
         </property>
         <item>
-         <widget class="QPushButton" name="edit_resume_button">
+         <widget class="QPushButton" name="edit_button">
           <property name="minimumSize">
            <size>
             <width>200</width>
@@ -163,13 +163,16 @@ p, li { white-space: pre-wrap; }
             <bold>true</bold>
            </font>
           </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Edit Resume</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="send_resume_button">
+         <widget class="QPushButton" name="save_changes_button">
           <property name="minimumSize">
            <size>
             <width>200</width>
