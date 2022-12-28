@@ -634,11 +634,18 @@ class Usersettings(QMainWindow):
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_student_resume(self): # change to login screen
+        studentResume = StudentResume()
+        widget.addWidget(studentResume)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
 
+        if userObj.Usertype == 'Student':
+            self.my_resume_button.clicked.connect(self.change_to_student_resume)
 
 
 #------------------------------------Advanced search class------------------------------------
@@ -1003,6 +1010,27 @@ class MyAdsResumePopup(QMainWindow):
 
 
 
+
+#-------------------------------Student Resume Frame--------------------------------
+
+class StudentResume(QMainWindow):
+    def __init__(self):
+        super(StudentResume, self).__init__()
+        loadUi("ui/student_resume.ui", self)
+        self.handle_buttons() 
+        self.save_changes_button.hide()
+
+    
+    def change_to_usersettings(self): # change to user settings screen
+        usersettings = Usersettings()
+        widget.addWidget(usersettings)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+
+    def handle_buttons(self):
+        self.back_button.clicked.connect(self.change_to_usersettings)
+        #self.save_changes_button.clicked.connect()
+        #self.edit_button.clicked.connect()
 
 #----------------------------------------Main----------------------------------
 

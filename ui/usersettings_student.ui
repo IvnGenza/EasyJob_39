@@ -294,7 +294,7 @@
      <string>Delete Account</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="make_resume_button">
+   <widget class="QPushButton" name="my_resume_button">
     <property name="geometry">
      <rect>
       <x>150</x>
