@@ -8,6 +8,6 @@ omershay1212@gmail.com or omersh9@ac.sce.ac.il
 שי חחיאשוילי - shayha2@ac.sce.ac.il
 איבן גנזה 
 
-בהרצה הראשונה של האפליקציה יש להריץ את השורה הבאה בטרמינל:
+ בהרצה הראשונה של האפליקציה יש להריץ את השורה הבאה בTerminal :
 
 python -m pip install -r requirements.txt
