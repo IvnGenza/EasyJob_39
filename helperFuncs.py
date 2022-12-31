@@ -51,26 +51,28 @@ def checkUserName(username):
 
 
 def checkTitle(title):
-    '''gets a string and checks if its length is too long.'''
-    if len(title)>40:
+    '''gets a string and checks if its length is too long (longer than 40).'''
+    if len(title)>40 or len(title)==0:
+        return False
+    return True
+
+
+def checkDescription(title):
+    '''gets a string and checks if its length is less than 40.'''
+    if len(title)<40:
         return False
     return True
 
 
 
 def checkPhoneNumber(number):
-    
-    regex = '051/054/052/050/055/056/057/058/059'
+    '''gets a string, checking that its exaclty 10 digits long.'''
+    regex = '^(\d{10})$'
 
-    if re.match(str(number)[:3],regex) != True:         #regular expression
-        return False
-    
-    if len(str(number)) != 10:      # Check if number have a correct length.
+    if bool(re.match(regex,number)) != True:         #regular expression
         return False
 
     return True
-
-
 
 
 

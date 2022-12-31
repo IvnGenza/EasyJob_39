@@ -50,17 +50,39 @@
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
+       <widget class="QLabel" name="wrong_data_label_3">
+        <property name="minimumSize">
          <size>
-          <width>40</width>
-          <height>20</height>
+          <width>450</width>
+          <height>30</height>
          </size>
         </property>
-       </spacer>
+        <property name="maximumSize">
+         <size>
+          <width>450</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: red;
+font-size: 11pt;
+text-align:left;
+
+</string>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:11pt;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="publish_button">
@@ -300,6 +322,11 @@
             </property>
             <item>
              <property name="text">
+              <string>No work experience</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
               <string>At least one year</string>
              </property>
             </item>
@@ -311,11 +338,6 @@
             <item>
              <property name="text">
               <string>At least five years</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>No exp needed</string>
              </property>
             </item>
            </widget>
@@ -409,12 +431,12 @@
             </property>
             <item>
              <property name="text">
-              <string>Hybrid work</string>
+              <string>Home</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Relocation</string>
+              <string>Hybrid work</string>
              </property>
             </item>
             <item>
@@ -424,12 +446,12 @@
             </item>
             <item>
              <property name="text">
-              <string>Home</string>
+              <string>Optional</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>Optional</string>
+              <string>Relocation</string>
              </property>
             </item>
            </widget>
@@ -1054,7 +1076,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTextEdit" name="d_2">
+           <widget class="QTextEdit" name="description_text_box">
             <property name="minimumSize">
              <size>
               <width>700</width>
