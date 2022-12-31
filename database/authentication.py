@@ -20,12 +20,7 @@ db = firebase.database()
 auth = firebase.auth()
 storage = firebase.storage()
 
-
-
-SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
-
-
-print(SomeUser)
+#SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
 
 
 #pushing some job adds to the database, you can use these lines, 
@@ -52,5 +47,16 @@ print(SomeUser)
 #        }
 #}
 
+
 ##this addes the above data into the 'Jobs' section of the realtime database
-#db.child('Jobs').push(data)
+    #db.child('Jobs').push(data)
+
+##this addes data into the 'Users' section of the realtime database into each user in a specific key
+#users = db.child('Users').get()
+#for user in users.each():
+    #db.child('Users').child((user.key())).child('preferences').push(data)
+
+
+
+
+

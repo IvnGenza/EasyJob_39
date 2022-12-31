@@ -522,27 +522,27 @@ text-align:left;
           <widget class="QLabel" name="requirements_label_2">
            <property name="minimumSize">
             <size>
-             <width>380</width>
+             <width>425</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>380</width>
+             <width>425</width>
              <height>30</height>
             </size>
            </property>
            <property name="font">
             <font>
              <family>MS Shell Dlg 2</family>
-             <pointsize>8</pointsize>
+             <pointsize>9</pointsize>
             </font>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>*password needs to have at least one capital letter and at least one number</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;*password needs to have at least one capital letter and at least one number.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -550,27 +550,27 @@ text-align:left;
           <widget class="QLabel" name="requirements_label_3">
            <property name="minimumSize">
             <size>
-             <width>380</width>
+             <width>425</width>
              <height>30</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>380</width>
+             <width>425</width>
              <height>30</height>
             </size>
            </property>
            <property name="font">
             <font>
              <family>MS Shell Dlg 2</family>
-             <pointsize>8</pointsize>
+             <pointsize>9</pointsize>
             </font>
            </property>
            <property name="layoutDirection">
             <enum>Qt::LeftToRight</enum>
            </property>
            <property name="text">
-            <string>*username needs to have at least one capital letter</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;*username needs to have only letters, lower or upper or both.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
           </widget>
          </item>
@@ -587,7 +587,7 @@ text-align:left;
      <x>0</x>
      <y>0</y>
      <width>1240</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
