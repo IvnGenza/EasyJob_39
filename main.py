@@ -1,4 +1,3 @@
-
 from database.authentication import auth,db
 import sys
 from PyQt5.uic import loadUi
@@ -136,7 +135,7 @@ class Login(QMainWindow):
                 for user in users.each():
                     if user.val()['email'] == email:
                         if user.val()['usertype'] == 'Student': #user
-                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'])
+                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume']) 
                         if user.val()['usertype'] == 'Employer':
                             userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer', {})
                         if user.val()['usertype'] == 'Admin':
@@ -313,7 +312,7 @@ class NewAd(QMainWindow):
                         "daysPerWeek": workRate, 
                         "workingFrom": workPlace
                         },
-                    "resumes": [''],
+                    "resumes": [{"email":"none","status":"False"}], 
                     "search": {
                         "role": role, 
                         "location": location, 
@@ -540,9 +539,10 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
-        self.my_ads_button.clicked.connect(self.change_to_my_ads)
+ 
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
+            self.my_ads_button.clicked.connect(self.change_to_my_ads)
 
         if userObj.Usertype == 'Admin': #only the admin has these buttons, thats why we check if the current user is admin or not
             self.search_username_button.clicked.connect(self.SearchUser)
@@ -652,12 +652,40 @@ class Usersettings(QMainWindow):
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_student_resume(self): # change to login screen
+        studentResume = StudentResume()
+        widget.addWidget(studentResume)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_student_resume(self): # change to login screen
+        studentResume = StudentResume()
+        widget.addWidget(studentResume)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+    
+    def change_to_my_ads(self): #change to my ads window for employer
+        myads = MyAds()
+        widget.addWidget(myads)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
+    def change_to_forgetpassword(self):
+        password = Password()
+        widget.addWidget(password)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
-
-
+        self.change_password_button.clicked.connect(self.change_to_forgetpassword)
+        if userObj.Usertype == 'Student':
+            self.my_resume_button.clicked.connect(self.change_to_student_resume)
+        if userObj.Usertype == 'Employer':
+            self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
+        if userObj.Usertype == 'Admin':
+            #hiding the buttons because the admin cant change the password, delete the account or see his jobs
+            self.change_password_button.hide()
+            self.delete_account_button.hide()
+            self.my_job_ads_button.hide()
 
 #------------------------------------Advanced search class------------------------------------
 
@@ -786,16 +814,16 @@ class AdPopup(QMainWindow):
     def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
         count,flag = 0,0
         for resume in db.child('Jobs').child(self.jobReference).child('resumes').get():
-            if resume.val() == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
+            if resume.val()["email"] == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
                 flag = 1
                 self.error_success_message.setText("you have already submited your resume to this job ad")
                 break
-            if resume.val() == '':
+            if resume.val()["email"] == 'none':
                 break #when the ad is first created, the resumes array in the database will have an empty string in index 0, there for we need to check if the current resume array is empty or not by checking for the empty string.
             count += 1
 
         if flag == 0:
-            data = {count:userObj.Email}
+            data = {count:{"email":userObj.Email,"status":"False"}}
             db.child('Jobs').child(self.jobReference).child('resumes').update(data)
             self.error_success_message.setText('resume submitted successfully')
                 
@@ -927,14 +955,16 @@ class MyAds(QMainWindow):
         self.back_button.clicked.connect(self.change_to_homepage)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
         self.listWidget.itemClicked.connect(self.change_to_myAdsDetails) 
-#----------------------------------------DeletePopup----------------------------------
+
+#----------------------------------------MyAdsDetails----------------------------------
 class MyAdsDetails(QMainWindow):
     def __init__(self):
         super(MyAdsDetails, self).__init__()
         loadUi("ui/My_Ads_Details.ui", self)
         self.handle_buttons()
+        self.save_changes_button.hide()
         self.ResumeFramePopup=None
-
+        self.jobreference=None
 
     def ShowResume(self,item):
         title = (item.split(' | '))[0]
@@ -953,15 +983,16 @@ class MyAdsDetails(QMainWindow):
                 self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
                     ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
+                self.jobreference = job.key() #we catch the job for later use in next classes
 
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
                 #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
                 users = db.child('Users').get()
                 for resume in db.child('Jobs').child(job.key()).child('resumes').get():
                     for user in users.each():
-                        if resume.val() == user.val()['email']:    
+                        if resume.val()["email"] == user.val()['email']:    
                             self.listWidget.addItem(user.val()['fullname']+' | '+user.val()['email']+' | '+user.val()['age'])
-                break
+                #break
         if flag == 0:
             self.listWidget.addItem('No resumes at the moment..')  # if employer doesnt have resumes we print a message
 
@@ -970,15 +1001,28 @@ class MyAdsDetails(QMainWindow):
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_ResumeFramePopup(self): # open the advanced settings screen
+    def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
+        self.ResumeFramePopup.SetParameters(item.text(),self.jobreference)
         self.ResumeFramePopup.show()
 
+    #def edit_job(self): #function to edit job ad, needs more work
+    #    self.edit_button.hide() #hides the edit button
+    #    self.save_changes_button.show() #unhides the save changes button
+    #    #makes all areas editable
+    #    self.title_textBox.setReadOnly(False)
+    #    self.description_textBox.setReadOnly(False)
+    #    self.knowledge_textBox.setReadOnly(False)
+    #    self.details_textBox.setReadOnly(False)
+    #    self.contact_info_textBox.setReadOnly(False)
+    #    if self.save_changes_button.clicked:
+    #        self.save_changes_button.hide() #we hide the save changes button
+    #        self.edit_button.show() #we unhide the edit button
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
-        #self.edit_button.clicked.connect()
+        #self.edit_button.clicked.connect(self.edit_job)
         #self.delete_button.clicked.connect()
 
 
@@ -989,25 +1033,63 @@ class MyAdsResumePopup(QMainWindow):
         super(MyAdsResumePopup, self).__init__()
         loadUi("ui/My_Ads_Resume_Frame.ui", self)
         self.handle_buttons() 
+        self.usersEmail=''
+        self.Jobreference=None
 
-    def SetParameters(self, UserEmail):
+
+    def SetParameters(self, item, jobreference):
+        self.Jobreference = jobreference
+        #finds the correct user that has the email that appears in the resumes list, then enter that user's data into the popup window
+        self.usersEmail = (item.split(' | '))[1]
         users = db.child('Users').get()
         for user in users.each():
-            if user.val()['email'] == UserEmail: #if the emails match do this:
+            if user.val()['email'] == self.usersEmail: #if the emails match do this:
                 #adding all the data from the data base into the ui window based on the current user (username)
                 self.fullname_textBox.setText(user.val()['fullname'])
                 self.username_textBox.setText(user.val()['username'])
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
+            
 
-    def AcceptResume():
-        pass
+    def AcceptResume(self):
+        count = 0
+        for resume in db.child('Jobs').child(self.Jobreference).child('resumes').get():
+            if resume.val()['email'] != self.usersEmail: 
+                count+=1
+            else:
+                try:
+                    if resume.val()['status'] == "False":
+                        data = {count:{"email":self.usersEmail,"status":"True"}}
+                        db.child('Jobs').child(self.Jobreference).child('resumes').update(data)  
+                        self.error_success_message.setText('Successfuly accepted the resume')
+                    else:
+                        self.error_success_message.setText('The resume has already been accepted')
+                except:
+                    self.error_success_message.setText('Something when wrong, try again later')
+                
+                break
+
     
-    def RejectResume():
-        pass
+    def RejectResume(self):
+        count = 0
+        for resume in db.child('Jobs').child(self.Jobreference).child('resumes').get():
+            if resume.val()['email'] != self.usersEmail: 
+                count+=1
+            else:
+                try:
+                    if resume.val()['status'] == "True":
+                        data = {count:{"email":self.usersEmail,"status":"False"}}
+                        db.child('Jobs').child(self.Jobreference).child('resumes').update(data)  
+                        self.error_success_message.setText('Successfuly rejected the resume')
+                    else:
+                        self.error_success_message.setText('The resume has already been rejected')
+                except:
+                    self.error_success_message.setText('Something when wrong, try again later')
+                
+                break
     
-    def SendMessage():
+    def SendMessage(self):
         pass
 
     def handle_buttons(self):
@@ -1019,6 +1101,38 @@ class MyAdsResumePopup(QMainWindow):
 
 
 
+
+#-------------------------------Student Resume Frame--------------------------------
+
+class StudentResume(QMainWindow):
+    def __init__(self):
+        super(StudentResume, self).__init__()
+        loadUi("ui/student_resume.ui", self)
+        self.handle_buttons() 
+        self.save_changes_button.hide()
+        self.resume_textBox.setText(userObj.Resume)
+    
+    def change_to_usersettings(self): # change to user settings screen
+        usersettings = Usersettings()
+        widget.addWidget(usersettings)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+    
+    def edit_resume(self):
+        self.edit_button.hide() #we hide edit button
+        self.save_changes_button.show() #we unhide the save changes button
+        self.resume_textBox.setReadOnly(False) 
+
+    def save_changes(self):
+        self.edit_button.show() 
+        self.save_changes_button.hide()
+        abc = self.resume_textBox.toPlainText()
+        userObj.setResume(abc)
+        self.resume_textBox.setReadOnly(True)
+
+    def handle_buttons(self):
+        self.back_button.clicked.connect(self.change_to_usersettings)
+        self.edit_button.clicked.connect(self.edit_resume)
+        self.save_changes_button.clicked.connect(self.save_changes)
 
 #----------------------------------------Main----------------------------------
 
@@ -1035,15 +1149,6 @@ try:
     sys.exit(app.exec_()) # tring to run the app
 except:
     print("Exiting")
-
-
-
-
-
-
-
-
-
 
 
 
