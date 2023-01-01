@@ -540,7 +540,7 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
-#        self.my_ads_button.clicked.connect(self.change_to_my_ads)
+        self.my_ads_button.clicked.connect(self.change_to_my_ads)
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
 
