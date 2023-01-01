@@ -68,7 +68,7 @@ class Signup(QMainWindow):
                     'fullname':FullName,
                     'age':Age,
                     'usertype':UserType,
-                    'MessageP' :'free', # or can msg only to admin (permission)
+                    'MessagePermission' :'free', # or 'admin'. Can chat only with admin.
                     'email':email,
                     'preferences':{'location':'','role':'','workingFrom':'',},
                     'resume':''
@@ -79,7 +79,7 @@ class Signup(QMainWindow):
                         'fullname':FullName,
                         'age':Age,
                         'usertype':UserType,
-                        'PublicationP':'free',
+                        'PublicationP':'free', # or 'Block'. button "publish new ad" is disable.
                         'MessageP':'free',
                         'email':email
 
@@ -842,14 +842,17 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
     def __init__(self):
         super(UserPopup, self).__init__()
         loadUi("ui/User_frame_student.ui", self) #frist we assume its a student user
-        self.handle_buttons() 
+        self.handle_buttons()
+        self.userreference=None 
 
     def SetParameters(self, UserName):
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['username'] == UserName: #if the usernames match do this:
+                self.userreference=user.key() # We want to use the key of some user, so we can change his info.
                 if user.val()['usertype'] == 'Student': #then we check, if the account is actualy a sturent, if not we change the ui file
                     self.resume_textBox.setText(user.val()['resume']) #only students have resumes in the database, employers dont have it
+
                 else:
                     loadUi("ui/User_frame_employer.ui", self)
 
@@ -867,9 +870,39 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
     def DeleteAccount(self):
         pass
 
+    def ChangePermission(self):
+        
+        
+
+            
+        
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.send_message_button.clicked.connect(self.SendMessage) #calls a function that send a message to the user
         self.delete_account_button.clicked.connect(self.DeleteAccount) #calls a function that deletes the given account
+        self.permission_button.clicked.connect(self.ChangePermission) #calls a function that change permission of the given account
+
+
+
+    #----------------------------------------UserPermission Class----------------------------------
+
+class UserPermission(QMainWindow):
+    def __init__(self,User):
+        super(UserPermission,self).__init__()
+        loadUi("ui/employer_permission.ui",self)
+        self.permission = User
+        self.handle_buttons()
+
+
+
+
+
+
+
+
+
+
+
 
     #----------------------------------------DeletePopup----------------------------------
 class DeletePopup(QMainWindow):
