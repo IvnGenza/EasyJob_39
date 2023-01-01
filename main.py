@@ -64,9 +64,27 @@ class Signup(QMainWindow):
             try:
                 auth.create_user_with_email_and_password(email,PasswordKey) # Saving new user account in FireBase auth.
                 if UserType == 'Student':
-                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email,'preferences':{'location':'','role':'','workingFrom':'',}, 'resume':''}) #Saving new user data in RealTime db.
+                    db.child('Users').push({
+                    'username':UserName,
+                    'fullname':FullName,
+                    'age':Age,
+                    'usertype':UserType,
+                    'MessageP' :'free', # or can msg only to admin (permission)
+                    'email':email,
+                    'preferences':{'location':'','role':'','workingFrom':'',},
+                    'resume':''
+                    }) #Saving new user data in RealTime db.
                 else:
-                    db.child('Users').push({'username':UserName,'fullname':FullName,'age':Age,'usertype':UserType,'email':email}) #Saving new user data in RealTime db.
+                    db.child('Users').push({
+                        'username':UserName,
+                        'fullname':FullName,
+                        'age':Age,
+                        'usertype':UserType,
+                        'PublicationP':'free',
+                        'MessageP':'free',
+                        'email':email
+
+                        }) #Saving new user data in RealTime db.
                 self.change_to_login()
 
             except:
@@ -480,7 +498,7 @@ class Homepage(QMainWindow):
 
         #--------------help funcs for homepage class-----------------
 
-       
+
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
@@ -522,7 +540,7 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
-        self.my_ads_button.clicked.connect(self.change_to_my_ads)
+#        self.my_ads_button.clicked.connect(self.change_to_my_ads)
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
 
@@ -1000,6 +1018,8 @@ class MyAdsResumePopup(QMainWindow):
 
 
 
+
+
 #----------------------------------------Main----------------------------------
 
 
@@ -1015,3 +1035,18 @@ try:
     sys.exit(app.exec_()) # tring to run the app
 except:
     print("Exiting")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
