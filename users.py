@@ -40,11 +40,12 @@ class User():
             db.child('Users').child((user.key())).update({"email":temp})
 
 class Student(User):
-    def __init__(self, fullname, age, username, email, usertype, preferences, resume): 
+    def __init__(self, fullname, age, username, email, usertype, preferences, resume, MessageP): 
         super(Student,self).__init__(fullname, age, username, email)
         self.Usertype = usertype
         self.Preferences = preferences #dictionary from database 
         self.Resume = resume
+        self.MessagePermission = MessageP
 
     def setPreferences(self, key, value):
         user = self.SearchUser(self.Email)
@@ -59,9 +60,11 @@ class Student(User):
             db.child('Users').child(user.key()).update({'resume':res})
 
 class Employer(User):
-    def __init__(self, fullname, age, username, email, usertype, jobAds): 
+    def __init__(self, fullname, age, username, email, usertype, jobAds, MessageP, PublicationP): 
         super(Employer,self).__init__(fullname, age, username, email)
         self.Usertype = usertype
+        self.MessagePermission = MessageP
+        self.PublicationPermission = PublicationP
     #    self.JobAds = jobAds #JobAds is an array of dicitionaries
 
     #def AddJobAds(self, job):
