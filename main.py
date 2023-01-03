@@ -847,6 +847,10 @@ class AdPopup(QMainWindow):
             self.error_success_message.setText('resume submitted successfully')
                 
 
+    def VisabilityPopUp(self):
+        self.advisability = UserPermission(self.jobReference)
+        self.advisability.show()
+
 
     def SendMessage(self):
         pass
@@ -854,6 +858,29 @@ class AdPopup(QMainWindow):
     def handle_buttons(self):
         self.send_resume_button.clicked.connect(self.SendResume)
         self.send_message_button.clicked.connect(self.SendMessage)
+        self.visability_ad_button.clicked.connect(self.VisabilityPopUp)
+        self.edit_ad_button.clicked.connect(self)
+        self.delete_ad_button.clicked.connect(self)
+
+
+
+#----------------------------------------Ad Visability popUp----------------------------------
+
+class AdVisability(QMainWindow):
+    def __init__(self,Job):
+        super(AdVisability, self).__init__()
+        loadUi("ui/visability_Popup.ui", self) 
+        self.JobRef = Job
+        self.handle_buttons()
+
+
+    def SetVisability(self):
+        self.JobRef.update({'Visability' :self.visability_comboBox.currentText()}) # Update ad`s visability param in data base.
+        self.close() # close window after you push 'save' button.
+
+
+    def handle_buttons(self):
+        self.save_vis_button.clicked.connect(self)
 
 #----------------------------------------User popup----------------------------------
 
