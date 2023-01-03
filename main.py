@@ -346,12 +346,12 @@ class NewAd(QMainWindow):
 
 #------------------------------------Ad Widget class------------------------------------
 
-class AdWidget(QWidget):
+# class AdWidget(QWidget):
 
-    def __init__(self, id_widget=0, parent=None):
-        super(AdWidget,self).__init__(parent)
-        loadUi("ui/Ad_frame.ui",self)
-        self.handle.buttons()
+#     def __init__(self, id_widget=0, parent=None):
+#         super(AdWidget,self).__init__(parent)
+#         loadUi("ui/Ad_frame.ui",self)
+#         self.handle.buttons()
         
 
 
@@ -359,18 +359,18 @@ class AdWidget(QWidget):
 
 
 
-        #--------------help funcs for Ad Widget class-----------------
+#         #--------------help funcs for Ad Widget class-----------------
 
-    def handle_buttons(self):
-        self.edit_ad_button.clicked.connect(print('edit ad'))
-        self.delete_ad_botton.clicked.connect(print('delete ad'))
-        self.send_resume_button.clicked.connect(print('send resume'))
-        self.send_message_button.clicked.connect(print('send message'))
+#     def handle_buttons(self):
+#         self.edit_ad_button.clicked.connect(print('edit ad'))
+#         self.delete_ad_botton.clicked.connect(print('delete ad'))
+#         self.send_resume_button.clicked.connect(print('send resume'))
+#         self.send_message_button.clicked.connect(print('send message'))
 
-    def back_to_homepage(self):
-        homepage = Homepage()
-        widget.addWidget(homepage)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+#     def back_to_homepage(self):
+#         homepage = Homepage()
+#         widget.addWidget(homepage)
+#         widget.setCurrentIndex(widget.currentIndex()+1)
 
 
 
