@@ -1129,6 +1129,29 @@ padding:10px;</string>
      </item>
     </layout>
    </widget>
+   <widget class="QPushButton" name="chat_admin">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>450</y>
+      <width>241</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>chat with Admin</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -1136,7 +1159,7 @@ padding:10px;</string>
      <x>0</x>
      <y>0</y>
      <width>1240</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

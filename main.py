@@ -155,6 +155,13 @@ class Login(QMainWindow):
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
+        self.forgotpass_button.clicked.connect(self.change_forgetpassword)
+
+    def change_forgetpassword(self):
+        password = Password()
+        widget.addWidget(password)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
         self.forgotpass_button.clicked.connect(self.change_to_forgetpassword)
 
 
@@ -162,6 +169,7 @@ class Login(QMainWindow):
         password = Password()
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 
 
@@ -339,8 +347,6 @@ class AdWidget(QWidget):
 
 
 
-
-
         #--------------help funcs for Ad Widget class-----------------
 
     def handle_buttons(self):
@@ -372,6 +378,7 @@ class Homepage(QMainWindow):
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
         self.userpopup = None #this is a place holder for a user info popup window
         self.adpopup = None #this is a place holder for a job ad info popup window
+        self.deletepopup=None
 
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
@@ -514,6 +521,10 @@ class Homepage(QMainWindow):
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
+    def change_to_deletePopup(self,item):
+        self.deletepopup = DeletePopup(item.text())
+        self.deletepopup.show()
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for user settings button 
@@ -521,6 +532,7 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
+
  
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
@@ -610,17 +622,19 @@ class Password(QMainWindow):
 class Usersettings(QMainWindow):
     def __init__(self):
         super(Usersettings, self).__init__()
+
         if userObj.Usertype == 'Student':
             loadUi("ui/usersettings_student.ui", self) # file
         else:
             loadUi("ui/usersettings.ui", self)
-        self.handle_buttons() 
+        self.handle_buttons()
+        self.studentResume=None
+        self.chat=None
 
     def change_to_deletePopup(self):
         global userObj
         self.deletepopup = DeletePopup(userObj)
         self.deletepopup.show()
-
 
         #--------------help funcs for usersettings class-----------------
 
@@ -639,10 +653,14 @@ class Usersettings(QMainWindow):
         widget.addWidget(studentResume)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def change_to_student_resume(self): # change to login screen
-        studentResume = StudentResume()
-        widget.addWidget(studentResume)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+    #def change_to_student_resume(self): # change to login screen
+    #    self.studentResume = studentresume()
+    #    self.studentResume.show()
+
+   # def change_to_report(self):  # change to login screen
+    #    self.report = StudentResume()
+     #   widget.addWidget(studentResume)
+      #  widget.setCurrentIndex(widget.currentIndex() + 1)
     
     def change_to_my_ads(self): #change to my ads window for employer
         myads = MyAds()
@@ -654,13 +672,20 @@ class Usersettings(QMainWindow):
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
+    def open_chat(self):
+        self.chat= Chat_with_Admin()
+        self.chat.show()
+
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
-        self.delete_account_button.clicked.connect(self.change_to_deletePopup)
+        self.delete_account_button.clicked.connect(self.change_to_deletePopup) ########H
         self.change_password_button.clicked.connect(self.change_to_forgetpassword)
+
         if userObj.Usertype == 'Student':
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
+            self.chat_admin.clicked.connect(self.open_chat)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
         if userObj.Usertype == 'Admin':
@@ -871,6 +896,18 @@ class DeletePopup(QMainWindow):
                 self.close()
                 self.change_to_login() #when we delete the account we go back to login screen
 
+##########################################################omer omer omer
+    def delete_user(self): #deleting the current user just for Admin
+        #print("its ok ")
+        #print(self.deleteUser)
+        users = db.child('Users').get()
+        for user in users.each(): #this is loop to find the user we want to delete
+            if user.val()['username'] == self.deleteUser:
+
+                #auth.delete_user_account(self.deleteUser['idToken']) #we delete the user from auth with his id
+                db.child('Users').child(user.key()).remove()  # we delete the user from database
+                self.close()
+                self.change_to_login() #when we delete the account we go back to login screen
     def noButton(self):
         self.close()
     
@@ -879,9 +916,14 @@ class DeletePopup(QMainWindow):
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def handle_buttons(self):
-        self.yes_button.clicked.connect(self.delete_account)
-        self.no_button.clicked.connect(self.noButton)
+    def handle_buttons(self): #if user is admin so he can delete a user account else
+        if userObj.Usertype == 'Admin': #check if its Admin so we can delete a user
+            self.yes_button.clicked.connect(self.delete_user)
+        else:# if not admin - go to delete Account
+            self.yes_button.clicked.connect(self.delete_account)
+        self.no_button.clicked.connect(self.noButton) # if press no close the
+
+
 
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
@@ -975,20 +1017,26 @@ class MyAdsDetails(QMainWindow):
                         if resume.val()["email"] == user.val()['email']:    
                             self.listWidget.addItem(user.val()['fullname']+' | '+user.val()['email']+' | '+user.val()['age'])
                 #break
-        if flag == 0:
-            self.listWidget.addItem('No resumes at the moment..')  # if employer doesnt have resumes we print a message
-
-    def change_to_MyAds(self):
-        myads = MyAds()
-        widget.addWidget(myads)
-        widget.setCurrentIndex(widget.currentIndex()+1)
+        if flag ==0:
+            self.listWidget.addItem('No resumes at the moment..')  # if employer does not have resumes we print a message
 
     def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
         self.ResumeFramePopup.SetParameters(item.text(),self.jobreference)
         self.ResumeFramePopup.show()
 
-    #def edit_job(self): #function to edit job ad, needs more work
+    def change_to_MyAds(self): # change to My Ads screen
+        Ad_wind = MyAds()
+        widget.addWidget(Ad_wind)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+    def delete_job(self):
+        Jobs=db.child("Jobs").get()
+        if Jobs.val():
+            db.child('Jobs').child(self.jobreference).remove()  #search in data base and remove Ad
+            self.change_to_MyAds()
+        #check if its work - print something
+
+    # #function to edit job ad, needs more work
     #    self.edit_button.hide() #hides the edit button
     #    self.save_changes_button.show() #unhides the save changes button
     #    #makes all areas editable
@@ -1001,11 +1049,12 @@ class MyAdsDetails(QMainWindow):
     #        self.save_changes_button.hide() #we hide the save changes button
     #        self.edit_button.show() #we unhide the edit button
 
+    #def edit_job(self):
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
         #self.edit_button.clicked.connect(self.edit_job)
-        #self.delete_button.clicked.connect()
+        self.delete_button.clicked.connect(self.delete_job) #delete job
 
 
 #-------------------------------My Ads Resume Frame--------------------------------
@@ -1017,6 +1066,7 @@ class MyAdsResumePopup(QMainWindow):
         self.handle_buttons() 
         self.usersEmail=''
         self.Jobreference=None
+        self.connect=None
 
 
     def SetParameters(self, item, jobreference):
@@ -1072,22 +1122,57 @@ class MyAdsResumePopup(QMainWindow):
                 break
     
     def SendMessage(self):
-        pass
+        self.connect= connect_with_student()
+        self.connect.show()
 
     def handle_buttons(self):
         self.accept_resume_button.clicked.connect(self.AcceptResume)
         self.reject_resume_button.clicked.connect(self.RejectResume)
         self.send_message_button.clicked.connect(self.SendMessage)
 
+#-----------------------------Password---------------------------
+class Password(QMainWindow):
+    def __init__(self):
+        super(Password, self).__init__()
+        loadUi("ui/inputpassword.ui", self)  # file
+        self.ok.clicked.connect(self.check)
 
+    def change_to_login(self):
 
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+    # check
+    #def checkPasswordKey(self, passkey):
+        #if passkey == '':
+         #   return False
+        #elif passkey != " ":
+            #countL = 0
+            #countN = 0
+            #index = 0
+            #for letter in passkey:
+                #if 'A' <= passkey <= 'Z':
+               #     countL += 1  # .
+              #      index += 1
+             #   if '1' <= letter <= '9':  # check for password.
+            #        countL += 1
+           #         index += 1
+          #  if countN >= 1 and countN >= 1:
+
+         #       return True
+        #else:
+            #return False
+        # passkey.islower() or passkey.isalpha():
+        #   return False  # returns false if there are no uppercase letters or no numbers
+        # return True
 
 #-------------------------------Student Resume Frame--------------------------------
 
 class StudentResume(QMainWindow):
     def __init__(self):
         super(StudentResume, self).__init__()
-        loadUi("ui/student_resume.ui", self)
+        loadUi("ui/Student.ui", self)
         self.handle_buttons() 
         self.save_changes_button.hide()
         self.resume_textBox.setText(userObj.Resume)
@@ -1114,8 +1199,45 @@ class StudentResume(QMainWindow):
         self.edit_button.clicked.connect(self.edit_resume)
         self.save_changes_button.clicked.connect(self.save_changes)
 
-#----------------------------------------Main----------------------------------
 
+    def check(self):
+        password = self.inputpassword.text()
+        #autpassword=self.lineEdit().text()
+        #check if the password is equal to second password
+        if checkPasswordKey(password) :
+            # update the data base
+            self.change_to_login()  # goes to next screen
+        else:
+            self.error.setText("Error! invalid Password")
+
+
+# after push it will appear
+
+class connect_with_student(QMainWindow):
+    def __init__(self):
+        super(connect_with_student, self).__init__()
+        loadUi("ui/connect_with_student.ui", self)
+        self.handle_buttons()
+    def send_message(self):
+        UserType = self.textEdit.toPlainText()
+        print(UserType)
+    def handle_buttons(self):
+        self.send_button.clicked.connect(self.send_message)
+
+
+
+
+
+#--------------------
+
+class Chat_with_Admin(QMainWindow):
+    def __init__(self):
+        super(Chat_with_Admin, self).__init__()
+        loadUi("ui/chay_with_admin.ui", self)
+        #self.handle_buttons()
+
+    #----------------------------------------Main----------------------------------
+#
 
 app = QApplication(sys.argv)
 widget = QtWidgets.QStackedWidget() # creates a Stack of widgets(windows)
@@ -1131,7 +1253,4 @@ except:
     print("Exiting")
 
 
-
-
-
-
+#heyh3y
