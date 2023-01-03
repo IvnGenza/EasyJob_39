@@ -780,15 +780,24 @@ class AdPopup(QMainWindow):
         self.handle_buttons() 
         self.jobReference = ''
         self.error_success_message.setText('')
+        
         if userObj.Usertype == 'Student': #students cant edit or delete ads, only employer and admin can, thats why we disable the buttons
             self.edit_ad_button.hide()
             self.delete_ad_button.hide()
-        elif userObj.Usertype == 'Admin' or userObj.Usertype == 'Employer': #the admin and employers cant send a resume, so we disable the button if the user is an admin
+            self.visability_ad_button.hide()
+            if userObj.MessagePermission == 'Only admin': #check if student haven`t permission to send message or resume.
+                self.send_message_button.setDisabled(True) #disable send message button.
+                self.send_resume_button.setDisabled(True) #disable send resume button.
+
+        if userObj.Usertype == 'Employer':
+            self.send_resume_button.hide() #the admin and employers cant send a resume, so we disable the button if the user is an admin
+            self.visability_ad_button.hide() 
+            if userObj.MessagePermission == 'Only admin': #check if employer haven`t permission to send message.
+                self.send_message_button.setDisabled(True) #disable send message button.
+
+
+        if userObj.Usertype == 'Admin':
             self.send_resume_button.hide()
-        
-        if userObj.MessagePermission == 'Only admin': #check if user have permission to send message.
-            self.send_message_button.setDisabled(True)
-        
 
 
 
