@@ -1,4 +1,4 @@
-from database.authentication import auth,db
+from database.authentication import auth, db, current_month, current_year, current_date, UpdateReport, StudentAccCounter, StudentDeleteAccCounter, EmployerAccCounter, EmployerDeleteAccCounter
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
@@ -9,7 +9,18 @@ from helperFuncs import *
 
 userObj = None #global parameter, this will hold the current user object like student, employer and admin.
 CURRENTUSER = None #global parameter for auth 
- 
+
+
+
+
+# ====> UpdateReport <====  Use this variable in order to update Activity report.
+# ====> StudentAccCounter <====  Use this variable in order to update Student create acc counter.
+# ====> StudentDeleteAccCounter <====  Use this variable in order to update Student delete Acc counter.
+# ====> EmployerAccCounter <====  Use this variable in order to update Employer create acc counter.
+# ====> EmployerDeleteAccCounter <====  Use this variable in order to update Employer delete Acc counter.
+
+#For example >> UpdateReport.update({'Student Create Acc': 'StudentAccCounter + 1'})
+
 
 #------------------------------------Signup class------------------------------------
 
@@ -18,7 +29,6 @@ class Signup(QMainWindow):
         super(Signup, self).__init__()
         loadUi("ui/signup.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on all the buttons
-
 
     def CreateNewAccFunc(self):
         flag=0
@@ -73,6 +83,7 @@ class Signup(QMainWindow):
                     'preferences':{'location':'','role':'','workingFrom':'',},
                     'resume':''
                     }) #Saving new user data in RealTime db.
+
                 else:
                     db.child('Users').push({
                         'username':UserName,
@@ -431,7 +442,7 @@ class Homepage(QMainWindow):
         #for every job in the data base, add it to the list of jobs on the screen
         jobs = db.child('Jobs').get()
         for job in jobs.each():
-            if job.val(['Visability']) == 'Visible for every user': #check if ad is visible for another users.
+            if job.val()['Visability'] == 'Visible for every user': #check if ad is visible for another users.
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
 
