@@ -135,7 +135,7 @@ class Login(QMainWindow):
                 for user in users.each():
                     if user.val()['email'] == email:
                         if user.val()['usertype'] == 'Student': #user
-                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume'],user.val()['MessagePermission']) 
+                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume'], user.val()['MessagePermission']) 
                         if user.val()['usertype'] == 'Employer':
                             userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer',user.val()['MessagePermission'],user.val()['PublicationP'])
                         if user.val()['usertype'] == 'Admin':
@@ -317,7 +317,8 @@ class NewAd(QMainWindow):
                         "role": role, 
                         "location": location, 
                         "degree": degree, 
-                        "jobType": jobType
+                        "jobType": jobType,
+                        "Visability": 'Visible for every user' # Ad Visability in homepage list. admin can change this param to 'Visible for creator only'.
                         }
                 }
                 db.child('Jobs').push(data)
@@ -430,7 +431,8 @@ class Homepage(QMainWindow):
         #for every job in the data base, add it to the list of jobs on the screen
         jobs = db.child('Jobs').get()
         for job in jobs.each():
-            self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
+            if job.val(['Visability']) == 'Visible for every user': #check if ad is visible for another users.
+                self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
 
 
 
@@ -440,10 +442,11 @@ class Homepage(QMainWindow):
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if (
-                job.val()['search']['degree'] == Degree or 
+                (job.val()['search']['degree'] == Degree or 
                 job.val()['search']['jobType'] == JobType or 
                 job.val()['search']['location'] == Location or 
-                job.val()['search']['role'] == Role
+                job.val()['search']['role'] == Role) 
+                
                 ): #for now the description is atleast on of the 4 search criteria must be meet, maybe later we will change it to all of the 4 criteria must be meet all together.
                 
                 #print(job.val()['description'])
@@ -780,7 +783,7 @@ class AdPopup(QMainWindow):
         self.handle_buttons() 
         self.jobReference = ''
         self.error_success_message.setText('')
-        
+
         if userObj.Usertype == 'Student': #students cant edit or delete ads, only employer and admin can, thats why we disable the buttons
             self.edit_ad_button.hide()
             self.delete_ad_button.hide()
@@ -919,9 +922,11 @@ class UserPermission(QMainWindow):
     def SetPermission(self):
         if self.permission.val()['usertype'] == 'Student':
             self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
+            self.close()
         else:
             self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
             self.permission.update({'PublicationP' :self.publish_combobox.currentText()})
+            self.close()
             
             
 
