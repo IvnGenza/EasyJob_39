@@ -60,7 +60,7 @@ class Student(User):
             db.child('Users').child(user.key()).update({'resume':res})
 
 class Employer(User):
-    def __init__(self, fullname, age, username, email, usertype, jobAds, MessageP, PublicationP): 
+    def __init__(self, fullname, age, username, email, usertype, MessageP, PublicationP ): 
         super(Employer,self).__init__(fullname, age, username, email)
         self.Usertype = usertype
         self.MessagePermission = MessageP
