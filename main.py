@@ -395,6 +395,9 @@ class Homepage(QMainWindow):
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
             self.my_ads_button.hide() #only for employer 
             self.line_4.hide() 
+
+        if userObj.Usertype == 'Employer' and userObj.PublicationPermission == 'block': #check if employer can create new ad.
+            self.new_ad_button.setDisabled(True) #disable 'new ad' bottun if admin blocked this func for the user.
     
     #--------------------Main Functionality Functions-----------------------#
 
