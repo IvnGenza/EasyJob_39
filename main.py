@@ -445,7 +445,7 @@ class Homepage(QMainWindow):
                 (job.val()['search']['degree'] == Degree or 
                 job.val()['search']['jobType'] == JobType or 
                 job.val()['search']['location'] == Location or 
-                job.val()['search']['role'] == Role) 
+                job.val()['search']['role'] == Role) and job.val()['Visability'] == 'Visible for every user'
                 
                 ): #for now the description is atleast on of the 4 search criteria must be meet, maybe later we will change it to all of the 4 criteria must be meet all together.
                 
