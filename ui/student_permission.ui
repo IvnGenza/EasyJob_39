@@ -83,7 +83,7 @@
             </item>
             <item>
              <property name="text">
-              <string>Only for admin</string>
+              <string>Only admin</string>
              </property>
             </item>
            </widget>
