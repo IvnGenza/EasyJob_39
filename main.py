@@ -80,7 +80,7 @@ class Signup(QMainWindow):
                         'age':Age,
                         'usertype':UserType,
                         'PublicationP':'free', # or 'Block'. button "publish new ad" is disable.
-                        'MessageP':'free',
+                        'MessagePermission':'free',
                         'email':email
 
                         }) #Saving new user data in RealTime db.
@@ -849,7 +849,7 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['username'] == UserName: #if the usernames match do this:
-                self.userreference=user.key() # We want to use the key of some user, so we can change his info.
+                self.userreference=user # We want to use the key of some user, so we can change his info.
                 if user.val()['usertype'] == 'Student': #then we check, if the account is actualy a sturent, if not we change the ui file
                     self.resume_textBox.setText(user.val()['resume']) #only students have resumes in the database, employers dont have it
 
@@ -870,7 +870,9 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
     def DeleteAccount(self):
         pass
 
-    def ChangePermission(self):
+    def change_to_permissionPopup(self):
+        self.permissionpopup = UserPermission(self.userreference)
+        self.permissionpopup.show()
         
         
 
@@ -880,7 +882,7 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
     def handle_buttons(self): # this function handles the click of the signup button
         self.send_message_button.clicked.connect(self.SendMessage) #calls a function that send a message to the user
         self.delete_account_button.clicked.connect(self.DeleteAccount) #calls a function that deletes the given account
-        self.permission_button.clicked.connect(self.ChangePermission) #calls a function that change permission of the given account
+        self.permission_button.clicked.connect(self.change_to_permissionPopup) #calls a function that change permission of the given account
 
 
 
@@ -889,15 +891,28 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
 class UserPermission(QMainWindow):
     def __init__(self,User):
         super(UserPermission,self).__init__()
-        loadUi("ui/employer_permission.ui",self)
+        if self.permission.val()['usertype'] == 'Student':
+            loadUi("ui/student_permission.ui",self)
+        else:
+            loadUi("ui/employer_permission.ui",self)
         self.permission = User
         self.handle_buttons()
 
 
 
+    def SetPermission(self):
+        if self.permission.val()['usertype'] == 'Student':
+            self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
+        else:
+            self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
+            self.permission.update({'PublicationP' :self.publish_combobox.currentText()})
+            
 
 
 
+
+    def handle_buttons(self):
+        self.save_botton.clicked.connect(self.SetPermission)
 
 
 
