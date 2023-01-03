@@ -135,9 +135,9 @@ class Login(QMainWindow):
                 for user in users.each():
                     if user.val()['email'] == email:
                         if user.val()['usertype'] == 'Student': #user
-                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume']) 
+                            userObj= Student(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Student', user.val()['preferences'], user.val()['resume'],user.val()['MessagePermission']) 
                         if user.val()['usertype'] == 'Employer':
-                            userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer', {})
+                            userObj= Employer(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Employer',user.val()['MessagePermission'],user.val()['PublicationP'])
                         if user.val()['usertype'] == 'Admin':
                             userObj= Admin(user.val()['fullname'], user.val()['age'], user.val()['username'], email, 'Admin')
                 
@@ -783,6 +783,10 @@ class AdPopup(QMainWindow):
         elif userObj.Usertype == 'Admin' or userObj.Usertype == 'Employer': #the admin and employers cant send a resume, so we disable the button if the user is an admin
             self.send_resume_button.hide()
         
+        if userObj.MessagePermission == 'Only admin': #check if user have permission to send message.
+            self.send_message_button.setDisabled(True)
+        
+
 
 
     def SetParameters(self,item):
@@ -906,6 +910,7 @@ class UserPermission(QMainWindow):
         else:
             self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
             self.permission.update({'PublicationP' :self.publish_combobox.currentText()})
+            
             
 
 
