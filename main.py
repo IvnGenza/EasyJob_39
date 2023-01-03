@@ -19,7 +19,10 @@ CURRENTUSER = None #global parameter for auth
 # ====> EmployerAccCounter <====  Use this variable in order to update Employer create acc counter.
 # ====> EmployerDeleteAccCounter <====  Use this variable in order to update Employer delete Acc counter.
 
-#For example >> UpdateReport.update({'Student Create Acc': 'StudentAccCounter + 1'})
+#Examples >>>         UpdateReport.update({'Student Create Acc': StudentAccCounter + 1})
+#                     UpdateReport.update({'Employer Create Acc': EmployerAccCounter + 1})
+#                     UpdateReport.update({'Student Delete Acc': StudentDeleteAccCounter + 1})
+#                     UpdateReport.update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
 
 
 #------------------------------------Signup class------------------------------------
@@ -83,18 +86,19 @@ class Signup(QMainWindow):
                     'preferences':{'location':'','role':'','workingFrom':'',},
                     'resume':''
                     }) #Saving new user data in RealTime db.
+                    UpdateReport.update({'Student Create Acc': StudentAccCounter + 1}) #Update Student activity counter in database.
 
                 else:
                     db.child('Users').push({
-                        'username':UserName,
-                        'fullname':FullName,
-                        'age':Age,
-                        'usertype':UserType,
-                        'PublicationP':'free', # or 'Block'. button "publish new ad" is disable.
-                        'MessagePermission':'free',
-                        'email':email
-
-                        }) #Saving new user data in RealTime db.
+                    'username':UserName,
+                    'fullname':FullName,
+                    'age':Age,
+                    'usertype':UserType,
+                    'PublicationP':'free', # or 'Block'. button "publish new ad" is disable.
+                    'MessagePermission':'free',
+                    'email':email
+                    }) #Saving new user data in RealTime db.
+                    UpdateReport.update({'Employer Create Acc': EmployerAccCounter + 1}) #Update Employer activity counter in database.
                 self.change_to_login()
 
             except:
@@ -333,6 +337,7 @@ class NewAd(QMainWindow):
                         }
                 }
                 db.child('Jobs').push(data)
+
                 self.back_to_homepage()    
             except:    
                 showError(">> Connection Error! <<")        
