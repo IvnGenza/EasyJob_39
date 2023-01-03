@@ -5,35 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d04613d-9ce8-4553-bd74-d538bbaba2fa" name="Changes" comment="Merge remote-tracking branch 'origin/main'">
-      <change afterPath="$PROJECT_DIR$/.idea/newnew.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_31_12_2022_13_08_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_31_12_2022_13_08__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/Delete_Popup.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/My_Ads.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/My_Ads_Details.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/My_Ads_Resume_Frame.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/User_frame_employer.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/User_frame_student.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/homepage_admin.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/student_resume.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ui/terms_and_conditions.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/EasyJob_39.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/EasyJob_39.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/authentication.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/authentication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/helperFuncs.py" beforeDir="false" afterPath="$PROJECT_DIR$/helperFuncs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/connect_with_student.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui/resume.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/Ad_frame.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/Ad_frame.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/advancedSearch.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/advancedSearch.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/homepage.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/homepage.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/inputpassword.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/inputpassword.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/new_ad.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/new_ad.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui/usersettings.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/usersettings.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/student_resume.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/StudentResume.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui/usersettings_student.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui/usersettings_student.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/users.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +203,14 @@
       <option name="project" value="LOCAL‎" />
       <updated>1671107071564</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL‎-00010" summary="Merge remote-tracking branch 'origin/main'">
+      <created>1672509531531</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL‎-00010" />
+      <option name="project" value="LOCAL‎" />
+      <updated>1672509531531</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
