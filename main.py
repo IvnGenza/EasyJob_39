@@ -997,8 +997,15 @@ class DeletePopup(QMainWindow):
         users = db.child('Users').get()
         for user in users.each(): #this is loop to find the user we want to delete
             if user.val()['email'] == self.deleteUser.Email: 
+
+                if user.val()['usertype'] == 'Student': # Check the Acc. type and in order to update activity report.
+                    UpdateReport.update({'Student Delete Acc': StudentDeleteAccCounter + 1})
+                else:
+                    UpdateReport.update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
+
                 auth.delete_user_account(CURRENTUSER['idToken']) #we delete the user from auth with his id
-                db.child('Users').child(user.key()).remove()  # we deletethe user from database
+                db.child('Users').child(user.key()).remove()  # we delete the user from database
+
                 self.close()
                 self.change_to_login() #when we delete the account we go back to login screen
 
