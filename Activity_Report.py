@@ -39,22 +39,25 @@ class Ui_MainWindow(object):
         self.verticalLayout.setContentsMargins(10, 10, 10, 10)
         self.verticalLayout.setSpacing(10)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.date_list = QtWidgets.QScrollArea(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.date_list.sizePolicy().hasHeightForWidth())
-        self.date_list.setSizePolicy(sizePolicy)
+        self.date_list = QtWidgets.QListWidget(self.centralwidget)
         self.date_list.setMinimumSize(QtCore.QSize(150, 340))
         self.date_list.setMaximumSize(QtCore.QSize(150, 340))
-        self.date_list.setWidgetResizable(True)
         self.date_list.setObjectName("date_list")
+        self.verticalLayout.addWidget(self.date_list)
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 148, 338))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.date_list.setWidget(self.scrollAreaWidgetContents)
-        self.verticalLayout.addWidget(self.date_list, 0, QtCore.Qt.AlignHCenter)
-        self.send_report_button = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.plotOnCanvas())
+
+#------------------------------------------------------------------------------------
+
+        self.send_report_button = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.FullDateList())
+        self.date_list.itemClicked.connect(self.plotOnCanvas)
+
+#------------------------------------------------------------------------------------
+
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -80,12 +83,16 @@ class Ui_MainWindow(object):
         self.activity_chart.setFrameShadow(QtWidgets.QFrame.Raised)
         self.activity_chart.setObjectName("activity_chart")
 
+#------------------------------------------------------------------------------------
 
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.activity_chart)  # Create a horizontal Layout in activity chart frame
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
         self.figure = plt.figure()                                  # Create Canvas
         self.canvas = FigureCanvas(self.figure)                     
         self.horizontalLayout_4.addWidget(self.canvas)              # Add Canvas into activity chart 
+
+#------------------------------------------------------------------------------------
+
 
         self.horizontalLayout.addWidget(self.activity_chart, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
@@ -104,12 +111,30 @@ class Ui_MainWindow(object):
         self.send_report_button.setText(_translate("MainWindow", "Send Report"))
 
 
-    def plotOnCanvas(self):
+    def FullDateList(self):
 
+        years = db.child('Reports').child('Activity').get()
+        for year in years.each():
+            print(year.key())
+
+            temp = len(year.val())
+
+            for month in range(temp-1):
+                date = str(year.key()) + "/" + str(month+1)
+                self.date_list.addItem(date)
+
+
+
+    def plotOnCanvas(self,item):
         self.figure.clear() #Clear the canvas.
 
+        a = db.child('Reports').child('Activity').child(item.text()).child('Employer Create Acc').get().val() 
+        b = db.child('Reports').child('Activity').child(item.text()).child('Student Delete Acc').get().val()
+        c = db.child('Reports').child('Activity').child(item.text()).child('Employer Delete Acc').get().val()
+        d = db.child('Reports').child('Activity').child(item.text()).child('Student Create Acc').get().val()
+
         valLabels = ['S_CreateAc.', 'E_CreateAc.', 'S_DeleteAc.', 'E_DeleteAc.']     
-        values = [StudentAccCounter, EmployerAccCounter, StudentDeleteAccCounter, EmployerDeleteAccCounter]
+        values = [a, b, c, d]
 
         plt.bar(valLabels,values, color = 'grey', width= 0.5)
         plt.xlabel("Student/Employer Create/Delete Account")
@@ -122,12 +147,14 @@ class Ui_MainWindow(object):
 
 
 
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     MainWindow = QtWidgets.QMainWindow()
+#     ui = Ui_MainWindow()
+#     ui.setupUi(MainWindow)
+#     MainWindow.show()
+#     sys.exit(app.exec_())
+    
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+
