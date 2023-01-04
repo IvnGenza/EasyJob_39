@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; text-decoration: underline;\">Activity Chart</span></p></body></html>"))
-        self.send_report_button.setText(_translate("MainWindow", "Send Report"))
+        self.send_report_button.setText(_translate("MainWindow", "Report"))
 
 
     def FullDateList(self):

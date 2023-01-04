@@ -701,7 +701,7 @@ class Usersettings(QMainWindow):
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    def show_activity_window(self):                     
+    def show_activity_window(self):                         
         self.app = QtWidgets.QApplication(sys.argv)
         self.MainWindow = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
@@ -949,7 +949,8 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
         pass
 
     def DeleteAccount(self):
-        pass
+        self.deleteUserAcc = DeletePopup(self.userreference)
+        self.deleteUserAcc.show()
 
     def change_to_permissionPopup(self):
         self.permissionpopup = UserPermission(self.userreference)
