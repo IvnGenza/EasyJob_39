@@ -696,11 +696,15 @@ class Usersettings(QMainWindow):
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
+    def show_activity_window(self):
+        Ui_MainWindow()
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
         self.change_password_button.clicked.connect(self.change_to_forgetpassword)
+        self.make_report_button.clicked.connect(self.show_activity_window)
         if userObj.Usertype == 'Student':
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
         if userObj.Usertype == 'Employer':
