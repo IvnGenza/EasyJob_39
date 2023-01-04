@@ -1,10 +1,14 @@
-
+from database.authentication import *
 
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-
-
+from matplotlib.figure import Figure
 from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+#--------------------------------------------------------------
+#--------------------------------------------------------------
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -50,7 +54,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.date_list.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.date_list, 0, QtCore.Qt.AlignHCenter)
-        self.send_report_button = QtWidgets.QPushButton(self.centralwidget)
+        self.send_report_button = QtWidgets.QPushButton(self.centralwidget, clicked = lambda: self.plotOnCanvas())
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -75,6 +79,14 @@ class Ui_MainWindow(object):
         self.activity_chart.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.activity_chart.setFrameShadow(QtWidgets.QFrame.Raised)
         self.activity_chart.setObjectName("activity_chart")
+
+
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.activity_chart)  # Create a horizontal Layout in activity chart frame
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.figure = plt.figure()                                  # Create Canvas
+        self.canvas = FigureCanvas(self.figure)                     
+        self.horizontalLayout_4.addWidget(self.canvas)              # Add Canvas into activity chart 
+
         self.horizontalLayout.addWidget(self.activity_chart, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -90,6 +102,25 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; text-decoration: underline;\">Activity Chart</span></p></body></html>"))
         self.send_report_button.setText(_translate("MainWindow", "Send Report"))
+
+
+    def plotOnCanvas(self):
+
+        self.figure.clear() #Clear the canvas.
+
+        valLabels = ['S_CreateAc.', 'E_CreateAc.', 'S_DeleteAc.', 'E_DeleteAc.']     
+        values = [StudentAccCounter, EmployerAccCounter, StudentDeleteAccCounter, EmployerDeleteAccCounter]
+
+        plt.bar(valLabels,values, color = 'grey', width= 0.5)
+        plt.xlabel("Student/Employer Create/Delete Account")
+        plt.ylabel("User Acc. Value")
+
+        self.canvas.draw()  #show a new chart
+
+
+
+
+
 
 
 if __name__ == "__main__":
