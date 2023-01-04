@@ -1,4 +1,4 @@
-from database.authentication import auth, db, current_month, current_year, current_date, UpdateReport, StudentAccCounter, StudentDeleteAccCounter, EmployerAccCounter, EmployerDeleteAccCounter
+from database.authentication import auth, db,current_month, current_year, current_date, StudentAccCounter, StudentDeleteAccCounter, EmployerAccCounter, EmployerDeleteAccCounter
 import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
@@ -9,12 +9,13 @@ from users import *
 from helperFuncs import *
 from Activity_Report import *
 
+
 userObj = None #global parameter, this will hold the current user object like student, employer and admin.
 CURRENTUSER = None #global parameter for auth 
 
 
 
-
+#from database.authentication import UpdateReport
 # ====> UpdateReport <====  Use this variable in order to update Activity report.
 # ====> StudentAccCounter <====  Use this variable in order to update Student create acc counter.
 # ====> StudentDeleteAccCounter <====  Use this variable in order to update Student delete Acc counter.
@@ -25,6 +26,10 @@ CURRENTUSER = None #global parameter for auth
 #                     UpdateReport.update({'Employer Create Acc': EmployerAccCounter + 1})
 #                     UpdateReport.update({'Student Delete Acc': StudentDeleteAccCounter + 1})
 #                     UpdateReport.update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
+
+
+
+
 
 
 #------------------------------------Signup class------------------------------------
@@ -88,7 +93,7 @@ class Signup(QMainWindow):
                     'preferences':{'location':'','role':'','workingFrom':'',},
                     'resume':''
                     }) #Saving new user data in RealTime db.
-                    UpdateReport.update({'Student Create Acc': StudentAccCounter + 1}) #Update Student activity counter in database.
+                    db.child('Reports').child('Activity').child(current_date).update({'Student Create Acc': StudentAccCounter + 1}) #Update Student activity counter in database.
 
                 else:
                     db.child('Users').push({
@@ -100,7 +105,7 @@ class Signup(QMainWindow):
                     'MessagePermission':'free',
                     'email':email
                     }) #Saving new user data in RealTime db.
-                    UpdateReport.update({'Employer Create Acc': EmployerAccCounter + 1}) #Update Employer activity counter in database.
+                    db.child('Reports').child('Activity').child(current_date).update({'Employer Create Acc': EmployerAccCounter + 1}) #Update Employer activity counter in database.
                 self.change_to_login()
 
             except:
@@ -696,24 +701,32 @@ class Usersettings(QMainWindow):
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    def show_activity_window(self):
-        Ui_MainWindow()
+    def show_activity_window(self):                     
+        self.app = QtWidgets.QApplication(sys.argv)
+        self.MainWindow = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.MainWindow)
+        self.MainWindow.show()
+
+
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
         self.change_password_button.clicked.connect(self.change_to_forgetpassword)
-        self.make_report_button.clicked.connect(self.show_activity_window)
+        
         if userObj.Usertype == 'Student':
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
         if userObj.Usertype == 'Admin':
-            #hiding the buttons because the admin cant change the password, delete the account or see his jobs
-            self.change_password_button.hide()
+            self.make_report_button.clicked.connect(self.show_activity_window)
+            #hiding the buttons because the admin cant, delete the account or see his jobs
             self.delete_account_button.hide()
             self.my_job_ads_button.hide()
+
+
 
 #------------------------------------Advanced search class------------------------------------
 
@@ -1005,9 +1018,9 @@ class DeletePopup(QMainWindow):
             if user.val()['email'] == self.deleteUser.Email: 
 
                 if user.val()['usertype'] == 'Student': # Check the Acc. type and in order to update activity report.
-                    UpdateReport.update({'Student Delete Acc': StudentDeleteAccCounter + 1})
+                    db.child('Reports').child('Activity').child(current_date).update({'Student Delete Acc': StudentDeleteAccCounter + 1})
                 else:
-                    UpdateReport.update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
+                    db.child('Reports').child('Activity').child(current_date).update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
 
                 auth.delete_user_account(CURRENTUSER['idToken']) #we delete the user from auth with his id
                 db.child('Users').child(user.key()).remove()  # we delete the user from database
