@@ -4,10 +4,10 @@ from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget,QVBoxLayout
 from PyQt5 import QtChart
-from PyQt5.QtChart import QChart, QChartView, QBarSet, QPercentBarSeries, QBarCategoryAxis
 from functools import *
 from users import *
 from helperFuncs import *
+from Activity_Report import *
 
 userObj = None #global parameter, this will hold the current user object like student, employer and admin.
 CURRENTUSER = None #global parameter for auth 
@@ -1222,12 +1222,6 @@ class MyAdsResumePopup(QMainWindow):
 
 
 #------------------------------- Activity Report -----------------------------------
-
-class ActivityReport():
-
-    def __init__(self):
-        
-
 
 
 #-------------------------------Student Resume Frame--------------------------------
