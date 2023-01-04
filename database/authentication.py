@@ -27,21 +27,21 @@ storage = firebase.storage()
 
 #------------------------------ Activity Report -----------------------------------
 
+
 db.child('Reports').child('Activity').child(current_date).update({ # This line will automatically create a new empty report every NEW month.
-    'Student Create Acc':0,
-    'Employer Create Acc':0,
-    'Student Delete Acc':0,
-    'Employer Delete Acc':0
+    'Student Create Acc':12,
+    'Employer Create Acc':15,
+    'Student Delete Acc':3,
+    'Employer Delete Acc':2
     })
 
-UpdateReport = db.child('Reports').child('Activity').child(current_date) 
-
-StudentAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Create Acc').get().val()
 EmployerAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Create Acc').get().val()
-
 StudentDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Delete Acc').get().val()
 EmployerDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Delete Acc').get().val()
+StudentAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Create Acc').get().val()
 
+
+UpdateReport = db.child('Reports').child('Activity').child(current_date)
 
 
 
