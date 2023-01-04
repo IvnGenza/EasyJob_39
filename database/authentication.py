@@ -40,8 +40,19 @@ StudentDeleteAccCounter = db.child('Reports').child('Activity').child(current_da
 EmployerDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Delete Acc').get().val()
 StudentAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Create Acc').get().val()
 
+# liist = db.child('Reports').child('Activity').get()
+# for item in (liist.each()):
+#     print(item.key())
 
-UpdateReport = db.child('Reports').child('Activity').child(current_date)
+#     temp = len(item.val())
+
+#     for i in range(temp-1):
+#         print(i+1)
+        
+
+
+
+#UpdateReport = db.child('Reports').child('Activity').child(current_date)
 
 
 
