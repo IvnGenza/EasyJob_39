@@ -254,7 +254,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="permission_button">
+           <widget class="QPushButton" name="permission_button1">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -283,7 +283,7 @@ p, li { white-space: pre-wrap; }
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="delete_account_button">
+           <widget class="QPushButton" name="delete_account_button1">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -318,16 +318,6 @@ p, li { white-space: pre-wrap; }
      </layout>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>750</width>
-     <height>21</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
