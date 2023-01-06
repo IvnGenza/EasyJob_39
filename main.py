@@ -3,7 +3,6 @@ import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget,QVBoxLayout
-from PyQt5 import QtChart
 from functools import *
 from users import *
 from helperFuncs import *
@@ -585,6 +584,7 @@ class Homepage(QMainWindow):
         ad = NewAd(None)
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_advanced_search(self): # open the advanced settings screen
         self.advancedSearchWindow = AdvancedSearch()
@@ -595,15 +595,18 @@ class Homepage(QMainWindow):
         self.adpopup = AdPopup()
         self.adpopup.SetParameters(item.text())
         self.adpopup.show()
+        return True
 
     def change_to_UserPopup(self, item): #open the user popup window when an user is clicked
         self.userpopup = UserPopup(item.text())
         self.userpopup.show()
+        return True
 
     def change_to_my_ads(self): #change to my ads window for employer
         myads = MyAds()
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
@@ -726,11 +729,6 @@ class Usersettings(QMainWindow):
     def back_to_homepage(self): # back to previous screen
         homepage = Homepage()
         widget.addWidget(homepage)
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-    def change_to_student_resume(self): # change to login screen
-        studentResume = StudentResume()
-        widget.addWidget(studentResume)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def change_to_student_resume(self): # change to login screen
