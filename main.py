@@ -1360,7 +1360,7 @@ class StudentResume(QMainWindow):
 
 
 
-#----------------------------------------Main----------------------------------
+#----------------------------------------Student Report class----------------------------------
 
 class StudentReport(QMainWindow):
     def __init__(self):
