@@ -6,7 +6,7 @@ omershay1212@gmail.com or omersh9@ac.sce.ac.il
 עומר שי - omersh9@ac.sce.ac.il
 מקסים סובוטין - maximsu@ac.sce.ac.il
 שי חחיאשוילי - shayha2@ac.sce.ac.il
-איבן גנזה 
+איוון גנזה - ivange@ac.sce.ac.il
 
  בהרצה הראשונה של האפליקציה יש להריץ את השורה הבאה בTerminal :
 
