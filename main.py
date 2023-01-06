@@ -210,20 +210,44 @@ class Login(QMainWindow):
 
 class NewAd(QMainWindow):
 
-    def __init__(self):
+    def __init__(self,Job):
         super(NewAd, self).__init__()
         loadUi("ui/new_ad.ui", self)
         self.handle_buttons()
+        self.JobRef = Job
 
+        if self.JobRef != None:
+            self.window_title.setText(">> Edit Ad <<")
+
+            search = self.JobRef.val()['search']
+            cInfo = self.JobRef.val()['contactInfo']
+            pref = self.JobRef.val()['preferences']
+
+            self.name_textbox.setText(cInfo[0])      
+            self.phone_textbox.setText(cInfo[1])  
+            self.email_textbox.setText(cInfo[2])
+            self.work_exp_comboBox.setCurrentText(pref["workExperience"])
+            self.work_rate_comboBox.setCurrentText(pref["daysPerWeek"])
+            self.work_place_comboBox.setCurrentText(pref["workingFrom"])
+            self.role_comboBox.setCurrentText(search["role"])
+            self.location_comboBox.setCurrentText(search["location"])
+            self.job_type_comboBox.setCurrentText(search["jobType"])
+            self.degree_comboBox.setCurrentText(search["degree"])
+            self.title_text_box.setText(self.JobRef.val()['title'])         
+            self.description_text_box.setText(self.JobRef.val()['description'])
+
+        else:
+            self.window_title.setText(">> New Ad <<")
+
+        
     def CreateAd(self):
-
         def showError(message):
             self.wrong_data_label_3.setVisible(True)
             self.wrong_data_label_3.setText(message) 
 
-        fname=self.name_textbox.text()      #
-        Pnumber=self.phone_textbox.text()   #
-        email=self.email_textbox.text()     #
+        fname=self.name_textbox.text()      
+        Pnumber=self.phone_textbox.text()   
+        email=self.email_textbox.text()     
         workExp=self.work_exp_comboBox.currentText()
         workRate=self.work_rate_comboBox.currentText()
         workPlace=self.work_place_comboBox.currentText()
@@ -231,7 +255,7 @@ class NewAd(QMainWindow):
         location=self.location_comboBox.currentText()
         jobType=self.job_type_comboBox.currentText()
         degree=self.degree_comboBox.currentText()
-        title=self.title_text_box.text()         #
+        title=self.title_text_box.text()         
         description=self.description_text_box.toPlainText()
         ErrorString = ''
         flag = 0
@@ -255,43 +279,30 @@ class NewAd(QMainWindow):
         
         if self.Javascript_checkbox.isChecked() != True:
             knowledge.remove('Javascript')
-    
         if self.Rust_checkBox.isChecked() != True:
             knowledge.remove('Rust')
-
         if self.Python_checkBox.isChecked() != True:
             knowledge.remove('Python')
-
         if self.Kotlin_checkBox.isChecked() != True:
             knowledge.remove('Kotlin')
-
         if self.Go_checkBox.isChecked() != True:
             knowledge.remove('Go')
-
         if self.Swift_checkBox.isChecked() != True:
             knowledge.remove('Swift')
-
         if self.C_checkBox.isChecked() != True:
             knowledge.remove('C and C++')
-
         if self.SQL_checkBox.isChecked() != True:
             knowledge.remove('SQL')
-
         if self.CSS_checkBox.isChecked() != True:
             knowledge.remove('CSS')
-
         if self.PHP_checkBox.isChecked() != True:
             knowledge.remove('PHP')
-
         if self.TypeScript_checkBox.isChecked() != True:
             knowledge.remove('TypeScript')
-
         if self.Perl_checkBox.isChecked() != True:
             knowledge.remove('Perl')
-
         if self.Java_checkBox.isChecked() != True:
             knowledge.remove('Java')
-
         if self.HTML_checkBox.isChecked() != True:
             knowledge.remove('HTML')
 
@@ -299,30 +310,27 @@ class NewAd(QMainWindow):
         if checkEmail(email)==False:
             ErrorString = ''.join((ErrorString,' Email,'))
             flag = 1        
-
         if checkFullName(fname)==False:
             ErrorString = ''.join((ErrorString,' Full Name,'))
             flag = 1
-
         if checkTitle(title)==False:
             ErrorString = ''.join((ErrorString,' Title,'))
             flag = 1
-            
         if checkDescription(description)==False:
             ErrorString = ''.join((ErrorString,' Description,'))
             flag = 1
-
         if checkPhoneNumber(Pnumber)==False:
             ErrorString = ''.join((ErrorString,' Phone Number,'))
             flag = 1
-            
+        if len(knowledge)==0:
+            ErrorString = ''.join((ErrorString,' Mark at least 1 language,'))
+            flag = 1
 
         ErrorString = ''.join(('Invalid ',ErrorString))
         ErrorString = ErrorString[:-1] + '.'      
 
 
-        if flag == 0:        
-
+        if flag == 0 and self.JobRef==None:        
             try:
                 data={
                     "title": title,
@@ -352,7 +360,32 @@ class NewAd(QMainWindow):
             showError(ErrorString)      
 
 
+        if flag == 0 and self.JobRef!=None:        
+            try:
+                data={
+                    "title": title,
+                    "description": description, 
+                    "contactInfo": [fname, Pnumber, email], 
+                    "knowledge": knowledge,
+                    "preferences": {
+                        "workExperience": workExp,
+                        "daysPerWeek": workRate, 
+                        "workingFrom": workPlace
+                        },
+                    "search": {
+                        "role": role, 
+                        "location": location, 
+                        "degree": degree, 
+                        "jobType": jobType,
+                        }
+                }
+                db.child('Jobs').child(self.JobRef.key()).update(data)
 
+                self.back_to_homepage()    
+            except:    
+                showError(">> Connection Error! <<")        
+        else:
+            showError(ErrorString)    
 
 
         #--------------help funcs for Create/publish job class-----------------
@@ -365,6 +398,7 @@ class NewAd(QMainWindow):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
+
 
 
 
@@ -538,22 +572,21 @@ class Homepage(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def change_to_NewAd(self): # open the new add screen (only by employer)
-        ad = NewAd()
+        ad = NewAd(None)
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
     def change_to_advanced_search(self): # open the advanced settings screen
         self.advancedSearchWindow = AdvancedSearch()
         self.advancedSearchWindow.show()
-       
+
     def change_to_AdPopup(self, item): #open the ad popup window when an ad is clicked
         self.adpopup = AdPopup()
         self.adpopup.SetParameters(item.text())
         self.adpopup.show()
 
-    def change_to_UserPopup(self, item): #open the ad popup window when an ad is clicked
-        self.userpopup = UserPopup()
-        self.userpopup.SetParameters(item.text())
+    def change_to_UserPopup(self, item): #open the user popup window when an user is clicked
+        self.userpopup = UserPopup(item.text())
         self.userpopup.show()
 
     def change_to_my_ads(self): #change to my ads window for employer
@@ -816,7 +849,8 @@ class AdPopup(QMainWindow):
         super(AdPopup, self).__init__()
         loadUi("ui/Ad_frame.ui", self)
         self.handle_buttons() 
-        self.jobReference = ''
+        self.PoPjobRef = None
+        self.PoPjobKey = None
         self.error_success_message.setText('')
 
         if userObj.Usertype == 'Student': #students cant edit or delete ads, only employer and admin can, thats why we disable the buttons
@@ -863,11 +897,12 @@ class AdPopup(QMainWindow):
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
                 
                 #saving the key of the job from the database for later use in sendResume, sendMessage, editAd and deleteAd functions.
-                self.jobReference = job.key()
-        
+                self.PoPjobRef = job 
+                self.PoPjobKey = job.key()
+
     def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
         count,flag = 0,0
-        for resume in db.child('Jobs').child(self.jobReference).child('resumes').get():
+        for resume in db.child('Jobs').child(self.PoPjobKey).child('resumes').get():
             if resume.val()["email"] == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
                 flag = 1
                 self.error_success_message.setText("you have already submited your resume to this job ad")
@@ -878,25 +913,35 @@ class AdPopup(QMainWindow):
 
         if flag == 0:
             data = {count:{"email":userObj.Email,"status":"False"}}
-            db.child('Jobs').child(self.jobReference).child('resumes').update(data)
+            db.child('Jobs').child(self.PoPjobKey).child('resumes').update(data)
             self.error_success_message.setText('resume submitted successfully')
                 
 
     def VisabilityPopUp(self):
-        self.advisability = UserPermission(self.jobReference)
+        self.advisability = AdVisability(self.PoPjobKey)
         self.advisability.show()
 
 
     def SendMessage(self):
         pass
-    
+
+
+    def Change_to_EditAd(self):
+        self.editAd = NewAd(self.PoPjobRef)
+        widget.addWidget(self.editAd)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+        self.close()
+
+
+    def DeleteAd(self):
+        pass
+
     def handle_buttons(self):
         self.send_resume_button.clicked.connect(self.SendResume)
         self.send_message_button.clicked.connect(self.SendMessage)
         self.visability_ad_button.clicked.connect(self.VisabilityPopUp)
-        self.edit_ad_button.clicked.connect(self)
-        self.delete_ad_button.clicked.connect(self)
-
+        self.edit_ad_button.clicked.connect(self.Change_to_EditAd)
+        self.delete_ad_button.clicked.connect(self.DeleteAd)
 
 
 #----------------------------------------Ad Visability popUp----------------------------------
@@ -905,60 +950,60 @@ class AdVisability(QMainWindow):
     def __init__(self,Job):
         super(AdVisability, self).__init__()
         loadUi("ui/visability_Popup.ui", self) 
-        self.JobRef = Job
+        self.AdJobKey = Job
         self.handle_buttons()
 
 
     def SetVisability(self):
-        self.JobRef.update({'Visability' :self.visability_comboBox.currentText()}) # Update ad`s visability param in data base.
+        db.child('Jobs').child(self.AdJobKey).update({'Visability' :self.visability_comboBox.currentText()}) # Update ad`s visability param in data base.
         self.close() # close window after you push 'save' button.
 
 
     def handle_buttons(self):
-        self.save_vis_button.clicked.connect(self)
+        self.save_vis_button.clicked.connect(self.SetVisability)
 
 #----------------------------------------User popup----------------------------------
 
 class UserPopup(QMainWindow): #this is a popup window that we see when the admin clickes on some user from the user's list, in this popup window there is all the information about this specific user from the database
-    def __init__(self):
+    def __init__(self,User):
         super(UserPopup, self).__init__()
-        loadUi("ui/User_frame_student.ui", self) #frist we assume its a student user
+
+        def GetUserKey(name):
+            for u in db.child('Users').get().each():
+                if u.val()['username'] == name: #if the usernames match return his key:
+                    return u.key() # We want to use the key in order to set/get his info.
+
+        self.UserKey = GetUserKey(User)
+
+        if db.child('Users').child(self.UserKey).get().val()['usertype'] == 'Employer':                                                                                                    
+            loadUi("ui/User_frame_employer.ui", self)                                                             
+        elif db.child('Users').child(self.UserKey).get().val()['usertype'] == 'Student': #then we check, if the account is actualy a sturent, if not we change the ui file:
+            loadUi("ui/User_frame_student.ui", self)
+            self.resume_textBox.setText(db.child('Users').child(self.UserKey).get().val()['resume']) #only students have resumes in the database, employers dont have it
         self.handle_buttons()
-        self.userreference=None 
 
-    def SetParameters(self, UserName):
-        users = db.child('Users').get()
-        for user in users.each():
-            if user.val()['username'] == UserName: #if the usernames match do this:
-                self.userreference=user # We want to use the key of some user, so we can change his info.
-                if user.val()['usertype'] == 'Student': #then we check, if the account is actualy a sturent, if not we change the ui file
-                    self.resume_textBox.setText(user.val()['resume']) #only students have resumes in the database, employers dont have it
 
-                else:
-                    loadUi("ui/User_frame_employer.ui", self)
+        #adding all the data from the data base into the ui window based on the current user (username)
+        self.fullname_textBox.setText(db.child('Users').child(self.UserKey).get().val()['fullname'])
+        self.username_textBox.setText(db.child('Users').child(self.UserKey).get().val()['username'])
+        self.email_textBox.setText(db.child('Users').child(self.UserKey).get().val()['email'])
+        self.age_textBox.setText(db.child('Users').child(self.UserKey).get().val()['age'])
+        self.usertype_textBox.setText(db.child('Users').child(self.UserKey).get().val()['usertype'])
 
-                #adding all the data from the data base into the ui window based on the current user (username)
-                self.fullname_textBox.setText(user.val()['fullname'])
-                self.username_textBox.setText(user.val()['username'])
-                self.email_textBox.setText(user.val()['email'])
-                self.age_textBox.setText(user.val()['age'])
-                self.usertype_textBox.setText(user.val()['usertype'])
+
 
 
     def SendMessage(self):
         pass
 
     def DeleteAccount(self):
-        self.deleteUserAcc = DeletePopup(self.userreference)
+        self.deleteUserAcc = DeletePopup(self.UserKey)
         self.deleteUserAcc.show()
 
     def change_to_permissionPopup(self):
-        self.permissionpopup = UserPermission(self.userreference)
+        self.permissionpopup = UserPermission(self.UserKey)
         self.permissionpopup.show()
         
-        
-
-            
         
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -966,59 +1011,48 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
         self.delete_account_button.clicked.connect(self.DeleteAccount) #calls a function that deletes the given account
         self.permission_button.clicked.connect(self.change_to_permissionPopup) #calls a function that change permission of the given account
 
-
-
     #----------------------------------------UserPermission Class----------------------------------
 
 class UserPermission(QMainWindow):
     def __init__(self,User):
         super(UserPermission,self).__init__()
-        if self.permission.val()['usertype'] == 'Student':
-            loadUi("ui/student_permission.ui",self)
+        self.userPrmKey = User                                                                                      
+        
+        if db.child('Users').child(self.userPrmKey).get().val()['usertype'] == 'Student':                                                      
+            loadUi("ui/student_permission.ui",self)                                                                  
         else:
             loadUi("ui/employer_permission.ui",self)
-        self.permission = User
         self.handle_buttons()
 
 
-
     def SetPermission(self):
-        if self.permission.val()['usertype'] == 'Student':
-            self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
+        if db.child('Users').child(self.userPrmKey).get().val()['usertype'] == 'Student':
+            db.child('Users').child(self.userPrmKey).update({'MessagePermission' :self.msg_combobox.currentText()})
             self.close()
         else:
-            self.permission.update({'MessagePermission' :self.msg_combobox.currentText()})
-            self.permission.update({'PublicationP' :self.publish_combobox.currentText()})
+            db.child('Users').child(self.userPrmKey).update({'MessagePermission' :self.msg_combobox.currentText()})
+            db.child('Users').child(self.userPrmKey).update({'PublicationP' :self.publish_combobox.currentText()})
             self.close()
             
-            
-
-
-
 
     def handle_buttons(self):
-        self.save_botton.clicked.connect(self.SetPermission)
-
-
-
-
-
+        self.save_button.clicked.connect(self.SetPermission)
 
     #----------------------------------------DeletePopup----------------------------------
 class DeletePopup(QMainWindow):
     def __init__(self,User):
         super(DeletePopup, self).__init__()
         loadUi("ui/Delete_Popup.ui", self)
-        self.deleteUser = User
+        self.deleteUserKey = User
         self.handle_buttons() 
 
     def delete_account(self): #deleting the current user
         global CURRENTUSER
         users = db.child('Users').get()
         for user in users.each(): #this is loop to find the user we want to delete
-            if user.val()['email'] == self.deleteUser.Email: 
+            if user.val()['email'] == self.deleteUserKey.Email: 
 
-                if user.val()['usertype'] == 'Student': # Check the Acc. type and in order to update activity report.
+                if user.val()['usertype'] == 'Student': # Check the Acc.Type and in order to update activity report.
                     db.child('Reports').child('Activity').child(current_date).update({'Student Delete Acc': StudentDeleteAccCounter + 1})
                 else:
                     db.child('Reports').child('Activity').child(current_date).update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
@@ -1037,9 +1071,33 @@ class DeletePopup(QMainWindow):
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def handle_buttons(self):
-        self.yes_button.clicked.connect(self.delete_account)
-        self.no_button.clicked.connect(self.noButton)
+
+
+    def delete_user(self): #deleting the current user just for Admin
+        # users = db.child('Users').get()
+        # for user in users.each(): #this is loop to find the user we want to delete
+        #     if user.val()['username'] == self.deleteUser:
+                #auth.delete_user_account(self.deleteUser['idToken']) #we delete the user from auth with his id
+
+
+        if db.child('Users').child(self.deleteUserKey).get().val()['usertype'] == 'Student': # Check the Acc. type and in order to update activity report.
+            db.child('Reports').child('Activity').child(current_date).update({'Student Delete Acc': StudentDeleteAccCounter + 1})
+        else:
+            db.child('Reports').child('Activity').child(current_date).update({'Employer Delete Acc': EmployerDeleteAccCounter + 1})
+        db.child('Users').child(self.deleteUserKey).remove()  # we delete the user from database
+        #auth.delete_user_account(self.deleteUserKey['idToken'])
+        self.close()
+        self.change_to_login() #when we delete the account we go back to login screen
+        self.deleteUserKey = User
+
+
+    def handle_buttons(self): #if user is admin so he can delete a user account else
+        if userObj.Usertype == 'Admin': #check if its Admin so we can delete a user
+            self.yes_button.clicked.connect(self.delete_user)
+        else:# if not admin - go to delete Account
+            self.yes_button.clicked.connect(self.delete_account)
+
+        self.no_button.clicked.connect(self.noButton) # if press no close the
 
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
@@ -1104,7 +1162,8 @@ class MyAdsDetails(QMainWindow):
         self.handle_buttons()
         self.save_changes_button.hide()
         self.ResumeFramePopup=None
-        self.jobreference=None
+        self.myjobKey=None
+        self.myjobRef=None
 
     def ShowResume(self,item):
         title = (item.split(' | '))[0]
@@ -1123,8 +1182,8 @@ class MyAdsDetails(QMainWindow):
                 self.details_textBox.setText(job.val()['search']['degree']+' , '+job.val()['search']['jobType']+
                     ' , '+job.val()['search']['location']+' , '+job.val()['search']['role']+' , '+job.val()['preferences']['daysPerWeek']+' , '+job.val()['preferences']['workExperience']+' , '+job.val()['preferences']['workingFrom'])
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
-                self.jobreference = job.key() #we catch the job for later use in next classes
-
+                self.myjobKey = job.key() #we catch the job for later use in next classes
+                self.myjobRef = job
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
                 #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
                 users = db.child('Users').get()
@@ -1143,8 +1202,15 @@ class MyAdsDetails(QMainWindow):
 
     def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
-        self.ResumeFramePopup.SetParameters(item.text(),self.jobreference)
+        self.ResumeFramePopup.SetParameters(item.text(),self.myjobRef)
         self.ResumeFramePopup.show()
+
+
+    def Change_to_EditAd(self):
+        self.editAd = NewAd(self.myjobRef)
+        widget.addWidget(self.editAd)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+
 
     #def edit_job(self): #function to edit job ad, needs more work
     #    self.edit_button.hide() #hides the edit button
@@ -1162,7 +1228,7 @@ class MyAdsDetails(QMainWindow):
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
-        #self.edit_button.clicked.connect(self.edit_job)
+        self.edit_button.clicked.connect(self.Change_to_EditAd)
         #self.delete_button.clicked.connect()
 
 
@@ -1239,8 +1305,6 @@ class MyAdsResumePopup(QMainWindow):
 
 
 
-#------------------------------- Activity Report -----------------------------------
-
 
 #-------------------------------Student Resume Frame--------------------------------
 
@@ -1274,6 +1338,7 @@ class StudentResume(QMainWindow):
         self.edit_button.clicked.connect(self.edit_resume)
         self.save_changes_button.clicked.connect(self.save_changes)
 
+
 #----------------------------------------Main----------------------------------
 
 
@@ -1289,6 +1354,10 @@ try:
     sys.exit(app.exec_()) # tring to run the app
 except:
     print("Exiting")
+
+
+
+
 
 
 
