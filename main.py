@@ -81,10 +81,12 @@ class Signup(QMainWindow):
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.CreateNewAccFunc)
         self.existing_account_button.clicked.connect(self.change_to_login)
+        return True
         #self.wrong_data_label.setVisible(False) #not needed beacause the inner text is already blank, there is no text.
         
 
@@ -145,23 +147,28 @@ class Login(QMainWindow):
         signup = Signup()
         widget.addWidget(signup)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
+
 
     def change_to_homepage(self): #change to homepage screen
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_up_button.clicked.connect(self.change_to_signup)
         self.wrong_data_label_2.setVisible(False)
         self.login_button.clicked.connect(self.logging)
         self.forgotpass_button.clicked.connect(self.change_to_forgetpassword)
-
+        return True
 
     def change_to_forgetpassword(self):
         password = Password()
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
+        return True
+
 
 
 
@@ -372,6 +379,7 @@ class Homepage(QMainWindow):
         self.advancedSearchWindow = None # this is a place holder for the advanced search small window
         self.userpopup = None #this is a place holder for a user info popup window
         self.adpopup = None #this is a place holder for a job ad info popup window
+        self.deletepopup = None
 
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
@@ -484,11 +492,13 @@ class Homepage(QMainWindow):
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_usersettings(self): # change to user settings screen
         usersettings = Usersettings()
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_NewAd(self): # open the new add screen (only by employer)
         ad = NewAd()
@@ -498,6 +508,7 @@ class Homepage(QMainWindow):
     def change_to_advanced_search(self): # open the advanced settings screen
         self.advancedSearchWindow = AdvancedSearch()
         self.advancedSearchWindow.show()
+        return True
        
     def change_to_AdPopup(self, item): #open the ad popup window when an ad is clicked
         self.adpopup = AdPopup()
@@ -529,7 +540,8 @@ class Homepage(QMainWindow):
         if userObj.Usertype == 'Admin': #only the admin has these buttons, thats why we check if the current user is admin or not
             self.search_username_button.clicked.connect(self.SearchUser)
             self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
-
+        
+        return True
         #this gets an item from the list widget
         #abcd = self.listWidget.item(0)
 
@@ -564,13 +576,15 @@ class Password(QMainWindow):
         #--------------help funcs for Password class-----------------
 
     def handle_buttons(self):
-
         self.back_login_botton.clicked.connect(self.change_to_login)
         self.send_email_botton.clicked.connect(self.forgetPass)
+        return True
+
     def change_to_login(self): # change to login screen
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
 
     # # check
@@ -825,6 +839,8 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
         super(UserPopup, self).__init__()
         loadUi("ui/User_frame_student.ui", self) #frist we assume its a student user
         self.handle_buttons() 
+        self.usernameRef = None
+        self.deletepopup = None
 
     def SetParameters(self, UserName):
         users = db.child('Users').get()
@@ -836,6 +852,7 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
                     loadUi("ui/User_frame_employer.ui", self)
 
                 #adding all the data from the data base into the ui window based on the current user (username)
+                self.usernameRef = UserName
                 self.fullname_textBox.setText(user.val()['fullname'])
                 self.username_textBox.setText(user.val()['username'])
                 self.email_textBox.setText(user.val()['email'])
@@ -847,7 +864,9 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
         pass
 
     def DeleteAccount(self):
-        pass
+        self.deletepopup = DeletePopup(self.usernameRef)
+        self.deletepopup.show()
+
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.send_message_button.clicked.connect(self.SendMessage) #calls a function that send a message to the user
@@ -871,6 +890,15 @@ class DeletePopup(QMainWindow):
                 self.close()
                 self.change_to_login() #when we delete the account we go back to login screen
 
+    def delete_user(self): #deleting the current user just for Admin
+        users = db.child('Users').get()
+        for user in users.each(): #this is loop to find the user we want to delete
+            if user.val()['username'] == self.deleteUser:
+                #auth.delete_user_account(self.deleteUser['idToken']) #we delete the user from auth with his id
+                db.child('Users').child(user.key()).remove()  # we delete the user from database
+                self.close()
+                self.change_to_login() #when we delete the account we go back to login screen
+
     def noButton(self):
         self.close()
     
@@ -879,9 +907,14 @@ class DeletePopup(QMainWindow):
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
-    def handle_buttons(self):
-        self.yes_button.clicked.connect(self.delete_account)
-        self.no_button.clicked.connect(self.noButton)
+    def handle_buttons(self): #if user is admin so he can delete a user account else
+        if userObj.Usertype == 'Admin': #check if its Admin so we can delete a user
+            self.yes_button.clicked.connect(self.delete_user)
+        else:# if not admin - go to delete Account
+            self.yes_button.clicked.connect(self.delete_account)
+        
+        self.no_button.clicked.connect(self.noButton) # if press no close the
+
 
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
