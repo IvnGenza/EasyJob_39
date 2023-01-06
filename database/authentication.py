@@ -2,6 +2,7 @@
 # Test for adding an authentication database
 
 import pyrebase
+import datetime
 
 firebaseConfig ={
 'apiKey': "AIzaSyAwzsiCVmWkqAwh_zDR1XDsFbl_1g3vicw",
@@ -14,14 +15,50 @@ firebaseConfig ={
 'measurementId': "G-4FS7N8MX70"
 };
 
+current_month = str(datetime.datetime.now().month)
+current_year = str(datetime.datetime.now().year)
+
+current_date = current_year + "/" + current_month
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 db = firebase.database()
 auth = firebase.auth()
 storage = firebase.storage()
 
-#SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
+#------------------------------ Activity Report -----------------------------------
 
+
+db.child('Reports').child('Activity').child(current_date).update({ # This line will automatically create a new empty report every NEW month.
+    'Student Create Acc':12,
+    'Employer Create Acc':15,
+    'Student Delete Acc':3,
+    'Employer Delete Acc':2
+    })
+
+EmployerAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Create Acc').get().val()
+StudentDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Delete Acc').get().val()
+EmployerDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Delete Acc').get().val()
+StudentAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Create Acc').get().val()
+
+
+#for u in db.child('Users').get().each():
+
+    #print(u.val()['username'])
+    #print(u.key())                   
+    # print(u.val()['contactInfo'])   # list with contact info of the employer who posted the ad.
+    # print(u.val()['resumes'])       #dictionary with every resume that was sent to each Job in db.
+    # print(u.val()['search'])
+    #for i in u.val()['search'].values():
+    #     print(i)
+
+
+
+
+#UpdateReport = db.child('Reports').child('Activity').child(current_date)
+
+
+
+#SomeUser = db.child("Users").order_by_child('email').equal_to('name@name.name').get().val() # Search user by email example.
 
 #pushing some job adds to the database, you can use these lines, 
 #just change up the information and run THIS file. 
