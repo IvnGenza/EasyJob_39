@@ -40,15 +40,17 @@ StudentDeleteAccCounter = db.child('Reports').child('Activity').child(current_da
 EmployerDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Delete Acc').get().val()
 StudentAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Create Acc').get().val()
 
-# liist = db.child('Reports').child('Activity').get()
-# for item in (liist.each()):
-#     print(item.key())
 
-#     temp = len(item.val())
+#for u in db.child('Users').get().each():
 
-#     for i in range(temp-1):
-#         print(i+1)
-        
+    #print(u.val()['username'])
+    #print(u.key())                   
+    # print(u.val()['contactInfo'])   # list with contact info of the employer who posted the ad.
+    # print(u.val()['resumes'])       #dictionary with every resume that was sent to each Job in db.
+    # print(u.val()['search'])
+    #for i in u.val()['search'].values():
+    #     print(i)
+
 
 
 
