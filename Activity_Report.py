@@ -113,11 +113,10 @@ class Ui_MainWindow(object):
 
     def FullDateList(self):
 
-        years = db.child('Reports').child('Activity').get()
-        for year in years.each():
-            print(year.key())
-
-            temp = len(year.val())
+        years = db.child('Reports').child('Activity').get()     #######################################
+        for year in years.each():                               ##This func push every report in db into the QListWidget.
+            print(year.key())                                   ##Reports are sorted by yyyy/m.
+            temp = len(year.val())                              #######################################
 
             for month in range(temp-1):
                 date = str(year.key()) + "/" + str(month+1)
@@ -128,19 +127,18 @@ class Ui_MainWindow(object):
     def plotOnCanvas(self,item):
         self.figure.clear() #Clear the canvas.
 
-        a = db.child('Reports').child('Activity').child(item.text()).child('Employer Create Acc').get().val() 
-        b = db.child('Reports').child('Activity').child(item.text()).child('Student Delete Acc').get().val()
-        c = db.child('Reports').child('Activity').child(item.text()).child('Employer Delete Acc').get().val()
-        d = db.child('Reports').child('Activity').child(item.text()).child('Student Create Acc').get().val()
+        a = db.child('Reports').child('Activity').child(item.text()).child('Employer Create Acc').get().val()   #######################################
+        b = db.child('Reports').child('Activity').child(item.text()).child('Student Delete Acc').get().val()    ##Gets value of every creating
+        c = db.child('Reports').child('Activity').child(item.text()).child('Employer Delete Acc').get().val()   ## or deleting acc. move in some month.
+        d = db.child('Reports').child('Activity').child(item.text()).child('Student Create Acc').get().val()    #######################################
 
         valLabels = ['S_CreateAc.', 'E_CreateAc.', 'S_DeleteAc.', 'E_DeleteAc.']     
         values = [a, b, c, d]
 
-        plt.bar(valLabels,values, color = 'grey', width= 0.5)
-        plt.xlabel("Student/Employer Create/Delete Account")
-        plt.ylabel("User Acc. Value")
-
-        self.canvas.draw()  #show a new chart
+        plt.bar(valLabels,values, color = 'grey', width= 0.5)      #############################################
+        plt.xlabel("Student/Employer Create/Delete Account")       ##Set names of the parameters into the graph.
+        plt.ylabel("User Acc. Value")                              ############################################
+        self.canvas.draw()  #show a new chart                      
 
 
 
