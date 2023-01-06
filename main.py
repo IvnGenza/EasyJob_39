@@ -1,8 +1,8 @@
 from database.authentication import auth, db,current_month, current_year, current_date, StudentAccCounter, StudentDeleteAccCounter, EmployerAccCounter, EmployerDeleteAccCounter
 import sys
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget,QVBoxLayout
+from PyQt5 import QtWidgets, Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget,QVBoxLayout, QTableWidgetItem
 from functools import *
 from users import *
 from helperFuncs import *
@@ -712,6 +712,7 @@ class Usersettings(QMainWindow):
         else:
             loadUi("ui/usersettings.ui", self)
         self.handle_buttons() 
+        self.studentReport = None
 
     def change_to_deletePopup(self):
         global userObj
@@ -753,6 +754,9 @@ class Usersettings(QMainWindow):
         self.ui.setupUi(self.MainWindow)
         self.MainWindow.show()
 
+    def change_to_student_report(self):
+        self.studentReport = StudentReport()
+        self.studentReport.show()
 
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -760,9 +764,10 @@ class Usersettings(QMainWindow):
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
         self.change_password_button.clicked.connect(self.change_to_forgetpassword)
-        
+
         if userObj.Usertype == 'Student':
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
+            self.make_report_button.clicked.connect(self.change_to_student_report)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
         if userObj.Usertype == 'Admin':
@@ -915,13 +920,13 @@ class AdPopup(QMainWindow):
     def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
         count,flag = 0,0
         for resume in db.child('Jobs').child(self.PoPjobKey).child('resumes').get():
-            if resume.val()["email"] == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
-                flag = 1
-                self.error_success_message.setText("you have already submited your resume to this job ad")
-                break
-            if resume.val()["email"] == 'none':
-                break #when the ad is first created, the resumes array in the database will have an empty string in index 0, there for we need to check if the current resume array is empty or not by checking for the empty string.
-            count += 1
+                if resume.val()["email"] == userObj.Email: #for every email in the database in the resume of this specific job ad, check if the current user email already exists
+                    flag = 1
+                    self.error_success_message.setText("you have already submited your resume to this job ad")
+                    break
+                if resume.val()["email"] == 'none':
+                    break #when the ad is first created, the resumes array in the database will have an empty string in index 0, there for we need to check if the current resume array is empty or not by checking for the empty string.
+                count += 1
 
         if flag == 0:
             data = {count:{"email":userObj.Email,"status":"False"}}
@@ -1173,6 +1178,7 @@ class MyAdsDetails(QMainWindow):
         loadUi("ui/My_Ads_Details.ui", self)
         self.handle_buttons()
         self.save_changes_button.hide()
+        self.error_message.hide()
         self.ResumeFramePopup=None
         self.myjobKey=None
         self.myjobRef=None
@@ -1196,16 +1202,18 @@ class MyAdsDetails(QMainWindow):
                 self.contact_info_textBox.setText(job.val()['contactInfo'][0]+ ' , '+job.val()['contactInfo'][1]+ ' , '+job.val()['contactInfo'][2])
                 self.myjobKey = job.key() #we catch the job for later use in next classes
                 self.myjobRef = job
-                flag = 1 #flag = 1 means that we found at least one job ad that fits the description
+                
                 #this line adds all the jobs from the database that fit ONE OR MORE of the 4 main search criteria, adds them to the list in this order: Title | location | role | work from | degree 
                 users = db.child('Users').get()
                 for resume in db.child('Jobs').child(job.key()).child('resumes').get():
                     for user in users.each():
-                        if resume.val()["email"] == user.val()['email']:    
+                        if resume.val()['email'] == user.val()['email']:    
                             self.listWidget.addItem(user.val()['fullname']+' | '+user.val()['email']+' | '+user.val()['age'])
+                            flag = 1 #flag = 1 means that we found at least one user that send his resume to this ad
                 #break
         if flag == 0:
-            self.listWidget.addItem('No resumes at the moment..')  # if employer doesnt have resumes we print a message
+            self.error_message.show()
+            self.error_message.setText('No resumes at the moment..') # if employer doesnt have resumes we print a message
 
     def change_to_MyAds(self):
         myads = MyAds()
@@ -1214,7 +1222,7 @@ class MyAdsDetails(QMainWindow):
 
     def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
-        self.ResumeFramePopup.SetParameters(item.text(),self.myjobRef)
+        self.ResumeFramePopup.SetParameters(item.text(),self.myjobKey)
         self.ResumeFramePopup.show()
 
 
@@ -1349,6 +1357,53 @@ class StudentResume(QMainWindow):
         self.back_button.clicked.connect(self.change_to_usersettings)
         self.edit_button.clicked.connect(self.edit_resume)
         self.save_changes_button.clicked.connect(self.save_changes)
+
+
+
+#----------------------------------------Main----------------------------------
+
+class StudentReport(QMainWindow):
+    def __init__(self):
+        super(StudentReport, self).__init__()
+        loadUi("ui/Student_Report.ui", self)
+        self.handle_buttons()
+        self.ShowReportInfo()
+
+    def ShowReportInfo(self):
+
+        self.tableWidget.clear()
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            for resume in db.child('Jobs').child(job.key()).child('resumes').get():
+                try:
+                   if resume.val()['email'] == userObj.Email:
+                    #add a new row
+                    rowPosition = self.tableWidget.rowCount()
+                    self.tableWidget.insertRow(rowPosition)
+                
+                    #add information into the new row
+                    self.tableWidget.setItem(rowPosition , 0 , QtWidgets.QTableWidgetItem(job.val()['title'])) #title
+                    self.tableWidget.setItem(rowPosition , 1 , QtWidgets.QTableWidgetItem(job.val()['search']['location'])) #location
+                    self.tableWidget.setItem(rowPosition , 2 , QtWidgets.QTableWidgetItem(job.val()['search']['role'])) #role
+                    self.tableWidget.setItem(rowPosition , 3 , QtWidgets.QTableWidgetItem(job.val()['search']['jobType'])) #jobType
+                    
+                    buf = resume.val()['status']
+                    if buf == "True":
+                        buf = 'Accepted! Send an email to continue.'
+                    else:
+                        buf = 'Not Accepted Yet.'
+                    self.tableWidget.setItem(rowPosition , 4 , QtWidgets.QTableWidgetItem(buf)) #status
+                    buf = str(job.val()['contactInfo'][0]) +' | '+ str(job.val()['contactInfo'][1]) +' | '+  str(job.val()['contactInfo'][2])
+                    self.tableWidget.setItem(rowPosition , 5 , QtWidgets.QTableWidgetItem(buf)) #contactInfo
+
+                    self.tableWidget.setHorizontalHeaderLabels(['Title', 'Location', 'Role', 'Job Type','Status','Contact Info'])
+
+                except: 
+                    pass
+
+    def handle_buttons(self):
+        self.close_button.clicked.connect(self.close)
+
 
 
 #----------------------------------------Main----------------------------------
