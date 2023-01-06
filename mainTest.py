@@ -14,7 +14,12 @@ if userObj.Usertype == "Student":
         signup = Signup()
         homepage = Homepage()
         password = Password()
-        #add more classes here . . . 
+        usersettings = Usersettings()
+        adPopup = AdPopup()
+        myAds = MyAds()
+        myAdsDetails = MyAdsDetails()
+        studentResume = StudentResume()
+        #=-----------------------------=#
 
 
         # Unit Tests for Login: 
@@ -29,7 +34,21 @@ if userObj.Usertype == "Student":
         # Unit Tests for Password: 
             # None
 
-        # Unit Tests for XXXXX: 
+        # Unit Tests for Usersettings: 
+
+
+        # Unit Tests for AdPopup: 
+
+
+        # Unit Tests for MyAds: 
+
+
+        # Unit Tests for MyAdsDetails: 
+
+
+        # Unit Tests for StudentResume: 
+
+
     
 
 
@@ -44,8 +63,12 @@ if userObj.Usertype == "Employer":
         signup = Signup()
         homepage = Homepage()
         password = Password()
-        #add more classes here . . . 
-
+        usersettings = Usersettings()
+        adPopup = AdPopup()
+        myAds = MyAds()
+        myAdsDetails = MyAdsDetails()
+        studentResume = StudentResume()
+        #=-----------------------------=#
         
         # Unit Tests for Login:
             # None
@@ -55,15 +78,29 @@ if userObj.Usertype == "Employer":
 
         # Unit Tests for Homepage:
         def test_Homepage_To_NewAd(self):
-            self.assertTrue(self.homepage.change_to_NewAd);
+            self.assertTrue(self.homepage.change_to_NewAd)
     
         def test_Homepage_To_My_Ads(self):
-            self.assertTrue(self.homepage.change_to_my_ads);   
+            self.assertTrue(self.homepage.change_to_my_ads)
 
         # Unit Tests for Password:
             # None
 
-        # Unit Tests for XXXXX: 
+        # Unit Tests for Usersettings: 
+
+
+        # Unit Tests for AdPopup: 
+
+
+        # Unit Tests for MyAds: 
+
+
+        # Unit Tests for MyAdsDetails: 
+
+
+        # Unit Tests for StudentResume: 
+
+
 
 
 
@@ -78,7 +115,12 @@ if userObj.Usertype == "Admin":
         signup = Signup()
         homepage = Homepage()
         password = Password()
-        #add more classes here . . . 
+        usersettings = Usersettings()
+        adPopup = AdPopup()
+        myAds = MyAds()
+        myAdsDetails = MyAdsDetails()
+        studentResume = StudentResume()
+        #=-----------------------------=#
 
         # Unit Tests for Login:
             # None
@@ -88,16 +130,29 @@ if userObj.Usertype == "Admin":
 
         # Unit Tests for Homepage:
         def test_Homepage_To_NewAd(self):
-            self.assertTrue(self.homepage.change_to_NewAd);
+            self.assertTrue(self.homepage.change_to_NewAd)
     
         def test_Homepage_To_UserPopup(self):
-            self.assertTrue(self.homepage.change_to_UserPopup);
+            self.assertTrue(self.homepage.change_to_UserPopup)
         
         
         # Unit Tests for Password:
             # None
 
-        # Unit Tests for XXXXX: 
+        # Unit Tests for Usersettings: 
+
+
+        # Unit Tests for AdPopup: 
+
+
+        # Unit Tests for MyAds: 
+
+
+        # Unit Tests for MyAdsDetails: 
+
+
+        # Unit Tests for StudentResume: 
+
 
 
 
@@ -110,45 +165,50 @@ class GeneralTests(unittest.TestCase):
     signup = Signup()
     homepage = Homepage()
     password = Password()
-    #add more classes here . . . 
+    usersettings = Usersettings()
+    adPopup = AdPopup()
+    myAds = MyAds()
+    myAdsDetails = MyAdsDetails()
+    studentResume = StudentResume()
+    #=-----------------------------=#
 
 
     # Unit Tests for Login:
     def test_Login_To_Homepage(self):
-        self.assertTrue(self.login.change_to_homepage);
+        self.assertTrue(self.login.change_to_homepage)
 
     def test_Login_To_Signup(self):
-        self.assertTrue(self.login.change_to_signup);
+        self.assertTrue(self.login.change_to_signup)
 
     def test_Login_To_Forgetpass(self):
-        self.assertTrue(self.login.change_to_forgetpassword);
+        self.assertTrue(self.login.change_to_forgetpassword)
     
     def test_Login_Handle_Buttons(self):
-        self.assertTrue(self.login.handle_buttons);
+        self.assertTrue(self.login.handle_buttons)
 
 
 
     # Unit Tests for Signup:
     def test_Signup_To_Homepage(self):
-        self.assertTrue(self.signup.change_to_login);
+        self.assertTrue(self.signup.change_to_login)
 
     def test_Signup_Handle_Buttons(self):
-        self.assertTrue(self.signup.handle_buttons);
+        self.assertTrue(self.signup.handle_buttons)
 
 
 
     # Unit Tests for Homepage:
     def test_Homepage_To_Login(self):
-        self.assertTrue(self.homepage.change_to_login);
+        self.assertTrue(self.homepage.change_to_login)
 
     def test_Homepage_To_Handle_Buttons(self):
-        self.assertTrue(self.homepage.handle_buttons);
+        self.assertTrue(self.homepage.handle_buttons)
     
     def test_Homepage_To_Usersettings(self):
-        self.assertTrue(self.homepage.change_to_usersettings);
+        self.assertTrue(self.homepage.change_to_usersettings)
     
     def test_Homepage_To_AdvancedSearch(self):
-        self.assertTrue(self.homepage.change_to_advanced_search);
+        self.assertTrue(self.homepage.change_to_advanced_search)
 
     def test_Homepage_To_AdPopup(self):
         self.assertTrue(self.homepage.change_to_AdPopup)
@@ -157,19 +217,61 @@ class GeneralTests(unittest.TestCase):
 
     # Unit Tests for Password:
     def test_Password_To_Login(self):
-        self.assertTrue(self.password.change_to_login);
+        self.assertTrue(self.password.change_to_login)
 
     def test_Password_To_Handle_Buttons(self):
-        self.assertTrue(self.password.handle_buttons);
+        self.assertTrue(self.password.handle_buttons)
     
 
-    # Unit Tests for XXXXX: 
+
+    # Unit Tests for Usersettings: 
+    def test_Usersettings_To_Handle_Buttons(self):
+        self.assertTrue(self.usersettings.handle_buttons)
+    
+    #def test_Usersettings_To_(self):
+    
+    #def test_Usersettings_To_(self):
+    
+
+    
+    # Unit Tests for AdPopup: 
+    def test_AdPopup_To_Handle_Buttons(self):
+        self.assertTrue(self.adPopup.handle_buttons)
+
+    #def test_AdPopup_To_(self):
+    
+    #def test_AdPopup_To_(self):
 
 
-    # Unit Tests for XXXXX: 
+
+    # Unit Tests for MyAds: 
+    def test_MyAds_To_Handle_Buttons(self):
+        self.assertTrue(self.myAds.handle_buttons)
+    
+    #def test_MyAds_To_(self):
+    
+    #def test_MyAds_To_(self):
 
 
-    # Unit Tests for XXXXX: 
+
+    # Unit Tests for MyAdsDetails: 
+    def test_MyAdsDetails_To_Handle_Buttons(self):
+        self.assertTrue(self.myAdsDetails.handle_buttons)
+        
+    #def test_MyAdsDetails_To_(self):
+    
+    #def test_MyAdsDetails_To_(self):
+
+
+
+    # Unit Tests for StudentResume: 
+    def test_StudentResume_To_Handle_Buttons(self):
+        self.assertTrue(self.studentResume.handle_buttons)
+        
+    #def test_StudentResume_To_(self):
+    
+    #def test_StudentResume_To_(self):
+ 
 
 
 
