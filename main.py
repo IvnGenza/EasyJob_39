@@ -718,6 +718,7 @@ class Usersettings(QMainWindow):
         global userObj
         self.deletepopup = DeletePopup(userObj)
         self.deletepopup.show()
+        return True
 
 
         #--------------help funcs for usersettings class-----------------
@@ -726,26 +727,32 @@ class Usersettings(QMainWindow):
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def back_to_homepage(self): # back to previous screen
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_student_resume(self): # change to login screen
         studentResume = StudentResume()
         widget.addWidget(studentResume)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
     
     def change_to_my_ads(self): #change to my ads window for employer
         myads = MyAds()
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
+
 
     def change_to_forgetpassword(self):
         password = Password()
         widget.addWidget(password)
         widget.setCurrentIndex(widget.currentIndex() + 1)
+        return True
 
     def show_activity_window(self):                         
         self.app = QtWidgets.QApplication(sys.argv)
@@ -753,10 +760,12 @@ class Usersettings(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self.MainWindow)
         self.MainWindow.show()
+        return True
 
     def change_to_student_report(self):
         self.studentReport = StudentReport()
         self.studentReport.show()
+        return True
 
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -775,6 +784,8 @@ class Usersettings(QMainWindow):
             #hiding the buttons because the admin cant, delete the account or see his jobs
             self.delete_account_button.hide()
             self.my_job_ads_button.hide()
+
+        return True
 
 
 
@@ -916,6 +927,7 @@ class AdPopup(QMainWindow):
                 #saving the key of the job from the database for later use in sendResume, sendMessage, editAd and deleteAd functions.
                 self.PoPjobRef = job 
                 self.PoPjobKey = job.key()
+        return True
 
     def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
         count,flag = 0,0
@@ -932,6 +944,7 @@ class AdPopup(QMainWindow):
             data = {count:{"email":userObj.Email,"status":"False"}}
             db.child('Jobs').child(self.PoPjobKey).child('resumes').update(data)
             self.error_success_message.setText('resume submitted successfully')
+        return True
                 
 
     def VisabilityPopUp(self):
@@ -940,7 +953,7 @@ class AdPopup(QMainWindow):
 
 
     def SendMessage(self):
-        pass
+        return True
 
 
     def Change_to_EditAd(self):
@@ -948,10 +961,12 @@ class AdPopup(QMainWindow):
         widget.addWidget(self.editAd)
         widget.setCurrentIndex(widget.currentIndex()+1)
         self.close()
+        return True
 
 
     def DeleteAd(self):
-        pass
+        return True
+        
 
     def handle_buttons(self):
         self.send_resume_button.clicked.connect(self.SendResume)
@@ -1219,17 +1234,20 @@ class MyAdsDetails(QMainWindow):
         myads = MyAds()
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
         self.ResumeFramePopup.SetParameters(item.text(),self.myjobKey)
         self.ResumeFramePopup.show()
+        return True
 
 
     def Change_to_EditAd(self):
         self.editAd = NewAd(self.myjobRef)
         widget.addWidget(self.editAd)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
 
     #def edit_job(self): #function to edit job ad, needs more work
