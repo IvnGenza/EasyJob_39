@@ -3,7 +3,6 @@ import sys
 from PyQt5.uic import loadUi
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget,QVBoxLayout
-from PyQt5 import QtChart
 from functools import *
 from users import *
 from helperFuncs import *
