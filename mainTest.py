@@ -10,13 +10,16 @@ if userObj.Usertype == "Student":
     class StudentTests(unittest.TestCase):
 
         #classes that we are gonna be testing:
+        #=============Max=============#
         login = Login()
         signup = Signup()
         homepage = Homepage()
         password = Password()
+        #===========Shay==============#
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        #===========Ivan==============#
         myAdsDetails = MyAdsDetails()
         studentResume = StudentResume()
         #=-----------------------------=#
@@ -35,6 +38,12 @@ if userObj.Usertype == "Student":
             # None
 
         # Unit Tests for Usersettings: 
+        
+        def test_Usersettings_To_Student_Resume(self):
+            self.assertTrue(self.usersettings.change_to_student_resume)
+
+        def test_Usersettings_To_Student_Report(self):
+            self.assertTrue(self.usersettings.change_to_student_report)
 
 
         # Unit Tests for AdPopup: 
@@ -93,6 +102,8 @@ if userObj.Usertype == "Employer":
             # None
 
         # Unit Tests for Usersettings: 
+        def test_Homepage_To_My_Ads(self):
+            self.assertTrue(self.usersettings.change_to_my_ads)
 
 
         # Unit Tests for AdPopup: 
@@ -151,7 +162,8 @@ if userObj.Usertype == "Admin":
             # None
 
         # Unit Tests for Usersettings: 
-
+        def test_Usersettings_To_show_activity_window(self):
+            self.assertTrue(self.usersettings.show_activity_window)
 
         # Unit Tests for AdPopup: 
 
@@ -238,19 +250,39 @@ class GeneralTests(unittest.TestCase):
     def test_Usersettings_To_Handle_Buttons(self):
         self.assertTrue(self.usersettings.handle_buttons)
     
-    #def test_Usersettings_To_(self):
+    def test_Usersettings_To_Login(self):
+        self.assertTrue(self.usersettings.change_to_login)
+
+    def test_Usersettings_To_Homepage(self):
+        self.assertTrue(self.usersettings.back_to_homepage)
+
+    def test_Usersettings_To_DeletePopup(self):
+        self.assertTrue(self.usersettings.change_to_deletePopup)
+
+    def test_Usersettings_To_Forgetpassword(self):
+        self.assertTrue(self.usersettings.change_to_forgetpassword)
     
-    #def test_Usersettings_To_(self):
     
 
-    
     # Unit Tests for AdPopup: 
     def test_AdPopup_To_Handle_Buttons(self):
         self.assertTrue(self.adPopup.handle_buttons)
-
-    #def test_AdPopup_To_(self):
     
-    #def test_AdPopup_To_(self):
+    def test_AdPopup_To_SendResume(self):
+        self.assertTrue(self.adPopup.SendResume)
+
+    def test_AdPopup_To_SendMessage(self):
+        self.assertTrue(self.adPopup.SendMessage)
+
+    def test_AdPopup_To_VisabilityPopUp(self):
+        self.assertTrue(self.adPopup.VisabilityPopUp)
+
+    def test_AdPopup_To_Change_to_EditAd(self):
+        self.assertTrue(self.adPopup.Change_to_EditAd)
+
+    def test_AdPopup_To_DeleteAd(self):
+        self.assertTrue(self.adPopup.DeleteAd)
+    
 
 
 
@@ -258,11 +290,21 @@ class GeneralTests(unittest.TestCase):
     def test_MyAds_To_handle_buttons(self):
         self.assertTrue(self.myAds.handle_buttons)
     
+    def test_MyAds_To_login(self):
+         self.assertTrue(self.myAds.change_to_login)
+
+    def test_MyAds_To_usersettings(self):
+         self.assertTrue(self.myAds.change_to_usersettings)
+
+    def test_MyAds_To_homepage(self):
+        self.assertTrue(self.myAds.change_to_homepage)
+
     def test_MyAds_To_NewAd(self):
-        self.assertTrue(self.myAds.change_to_NewAd)
-    
+         self.assertTrue(self.myAds.change_to_NewAd)
+
     def test_MyAds_To_myAdsDetails(self):
         self.assertTrue(self.myAds.change_to_myAdsDetails)
+   
 
 
 
