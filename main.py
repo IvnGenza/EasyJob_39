@@ -130,7 +130,7 @@ class Signup(QMainWindow):
         
 
 #------------------------------------Login class------------------------------------
- 
+
 
 # This is a Login window object
 class Login(QMainWindow):
@@ -363,7 +363,8 @@ class NewAd(QMainWindow):
             except:    
                 showError(">> Connection Error! <<")        
         else:
-            showError(ErrorString)      
+            showError(ErrorString)
+        
 
 
         if flag == 0 and self.JobRef!=None:        
@@ -391,7 +392,8 @@ class NewAd(QMainWindow):
             except:    
                 showError(">> Connection Error! <<")        
         else:
-            showError(ErrorString)    
+            showError(ErrorString)   
+        return True
 
 
         #--------------help funcs for Create/publish job class-----------------
@@ -399,11 +401,13 @@ class NewAd(QMainWindow):
     def handle_buttons(self):
         self.publish_button.clicked.connect(self.CreateAd)
         self.cancel_button.clicked.connect(self.back_to_homepage)
+        return True
 
     def back_to_homepage(self):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
 
 
@@ -1287,7 +1291,7 @@ class MyAdsResumePopup(QMainWindow):
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
-            
+
 
     def AcceptResume(self):
         count = 0
@@ -1351,11 +1355,13 @@ class StudentResume(QMainWindow):
         usersettings = Usersettings()
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
     
     def edit_resume(self):
         self.edit_button.hide() #we hide edit button
         self.save_changes_button.show() #we unhide the save changes button
         self.resume_textBox.setReadOnly(False) 
+        return True
 
     def save_changes(self):
         self.edit_button.show() 
@@ -1363,11 +1369,13 @@ class StudentResume(QMainWindow):
         abc = self.resume_textBox.toPlainText()
         userObj.setResume(abc)
         self.resume_textBox.setReadOnly(True)
+        return True
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_usersettings)
         self.edit_button.clicked.connect(self.edit_resume)
         self.save_changes_button.clicked.connect(self.save_changes)
+        return True
 
 
 
