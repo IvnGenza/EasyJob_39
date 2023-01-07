@@ -19,7 +19,7 @@ if userObj.Usertype == "Student":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
-        #===========Ivan==============#
+        #===========Ivan==============
         myAdsDetails = MyAdsDetails()
         studentResume = StudentResume()
         #=-----------------------------=#
