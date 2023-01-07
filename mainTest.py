@@ -239,25 +239,29 @@ class GeneralTests(unittest.TestCase):
 
 
     # Unit Tests for MyAds: 
-    def test_MyAds_To_Handle_Buttons(self):
+    def test_MyAds_To_handle_buttons(self):
         self.assertTrue(self.myAds.handle_buttons)
     
-    #def test_MyAds_To_(self):
+    def test_MyAds_To_change_to_NewAd(self):
+        self.assertTrue(self.myAds.change_to_NewAd)
     
-    #def test_MyAds_To_(self):
+    def test_MyAds_To_to_myAdsDetails(self):
+        self.assertTrue(self.myAds.change_to_myAdsDetails)
 
 
 
     # Unit Tests for MyAdsDetails: 
-    def test_MyAdsDetails_To_Handle_Buttons(self):
+    def test_MyAdsDetails_To_handle_buttons(self):
         self.assertTrue(self.myAdsDetails.handle_buttons)
         
-    #def test_MyAdsDetails_To_(self):
+    def test_MyAdsDetails_To_Change_to_EditAd(self):
+        self.assertTrue(self.myAdsDetails.change_to_MyAds)
     
-    #def test_MyAdsDetails_To_(self):
+    def test_MyAdsDetails_To_ResumeFramePopup(self):
+        self.assertTrue(self.myAdsDetails.change_to_ResumeFramePopup)
 
 
- 
+
 
 
 
