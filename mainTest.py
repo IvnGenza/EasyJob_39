@@ -67,7 +67,6 @@ if userObj.Usertype == "Employer":
         adPopup = AdPopup()
         myAds = MyAds()
         myAdsDetails = MyAdsDetails()
-        studentResume = StudentResume()
         #=-----------------------------=#
         
         # Unit Tests for Login:
@@ -98,7 +97,6 @@ if userObj.Usertype == "Employer":
         # Unit Tests for MyAdsDetails: 
 
 
-        # Unit Tests for StudentResume: 
 
 
 
@@ -119,7 +117,6 @@ if userObj.Usertype == "Admin":
         adPopup = AdPopup()
         myAds = MyAds()
         myAdsDetails = MyAdsDetails()
-        studentResume = StudentResume()
         #=-----------------------------=#
 
         # Unit Tests for Login:
@@ -151,8 +148,6 @@ if userObj.Usertype == "Admin":
         # Unit Tests for MyAdsDetails: 
 
 
-        # Unit Tests for StudentResume: 
-
 
 
 
@@ -169,7 +164,6 @@ class GeneralTests(unittest.TestCase):
     adPopup = AdPopup()
     myAds = MyAds()
     myAdsDetails = MyAdsDetails()
-    studentResume = StudentResume()
     #=-----------------------------=#
 
 
@@ -263,14 +257,6 @@ class GeneralTests(unittest.TestCase):
     #def test_MyAdsDetails_To_(self):
 
 
-
-    # Unit Tests for StudentResume: 
-    def test_StudentResume_To_Handle_Buttons(self):
-        self.assertTrue(self.studentResume.handle_buttons)
-        
-    #def test_StudentResume_To_(self):
-    
-    #def test_StudentResume_To_(self):
  
 
 
