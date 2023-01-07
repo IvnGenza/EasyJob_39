@@ -1115,6 +1115,7 @@ class DeletePopup(QMainWindow):
             self.yes_button.clicked.connect(self.delete_account)
 
         self.no_button.clicked.connect(self.noButton) # if press no close the
+        return True
 
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
@@ -1142,34 +1143,40 @@ class MyAds(QMainWindow):
         login = Login()
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_usersettings(self): # change to user settings screen
         usersettings = Usersettings()
         widget.addWidget(usersettings)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_homepage(self):
         homepage = Homepage()
         widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_myAdsDetails(self,item):
         myAdsDetails = MyAdsDetails()
         myAdsDetails.ShowResume(item.text())
         widget.addWidget(myAdsDetails)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_NewAd(self): # open the new add screen (only by employer)
         ad = NewAd()
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def handle_buttons(self):
         self.sign_out_button.clicked.connect(self.change_to_login)
         self.user_settings_button.clicked.connect(self.change_to_usersettings)
         self.back_button.clicked.connect(self.change_to_homepage)
         self.new_ad_button.clicked.connect(self.change_to_NewAd)
-        self.listWidget.itemClicked.connect(self.change_to_myAdsDetails) 
+        self.listWidget.itemClicked.connect(self.change_to_myAdsDetails)
+        return True
 
 #----------------------------------------MyAdsDetails----------------------------------
 class MyAdsDetails(QMainWindow):
@@ -1219,17 +1226,20 @@ class MyAdsDetails(QMainWindow):
         myads = MyAds()
         widget.addWidget(myads)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
     def change_to_ResumeFramePopup(self,item): # open the advanced settings screen
         self.ResumeFramePopup = MyAdsResumePopup()
         self.ResumeFramePopup.SetParameters(item.text(),self.myjobKey)
         self.ResumeFramePopup.show()
+        return True
 
 
     def Change_to_EditAd(self):
         self.editAd = NewAd(self.myjobRef)
         widget.addWidget(self.editAd)
         widget.setCurrentIndex(widget.currentIndex()+1)
+        return True
 
 
     #def edit_job(self): #function to edit job ad, needs more work
@@ -1250,6 +1260,7 @@ class MyAdsDetails(QMainWindow):
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
         self.edit_button.clicked.connect(self.Change_to_EditAd)
         #self.delete_button.clicked.connect()
+        return True
 
 
 #-------------------------------My Ads Resume Frame--------------------------------
@@ -1296,7 +1307,7 @@ class MyAdsResumePopup(QMainWindow):
                 
                 break
 
-    
+
     def RejectResume(self):
         count = 0
         for resume in db.child('Jobs').child(self.Jobreference).child('resumes').get():
