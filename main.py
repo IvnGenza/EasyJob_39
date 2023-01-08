@@ -746,6 +746,7 @@ class Usersettings(QMainWindow):
             loadUi("ui/usersettings.ui", self)
         self.handle_buttons() 
         self.studentReport = None
+        self.messageBox = None
 
     def change_to_deletePopup(self):
         global userObj
@@ -791,6 +792,12 @@ class Usersettings(QMainWindow):
         self.studentReport = StudentReport()
         self.studentReport.show()
 
+    def change_to_message_the_admin(self):
+        self.messageBox = MessageBox()
+        self.messageBox.label.setText('Your Message To Admin:')
+        self.messageBox.show()
+
+
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
@@ -803,11 +810,13 @@ class Usersettings(QMainWindow):
             self.make_report_button.clicked.connect(self.change_to_student_report)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
+            self.message_admin_button.clicked.connect(self.change_to_message_the_admin)
         if userObj.Usertype == 'Admin':
             self.make_report_button.clicked.connect(self.show_activity_window)
             #hiding the buttons because the admin cant, delete the account or see his jobs
             self.delete_account_button.hide()
             self.my_job_ads_button.hide()
+            self.message_admin_button.hide()
 
 
 
@@ -1469,10 +1478,18 @@ class MessageBox(QMainWindow):
         db.child('GeneralMessages').push(data) #adds the message to the data base
         self.close()
 
+    def SendMessageToAdmin(self):
+        message = self.textBox.toPlainText()
+        #there will be something here
+        self.close()
+
+
 
     def handle_buttons(self):
-        self.send_message_button.clicked.connect(self.SendMessage)
-
+        if userObj.Usertype == 'Admin':
+            self.send_message_button.clicked.connect(self.SendMessage)
+        elif userObj.Usertype == 'Employer':
+            self.send_message_button.clicked.connect(self.SendMessageToAdmin)
 
 
 
