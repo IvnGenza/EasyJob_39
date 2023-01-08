@@ -455,6 +455,9 @@ class Homepage(QMainWindow):
         self.userpopup = None #this is a place holder for a user info popup window
         self.adpopup = None #this is a place holder for a job ad info popup window
         self.deletepopup = None
+        self.messageBox = None
+        self.messageText = None
+        self.checkForNotifications()
 
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
@@ -465,6 +468,18 @@ class Homepage(QMainWindow):
             self.new_ad_button.setDisabled(True) #disable 'new ad' bottun if admin blocked this func for the user.
     
     #--------------------Main Functionality Functions-----------------------#
+
+    def checkForNotifications(self):
+        flag = 0
+        self.messageText = ''
+        messages = db.child('GeneralMessages').get()
+        for mess in messages:
+            if mess.key() != 'PlaceHolder':
+                flag = 1
+                self.messageText = mess.val()['message'] # saves the text form the message
+
+        if flag != 0:
+            self.change_to_generalMessagePopup()
 
     def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
         #saving the data that was submited in the search bar
@@ -608,6 +623,16 @@ class Homepage(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
         return True
 
+    def change_to_messageBox(self):
+        self.messageBox = MessageBox()
+        self.messageBox.show()
+
+    def change_to_generalMessagePopup(self):
+        self.generalMessagePopup = GeneralMessagePopup()
+        self.generalMessagePopup.addMessage(self.messageText)
+        self.generalMessagePopup.show()
+
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for user settings button 
@@ -623,6 +648,7 @@ class Homepage(QMainWindow):
         if userObj.Usertype == 'Admin': #only the admin has these buttons, thats why we check if the current user is admin or not
             self.search_username_button.clicked.connect(self.SearchUser)
             self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
+            self.message_everyone_button.clicked.connect(self.change_to_messageBox)
         
         return True
         #this gets an item from the list widget
@@ -1404,6 +1430,40 @@ class StudentReport(QMainWindow):
     def handle_buttons(self):
         self.close_button.clicked.connect(self.close)
 
+
+
+#-------------------------------Message Box Class----------------------------------
+
+class MessageBox(QMainWindow):
+    def __init__(self):
+        super(MessageBox, self).__init__()
+        loadUi("ui/MessageBox.ui", self)
+        self.handle_buttons()
+
+
+    def SendMessage(self):
+        message = self.textBox.toPlainText()
+        data = {"message":message}
+        db.child('GeneralMessages').push(data) #adds the message to the data base
+        self.close()
+
+
+    def handle_buttons(self):
+        self.send_message_button.clicked.connect(self.SendMessage)
+
+
+
+
+
+#------------------------------- General Message Popup ----------------------------------
+
+class GeneralMessagePopup(QMainWindow):
+    def __init__(self):
+        super(GeneralMessagePopup, self).__init__()
+        loadUi("ui/ShowGeneralMessage.ui", self)
+
+    def addMessage(self, messageText):
+        self.textBox.setText(messageText)
 
 
 #----------------------------------------Main----------------------------------
