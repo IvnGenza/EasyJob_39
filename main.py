@@ -8,7 +8,6 @@ from users import *
 from helperFuncs import *
 from Activity_Report import *
 
-
 userObj = None #global parameter, this will hold the current user object like student, employer and admin.
 CURRENTUSER = None #global parameter for auth 
 
@@ -456,8 +455,8 @@ class Homepage(QMainWindow):
         self.adpopup = None #this is a place holder for a job ad info popup window
         self.deletepopup = None
         self.messageBox = None
-        self.messageText = None
-        self.checkForNotifications()
+        self.messageObj = None
+        self.checkForGeneralMessages() #we call this function every time the main window opens, will only show a message when the user logs in for the first time
 
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
@@ -469,17 +468,18 @@ class Homepage(QMainWindow):
     
     #--------------------Main Functionality Functions-----------------------#
 
-    def checkForNotifications(self):
+    def checkForGeneralMessages(self):
         flag = 0
-        self.messageText = ''
         messages = db.child('GeneralMessages').get()
         for mess in messages:
-            if mess.key() != 'PlaceHolder':
+            if mess.key() != 'PlaceHolder': #checking if there is a message in the database
                 flag = 1
-                self.messageText = mess.val()['message'] # saves the text form the message
+                self.messageObj = mess #saving the object of the message from the database for later use
 
         if flag != 0:
-            self.change_to_generalMessagePopup()
+            if userObj.Usertype != 'Admin': #admin cant see the message he sent
+                self.change_to_generalMessagePopup() #opening the popup window with the general message
+
 
     def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
         #saving the data that was submited in the search bar
@@ -626,12 +626,15 @@ class Homepage(QMainWindow):
     def change_to_messageBox(self):
         self.messageBox = MessageBox()
         self.messageBox.show()
+        return True
 
     def change_to_generalMessagePopup(self):
         self.generalMessagePopup = GeneralMessagePopup()
-        self.generalMessagePopup.addMessage(self.messageText)
+        self.generalMessagePopup.addMessage(self.messageObj)
         self.generalMessagePopup.show()
-
+        if self.messageObj != None:
+            db.child('GeneralMessages').child(self.messageObj.key()).remove()
+        return True
 
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
@@ -1461,9 +1464,9 @@ class GeneralMessagePopup(QMainWindow):
     def __init__(self):
         super(GeneralMessagePopup, self).__init__()
         loadUi("ui/ShowGeneralMessage.ui", self)
-
-    def addMessage(self, messageText):
-        self.textBox.setText(messageText)
+    
+    def addMessage(self, messageObj):
+        self.textBox.setText(messageObj.val()['message'])
 
 
 #----------------------------------------Main----------------------------------
