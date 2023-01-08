@@ -130,6 +130,7 @@ if userObj.Usertype == "Admin":
         adPopup = AdPopup()
         myAds = MyAds()
         myAdsDetails = MyAdsDetails()
+        messageBox = MessageBox() #exclusive for admin
         #=-----------------------------=#
 
         # Unit Tests for Login:
@@ -160,7 +161,9 @@ if userObj.Usertype == "Admin":
 
 
 
-
+        # Unit Tests for MessageBox: 
+        def test_Homepage_To_MessageBox(self):
+            self.assertTrue(self.homepage.change_to_messageBox)
 
 #------------------------------------------------------#
 # Unit tests for EVERY USER TYPE together (these are mutual functions that we test):
@@ -217,7 +220,9 @@ class GeneralTests(unittest.TestCase):
 
     def test_Homepage_To_AdPopup(self):
         self.assertTrue(self.homepage.change_to_AdPopup)
-
+    
+    def test_Homepage_To_General_Message_Popup(self):
+        self.assertTrue(self.homepage.change_to_generalMessagePopup)
 
 
     # Unit Tests for Password:
