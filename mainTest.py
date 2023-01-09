@@ -83,6 +83,7 @@ if userObj.Usertype == "Employer":
         myAds = MyAds()
         myAdsDetails = MyAdsDetails()
         #newAd = NewAd() #<---- you cant create an object of this class without passing an argument, so try testing different class
+        messageBox = MessageBox()
         #=-----------------------------=#
         
         # Unit Tests for Login:
@@ -120,7 +121,9 @@ if userObj.Usertype == "Employer":
         #    self.assertTrue(self.newAd.handle_buttons)
         
 
-
+        # Unit Tests for Usersettings: 
+        def test_MessageBox_To_My_Ads(self):
+            self.assertTrue(self.messageBox.SendMessageToAdmin)
 
 
 

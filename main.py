@@ -1541,8 +1541,10 @@ class MessageBox(QMainWindow):
 
     def SendMessageToAdmin(self):
         message = self.textBox.toPlainText()
-        #there will be something here
+        data = {"email":userObj.Email, "message":message}
+        db.child("MessageToAdmin").push(data)
         self.close()
+        return True
 
 
 
