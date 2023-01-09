@@ -34,6 +34,21 @@ class Test(unittest.TestCase):
         self.assertFalse(checkUserName('user123'))
         self.assertFalse(checkUserName('User1'))
         print("Test 4 success\n")
+    
+    def test_checkTitle(self):
+        self.assertTrue(checkTitle('this is a title'))
+        self.assertFalse(checkTitle('ajsdfhaksjdfhadfhaskjdfhsdkjfhaskjdfsdfasfsdfsdfasdf'))
+        print("Test 5 success\n")
+
+    def test_checkDescription(self):
+        self.assertTrue(checkDescription('alschgdcvhdshfasdhfshfksjadhfklshdkashfkasdhjaskdhfakjsdhfaksjdfhalksdjfhaskjfhasdkfhaklsdhfakljsdhfkajlshfdk'))
+        self.assertFalse(checkDescription('abcd'))
+        print("Test 6 success\n")
+
+    def test_checkPhoneNumber(self):
+        self.assertTrue(checkPhoneNumber('0546143258'))
+        self.assertFalse(checkPhoneNumber('214352'))
+        print("Test 7 success\n")
 
 
 
