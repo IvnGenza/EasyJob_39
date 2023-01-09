@@ -819,10 +819,10 @@ class Usersettings(QMainWindow):
             self.make_report_button.clicked.connect(self.change_to_student_report)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
-            #self.notifications_frame.show()
-            #self.notifications_lable.show()
-            #self.notifications_comboBox.show()
         if userObj.Usertype == 'Admin':
+            self.notifications_frame.hide()
+            self.notifications_lable.hide()
+            self.notifications_comboBox.hide()
             self.make_report_button.clicked.connect(self.show_activity_window)
             #hiding the buttons because the admin cant, delete the account or see his jobs
             self.delete_account_button.hide()
