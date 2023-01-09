@@ -101,7 +101,8 @@ class Signup(QMainWindow):
                     'usertype':UserType,
                     'PublicationP':'free', # or 'Block'. button "publish new ad" is disable.
                     'MessagePermission':'free',
-                    'email':email
+                    'email':email,
+                    'enableNotifications':'true' #enables notifications for the user by default 
                     }) #Saving new user data in RealTime db.
                     db.child('Reports').child('Activity').child(current_date).update({'Employer Create Acc': EmployerAccCounter + 1}) #Update Employer activity counter in database.
                 self.change_to_login()
@@ -747,6 +748,15 @@ class Usersettings(QMainWindow):
         self.handle_buttons() 
         self.studentReport = None
         self.messageBox = None
+        self.username_text.setText(userObj.Username)
+        self.full_name_text.setText(userObj.Fullname)
+        self.age_text.setText(str(userObj.Age))
+        self.email_text.setText(userObj.Email)
+
+
+
+
+
 
     def change_to_deletePopup(self):
         global userObj
@@ -805,14 +815,47 @@ class Usersettings(QMainWindow):
         self.messageBox = MessageBox()
         self.messageBox.label.setText('Your Message To Admin:')
         self.messageBox.show()
+    
+    def edit_personal_info(self):
+        self.edit_button.hide() #we hide edit button
+        self.save_changes_button.show() #we unhide the save changes button
+        self.username_text.setReadOnly(False) 
+        self.full_name_text.setReadOnly(False) 
+        self.age_text.setReadOnly(False) 
+        return True
 
+    def save_changes(self):
+        username = self.username_text.text()
+        name = self.full_name_text.text()
+        age = self.age_text.text()
+        userObj.setUsername(username)
+        userObj.setFullname(name)
+        userObj.setAge(age)
+        self.username_text.setReadOnly(True) 
+        self.full_name_text.setReadOnly(True) 
+        self.age_text.setReadOnly(True) 
+        self.email_text.setReadOnly(True)
+        if userObj.Usertype == 'Employer':
+            users = db.child('Users').get()
+            for user in users.each():
+                if user.val()['email'] == userObj.Email:
+                    if self.notifications_comboBox.currentText() == 'Yes':
+                        db.child('Users').child((user.key())).update({"enableNotifications":'true'})
+                    else:
+                        db.child('Users').child((user.key())).update({"enableNotifications":'false'})
+        self.edit_button.show() 
+        self.save_changes_button.hide() 
+        return True
 
 
     def handle_buttons(self): # this function handles the click of the signup button
+        self.save_changes_button.hide()
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button input
         self.back_button.clicked.connect(self.back_to_homepage) #for going back to previous screen
         self.delete_account_button.clicked.connect(self.change_to_deletePopup)
         self.change_password_button.clicked.connect(self.change_to_forgetpassword)
+        self.edit_button.clicked.connect(self.edit_personal_info)
+        self.save_changes_button.clicked.connect(self.save_changes)
 
         if userObj.Usertype == 'Student':
             self.my_resume_button.clicked.connect(self.change_to_student_resume)
