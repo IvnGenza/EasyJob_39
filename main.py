@@ -862,6 +862,7 @@ class Usersettings(QMainWindow):
             self.make_report_button.clicked.connect(self.change_to_student_report)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
+            self.message_admin_button.clicked.connect(self.change_to_message_the_admin)
         if userObj.Usertype == 'Admin':
             self.notifications_frame.hide()
             self.notifications_lable.hide()
