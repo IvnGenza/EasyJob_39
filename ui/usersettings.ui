@@ -563,7 +563,7 @@ padding:10px;</string>
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QPushButton" name="my_resume_button">
+      <widget class="QPushButton" name="my_job_ads_button">
        <property name="font">
         <font>
          <pointsize>16</pointsize>
@@ -575,12 +575,12 @@ padding:10px;</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
-        <string>My Resume</string>
+        <string>My Job Ads</string>
        </property>
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QPushButton" name="save_changes_button_2">
+      <widget class="QPushButton" name="save_changes_button">
        <property name="font">
         <font>
          <pointsize>16</pointsize>
@@ -637,10 +637,10 @@ padding:10px;</string>
 border-radius: 35px;
 padding:10px;</string>
     </property>
-    <property name="text">
+    <property name="text" stdset="0">
      <string>^</string>
     </property>
-    <property name="flat">
+    <property name="flat" stdset="0">
      <bool>false</bool>
     </property>
    </widget>
