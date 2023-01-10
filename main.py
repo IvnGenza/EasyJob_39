@@ -820,7 +820,7 @@ class Usersettings(QMainWindow):
         return True
 
     def change_to_message_the_admin(self):
-        self.messageBox = MessageBox()
+        self.messageBox = GeneralMessageBox()
         self.messageBox.label.setText('Your Message To Admin:')
         self.messageBox.show()
     
@@ -1556,19 +1556,6 @@ class GeneralMessageBox(QMainWindow):
         self.close()
         return True
 
-    def handle_buttons(self):
-        self.send_message_button.clicked.connect(self.SendMessage)
-        return True
-
-#-------------------------------Message Box Class----------------------------------
-
-class MessageBox(QMainWindow):
-    def __init__(self):
-        super(MessageBox, self).__init__()
-        loadUi("ui/MessageBox.ui", self)
-        self.handle_buttons()
-        self.email = None
-
     def SendMessageToAdmin(self):
         message = self.textBox.toPlainText()
         users = db.child('Users').get()
@@ -1581,6 +1568,24 @@ class MessageBox(QMainWindow):
                 db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
         self.close()
         return True
+
+    def handle_buttons(self):
+        if userObj.Usertype == 'Admin':
+            self.send_message_button.clicked.connect(self.SendMessage)
+        if userObj.Usertype == 'Employer':
+            self.send_message_button.clicked.connect(self.SendMessageToAdmin)
+        return True
+
+#-------------------------------Message Box Class----------------------------------
+
+class MessageBox(QMainWindow):
+    def __init__(self):
+        super(MessageBox, self).__init__()
+        loadUi("ui/MessageBox.ui", self)
+        self.handle_buttons()
+        self.email = None
+
+    
 
     def SendMessageFromAdmin(self): #functionality for admin to send message to users 
         self.label.setText('Message Context:')
