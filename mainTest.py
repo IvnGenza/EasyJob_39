@@ -169,6 +169,9 @@ if userObj.Usertype == "Admin":
     
         def test_Homepage_To_UserPopup(self):
             self.assertTrue(self.homepage.change_to_UserPopup)
+
+        def test_Homepage_To_MessageBox(self):
+            self.assertTrue(self.homepage.change_to_messageBox)
         
         
         # Unit Tests for Password:
@@ -184,11 +187,11 @@ if userObj.Usertype == "Admin":
         # Unit Tests for MyAds: 
 
 
-
-
         # Unit Tests for MessageBox: 
-        def test_Homepage_To_MessageBox(self):
-            self.assertTrue(self.homepage.change_to_messageBox)
+        
+
+        def test_SendMessageFromAdmin(self):
+            self.assertTrue(self.messagebox.SendMessageFromAdmin)
 
 #------------------------------------------------------#
 # Unit tests for EVERY USER TYPE together (these are mutual functions that we test):
@@ -378,15 +381,16 @@ class GeneralTests(unittest.TestCase):
     def test_RejectResume(self):
         self.assertTrue(self.myadsresume.RejectResume)
 
-    #def test_SendMessage(self):
-    #    self.assertTrue(self.myadsresume.SendMessage)
+    def test_SendMessage(self):
+        self.assertTrue(self.myadsresume.SendMessage)
 
 
 
 
     # Unit Tests for MessageBox:
-    def test_SendMessageFromAdmin(self):
-        self.assertTrue(self.messagebox.SendMessageFromAdmin)
+    def test_SendMessageAdResume(self):
+        self.assertTrue(self.messagebox.SendMessageAdResume)
+    
 
     # Unit Tests for GeneralMessage: 
     def test_ShowMessages(self):
