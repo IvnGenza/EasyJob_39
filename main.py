@@ -1087,7 +1087,7 @@ class AdVisability(QMainWindow):
 class UserPopup(QMainWindow): #this is a popup window that we see when the admin clickes on some user from the user's list, in this popup window there is all the information about this specific user from the database
     def __init__(self,User):
         super(UserPopup, self).__init__()
-
+        self.message = None
         def GetUserKey(name):
             for u in db.child('Users').get().each():
                 if u.val()['username'] == name: #if the usernames match return his key:
@@ -1114,7 +1114,9 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
 
 
     def SendMessage(self):
-        pass
+        self.message = MessageBox()
+        self.message.email = self.email_textBox.toPlainText()
+        self.message.show()
 
     def DeleteAccount(self):
         self.deleteUserAcc = DeletePopup(self.UserKey)
@@ -1531,7 +1533,7 @@ class MessageBox(QMainWindow):
         super(MessageBox, self).__init__()
         loadUi("ui/MessageBox.ui", self)
         self.handle_buttons()
-
+        self.email = None
 
     def SendMessage(self):
         message = self.textBox.toPlainText()
@@ -1546,14 +1548,26 @@ class MessageBox(QMainWindow):
         self.close()
         return True
 
-
+    def SendMessageFromAdmin(self): #functionality for admin to send message to users
+        self.label.setText('Message Context:')
+        message = self.textBox.toPlainText()
+        #data = {"messages":message}
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == self.email: #if the emails match do this:    
+                count = 0
+                for x in user.val()['messages']:
+                    count+=1
+                data = {count:message}
+                db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
+        self.close()
 
     def handle_buttons(self):
         if userObj.Usertype == 'Admin':
-            self.send_message_button.clicked.connect(self.SendMessage)
+            self.send_message_button.clicked.connect(self.SendMessageFromAdmin)
         elif userObj.Usertype == 'Employer':
             self.send_message_button.clicked.connect(self.SendMessageToAdmin)
-
+            
 
 
 
