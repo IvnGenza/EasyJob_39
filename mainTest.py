@@ -19,6 +19,8 @@ if userObj.Usertype == "Student":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        messagebox = MessageBox()
+        generalmessage = GeneralMessagePopup()
         #===========Ivan==============#
         myAdsDetails = MyAdsDetails()
         studentResume = StudentResume()
@@ -54,6 +56,10 @@ if userObj.Usertype == "Student":
 
         # Unit Tests for MyAdsDetails: 
 
+        # Unit Tests for MessageBox:
+         
+        # Unit Tests for GeneralMessage: 
+
 
         # Unit Tests for StudentResume:
         def test_handle_buttons(self):
@@ -81,6 +87,8 @@ if userObj.Usertype == "Employer":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        messagebox = MessageBox()
+        generalmessage = GeneralMessagePopup()
         myAdsDetails = MyAdsDetails()
         #newAd = NewAd() #<---- you cant create an object of this class without passing an argument, so try testing different class
         messageBox = MessageBox()
@@ -143,6 +151,8 @@ if userObj.Usertype == "Admin":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        messagebox = MessageBox()
+        generalmessage = GeneralMessagePopup()
         myAdsDetails = MyAdsDetails()
         messageBox = MessageBox() #exclusive for admin
         #=-----------------------------=#
@@ -193,6 +203,8 @@ class GeneralTests(unittest.TestCase):
     adPopup = AdPopup()
     myAds = MyAds()
     myAdsDetails = MyAdsDetails()
+    messagebox = MessageBox()
+    generalmessage = GeneralMessagePopup()
     #=-----------------------------=#
 
 
@@ -322,8 +334,13 @@ class GeneralTests(unittest.TestCase):
         self.assertTrue(self.myAdsDetails.change_to_ResumeFramePopup)
 
 
+    # Unit Tests for MessageBox:
+    def test_SendMessageFromAdmin(self):
+        self.assertTrue(self.messagebox.SendMessageFromAdmin)
 
-
+    # Unit Tests for GeneralMessage: 
+    def test_ShowMessages(self):
+        self.assertTrue(self.generalmessage.ShowMessages)
 
 
 

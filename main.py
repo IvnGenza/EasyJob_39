@@ -1556,7 +1556,7 @@ class MessageBox(QMainWindow):
         self.close()
         return True
 
-    def SendMessageFromAdmin(self): #functionality for admin to send message to users
+    def SendMessageFromAdmin(self): #functionality for admin to send message to users // unitests
         self.label.setText('Message Context:')
         message = self.textBox.toPlainText()
         #data = {"messages":message}
@@ -1569,7 +1569,7 @@ class MessageBox(QMainWindow):
                 data = {count:message}
                 db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
         self.close()
-    
+        return True
 
 
     def handle_buttons(self):
@@ -1591,7 +1591,7 @@ class GeneralMessagePopup(QMainWindow):
     def addMessage(self, messageObj):
         self.textBox.setText(messageObj.val()['message'])
 
-    def ShowMessages(self): #()
+    def ShowMessages(self): #unitest
         self.label.setText('My Messages:')
         string =''
         users = db.child('Users').get()
@@ -1601,6 +1601,7 @@ class GeneralMessagePopup(QMainWindow):
                     string += str(x)
                     string+= '\n'
         self.textBox.setText(string)
+        return True
 #----------------------------------------Main----------------------------------
 
 
