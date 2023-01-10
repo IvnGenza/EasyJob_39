@@ -78,10 +78,11 @@
           </property>
           <property name="font">
            <font>
+            <family>Comic Sans MS</family>
             <pointsize>70</pointsize>
             <weight>75</weight>
             <bold>true</bold>
-            <underline>true</underline>
+            <underline>false</underline>
            </font>
           </property>
           <property name="text">
@@ -231,6 +232,9 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="bottomMargin">
+         <number>150</number>
+        </property>
         <item alignment="Qt::AlignHCenter">
          <widget class="QLabel" name="wrong_data_label_2">
           <property name="enabled">
