@@ -1598,8 +1598,9 @@ class GeneralMessagePopup(QMainWindow):
         for user in users.each():
             if user.val()['email'] == userObj.Email: #if the emails match do this:    
                 for x in user.val()['messages']:
-                    string += x+'\n'
-                self.textBox.setText(string)
+                    string += str(x)
+                    string+= '\n'
+        self.textBox.setText(string)
 #----------------------------------------Main----------------------------------
 
 
