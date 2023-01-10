@@ -484,6 +484,7 @@ class Homepage(QMainWindow):
         if flag != 0:
             if userObj.Usertype != 'Admin': #admin cant see the message he sent
                 self.change_to_generalMessagePopup() #opening the popup window with the general message
+        return True
 
 
     def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
@@ -506,6 +507,7 @@ class Homepage(QMainWindow):
             workingFrom = self.advancedSearchWindow.searchData['workingFrom']
             knowledge = self.advancedSearchWindow.searchData['knowledge'] #knowledge is an array
             self.AdvancedSearchJob(jobtype, degree, location, role, workExperience, daysPerWeek, workingFrom, knowledge) #advanced search
+        return True
 
 
 
@@ -517,7 +519,7 @@ class Homepage(QMainWindow):
         for job in jobs.each():
             if job.val()['Visability'] == 'Visible for every user': #check if ad is visible for another users.
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
-
+        return True
 
 
     def SearchJob(self, JobType, Degree, Location, Role): #this functions performs a regular search in the data base, all the jobs that fit the description will be added to the list of jobs on the homepage screen.
@@ -541,7 +543,7 @@ class Homepage(QMainWindow):
 
         if flag == 0:
             self.no_jobs_found_label.setText('could not find jobs that fit your search') #if no job was found, paste the error message 
-
+        return True
 
 
     def AdvancedSearchJob(self, JobType, Degree, Location, Role, WorkExperience, DaysPerWeek, WorkingFrom, Knowledge): #this function is used in the advances search, its exactly like the regular search with the only difference beening that the criteria for the search in the data base also includes the additional information found inside the advanced search window.
@@ -645,7 +647,6 @@ class Homepage(QMainWindow):
         self.chatpopup = GeneralMessagePopup()
         self.chatpopup.show()
         self.chatpopup.ShowMessages()
-
         return True
 
     def handle_buttons(self): # this function handles the click of the signup button

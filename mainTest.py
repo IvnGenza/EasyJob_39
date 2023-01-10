@@ -251,6 +251,17 @@ class GeneralTests(unittest.TestCase):
     def test_Homepage_To_General_Message_Popup(self):
         self.assertTrue(self.homepage.change_to_generalMessagePopup)
 
+    def test_Search(self):
+        self.assertTrue(self.homepage.Search)
+
+    def test_SearchAllJobs(self):
+        self.assertTrue(self.homepage.SearchAllJobs)
+    
+    def test_SearchJob(self):
+        self.assertTrue(self.homepage.SearchJob)
+
+    def test_openChat(self):
+        self.assertTrue(self.homepage.openChat)
 
     # Unit Tests for Password:
     def test_Password_To_Login(self):
