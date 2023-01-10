@@ -629,7 +629,7 @@ class Homepage(QMainWindow):
         return True
 
     def change_to_messageBox(self):
-        self.messageBox = MessageBox()
+        self.messageBox = GeneralMessageBox()
         self.messageBox.show()
         return True
 
@@ -656,6 +656,7 @@ class Homepage(QMainWindow):
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
         self.chat_button.clicked.connect(self.openChat)
+
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
             self.my_ads_button.clicked.connect(self.change_to_my_ads)
@@ -1534,6 +1535,25 @@ class StudentReport(QMainWindow):
 
 
 
+
+
+#-------------------------------Message Box Class----------------------------------
+
+class GeneralMessageBox(QMainWindow):
+    def __init__(self):
+        super(GeneralMessageBox, self).__init__()
+        loadUi("ui/MessageBox.ui", self)
+        self.handle_buttons()
+
+    def SendMessage(self):
+        message = self.textBox.toPlainText()
+        data = {"message":message}
+        db.child('GeneralMessages').push(data) #adds the message to the data base
+        self.close()
+
+    def handle_buttons(self):
+        self.send_message_button.clicked.connect(self.SendMessage)
+
 #-------------------------------Message Box Class----------------------------------
 
 class MessageBox(QMainWindow):
@@ -1543,16 +1563,16 @@ class MessageBox(QMainWindow):
         self.handle_buttons()
         self.email = None
 
-    def SendMessage(self):
-        message = self.textBox.toPlainText()
-        data = {"message":message}
-        db.child('GeneralMessages').push(data) #adds the message to the data base
-        self.close()
-
     def SendMessageToAdmin(self):
         message = self.textBox.toPlainText()
-        data = {"email":userObj.Email, "message":message}
-        db.child("MessageToAdmin").push(data)
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == 'Admin1@gmail.com': #this is the admins email
+                count = 0
+                for x in user.val()['messages']:
+                    count+=1
+                data = {count:message}
+                db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
         self.close()
         return True
 
@@ -1587,7 +1607,8 @@ class GeneralMessagePopup(QMainWindow):
     def __init__(self):
         super(GeneralMessagePopup, self).__init__()
         loadUi("ui/ShowGeneralMessage.ui", self)
-    
+        self.textBox.setReadOnly(True)
+
     def addMessage(self, messageObj):
         self.textBox.setText(messageObj.val()['message'])
 
