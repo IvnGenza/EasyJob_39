@@ -462,7 +462,7 @@ class Homepage(QMainWindow):
         self.messageBox = None
         self.messageObj = None
         self.checkForGeneralMessages() #we call this function every time the main window opens, will only show a message when the user logs in for the first time
-
+        self.chatpopup=None
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
             self.my_ads_button.hide() #only for employer 
@@ -641,6 +641,13 @@ class Homepage(QMainWindow):
             db.child('GeneralMessages').child(self.messageObj.key()).remove()
         return True
 
+    def openChat(self):
+        self.chatpopup = GeneralMessagePopup()
+        self.chatpopup.show()
+        self.chatpopup.ShowMessages()
+
+        return True
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for user settings button 
@@ -648,7 +655,7 @@ class Homepage(QMainWindow):
         self.free_search_button.clicked.connect(self.SearchAllJobs) #this is for the free search button
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
- 
+        self.chat_button.clicked.connect(self.openChat)
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
             self.my_ads_button.clicked.connect(self.change_to_my_ads)
@@ -659,6 +666,7 @@ class Homepage(QMainWindow):
             self.message_everyone_button.clicked.connect(self.change_to_messageBox)
         
         return True
+    
         #this gets an item from the list widget
         #abcd = self.listWidget.item(0)
 
@@ -1558,6 +1566,8 @@ class MessageBox(QMainWindow):
                 data = {count:message}
                 db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
         self.close()
+    
+
 
     def handle_buttons(self):
         if userObj.Usertype == 'Admin':
@@ -1578,7 +1588,15 @@ class GeneralMessagePopup(QMainWindow):
     def addMessage(self, messageObj):
         self.textBox.setText(messageObj.val()['message'])
 
-
+    def ShowMessages(self): #()
+        self.label.setText('My Messages:')
+        string =''
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == userObj.Email: #if the emails match do this:    
+                for x in user.val()['messages']:
+                    string += x+'\n'
+                self.textBox.setText(string)
 #----------------------------------------Main----------------------------------
 
 
