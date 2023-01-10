@@ -870,6 +870,7 @@ class Usersettings(QMainWindow):
             self.make_report_button.clicked.connect(self.change_to_student_report)
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
+            self.message_admin_button.clicked.connect(self.change_to_message_the_admin)
         if userObj.Usertype == 'Admin':
             self.notifications_frame.hide()
             self.notifications_lable.hide()
@@ -1550,8 +1551,10 @@ class MessageBox(QMainWindow):
 
     def SendMessageToAdmin(self):
         message = self.textBox.toPlainText()
-        #there will be something here
+        data = {"email":userObj.Email, "message":message}
+        db.child("MessageToAdmin").push(data)
         self.close()
+        return True
 
     def SendMessageFromAdmin(self): #functionality for admin to send message to users
         self.label.setText('Message Context:')
