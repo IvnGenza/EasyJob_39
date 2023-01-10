@@ -502,15 +502,19 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
-     <string notr="true">border: 2px solid black;
-border-radius: 35px;
-padding:10px;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
-     <string>^</string>
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>70</width>
+      <height>70</height>
+     </size>
     </property>
     <property name="flat">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_2">

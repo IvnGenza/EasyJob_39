@@ -438,12 +438,16 @@ border-radius: 32px;</string>
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">border: 2px solid black;
-border-radius: 35px;
-padding:10px;</string>
+           <string notr="true">padding:10px;</string>
           </property>
           <property name="text">
-           <string>X</string>
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
           </property>
           <property name="flat">
            <bool>false</bool>
