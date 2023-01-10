@@ -1550,9 +1550,11 @@ class GeneralMessageBox(QMainWindow):
         data = {"message":message}
         db.child('GeneralMessages').push(data) #adds the message to the data base
         self.close()
+        return True
 
     def handle_buttons(self):
         self.send_message_button.clicked.connect(self.SendMessage)
+        return True
 
 #-------------------------------Message Box Class----------------------------------
 
