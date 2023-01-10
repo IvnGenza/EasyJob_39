@@ -766,15 +766,13 @@ class Usersettings(QMainWindow):
 
 
 
+        #--------------help funcs for usersettings class-----------------
 
     def change_to_deletePopup(self):
         global userObj
         self.deletepopup = DeletePopup(userObj)
         self.deletepopup.show()
         return True
-
-
-        #--------------help funcs for usersettings class-----------------
 
     def change_to_login(self): # change to login screen
         login = Login()
@@ -1401,6 +1399,7 @@ class MyAdsResumePopup(QMainWindow):
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
+        return True
 
 
     def AcceptResume(self):
@@ -1420,6 +1419,7 @@ class MyAdsResumePopup(QMainWindow):
                     self.error_success_message.setText('Something when wrong, try again later')
                 
                 break
+        return True
 
 
     def RejectResume(self):
@@ -1439,6 +1439,7 @@ class MyAdsResumePopup(QMainWindow):
                     self.error_success_message.setText('Something when wrong, try again later')
                 
                 break
+        return True
     
     def SendMessage(self):
         pass

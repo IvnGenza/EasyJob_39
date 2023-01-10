@@ -205,6 +205,7 @@ class GeneralTests(unittest.TestCase):
     myAdsDetails = MyAdsDetails()
     messagebox = MessageBox()
     generalmessage = GeneralMessagePopup()
+    myadsresume = MyAdsResumePopup()
     #=-----------------------------=#
 
 
@@ -287,6 +288,20 @@ class GeneralTests(unittest.TestCase):
 
     def test_Usersettings_To_Forgetpassword(self):
         self.assertTrue(self.usersettings.change_to_forgetpassword)
+
+    def test_change_to_deletePopup(self):
+        self.assertTrue(self.usersettings.change_to_deletePopup)
+
+    def test_edit_personal_info(self):
+        self.assertTrue(self.usersettings.edit_personal_info)
+
+    def test_save_changes(self): #unit test for save notification settings and user info settings
+        self.assertTrue(self.usersettings.save_changes)
+
+    def test_change_to_deletePopup(self):
+        self.assertTrue(self.usersettings.change_to_deletePopup)
+
+
     
     
 
@@ -304,6 +319,15 @@ class GeneralTests(unittest.TestCase):
         self.assertTrue(self.adPopup.VisabilityPopUp)
 
     def test_AdPopup_To_Change_to_EditAd(self):
+        self.assertTrue(self.adPopup.Change_to_EditAd)
+
+    def test_AdPopup_To_DeleteAd(self):
+        self.assertTrue(self.adPopup.DeleteAd)
+
+    def test_SetParameters(self):
+        self.assertTrue(self.adPopup.SetParameters)
+
+    def test_Change_to_EditAd(self):
         self.assertTrue(self.adPopup.Change_to_EditAd)
 
     def test_AdPopup_To_DeleteAd(self):
@@ -343,6 +367,21 @@ class GeneralTests(unittest.TestCase):
     
     def test_MyAdsDetails_To_ResumeFramePopup(self):
         self.assertTrue(self.myAdsDetails.change_to_ResumeFramePopup)
+
+    #Unit Tests for MyAdsResumePopup:
+    def test_SetParameters(self):
+        self.assertTrue(self.myadsresume.SetParameters)
+
+    def test_AcceptResume(self):
+        self.assertTrue(self.myadsresume.AcceptResume)
+
+    def test_RejectResume(self):
+        self.assertTrue(self.myadsresume.RejectResume)
+
+    def test_MyAdsDetails_To_ResumeFramePopup(self):
+        self.assertTrue(self.myadsresume.change_to_ResumeFramePopup)
+
+
 
 
     # Unit Tests for MessageBox:
