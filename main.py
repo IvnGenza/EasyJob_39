@@ -1384,7 +1384,7 @@ class MyAdsResumePopup(QMainWindow):
         self.handle_buttons() 
         self.usersEmail=''
         self.Jobreference=None
-
+        self.messagebox =None
 
     def SetParameters(self, item, jobreference):
         self.Jobreference = jobreference
@@ -1442,7 +1442,9 @@ class MyAdsResumePopup(QMainWindow):
         return True
     
     def SendMessage(self):
-        pass
+        self.messagebox = MessageBox()
+        self.messagebox.email = self.usersEmail
+        self.messagebox.show()
 
     def handle_buttons(self):
         self.accept_resume_button.clicked.connect(self.AcceptResume)
@@ -1558,10 +1560,9 @@ class MessageBox(QMainWindow):
         self.close()
         return True
 
-    def SendMessageFromAdmin(self): #functionality for admin to send message to users // unitests
+    def SendMessageFromAdmin(self): #functionality for admin to send message to users 
         self.label.setText('Message Context:')
         message = self.textBox.toPlainText()
-        #data = {"messages":message}
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['email'] == self.email: #if the emails match do this:    
@@ -1573,12 +1574,25 @@ class MessageBox(QMainWindow):
         self.close()
         return True
 
+    def SendMessageAdResume(self): #functionality for employer to send message to student // unitests
+        self.label.setText('Message Context:')
+        message = self.textBox.toPlainText()
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == self.email: #if the emails match do this:    
+                count = 0
+                for x in user.val()['messages']:
+                    count+=1
+                data = {count:message}
+                db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
+        self.close()
+        return True
 
     def handle_buttons(self):
         if userObj.Usertype == 'Admin':
             self.send_message_button.clicked.connect(self.SendMessageFromAdmin)
         elif userObj.Usertype == 'Employer':
-            self.send_message_button.clicked.connect(self.SendMessageToAdmin)
+            self.send_message_button.clicked.connect(self.SendMessageAdResume)
             
 
 

@@ -378,8 +378,8 @@ class GeneralTests(unittest.TestCase):
     def test_RejectResume(self):
         self.assertTrue(self.myadsresume.RejectResume)
 
-    def test_MyAdsDetails_To_ResumeFramePopup(self):
-        self.assertTrue(self.myadsresume.change_to_ResumeFramePopup)
+    #def test_SendMessage(self):
+    #    self.assertTrue(self.myadsresume.SendMessage)
 
 
 
