@@ -19,6 +19,8 @@ if userObj.Usertype == "Student":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        messagebox = MessageBox()
+        generalmessage = GeneralMessagePopup()
         #===========Ivan==============#
         myAdsDetails = MyAdsDetails()
         studentResume = StudentResume()
@@ -54,6 +56,10 @@ if userObj.Usertype == "Student":
 
         # Unit Tests for MyAdsDetails: 
 
+        # Unit Tests for MessageBox:
+         
+        # Unit Tests for GeneralMessage: 
+
 
         # Unit Tests for StudentResume:
         def test_handle_buttons(self):
@@ -81,6 +87,8 @@ if userObj.Usertype == "Employer":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        messagebox = MessageBox()
+        generalmessage = GeneralMessagePopup()
         myAdsDetails = MyAdsDetails()
         #newAd = NewAd() #<---- you cant create an object of this class without passing an argument, so try testing different class
         messageBox = MessageBox()
@@ -143,6 +151,8 @@ if userObj.Usertype == "Admin":
         usersettings = Usersettings()
         adPopup = AdPopup()
         myAds = MyAds()
+        messagebox = MessageBox()
+        generalmessage = GeneralMessagePopup()
         myAdsDetails = MyAdsDetails()
         generalMessageBox = GeneralMessageBox() #exclusive for admin
         #=-----------------------------=#
@@ -205,6 +215,9 @@ class GeneralTests(unittest.TestCase):
     adPopup = AdPopup()
     myAds = MyAds()
     myAdsDetails = MyAdsDetails()
+    messagebox = MessageBox()
+    generalmessage = GeneralMessagePopup()
+    myadsresume = MyAdsResumePopup()
     #=-----------------------------=#
 
 
@@ -251,6 +264,17 @@ class GeneralTests(unittest.TestCase):
     def test_Homepage_To_General_Message_Popup(self):
         self.assertTrue(self.homepage.change_to_generalMessagePopup)
 
+    def test_Search(self):
+        self.assertTrue(self.homepage.Search)
+
+    def test_SearchAllJobs(self):
+        self.assertTrue(self.homepage.SearchAllJobs)
+    
+    def test_SearchJob(self):
+        self.assertTrue(self.homepage.SearchJob)
+
+    def test_openChat(self):
+        self.assertTrue(self.homepage.openChat)
 
     # Unit Tests for Password:
     def test_Password_To_Login(self):
@@ -276,6 +300,20 @@ class GeneralTests(unittest.TestCase):
 
     def test_Usersettings_To_Forgetpassword(self):
         self.assertTrue(self.usersettings.change_to_forgetpassword)
+
+    def test_change_to_deletePopup(self):
+        self.assertTrue(self.usersettings.change_to_deletePopup)
+
+    def test_edit_personal_info(self):
+        self.assertTrue(self.usersettings.edit_personal_info)
+
+    def test_save_changes(self): #unit test for save notification settings and user info settings
+        self.assertTrue(self.usersettings.save_changes)
+
+    def test_change_to_deletePopup(self):
+        self.assertTrue(self.usersettings.change_to_deletePopup)
+
+
     
     
 
@@ -293,6 +331,15 @@ class GeneralTests(unittest.TestCase):
         self.assertTrue(self.adPopup.VisabilityPopUp)
 
     def test_AdPopup_To_Change_to_EditAd(self):
+        self.assertTrue(self.adPopup.Change_to_EditAd)
+
+    def test_AdPopup_To_DeleteAd(self):
+        self.assertTrue(self.adPopup.DeleteAd)
+
+    def test_SetParameters(self):
+        self.assertTrue(self.adPopup.SetParameters)
+
+    def test_Change_to_EditAd(self):
         self.assertTrue(self.adPopup.Change_to_EditAd)
 
     def test_AdPopup_To_DeleteAd(self):
@@ -333,9 +380,29 @@ class GeneralTests(unittest.TestCase):
     def test_MyAdsDetails_To_ResumeFramePopup(self):
         self.assertTrue(self.myAdsDetails.change_to_ResumeFramePopup)
 
+    #Unit Tests for MyAdsResumePopup:
+    def test_SetParameters(self):
+        self.assertTrue(self.myadsresume.SetParameters)
+
+    def test_AcceptResume(self):
+        self.assertTrue(self.myadsresume.AcceptResume)
+
+    def test_RejectResume(self):
+        self.assertTrue(self.myadsresume.RejectResume)
+
+    #def test_SendMessage(self):
+    #    self.assertTrue(self.myadsresume.SendMessage)
 
 
 
+
+    # Unit Tests for MessageBox:
+    def test_SendMessageFromAdmin(self):
+        self.assertTrue(self.messagebox.SendMessageFromAdmin)
+
+    # Unit Tests for GeneralMessage: 
+    def test_ShowMessages(self):
+        self.assertTrue(self.generalmessage.ShowMessages)
 
 
 

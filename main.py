@@ -484,6 +484,7 @@ class Homepage(QMainWindow):
         if flag != 0:
             if userObj.Usertype != 'Admin': #admin cant see the message he sent
                 self.change_to_generalMessagePopup() #opening the popup window with the general message
+        return True
 
 
     def Search(self): #this is a helper function that will call the main search function that will show us the jobs in the homepage screen
@@ -506,6 +507,7 @@ class Homepage(QMainWindow):
             workingFrom = self.advancedSearchWindow.searchData['workingFrom']
             knowledge = self.advancedSearchWindow.searchData['knowledge'] #knowledge is an array
             self.AdvancedSearchJob(jobtype, degree, location, role, workExperience, daysPerWeek, workingFrom, knowledge) #advanced search
+        return True
 
 
 
@@ -517,7 +519,7 @@ class Homepage(QMainWindow):
         for job in jobs.each():
             if job.val()['Visability'] == 'Visible for every user': #check if ad is visible for another users.
                 self.listWidget.addItem(job.val()['title']+' | '+job.val()['search']['location']+' | '+job.val()['search']['role']+' | '+job.val()['preferences']['workingFrom']+' | '+job.val()['search']['degree'])
-
+        return True
 
 
     def SearchJob(self, JobType, Degree, Location, Role): #this functions performs a regular search in the data base, all the jobs that fit the description will be added to the list of jobs on the homepage screen.
@@ -541,7 +543,7 @@ class Homepage(QMainWindow):
 
         if flag == 0:
             self.no_jobs_found_label.setText('could not find jobs that fit your search') #if no job was found, paste the error message 
-
+        return True
 
 
     def AdvancedSearchJob(self, JobType, Degree, Location, Role, WorkExperience, DaysPerWeek, WorkingFrom, Knowledge): #this function is used in the advances search, its exactly like the regular search with the only difference beening that the criteria for the search in the data base also includes the additional information found inside the advanced search window.
@@ -645,7 +647,6 @@ class Homepage(QMainWindow):
         self.chatpopup = GeneralMessagePopup()
         self.chatpopup.show()
         self.chatpopup.ShowMessages()
-
         return True
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -766,15 +767,13 @@ class Usersettings(QMainWindow):
 
 
 
+        #--------------help funcs for usersettings class-----------------
 
     def change_to_deletePopup(self):
         global userObj
         self.deletepopup = DeletePopup(userObj)
         self.deletepopup.show()
         return True
-
-
-        #--------------help funcs for usersettings class-----------------
 
     def change_to_login(self): # change to login screen
         login = Login()
@@ -1386,7 +1385,7 @@ class MyAdsResumePopup(QMainWindow):
         self.handle_buttons() 
         self.usersEmail=''
         self.Jobreference=None
-
+        self.messagebox =None
 
     def SetParameters(self, item, jobreference):
         self.Jobreference = jobreference
@@ -1401,6 +1400,7 @@ class MyAdsResumePopup(QMainWindow):
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
+        return True
 
 
     def AcceptResume(self):
@@ -1420,6 +1420,7 @@ class MyAdsResumePopup(QMainWindow):
                     self.error_success_message.setText('Something when wrong, try again later')
                 
                 break
+        return True
 
 
     def RejectResume(self):
@@ -1439,9 +1440,12 @@ class MyAdsResumePopup(QMainWindow):
                     self.error_success_message.setText('Something when wrong, try again later')
                 
                 break
+        return True
     
     def SendMessage(self):
-        pass
+        self.messagebox = MessageBox()
+        self.messagebox.email = self.usersEmail
+        self.messagebox.show()
 
     def handle_buttons(self):
         self.accept_resume_button.clicked.connect(self.AcceptResume)
@@ -1578,10 +1582,9 @@ class MessageBox(QMainWindow):
         self.close()
         return True
 
-    def SendMessageFromAdmin(self): #functionality for admin to send message to users
+    def SendMessageFromAdmin(self): #functionality for admin to send message to users 
         self.label.setText('Message Context:')
         message = self.textBox.toPlainText()
-        #data = {"messages":message}
         users = db.child('Users').get()
         for user in users.each():
             if user.val()['email'] == self.email: #if the emails match do this:    
@@ -1591,14 +1594,27 @@ class MessageBox(QMainWindow):
                 data = {count:message}
                 db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
         self.close()
-    
+        return True
 
+    def SendMessageAdResume(self): #functionality for employer to send message to student // unitests
+        self.label.setText('Message Context:')
+        message = self.textBox.toPlainText()
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == self.email: #if the emails match do this:    
+                count = 0
+                for x in user.val()['messages']:
+                    count+=1
+                data = {count:message}
+                db.child('Users').child(user.key()).child('messages').update(data) #adds the message to the data base
+        self.close()
+        return True
 
     def handle_buttons(self):
         if userObj.Usertype == 'Admin':
             self.send_message_button.clicked.connect(self.SendMessageFromAdmin)
         elif userObj.Usertype == 'Employer':
-            self.send_message_button.clicked.connect(self.SendMessageToAdmin)
+            self.send_message_button.clicked.connect(self.SendMessageAdResume)
             
 
 
@@ -1614,7 +1630,7 @@ class GeneralMessagePopup(QMainWindow):
     def addMessage(self, messageObj):
         self.textBox.setText(messageObj.val()['message'])
 
-    def ShowMessages(self): #()
+    def ShowMessages(self): #unitest
         self.label.setText('My Messages:')
         string =''
         users = db.child('Users').get()
@@ -1624,6 +1640,7 @@ class GeneralMessagePopup(QMainWindow):
                     string += str(x)
                     string+= '\n'
         self.textBox.setText(string)
+        return True
 #----------------------------------------Main----------------------------------
 
 
