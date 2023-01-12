@@ -1186,6 +1186,8 @@ class DeletePopup(QMainWindow): #add a commit here
         loadUi("ui/Delete_Popup.ui", self)
         self.deleteUserKey = User
         self.handle_buttons() 
+        
+ # adding commit for this function that delete Account from line 1192
 
     def delete_account(self): #deleting the current user
         global CURRENTUSER
@@ -1240,7 +1242,8 @@ class DeletePopup(QMainWindow): #add a commit here
 
         self.no_button.clicked.connect(self.noButton) # if press no close the
         return True
-
+### ===============================omer=====================================#### 
+### the end of deleting account ####
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
     def __init__(self):
