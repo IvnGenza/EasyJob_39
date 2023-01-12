@@ -1049,7 +1049,8 @@ class MyAdsDetails(QMainWindow):
     #        self.save_changes_button.hide() #we hide the save changes button
     #        self.edit_button.show() #we unhide the edit button
 
-    #def edit_job(self):
+    #def edit_job(self): 
+    ################# this is a coommit for delete Job Ad!###################################
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
         self.listWidget.itemClicked.connect(self.change_to_ResumeFramePopup)
