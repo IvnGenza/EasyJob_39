@@ -490,6 +490,26 @@ class TestSearchUser(unittest.TestCase):
     def tearDown(self):
         db.child("Users").child(self.student1.key()).remove()
         db.child("Users").child(self.student2.key()).remove()
+        
+        
+        
+    #######Test for help function "change to my Ads"
+    
+    
+    class TestChangeToMyAds(unittest.TestCase):
+    def setUp(self):
+        self.employer = User("employer@example.com", "employer", "password", "Employer")
+        self.homepage = HomePage(self.employer)
+        self.widget = QStackedWidget()
+        self.widget.addWidget(self.homepage)
+
+    def test_change_to_my_ads(self):
+        self.homepage.change_to_my_ads()
+        self.assertEqual(self.widget.currentIndex(), 1)
+        self.assertIsInstance(self.widget.currentWidget(), MyAds)
+
+    def tearDown(self):
+        self.widget = None
 
 
 
