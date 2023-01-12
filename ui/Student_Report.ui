@@ -26,6 +26,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="leftMargin">
      <number>15</number>
@@ -76,14 +79,14 @@
        <widget class="QPushButton" name="close_button">
         <property name="minimumSize">
          <size>
-          <width>120</width>
-          <height>40</height>
+          <width>150</width>
+          <height>50</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
-          <height>40</height>
+          <width>150</width>
+          <height>50</height>
          </size>
         </property>
         <property name="font">
@@ -92,6 +95,10 @@
           <weight>75</weight>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+</string>
         </property>
         <property name="text">
          <string>Back</string>
@@ -108,6 +115,9 @@
         <weight>50</weight>
         <bold>false</bold>
        </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:white;</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>

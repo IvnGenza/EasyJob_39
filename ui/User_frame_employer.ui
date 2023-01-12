@@ -26,6 +26,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -64,6 +67,9 @@
             <bold>false</bold>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
+          </property>
          </widget>
         </item>
         <item row="0" column="1">
@@ -78,6 +84,9 @@
            <font>
             <pointsize>12</pointsize>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -113,6 +122,9 @@
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
           </property>
          </widget>
         </item>
@@ -160,6 +172,9 @@
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
           </property>
           <property name="html">
            <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -220,6 +235,9 @@ p, li { white-space: pre-wrap; }
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -247,6 +265,10 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#90C8AC;
+</string>
             </property>
             <property name="text">
              <string>Send Message</string>
@@ -277,6 +299,10 @@ p, li { white-space: pre-wrap; }
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;
+</string>
+            </property>
             <property name="text">
              <string>Change permission</string>
             </property>
@@ -305,6 +331,10 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#EF5350;
+</string>
             </property>
             <property name="text">
              <string>Delete Account</string>

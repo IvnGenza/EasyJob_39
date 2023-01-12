@@ -26,1147 +26,1229 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="navigation_frame">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1241</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>1240</width>
-      <height>81</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>1920</width>
-      <height>81</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: lightgrey;</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="name_label">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>250</width>
-       <height>80</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>250</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>250</width>
-       <height>80</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>29</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>EasyJobs</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="sign_out_button">
-     <property name="geometry">
-      <rect>
-       <x>1080</x>
-       <y>0</y>
-       <width>160</width>
-       <height>85</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>160</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>160</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>19</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Sign out</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="back_button">
-     <property name="geometry">
-      <rect>
-       <x>920</x>
-       <y>0</y>
-       <width>160</width>
-       <height>85</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>160</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>160</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>19</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Back</string>
-     </property>
-     <property name="flat">
-      <bool>true</bool>
-     </property>
-    </widget>
-    <widget class="Line" name="line">
-     <property name="geometry">
-      <rect>
-       <x>1070</x>
-       <y>0</y>
-       <width>10</width>
-       <height>85</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>10</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>10</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">margin-left:7px;</string>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="lineWidth">
-      <number>3</number>
-     </property>
-     <property name="midLineWidth">
-      <number>0</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="Line" name="line_2">
-     <property name="geometry">
-      <rect>
-       <x>910</x>
-       <y>0</y>
-       <width>10</width>
-       <height>85</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>10</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>10</width>
-       <height>85</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">margin-left:7px;</string>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="lineWidth">
-      <number>3</number>
-     </property>
-     <property name="midLineWidth">
-      <number>0</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="notification_button">
-    <property name="geometry">
-     <rect>
-      <x>1160</x>
-      <y>90</y>
-      <width>70</width>
-      <height>70</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>70</width>
-      <height>70</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>70</width>
-      <height>70</height>
-     </size>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>24</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>70</width>
-      <height>70</height>
-     </size>
-    </property>
-    <property name="flat">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="Line" name="line_3">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>80</y>
-      <width>16</width>
-      <height>1000</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>10</width>
-      <height>1000</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>2000</width>
-      <height>2000</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">margin-left:7px;</string>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Plain</enum>
-    </property>
-    <property name="lineWidth">
-     <number>3</number>
-    </property>
-    <property name="midLineWidth">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_5">
+    <property name="spacing">
      <number>0</number>
     </property>
-    <property name="orientation">
-     <enum>Qt::Vertical</enum>
+    <property name="leftMargin">
+     <number>0</number>
     </property>
-   </widget>
-   <widget class="QFrame" name="navigation_frame_2">
-    <property name="enabled">
-     <bool>true</bool>
+    <property name="topMargin">
+     <number>0</number>
     </property>
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>110</y>
-      <width>391</width>
-      <height>41</height>
-     </rect>
+    <property name="rightMargin">
+     <number>0</number>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>300</width>
-      <height>20</height>
-     </size>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
-    <property name="maximumSize">
-     <size>
-      <width>2000</width>
-      <height>2000</height>
-     </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: lightgrey;</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>0</y>
-       <width>171</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>20</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Perferences</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>100</y>
-      <width>471</width>
-      <height>271</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="age_text">
-       <property name="minimumSize">
-        <size>
-         <width>270</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>17</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_2">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Username: &lt;/p&gt;&lt;p align=&quot;right&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0" alignment="Qt::AlignRight">
-      <widget class="QLabel" name="label_3">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Full Name: </string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="full_name_text">
-       <property name="minimumSize">
-        <size>
-         <width>270</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>17</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Normal</enum>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="username_text">
-       <property name="minimumSize">
-        <size>
-         <width>270</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>17</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_8">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Age:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_9">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>50</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>20</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Email:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="1">
-      <widget class="QLineEdit" name="email_text">
-       <property name="minimumSize">
-        <size>
-         <width>270</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>300</width>
-         <height>35</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>17</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="echoMode">
-        <enum>QLineEdit::Normal</enum>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>590</x>
-      <y>190</y>
-      <width>501</width>
-      <height>247</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="minimumSize">
-          <size>
-           <width>185</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>185</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>20</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Role:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_11">
-         <property name="minimumSize">
-          <size>
-           <width>185</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>185</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>20</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Working From:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QComboBox" name="location_comboBox">
-         <property name="minimumSize">
-          <size>
-           <width>275</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>275</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="whatsThis">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <item>
-          <property name="text">
-           <string>Akko</string>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLabel" name="name_label_2">
+        <property name="minimumSize">
+         <size>
+          <width>250</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>250</width>
+          <height>80</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Comic Sans MS</family>
+          <pointsize>32</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>EasyJobs</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="notification_button">
+        <property name="minimumSize">
+         <size>
+          <width>85</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>85</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>24</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>70</width>
+          <height>70</height>
+         </size>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line_5">
+        <property name="minimumSize">
+         <size>
+          <width>3</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>3</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>3</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="back_button">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>19</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
+        <property name="text">
+         <string>Back</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+       <widget class="Line" name="line">
+        <property name="minimumSize">
+         <size>
+          <width>3</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>3</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>3</number>
+        </property>
+        <property name="midLineWidth">
+         <number>0</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="sign_out_button">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>19</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#EF5350;
+border:0px;</string>
+        </property>
+        <property name="text">
+         <string>Sign out</string>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="Line" name="line_3">
+      <property name="minimumSize">
+       <size>
+        <width>2000</width>
+        <height>3</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>2000</width>
+        <height>3</height>
+       </size>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="lineWidth">
+       <number>3</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="leftMargin">
+         <number>125</number>
+        </property>
+        <property name="topMargin">
+         <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="verticalSpacing">
+           <number>15</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Arad</string>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="age_text">
+            <property name="minimumSize">
+             <size>
+              <width>270</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;border:1px solid black;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="email_text">
+            <property name="minimumSize">
+             <size>
+              <width>270</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;border:1px solid black;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Normal</enum>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="full_name_text">
+            <property name="minimumSize">
+             <size>
+              <width>270</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;border:1px solid black;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="echoMode">
+             <enum>QLineEdit::Normal</enum>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_6">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Email:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="username_text">
+            <property name="minimumSize">
+             <size>
+              <width>270</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>300</width>
+              <height>35</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>17</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;border:1px solid black;</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>20</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Age:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_2">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Username:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" alignment="Qt::AlignRight">
+           <widget class="QLabel" name="label_3">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>18</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Full Name:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="frameShadow">
+           <enum>QFrame::Plain</enum>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ashdod</string>
+          <property name="lineWidth">
+           <number>3</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ashkelon</string>
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Bat Yam</string>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="verticalSpacing">
+           <number>15</number>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Beer Sheva</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Bait Shemesh</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Dimona</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Eilat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Haifa</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Herzliya</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Jerusalem</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Kfar Saba</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Kiryat Gat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Lod</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ofakim</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ramat Gan</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Rishon Lezion</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Tel Aviv-Yafo</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="role_comboBox">
-         <property name="minimumSize">
-          <size>
-           <width>275</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>275</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <item>
-          <property name="text">
-           <string>Android developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Business systems analyst</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Cloud engineer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Computer hardware engineer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Database administrator</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Flutter/Dart software development</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Full-stack developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Geographic information system</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>iOS developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>IT security analyst</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Java developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Junior web developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Network engineer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Project control officer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Project engineer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Python developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>QA manager</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Ruby on Rails developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Security operations analyst</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Software engineer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>SQL developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>User interface developer</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>User experience designer </string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QComboBox" name="work_place_comboBox">
-         <property name="minimumSize">
-          <size>
-           <width>275</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>275</width>
-           <height>35</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="whatsThis">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <item>
-          <property name="text">
-           <string>Hybrid work</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Relocation</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Office</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Home</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Optional</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_10">
-         <property name="minimumSize">
-          <size>
-           <width>185</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>185</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>20</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Location:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item alignment="Qt::AlignHCenter">
-      <widget class="QPushButton" name="save_preferences_button">
-       <property name="minimumSize">
-        <size>
-         <width>320</width>
-         <height>75</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>320</width>
-         <height>75</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">margin-top:15px;
+          <item row="5" column="0">
+           <widget class="QPushButton" name="make_report_button">
+            <property name="minimumSize">
+             <size>
+              <width>450</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>Make Report</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QPushButton" name="my_resume_button">
+            <property name="minimumSize">
+             <size>
+              <width>450</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>My Resume</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QPushButton" name="change_password_button">
+            <property name="minimumSize">
+             <size>
+              <width>450</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>Change Password</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="save_changes_button">
+            <property name="minimumSize">
+             <size>
+              <width>450</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>Save Changes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QPushButton" name="edit_button">
+            <property name="minimumSize">
+             <size>
+              <width>450</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#90C8AC;
 </string>
-       </property>
-       <property name="text">
-        <string>Save Preferences</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="gridLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>400</y>
-      <width>471</width>
-      <height>271</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="5" column="0">
-      <widget class="QPushButton" name="make_report_button">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Make Report</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="save_changes_button">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Save Changes</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QPushButton" name="delete_account_button">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Delete Account</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QPushButton" name="change_password_button">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Change Password</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QPushButton" name="my_resume_button">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>My Resume</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="edit_button">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>Edit Info</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+            </property>
+            <property name="text">
+             <string>Edit Info</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QPushButton" name="delete_account_button">
+            <property name="minimumSize">
+             <size>
+              <width>450</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#EF5350;</string>
+            </property>
+            <property name="text">
+             <string>Delete Account</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>20</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item alignment="Qt::AlignHCenter">
+         <widget class="QFrame" name="navigation_frame_2">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>250</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>250</width>
+            <height>2000</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: #90C8AC;
+</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QLabel" name="label">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>0</y>
+             <width>171</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>20</pointsize>
+             <weight>75</weight>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Perferences</string>
+           </property>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="minimumSize">
+               <size>
+                <width>185</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>185</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Role:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_11">
+              <property name="minimumSize">
+               <size>
+                <width>185</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>185</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Working From:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="location_comboBox">
+              <property name="minimumSize">
+               <size>
+                <width>275</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>275</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>Akko</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Arad</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ashdod</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ashkelon</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Bat Yam</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Beer Sheva</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Bait Shemesh</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Dimona</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Eilat</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Haifa</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Herzliya</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Jerusalem</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Kfar Saba</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Kiryat Gat</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Lod</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ofakim</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ramat Gan</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Rishon Lezion</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Tel Aviv-Yafo</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="role_comboBox">
+              <property name="minimumSize">
+               <size>
+                <width>275</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>275</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>Android developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Business systems analyst</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Cloud engineer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Computer hardware engineer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Database administrator</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Flutter/Dart software development</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Full-stack developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Geographic information system</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>iOS developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>IT security analyst</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Java developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Junior web developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Network engineer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Project control officer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Project engineer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Python developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>QA manager</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Ruby on Rails developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Security operations analyst</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Software engineer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>SQL developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>User interface developer</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>User experience designer </string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QComboBox" name="work_place_comboBox">
+              <property name="minimumSize">
+               <size>
+                <width>275</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>275</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="whatsThis">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color:white;</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>Hybrid work</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Relocation</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Office</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Home</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Optional</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_10">
+              <property name="minimumSize">
+               <size>
+                <width>185</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>185</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>18</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;Location:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QPushButton" name="save_preferences_button">
+            <property name="minimumSize">
+             <size>
+              <width>320</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>320</width>
+              <height>75</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">margin-top:15px;
+background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>Save Preferences</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
