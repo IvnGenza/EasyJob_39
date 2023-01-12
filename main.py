@@ -618,7 +618,7 @@ class Password(QMainWindow):
 
 
 #------------------------------------Usersettings class------------------------------------
-
+ ####comment for commit Us- log in and load the "User setting" screen ###
 class Usersettings(QMainWindow):
     def __init__(self):
         super(Usersettings, self).__init__()
