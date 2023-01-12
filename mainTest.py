@@ -155,6 +155,8 @@ if userObj.Usertype == "Admin":
         generalmessage = GeneralMessagePopup()
         myAdsDetails = MyAdsDetails()
         generalMessageBox = GeneralMessageBox() #exclusive for admin
+        AdVisability = AdVisability()
+        UserPermission = UserPermission()
         #=-----------------------------=#
 
         # Unit Tests for Login:
@@ -221,6 +223,7 @@ class GeneralTests(unittest.TestCase):
     messagebox = MessageBox()
     generalmessage = GeneralMessagePopup()
     myadsresume = MyAdsResumePopup()
+    activityReport = Ui_MainWindow()
     #=-----------------------------=#
 
 
