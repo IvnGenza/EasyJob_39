@@ -1144,7 +1144,7 @@ class Password(QMainWindow):
         widget.addWidget(login)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    # check
+    # unit test for password 
     #def checkPasswordKey(self, passkey):
         #if passkey == '':
          #   return False
@@ -1254,4 +1254,4 @@ except:
     print("Exiting")
 
 
-#heyh3y
+#check 
