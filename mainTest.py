@@ -411,6 +411,46 @@ class GeneralTests(unittest.TestCase):
     def test_ShowMessages(self):
         self.assertTrue(self.generalmessage.ShowMessages)
 
+###############omer #######################
+
+class TestDeletePopup(unittest.TestCase):
+    def setUp(self):
+        self.app = QApplication([])
+        self.user = User("testuser@example.com", "Test User", "password", "Student")
+        self.popup = DeletePopup(self.user)
+
+    def test_delete_account(self):
+        # Verify that the account is deleted from the database and auth
+        self.popup.delete_account()
+        # Check that the account is not in the database
+        self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
+        # Check that the account is not in auth
+        self.assertIsNone(auth.get_user(self.user.idToken))
+    
+    def test_delete_user(self):
+        # Verify that the account is deleted from the database and auth
+        self.popup.delete_user()
+        # Check that the account is not in the database
+        self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
+        # Check that the account is not in auth
+        self.assertIsNone(auth.get_user(self.user.idToken))
+
+    def test_no_button(self):
+        # Verify that the popup closes when the 'no' button is clicked
+        self.popup.no_button.click()
+        self.assertFalse(self.popup.isVisible())
+
+    def test_change_to_login(self):
+        # Verify that the current index of the widget changes to the login screen
+        self.popup.change_to_login()
+        self.assertEqual(widget.currentIndex(), 1)
+
+    def test_handle_buttons(self):
+        # Verify that the delete account function is connected to the 'yes' button for non-admin users
+        self.popup.handle_buttons()
+        self.popup.yes_button.click()
+        self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
+        self.assertIsNone(auth.get_user(self.user.idToken))
 
 
 
