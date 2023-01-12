@@ -339,7 +339,7 @@
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>110</y>
+      <y>170</y>
       <width>391</width>
       <height>41</height>
      </rect>
@@ -612,7 +612,7 @@
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>190</y>
+      <y>250</y>
       <width>501</width>
       <height>247</height>
      </rect>
@@ -1166,6 +1166,45 @@
       </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>120</y>
+      <width>161</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Turn on/off notifications</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>120</y>
+      <width>31</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>on</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>120</y>
+      <width>31</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>off</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
