@@ -1180,7 +1180,7 @@ class UserPermission(QMainWindow):
         self.save_button.clicked.connect(self.SetPermission)
 
     #----------------------------------------DeletePopup----------------------------------
-class DeletePopup(QMainWindow):
+class DeletePopup(QMainWindow): #add a commit here 
     def __init__(self,User):
         super(DeletePopup, self).__init__()
         loadUi("ui/Delete_Popup.ui", self)
