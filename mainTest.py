@@ -15,6 +15,10 @@ if userObj.Usertype == "Student":
         signup = Signup()
         homepage = Homepage()
         password = Password()
+        #==========Omer================#
+        deletepopup=DeletePopup()
+        homepage = Homepage()
+        
         #===========Shay==============#
         usersettings = Usersettings()
         adPopup = AdPopup()
@@ -411,7 +415,7 @@ class GeneralTests(unittest.TestCase):
     def test_ShowMessages(self):
         self.assertTrue(self.generalmessage.ShowMessages)
 
-###############omer #######################
+###############  omer #######################
 
 class TestDeletePopup(unittest.TestCase):
     def setUp(self):
@@ -452,6 +456,40 @@ class TestDeletePopup(unittest.TestCase):
         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
         self.assertIsNone(auth.get_user(self.user.idToken))
 
+
+        #======================Test for Homepage ================================
+      
+
+class TestSearchUser(unittest.TestCase):
+    def setUp(self):
+        self.admin = User("admin@example.com", "admin", "password", "Admin")
+        self.student1 = User("student1@example.com", "student1", "password", "Student")
+        self.student2 = User("student2@example.com", "student2", "password", "Student")
+        self.homepage = HomePage(self.admin)
+        self.homepage.username_textBox.setText("student")
+        self.homepage.listWidget_users.clear()
+
+    def test_search_user(self):
+        # Add test users to the database
+        db.child("Users").child(self.student1.key()).set(self.student1.getUser())
+        db.child("Users").child(self.student2.key()).set(self.student2.getUser())
+        # Call the search user function
+        self.homepage.SearchUser()
+        # Check that the correct users are in the list widget
+        self.assertEqual(self.homepage.listWidget_users.count(), 2)
+        self.assertEqual(self.homepage.listWidget_users.item(0).text(), "student1")
+        self.assertEqual(self.homepage.listWidget_users.item(1).text(), "student2")
+        
+    def test_search_user_no_results(self):
+        # Call the search user function
+        self.homepage.SearchUser()
+        # Check that the correct message is displayed
+        self.assertEqual(self.homepage.no_jobs_found_label.text(), "could not find users that fit your search")
+        self.assertEqual(self.homepage.listWidget_users.count(), 0)
+        
+    def tearDown(self):
+        db.child("Users").child(self.student1.key()).remove()
+        db.child("Users").child(self.student2.key()).remove()
 
 
 
