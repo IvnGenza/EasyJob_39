@@ -1231,7 +1231,7 @@ class connect_with_student(QMainWindow):
 
 #--------------------
 
-class Chat_with_Admin(QMainWindow):
+class Chat_with_Admin(QMainWindow): #add commit for this class - Us chat with Admin about problems and Issues/
     def __init__(self):
         super(Chat_with_Admin, self).__init__()
         loadUi("ui/chay_with_admin.ui", self)
