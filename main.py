@@ -1289,7 +1289,7 @@ class MyAds(QMainWindow):
         return True
 
     def change_to_NewAd(self): # open the new add screen (only by employer)
-        ad = NewAd()
+        ad = NewAd(None)
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
         return True
