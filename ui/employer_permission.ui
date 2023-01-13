@@ -31,6 +31,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <spacer name="verticalSpacer_2">
@@ -86,6 +89,14 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QComboBox" name="msg_combobox">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;</string>
+            </property>
             <item>
              <property name="text">
               <string>Free</string>
@@ -100,6 +111,14 @@
           </item>
           <item>
            <widget class="QComboBox" name="publish_combobox">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;</string>
+            </property>
             <item>
              <property name="text">
               <string>free</string>
@@ -146,6 +165,14 @@
         </item>
         <item>
          <widget class="QPushButton" name="save_button">
+          <property name="font">
+           <font>
+            <pointsize>16</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">	background-color:#90C8AC;</string>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>
