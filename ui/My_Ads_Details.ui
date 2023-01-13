@@ -26,6 +26,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
      <number>5</number>
@@ -101,6 +104,10 @@
             <pointsize>10</pointsize>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;
+border:1px solid black;</string>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -144,6 +151,10 @@
             <weight>50</weight>
             <bold>false</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;
+border:1px solid black;</string>
           </property>
           <property name="readOnly">
            <bool>true</bool>
@@ -191,6 +202,10 @@ p, li { white-space: pre-wrap; }
             <bold>false</bold>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;
+border:1px solid black;</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -227,6 +242,10 @@ p, li { white-space: pre-wrap; }
             <bold>false</bold>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;
+border:1px solid black;</string>
+          </property>
          </widget>
         </item>
         <item>
@@ -262,18 +281,22 @@ p, li { white-space: pre-wrap; }
             <bold>false</bold>
            </font>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;
+border:1px solid black;</string>
+          </property>
          </widget>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <property name="spacing">
-           <number>0</number>
+           <number>8</number>
           </property>
           <property name="leftMargin">
            <number>10</number>
           </property>
           <property name="topMargin">
-           <number>12</number>
+           <number>15</number>
           </property>
           <property name="rightMargin">
            <number>10</number>
@@ -298,6 +321,9 @@ p, li { white-space: pre-wrap; }
               <weight>75</weight>
               <bold>true</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #90C8AC;</string>
             </property>
             <property name="text">
              <string>Save Changes</string>
@@ -328,6 +354,9 @@ p, li { white-space: pre-wrap; }
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
             <property name="text">
              <string>Edit</string>
             </property>
@@ -356,6 +385,9 @@ p, li { white-space: pre-wrap; }
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#EF5350;</string>
             </property>
             <property name="text">
              <string>Delete</string>
@@ -433,30 +465,11 @@ p, li { white-space: pre-wrap; }
            </spacer>
           </item>
           <item>
-           <widget class="Line" name="line_2">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="lineWidth">
-             <number>3</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="back_button">
             <property name="minimumSize">
              <size>
-              <width>100</width>
-              <height>0</height>
+              <width>125</width>
+              <height>50</height>
              </size>
             </property>
             <property name="font">
@@ -470,32 +483,13 @@ p, li { white-space: pre-wrap; }
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:#C4DFAA;</string>
             </property>
             <property name="text">
              <string>Back</string>
             </property>
             <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="Line" name="line_3">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="lineWidth">
-             <number>3</number>
-            </property>
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -515,7 +509,8 @@ p, li { white-space: pre-wrap; }
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">font:24px;</string>
+           <string notr="true">font:24px;background-color:white;
+border:1px solid black;</string>
           </property>
          </widget>
         </item>
