@@ -1,7 +1,8 @@
 from database.authentication import auth, db,current_month, current_year, current_date, StudentAccCounter, StudentDeleteAccCounter, EmployerAccCounter, EmployerDeleteAccCounter
 import sys
 from PyQt5.uic import loadUi
-from PyQt5 import QtWidgets, Qt
+from PyQt5 import QtWidgets, Qt, QtGui
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMainWindow, QGroupBox,QWidget,QCheckBox,QDesktopWidget,QVBoxLayout, QTableWidgetItem
 from functools import *
 from users import *
@@ -138,6 +139,10 @@ class Login(QMainWindow):
         super(Login, self).__init__()
         loadUi("ui/login.ui", self) # file
         self.handle_buttons() # allows us to listen for clicks on the signup button
+
+        #setting an icon for notifications button
+        self.BigImage.setPixmap(QtGui.QPixmap("ui/Images/login image.jpg"))
+
 
     def logging(self):
         global userObj #using global parameter
@@ -470,6 +475,11 @@ class Homepage(QMainWindow):
 
         if userObj.Usertype == 'Employer' and userObj.PublicationPermission == 'block': #check if employer can create new ad.
             self.new_ad_button.setDisabled(True) #disable 'new ad' bottun if admin blocked this func for the user.
+
+        #setting an icon for search button
+        self.search_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
+        if userObj.Usertype == 'Admin':
+            self.search_username_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
     
     #--------------------Main Functionality Functions-----------------------#
 
@@ -764,7 +774,8 @@ class Usersettings(QMainWindow):
         self.email_text.setText(userObj.Email)
 
 
-
+        #setting an icon for notifications button
+        self.notification_button.setIcon(QtGui.QIcon("ui/Images/bell.png"))
 
 
         #--------------help funcs for usersettings class-----------------
@@ -1169,12 +1180,14 @@ class UserPermission(QMainWindow):
         self.save_button.clicked.connect(self.SetPermission)
 
     #----------------------------------------DeletePopup----------------------------------
-class DeletePopup(QMainWindow):
+class DeletePopup(QMainWindow): #add a commit here 
     def __init__(self,User):
         super(DeletePopup, self).__init__()
         loadUi("ui/Delete_Popup.ui", self)
         self.deleteUserKey = User
         self.handle_buttons() 
+        
+ # adding commit for this function that delete Account from line 1192
 
     def delete_account(self): #deleting the current user
         global CURRENTUSER
@@ -1229,7 +1242,8 @@ class DeletePopup(QMainWindow):
 
         self.no_button.clicked.connect(self.noButton) # if press no close the
         return True
-
+### ===============================omer=====================================#### 
+### the end of deleting account ####
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
     def __init__(self):
@@ -1278,7 +1292,7 @@ class MyAds(QMainWindow):
         return True
 
     def change_to_NewAd(self): # open the new add screen (only by employer)
-        ad = NewAd()
+        ad = NewAd(None)
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
         return True

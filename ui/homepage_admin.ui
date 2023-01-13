@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1240</width>
+    <width>1280</width>
     <height>720</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1240</width>
+    <width>1280</width>
     <height>720</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>2000</width>
-    <height>720</height>
+    <height>1080</height>
    </size>
   </property>
   <property name="font">
@@ -34,6 +34,9 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_6">
     <property name="spacing">
      <number>0</number>
@@ -71,7 +74,8 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>29</pointsize>
+          <family>Comic Sans MS</family>
+          <pointsize>32</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -101,13 +105,13 @@
        <widget class="Line" name="line_5">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -143,6 +147,13 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
         <property name="text">
          <string>Chat</string>
         </property>
@@ -155,13 +166,13 @@
        <widget class="Line" name="line_4">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -200,6 +211,10 @@
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
         <property name="text">
          <string>Message Everyone</string>
         </property>
@@ -212,13 +227,13 @@
        <widget class="Line" name="line_2">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -264,7 +279,8 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-right: 2px solid black;</string>
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
         </property>
         <property name="text">
          <string>User Settings</string>
@@ -278,13 +294,13 @@
        <widget class="Line" name="line">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -330,7 +346,8 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background-color:#EF5350;
+border:0px;</string>
         </property>
         <property name="text">
          <string>Sign out</string>
@@ -387,19 +404,20 @@
      <widget class="QFrame" name="search_frame">
       <property name="minimumSize">
        <size>
-        <width>960</width>
+        <width>975</width>
         <height>82</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>960</width>
+        <width>975</width>
         <height>82</height>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: lightgray;
-border-radius: 32px;</string>
+       <string notr="true">background-color:#90C8AC;
+border-radius: 32px;
+</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -412,7 +430,7 @@ border-radius: 32px;</string>
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>951</width>
+         <width>960</width>
          <height>82</height>
         </rect>
        </property>
@@ -421,6 +439,9 @@ border-radius: 32px;</string>
          <number>10</number>
         </property>
         <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
          <number>10</number>
         </property>
         <item>
@@ -447,12 +468,23 @@ border-radius: 32px;</string>
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">border: 2px solid black;
-border-radius: 35px;
-padding:10px;</string>
+           <string notr="true">padding:10px;
+border: 0;
+border-radius: 30px;
+background-color:#90C8AC;
+color:black;
+
+
+</string>
           </property>
           <property name="text">
-           <string>X</string>
+           <string/>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
           </property>
           <property name="flat">
            <bool>false</bool>
@@ -476,13 +508,28 @@ padding:10px;</string>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">#comboBox_job_type {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_job_type::drop-down {
+	border: 0px;
+}</string>
           </property>
           <item>
            <property name="text">
@@ -528,6 +575,8 @@ padding:10px;</string>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
           <property name="cursor">
@@ -540,7 +589,20 @@ padding:10px;</string>
            <bool>false</bool>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">#comboBox_degree {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_degree::drop-down {
+	border: 0px;
+}</string>
           </property>
           <item>
            <property name="text">
@@ -581,6 +643,8 @@ padding:10px;</string>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
           <property name="cursor">
@@ -590,7 +654,20 @@ padding:10px;</string>
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">#comboBox_location {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_location::drop-down {
+	border: 0px;
+}</string>
           </property>
           <item>
            <property name="text">
@@ -694,27 +771,40 @@ padding:10px;</string>
           <property name="minimumSize">
            <size>
             <width>285</width>
-            <height>30</height>
+            <height>35</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>285</width>
-            <height>30</height>
+            <height>35</height>
            </size>
           </property>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">#comboBox_role {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_role::drop-down {
+	border: 0px;
+}</string>
           </property>
           <item>
            <property name="text">
@@ -878,6 +968,8 @@ padding:10px;</string>
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="cursor">
@@ -885,7 +977,8 @@ padding:10px;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">margin-right:10px;
-margin-left:100px;</string>
+margin-left:100px;
+background-color:#C4DFAA;</string>
         </property>
         <property name="text">
          <string>Free search</string>
@@ -896,23 +989,28 @@ margin-left:100px;</string>
        <widget class="QPushButton" name="advanced_search_button">
         <property name="minimumSize">
          <size>
-          <width>150</width>
+          <width>165</width>
           <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>150</width>
+          <width>165</width>
           <height>30</height>
          </size>
         </property>
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;</string>
         </property>
         <property name="text">
          <string>Advanced search</string>
@@ -926,13 +1024,13 @@ margin-left:100px;</string>
         </property>
         <property name="minimumSize">
          <size>
-          <width>300</width>
+          <width>315</width>
           <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>300</width>
+          <width>315</width>
           <height>30</height>
          </size>
         </property>
@@ -1027,7 +1125,7 @@ margin-left:100px;</string>
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color:lightgrey;
+            <string notr="true">background-color:#90C8AC;
 border-radius:22px;
 </string>
            </property>
@@ -1103,9 +1201,13 @@ border-radius:22px;
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">background-color:white;
-border-radius:5px;
-</string>
+                <string notr="true">background-color:#90C8AC;
+border-bottom: 2px solid black;
+padding-left:5px;
+padding-bottom:-8px;</string>
+               </property>
+               <property name="text">
+                <string/>
                </property>
               </widget>
              </item>
@@ -1134,11 +1236,16 @@ border-radius:5px;
                 <cursorShape>PointingHandCursor</cursorShape>
                </property>
                <property name="styleSheet">
-                <string notr="true">border-radius:18px;
-border: 2px solid black;</string>
+                <string notr="true"/>
                </property>
                <property name="text">
-                <string>x</string>
+                <string/>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>25</width>
+                 <height>25</height>
+                </size>
                </property>
               </widget>
              </item>
@@ -1160,7 +1267,7 @@ border: 2px solid black;</string>
              <rect>
               <x>0</x>
               <y>0</y>
-              <width>1224</width>
+              <width>1264</width>
               <height>368</height>
              </rect>
             </property>
@@ -1183,6 +1290,7 @@ border: 2px solid black;</string>
                  </property>
                  <property name="font">
                   <font>
+                   <pointsize>12</pointsize>
                    <underline>true</underline>
                   </font>
                  </property>
@@ -1209,7 +1317,8 @@ border: 2px solid black;</string>
                   <cursorShape>PointingHandCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font:24px;</string>
+                  <string notr="true">font:24px;
+background-color:white;</string>
                  </property>
                 </widget>
                </item>
@@ -1222,7 +1331,8 @@ border: 2px solid black;</string>
                   </size>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font:24px;</string>
+                  <string notr="true">font:24px;
+background-color:white;</string>
                  </property>
                 </widget>
                </item>
@@ -1230,6 +1340,7 @@ border: 2px solid black;</string>
                 <widget class="QLabel" name="label_2">
                  <property name="font">
                   <font>
+                   <pointsize>12</pointsize>
                    <underline>true</underline>
                   </font>
                  </property>
@@ -1256,7 +1367,7 @@ border: 2px solid black;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1240</width>
+     <width>1280</width>
      <height>21</height>
     </rect>
    </property>
