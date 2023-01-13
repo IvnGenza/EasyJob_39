@@ -32,6 +32,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:#F0F2F5;</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="QGroupBox" name="groupBox">
@@ -91,7 +94,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <property name="spacing">
-         <number>0</number>
+         <number>20</number>
         </property>
         <property name="topMargin">
          <number>10</number>
@@ -113,7 +116,12 @@
           <property name="font">
            <font>
             <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:#90C8AC;</string>
           </property>
           <property name="text">
            <string>Yes</string>
@@ -137,7 +145,12 @@
           <property name="font">
            <font>
             <pointsize>12</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
            </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:#EF5350;</string>
           </property>
           <property name="text">
            <string>No</string>

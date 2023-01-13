@@ -25,6 +25,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color:#F0F2F5;</string>
+  </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -567,6 +570,9 @@
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
+          </property>
           <item>
            <property name="text">
             <string>3 days +</string>
@@ -633,6 +639,9 @@
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
           </property>
           <item>
            <property name="text">
@@ -705,6 +714,9 @@
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
           </property>
           <item>
            <property name="text">
@@ -788,7 +800,7 @@
        <cursorShape>PointingHandCursor</cursorShape>
       </property>
       <property name="styleSheet">
-       <string notr="true">margin-top:10px;</string>
+       <string notr="true">	background-color:#90C8AC;margin-top:10px;</string>
       </property>
       <property name="text">
        <string>save advanced settings</string>

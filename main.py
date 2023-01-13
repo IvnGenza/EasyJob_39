@@ -1134,6 +1134,7 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
 
     def SendMessage(self):
         self.message = MessageBox()
+        self.message.label.setText('Message Context:')
         self.message.email = self.email_textBox.toPlainText()
         self.message.show()
 
