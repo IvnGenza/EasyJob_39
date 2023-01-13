@@ -31,7 +31,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color:#F0F2F5;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -71,7 +71,8 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>29</pointsize>
+          <family>Comic Sans MS</family>
+          <pointsize>32</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -101,13 +102,13 @@
        <widget class="Line" name="line_5">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -132,13 +133,13 @@
        <widget class="QPushButton" name="back_button">
         <property name="minimumSize">
          <size>
-          <width>130</width>
+          <width>150</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
+          <width>150</width>
           <height>85</height>
          </size>
         </property>
@@ -152,6 +153,10 @@
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
         <property name="text">
          <string>Back</string>
         </property>
@@ -164,13 +169,13 @@
        <widget class="Line" name="line_4">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -210,7 +215,8 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-right: 2px solid black;</string>
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
         </property>
         <property name="text">
          <string>User Settings</string>
@@ -224,13 +230,13 @@
        <widget class="Line" name="line">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -276,7 +282,8 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background-color:#EF5350;
+border:0px;</string>
         </property>
         <property name="text">
          <string>Sign out</string>
@@ -357,7 +364,8 @@
                   <cursorShape>PointingHandCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font:24px;</string>
+                  <string notr="true">font:24px;
+background-color:white;</string>
                  </property>
                 </widget>
                </item>
@@ -442,10 +450,16 @@
              <property name="font">
               <font>
                <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
               </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:#90C8AC;
+</string>
              </property>
              <property name="text">
               <string>New ad</string>
