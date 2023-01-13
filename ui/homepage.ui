@@ -34,6 +34,9 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_6">
     <property name="spacing">
      <number>0</number>
@@ -71,7 +74,8 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>29</pointsize>
+          <family>Comic Sans MS</family>
+          <pointsize>32</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -101,13 +105,13 @@
        <widget class="Line" name="line_5">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -146,6 +150,10 @@
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
         <property name="text">
          <string>Chat</string>
         </property>
@@ -156,6 +164,18 @@
       </item>
       <item>
        <widget class="Line" name="line_4">
+        <property name="minimumSize">
+         <size>
+          <width>3</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>3</width>
+          <height>85</height>
+         </size>
+        </property>
         <property name="frameShadow">
          <enum>QFrame::Plain</enum>
         </property>
@@ -191,6 +211,10 @@
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
         <property name="text">
          <string>My Ads</string>
         </property>
@@ -203,13 +227,13 @@
        <widget class="Line" name="line_2">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -255,7 +279,8 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true">border-right: 2px solid black;</string>
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
         </property>
         <property name="text">
          <string>User Settings</string>
@@ -269,13 +294,13 @@
        <widget class="Line" name="line">
         <property name="minimumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>5</width>
+          <width>3</width>
           <height>85</height>
          </size>
         </property>
@@ -321,13 +346,14 @@
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">background-color:#EF5350;
+border:0px;</string>
         </property>
         <property name="text">
          <string>Sign out</string>
         </property>
         <property name="flat">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -378,19 +404,32 @@
      <widget class="QFrame" name="search_frame">
       <property name="minimumSize">
        <size>
-        <width>960</width>
+        <width>975</width>
         <height>82</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>960</width>
+        <width>975</width>
         <height>82</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
       <property name="styleSheet">
-       <string notr="true">background-color: lightgray;
-border-radius: 32px;</string>
+       <string notr="true">#search_frame {
+	background-color:#90C8AC;
+	color:black;
+	border-radius: 32px;
+}
+
+
+
+</string>
       </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -398,438 +437,512 @@ border-radius: 32px;</string>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QWidget" name="horizontalLayoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>951</width>
-         <height>82</height>
-        </rect>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>10</number>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <property name="spacing">
-         <number>10</number>
-        </property>
-        <property name="leftMargin">
-         <number>10</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="search_button">
-          <property name="minimumSize">
-           <size>
-            <width>70</width>
-            <height>70</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>70</width>
-            <height>70</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">padding:10px;</string>
-          </property>
+       <property name="leftMargin">
+        <number>15</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>20</number>
+       </property>
+       <property name="bottomMargin">
+        <number>4</number>
+       </property>
+       <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+        <widget class="QPushButton" name="search_button">
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>70</width>
+           <height>70</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">padding:10px;
+border: 0;
+border-radius: 30px;
+background-color:#90C8AC;
+color:black;
+
+
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_job_type">
+         <property name="minimumSize">
+          <size>
+           <width>135</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>135</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#comboBox_job_type {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_job_type::drop-down {
+	border: 0px;
+}</string>
+         </property>
+         <item>
           <property name="text">
-           <string/>
+           <string>Full Time</string>
           </property>
-          <property name="iconSize">
-           <size>
-            <width>40</width>
-            <height>40</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Part Time</string>
           </property>
-          <property name="flat">
-           <bool>false</bool>
+         </item>
+         <item>
+          <property name="text">
+           <string>Seasonal</string>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_job_type">
-          <property name="minimumSize">
-           <size>
-            <width>135</width>
-            <height>35</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Contract</string>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>135</width>
-            <height>35</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Temporary</string>
           </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_degree">
+         <property name="minimumSize">
+          <size>
+           <width>225</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>225</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#comboBox_degree {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_degree::drop-down {
+	border: 0px;
+}</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Bachelor's Degree (1st)</string>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+         </item>
+         <item>
+          <property name="text">
+           <string>Master's Degree (2nd)</string>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ph.D (3rd)</string>
           </property>
-          <item>
-           <property name="text">
-            <string>Full Time</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Part Time</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Seasonal</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Contract</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Temporary</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_degree">
-          <property name="minimumSize">
-           <size>
-            <width>225</width>
-            <height>35</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Freelancer</string>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>225</width>
-            <height>35</height>
-           </size>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_location">
+         <property name="minimumSize">
+          <size>
+           <width>185</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>185</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="whatsThis">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#comboBox_location {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_location::drop-down {
+	border: 0px;
+}</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Akko</string>
           </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
+         </item>
+         <item>
+          <property name="text">
+           <string>Arad</string>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ashdod</string>
           </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ashkelon</string>
           </property>
-          <property name="autoFillBackground">
-           <bool>false</bool>
+         </item>
+         <item>
+          <property name="text">
+           <string>Bat Yam</string>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
+         </item>
+         <item>
+          <property name="text">
+           <string>Beer Sheva</string>
           </property>
-          <item>
-           <property name="text">
-            <string>Bachelor's Degree (1st)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Master's Degree (2nd)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ph.D (3rd)</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Freelancer</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_location">
-          <property name="minimumSize">
-           <size>
-            <width>185</width>
-            <height>35</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Bait Shemesh</string>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>185</width>
-            <height>35</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Dimona</string>
           </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
+         </item>
+         <item>
+          <property name="text">
+           <string>Eilat</string>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+         </item>
+         <item>
+          <property name="text">
+           <string>Haifa</string>
           </property>
-          <property name="whatsThis">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </item>
+         <item>
+          <property name="text">
+           <string>Herzliya</string>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
+         </item>
+         <item>
+          <property name="text">
+           <string>Jerusalem</string>
           </property>
-          <item>
-           <property name="text">
-            <string>Akko</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Arad</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ashdod</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ashkelon</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Bat Yam</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Beer Sheva</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Bait Shemesh</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dimona</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Eilat</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Haifa</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Herzliya</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Jerusalem</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Kfar Saba</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Kiryat Gat</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Lod</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ofakim</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ramat Gan</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Rishon Lezion</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Tel Aviv-Yafo</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="comboBox_role">
-          <property name="minimumSize">
-           <size>
-            <width>285</width>
-            <height>30</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kfar Saba</string>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>285</width>
-            <height>30</height>
-           </size>
+         </item>
+         <item>
+          <property name="text">
+           <string>Kiryat Gat</string>
           </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
+         </item>
+         <item>
+          <property name="text">
+           <string>Lod</string>
           </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ofakim</string>
           </property>
-          <property name="styleSheet">
-           <string notr="true"/>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ramat Gan</string>
           </property>
-          <item>
-           <property name="text">
-            <string>Android developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Business systems analyst</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Cloud engineer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Computer hardware engineer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Database administrator</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Flutter/Dart software development</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Full-stack developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Geographic information system</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>iOS developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>IT security analyst</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Java developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Junior web developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Network engineer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Project control officer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Project engineer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Python developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>QA manager</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Ruby on Rails developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Security operations analyst</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Software engineer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>SQL developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>User interface developer</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>User experience designer </string>
-           </property>
-          </item>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+         </item>
+         <item>
+          <property name="text">
+           <string>Rishon Lezion</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Tel Aviv-Yafo</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_role">
+         <property name="minimumSize">
+          <size>
+           <width>285</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>285</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+           <kerning>true</kerning>
+          </font>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#comboBox_role {
+	background-color:#90C8AC;
+	color:black;
+	border-bottom: 2px solid black;
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	padding-left:10px;
+	padding-bottom:-5px;
+}
+
+#comboBox_role::drop-down {
+	border: 0px;
+}</string>
+         </property>
+         <property name="duplicatesEnabled">
+          <bool>false</bool>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <item>
+          <property name="text">
+           <string>Android developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Business systems analyst</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Cloud engineer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Computer hardware engineer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Database administrator</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Flutter/Dart software development</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Full-stack developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Geographic information system</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>iOS developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>IT security analyst</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Java developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Junior web developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Network engineer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Project control officer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Project engineer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Python developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>QA manager</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ruby on Rails developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Security operations analyst</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Software engineer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>SQL developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>User interface developer</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>User experience designer </string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item>
@@ -838,7 +951,7 @@ border-radius: 32px;</string>
        <number>0</number>
       </property>
       <property name="topMargin">
-       <number>5</number>
+       <number>8</number>
       </property>
       <item>
        <spacer name="horizontalSpacer_4">
@@ -873,6 +986,8 @@ border-radius: 32px;</string>
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="cursor">
@@ -880,7 +995,8 @@ border-radius: 32px;</string>
         </property>
         <property name="styleSheet">
          <string notr="true">margin-right:10px;
-margin-left:100px;</string>
+margin-left:100px;
+background-color:#C4DFAA;</string>
         </property>
         <property name="text">
          <string>Free search</string>
@@ -891,23 +1007,28 @@ margin-left:100px;</string>
        <widget class="QPushButton" name="advanced_search_button">
         <property name="minimumSize">
          <size>
-          <width>150</width>
+          <width>165</width>
           <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>150</width>
+          <width>165</width>
           <height>30</height>
          </size>
         </property>
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
          </font>
         </property>
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;</string>
         </property>
         <property name="text">
          <string>Advanced search</string>
@@ -921,13 +1042,13 @@ margin-left:100px;</string>
         </property>
         <property name="minimumSize">
          <size>
-          <width>300</width>
+          <width>315</width>
           <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>300</width>
+          <width>315</width>
           <height>30</height>
          </size>
         </property>
@@ -983,8 +1104,14 @@ margin-left:100px;</string>
       <layout class="QVBoxLayout" name="verticalLayout_5">
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <property name="spacing">
+          <number>6</number>
+         </property>
          <item>
           <widget class="QScrollArea" name="board_scrollArea">
+           <property name="frameShape">
+            <enum>QFrame::StyledPanel</enum>
+           </property>
            <property name="widgetResizable">
             <bool>true</bool>
            </property>
@@ -994,7 +1121,7 @@ margin-left:100px;</string>
               <x>0</x>
               <y>0</y>
               <width>1216</width>
-              <height>379</height>
+              <height>376</height>
              </rect>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -1006,7 +1133,8 @@ margin-left:100px;</string>
                   <cursorShape>PointingHandCursor</cursorShape>
                  </property>
                  <property name="styleSheet">
-                  <string notr="true">font:24px;</string>
+                  <string notr="true">font:24px;
+background-color:white;</string>
                  </property>
                 </widget>
                </item>
@@ -1051,10 +1179,16 @@ margin-left:100px;</string>
              <property name="font">
               <font>
                <pointsize>12</pointsize>
+               <weight>75</weight>
+               <bold>true</bold>
               </font>
              </property>
              <property name="cursor">
               <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:#90C8AC;
+color:black;</string>
              </property>
              <property name="text">
               <string>New ad</string>
@@ -1069,6 +1203,9 @@ margin-left:100px;</string>
      </widget>
     </item>
    </layout>
+   <zorder>search_frame</zorder>
+   <zorder>line_3</zorder>
+   <zorder>board_frame</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
