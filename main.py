@@ -1458,6 +1458,7 @@ class MyAdsResumePopup(QMainWindow):
     
     def SendMessage(self):
         self.messagebox = MessageBox()
+        self.messagebox.label.setText('Message Context:')
         self.messagebox.email = self.usersEmail
         self.messagebox.show()
 
