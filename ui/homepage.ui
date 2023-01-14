@@ -102,6 +102,42 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="admin_chat_button">
+        <property name="minimumSize">
+         <size>
+          <width>160</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>160</width>
+          <height>85</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>19</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#C4DFAA;
+border:0px;</string>
+        </property>
+        <property name="text">
+         <string>Support</string>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="Line" name="line_5">
         <property name="minimumSize">
          <size>

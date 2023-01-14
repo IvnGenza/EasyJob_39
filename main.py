@@ -482,11 +482,14 @@ class Homepage(QMainWindow):
         for user in users.each():
             if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').get().val() == None:
                 self.chat_button.hide()
+            if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child('Admin Fullstack').get().val() != None:
+                self.admin_chat_button.hide()
 
         #setting an icon for search button
         self.search_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
         if userObj.Usertype == 'Admin':
             self.search_username_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
+            self.admin_chat_button.hide()
     
     #--------------------Main Functionality Functions-----------------------#
 
@@ -662,14 +665,16 @@ class Homepage(QMainWindow):
         return True
 
     def openChat(self):
-
         self.chat =  MsgStudentEmployer()
         self.chat.show()
-        # self.chatpopup = GeneralMessagePopup()
-        # self.chatpopup.show()
-        # self.chatpopup.ShowMessages()
         return True
 
+    def openAdminChat(self):
+        self.chat =  FirstMessage()
+        self.chat.GetKeys('Admin1@gmail.com')
+        self.chat.ShowName('Admin Fullstack')
+        self.chat.show()
+        return True 
 
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -680,7 +685,7 @@ class Homepage(QMainWindow):
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
         self.chat_button.clicked.connect(self.openChat)
-
+        self.admin_chat_button.clicked.connect(self.openAdminChat)
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
             self.my_ads_button.clicked.connect(self.change_to_my_ads)
