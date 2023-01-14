@@ -1207,14 +1207,7 @@ class MsgStudentEmployer(QMainWindow):
         self.chatlist.itemClicked.connect(self.ShowChat)
 
 
-
-
-
-
-
-
-
-
+#----------------------------------------First Message----------------------------------
 
 class FirstMessage(QMainWindow):
     def __init__(self):

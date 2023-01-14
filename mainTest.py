@@ -1,6 +1,6 @@
 
 # This is a Unit Test file for the helper fuctions file.
-
+from Activity_Report import *
 from main import *
 import unittest
 
@@ -232,6 +232,47 @@ class GeneralTests(unittest.TestCase):
     firstMessage = FirstMessage()
     chat = MsgStudentEmployer()
     #=-----------------------------=#
+
+    # def test_MsgStudentEmployer1(self):
+    #     self.assertTrue(self.chat.GetKeys)
+
+    # def test_MsgStudentEmployer2(self):
+    #     self.assertTrue(self.chat.ShowAllChats)
+
+    # def test_MsgStudentEmployer3(self):
+    #     self.assertTrue(self.chat.ShowChat)
+
+    # def test_MsgStudentEmployer4(self):
+    #     self.assertTrue(self.chat.SendMsg)
+
+    # def test_MsgStudentEmployer5(self):
+    #     self.assertTrue(self.chat.handle_buttons)
+
+
+    # def test_FirstMessage1(self):
+    #     self.assertTrue(self.firstMessage.GetKeys)
+
+    # def test_FirstMessage2(self):
+    #     self.assertTrue(self.firstMessage.ShowName)
+
+    # def test_FirstMessage3(self):
+    #     self.assertTrue(self.firstMessage.CreateDialog)
+
+    # def test_FirstMessage4(self):
+    #     self.assertTrue(self.firstMessage.handle_buttons)
+
+    # # def test_activityReport1(self):
+    # #     self.assertTrue(self.activityReport.setupUi)
+
+    # # def test_activityReport2(self):
+    # #     self.assertTrue(self.activityReport.retranslateUi)
+
+    # def test_activityReport3(self):
+    #     self.assertTrue(self.activityReport.FullDateList)
+
+    # def test_activityReport4(self):
+    #     self.assertTrue(self.activityReport.plotOnCanvas)
+
 
 
     # Unit Tests for Login:
