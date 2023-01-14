@@ -1,3 +1,4 @@
+from re import I
 from database.authentication import auth, db,current_month, current_year, current_date, StudentAccCounter, StudentDeleteAccCounter, EmployerAccCounter, EmployerDeleteAccCounter
 import sys
 from PyQt5.uic import loadUi
@@ -1327,6 +1328,7 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
 
     def DeleteAccount(self):
         self.deleteUserAcc = DeletePopup(self.UserKey)
+        self.close()
         self.deleteUserAcc.show()
 
     def change_to_permissionPopup(self):
@@ -1397,9 +1399,9 @@ class DeletePopup(QMainWindow): #add a commit here
     def noButton(self):
         self.close()
     
-    def change_to_login(self): # change to login screen
-        login = Login()
-        widget.addWidget(login)
+    def change_to_homepage(self): # change to login screen
+        homepage = Homepage()
+        widget.addWidget(homepage)
         widget.setCurrentIndex(widget.currentIndex()+1)
 
 
@@ -1410,7 +1412,6 @@ class DeletePopup(QMainWindow): #add a commit here
         #     if user.val()['username'] == self.deleteUser:
                 #auth.delete_user_account(self.deleteUser['idToken']) #we delete the user from auth with his id
 
-
         if db.child('Users').child(self.deleteUserKey).get().val()['usertype'] == 'Student': # Check the Acc. type and in order to update activity report.
             db.child('Reports').child('Activity').child(current_date).update({'Student Delete Acc': StudentDeleteAccCounter + 1})
         else:
@@ -1418,7 +1419,7 @@ class DeletePopup(QMainWindow): #add a commit here
         db.child('Users').child(self.deleteUserKey).remove()  # we delete the user from database
         #auth.delete_user_account(self.deleteUserKey['idToken'])
         self.close()
-        self.change_to_login() #when we delete the account we go back to login screen
+        self.change_to_homepage() #when we delete the account we go back to login screen #this was change to login, fixed it so that it will stay in homepage and refresh the users
         self.deleteUserKey = User
 
 
