@@ -496,7 +496,7 @@ class TestSearchUser(unittest.TestCase):
     #######Test for help function "change to my Ads"
     
     
-    class TestChangeToMyAds(unittest.TestCase):
+class TestChangeToMyAds(unittest.TestCase):
     def setUp(self):
         self.employer = User("employer@example.com", "employer", "password", "Employer")
         self.homepage = HomePage(self.employer)
