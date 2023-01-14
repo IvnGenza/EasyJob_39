@@ -108,14 +108,14 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; text-decoration: underline;\">Activity Chart</span></p></body></html>"))
-        self.send_report_button.setText(_translate("MainWindow", "Report"))
+        self.send_report_button.setText(_translate("MainWindow", "Show reports"))
 
 
     def FullDateList(self):
 
         years = db.child('Reports').child('Activity').get()     #######################################
         for year in years.each():                               ##This func push every report in db into the QListWidget.
-            print(year.key())                                   ##Reports are sorted by yyyy/m.
+        #print(year.key())                                      ##Reports are sorted by yyyy/m.
             temp = len(year.val())                              #######################################
 
             for month in range(temp-1):
