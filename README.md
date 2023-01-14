@@ -32,8 +32,11 @@ as a persone looking for workers (Employer):
 The project is managed by Group 39: 
 
 עומר שי - omersh9@ac.sce.ac.il or omershay1212@gmail.com
+
 מקסים סובוטין - maximsu@ac.sce.ac.il
+
 שי חחיאשוילי - shayha2@ac.sce.ac.il
+
 איוון גנזה - ivange@ac.sce.ac.il
 
 
@@ -41,9 +44,9 @@ The project is managed by Group 39:
 
 The first time you run the code, write the following line in the terminal before you run the program inorder to get the required libraries installed.
 
->> python -m pip install -r requirements.txt
+	python -m pip install -r requirements.txt
 
 
 After that every time you need to run the program you can type the following line in the terminal or run using the debugger.
 
->> python main.py
+	python main.py
