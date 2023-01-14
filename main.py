@@ -865,10 +865,16 @@ class Usersettings(QMainWindow):
         self.studentReport.show()
         return True
 
-    def change_to_message_the_admin(self):
-        self.messageBox = GeneralMessageBox()
-        self.messageBox.label.setText('Your Message To Admin:')
-        self.messageBox.show()
+    #def change_to_message_the_admin(self):
+    def openAdminChat(self):
+        self.chat =  FirstMessage()
+        self.chat.GetKeys('Admin1@gmail.com')
+        self.chat.ShowName('Admin Fullstack')
+        self.chat.show()
+        return True 
+        #self.messageBox = GeneralMessageBox()
+        #self.messageBox.label.setText('Your Message To Admin:')
+        #self.messageBox.show()
 
     def change_to_report(self):
         self.employer_report = EmployerReport()
