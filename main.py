@@ -1075,14 +1075,6 @@ class AdPopup(QMainWindow):
                 #saving the key of the job from the database for later use in sendResume, sendMessage, editAd and deleteAd functions.
                 self.PoPjobRef = job 
                 self.PoPjobKey = job.key()
-
-
-        name = db.child('Jobs').child(self.PoPjobKey).get().val()['contactInfo'][0]
-        users = db.child('Users').get()
-        for user in users.each():
-            if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child(name).get().val() != None:
-                self.send_message_button.hide() #if student already have chat with this employer, he cant send another 'first' msg. 
-
         return True
 
     def SendResume(self): #this function is called when a student presses the "send resume button" in the ad frame, this function updates the database acordingly and checks for duplications in the database.
@@ -1324,11 +1316,11 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
             self.resume_textBox.setText(db.child('Users').child(self.UserKey).get().val()['resume']) #only students have resumes in the database, employers dont have it
         self.handle_buttons()
 
-        name = db.child('Users').child(self.UserKey).get().val()['fullname']
-        users = db.child('Users').get()
-        for user in users.each():
-            if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child(name).get().val() != None:
-                self.send_message_button.hide()
+        # name = db.child('Users').child(self.UserKey).get().val()['fullname']
+        # users = db.child('Users').get()
+        # for user in users.each():
+        #     if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child(name).get().val() != None:
+        #         self.send_message_button.hide()
 
         #adding all the data from the data base into the ui window based on the current user (username)
         self.fullname_textBox.setText(db.child('Users').child(self.UserKey).get().val()['fullname'])
