@@ -31,11 +31,22 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;</string>
+   </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <widget class="QPushButton" name="cancel_button">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:#EF5350;</string>
+        </property>
         <property name="text">
          <string>Cancel</string>
         </property>
@@ -98,6 +109,15 @@ text-align:left;
       </item>
       <item>
        <widget class="QPushButton" name="publish_button">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #90C8AC;
+</string>
+        </property>
         <property name="text">
          <string>Publish</string>
         </property>
@@ -177,6 +197,14 @@ text-align:left;
               <height>35</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -203,6 +231,14 @@ text-align:left;
               <height>35</height>
              </size>
             </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -228,6 +264,14 @@ text-align:left;
               <width>185</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;</string>
             </property>
             <property name="text">
              <string/>
@@ -330,7 +374,7 @@ text-align:left;
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -387,7 +431,7 @@ text-align:left;
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -439,7 +483,7 @@ text-align:left;
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -572,7 +616,7 @@ text-align:left;
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -724,7 +768,7 @@ text-align:left;
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -853,7 +897,7 @@ text-align:left;
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -918,7 +962,7 @@ text-align:left;
              <bool>false</bool>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">background-color:white;</string>
             </property>
             <item>
              <property name="text">
@@ -1034,7 +1078,7 @@ text-align:left;
           <property name="minimumSize">
            <size>
             <width>0</width>
-            <height>0</height>
+            <height>30</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -1042,6 +1086,14 @@ text-align:left;
             <width>999</width>
             <height>999</height>
            </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:white;</string>
           </property>
          </widget>
         </item>
@@ -1100,6 +1152,14 @@ text-align:left;
               <width>350</width>
               <height>250</height>
              </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;</string>
             </property>
            </widget>
           </item>
@@ -1190,6 +1250,11 @@ text-align:left;
             </item>
             <item row="0" column="0">
              <widget class="QCheckBox" name="Javascript_checkbox">
+              <property name="font">
+               <font>
+                <pointsize>16</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Javascript</string>
               </property>
