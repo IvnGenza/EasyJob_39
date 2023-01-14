@@ -14,7 +14,7 @@ firebaseConfig ={
 'appId': "1:324559082205:web:bc45a327ebcce2a30b0134",
 'measurementId': "G-4FS7N8MX70"
 };
-
+current_day = int(datetime.datetime.now().day)
 current_month = str(datetime.datetime.now().month)
 current_year = str(datetime.datetime.now().year)
 
@@ -27,13 +27,13 @@ storage = firebase.storage()
 
 #------------------------------ Activity Report -----------------------------------
 
-
-db.child('Reports').child('Activity').child(current_date).update({ # This line will automatically create a new empty report every NEW month.
-    'Student Create Acc':12,
-    'Employer Create Acc':15,
-    'Student Delete Acc':3,
-    'Employer Delete Acc':2
-    })
+if current_day == 1:                                                   
+    db.child('Reports').child('Activity').child(current_date).update({          #################################################
+        'Student Create Acc':0,                                                 ##   If today is the first day of the month,   ##                   
+        'Employer Create Acc':0,                                                ##  this part of the code will automatically   ##
+        'Student Delete Acc':0,                                                 ## create a new empty report in the database.  ##
+        'Employer Delete Acc':0                                                 #################################################
+        })
 
 EmployerAccCounter = db.child('Reports').child('Activity').child(current_date).child('Employer Create Acc').get().val()
 StudentDeleteAccCounter = db.child('Reports').child('Activity').child(current_date).child('Student Delete Acc').get().val()
