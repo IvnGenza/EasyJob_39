@@ -447,7 +447,8 @@ border:0px;</string>
              </font>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color:white;border:1px solid black;</string>
+             <string notr="true">background-color:white;
+border:1px solid black;</string>
             </property>
             <property name="text">
              <string/>
@@ -722,6 +723,95 @@ border:0px;</string>
         <property name="rightMargin">
          <number>0</number>
         </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>50</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #90C8AC;
+</string>
+            </property>
+            <property name="text">
+             <string>Turn on/off notifications</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_3">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>on</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>12</pointsize>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
+            </property>
+            <property name="text">
+             <string>off</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
         <item alignment="Qt::AlignHCenter">
          <widget class="QFrame" name="navigation_frame_2">
           <property name="enabled">
