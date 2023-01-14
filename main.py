@@ -177,8 +177,9 @@ class Login(QMainWindow):
                 print(userObj.Fullname)
                 print(">> Welcome! <<")
                 self.change_to_homepage() #goes to next screen
-            except: #if could not login then there is a connection error.
-                showError(">> Connection Error! <<")
+            except Exception as e: #if could not login then there is a connection error.
+                showError(f">> Connection Error! <<")
+                print(e)
 
         else: #if there is no existing account then show this error message
             showError("Email or password is invalid.")
@@ -662,6 +663,8 @@ class Homepage(QMainWindow):
         # self.chatpopup.ShowMessages()
         return True
 
+
+
     def handle_buttons(self): # this function handles the click of the signup button
         self.sign_out_button.clicked.connect(self.change_to_login) #for sign out button 
         self.user_settings_button.clicked.connect(self.change_to_usersettings) #for user settings button 
@@ -726,37 +729,13 @@ class Password(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex()+1)
         return True
 
+#-------------------------------Employer Report class------------------------------------
+class Employer_Report(QMainWindow):
+    def __init__(self):
+        super(Employer_Report, self).__init__()
+        loadUi("ui/Employer_Report.ui", self)
 
-    # # check
-    # def checkPasswordKey(self, passkey,asd):
-    #     if passkey == '':
-    #         return False
-    #     elif passkey != " ":
-    #         countL = 0
-    #         countN = 0
-    #         index = 0
-    #         for letter in passkey:
-    #             if 'A' <= passkey <= 'Z':
-    #                 countL += 1  # .
-    #                 index += 1
-    #             if '1' <= letter <= '9':  # check for password.
-    #                 countL += 1
-    #                 index += 1
-    #         if countN >= 1 and countN >= 1:
-    #             return True
-    #     else:
-    #         return False
-    #     # passkey.islower() or passkey.isalpha():
-    #     #   return False  # returns false if there are no uppercase letters or no numbers
-    #     # return True
 
-    # def check(self):
-    #     password = self.inputpassword.text()
-    #     if self.checkPasswordKey(password):
-    #         # update the data base
-    #         self.change_to_signup()  # goes to next screen
-    #     else:
-    #         self.error.setText("Error! invalid Password")
 
 
 #------------------------------------Usersettings class------------------------------------
@@ -771,6 +750,7 @@ class Usersettings(QMainWindow):
         self.handle_buttons() 
         self.studentReport = None
         self.messageBox = None
+        self.employer_report = None
         self.username_text.setText(userObj.Username)
         self.full_name_text.setText(userObj.Fullname)
         self.age_text.setText(str(userObj.Age))
@@ -837,7 +817,12 @@ class Usersettings(QMainWindow):
         self.messageBox = GeneralMessageBox()
         self.messageBox.label.setText('Your Message To Admin:')
         self.messageBox.show()
-    
+
+    def change_to_report(self):
+        self.employer_report = Employer_Report()
+        self.employer_report.show()
+        return True
+
     def edit_personal_info(self):
         self.edit_button.hide() #we hide edit button
         self.save_changes_button.show() #we unhide the save changes button
@@ -885,6 +870,7 @@ class Usersettings(QMainWindow):
         if userObj.Usertype == 'Employer':
             self.my_job_ads_button.clicked.connect(self.change_to_my_ads)
             self.message_admin_button.clicked.connect(self.change_to_message_the_admin)
+            self.make_report_button.clicked.connect(self.change_to_report)
         if userObj.Usertype == 'Admin':
             self.notifications_frame.hide()
             self.notifications_lable.hide()
@@ -1254,6 +1240,7 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
 
     def SendMessage(self):
         self.message = MessageBox()
+        self.message.label.setText('Message Context:')
         self.message.email = self.email_textBox.toPlainText()
         self.message.show()
 
@@ -1306,6 +1293,8 @@ class DeletePopup(QMainWindow): #add a commit here
         loadUi("ui/Delete_Popup.ui", self)
         self.deleteUserKey = User
         self.handle_buttons() 
+        
+ # adding commit for this function that delete Account from line 1192
 
     def delete_account(self): #deleting the current user
         global CURRENTUSER
@@ -1360,7 +1349,8 @@ class DeletePopup(QMainWindow): #add a commit here
 
         self.no_button.clicked.connect(self.noButton) # if press no close the
         return True
-
+### ===============================omer=====================================#### 
+### the end of deleting account ####
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
     def __init__(self):
@@ -1409,7 +1399,7 @@ class MyAds(QMainWindow):
         return True
 
     def change_to_NewAd(self): # open the new add screen (only by employer)
-        ad = NewAd()
+        ad = NewAd(None)
         widget.addWidget(ad)
         widget.setCurrentIndex(widget.currentIndex()+1)
         return True
@@ -1576,6 +1566,7 @@ class MyAdsResumePopup(QMainWindow):
     
     def SendMessage(self):
         self.messagebox = MessageBox()
+        self.messagebox.label.setText('Message Context:')
         self.messagebox.email = self.usersEmail
         self.messagebox.show()
 
@@ -1753,7 +1744,6 @@ class MessageBox(QMainWindow):
         elif userObj.Usertype == 'Employer':
             self.send_message_button.clicked.connect(self.SendMessageAdResume)
             
-
 
 
 #------------------------------- General Message Popup ----------------------------------

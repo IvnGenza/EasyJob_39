@@ -26,6 +26,10 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background-color:#F0F2F5;
+</string>
+   </property>
    <layout class="QHBoxLayout" name="horizontalLayout_4">
     <property name="spacing">
      <number>0</number>
@@ -46,7 +50,7 @@
      <widget class="QLabel" name="BigImage">
       <property name="minimumSize">
        <size>
-        <width>685</width>
+        <width>675</width>
         <height>0</height>
        </size>
       </property>
@@ -96,7 +100,7 @@
         <item>
          <layout class="QGridLayout" name="gridLayout">
           <property name="topMargin">
-           <number>65</number>
+           <number>55</number>
           </property>
           <property name="bottomMargin">
            <number>20</number>
@@ -117,7 +121,9 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>24</pointsize>
+              <pointsize>22</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
             </property>
             <property name="text">
@@ -141,7 +147,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>24</pointsize>
+              <pointsize>22</pointsize>
              </font>
             </property>
             <property name="text">
@@ -167,6 +173,10 @@
              <font>
               <pointsize>17</pointsize>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;
+border: 1px solid black;</string>
             </property>
             <property name="text">
              <string/>
@@ -205,6 +215,10 @@
               <pointsize>17</pointsize>
              </font>
             </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:white;
+border: 1px solid black;</string>
+            </property>
             <property name="text">
              <string/>
             </property>
@@ -232,6 +246,9 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <property name="bottomMargin">
          <number>150</number>
         </property>
@@ -267,8 +284,14 @@ text-align:center;</string>
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="spacing">
+           <number>0</number>
+          </property>
           <property name="leftMargin">
            <number>100</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
           </property>
           <property name="rightMargin">
            <number>100</number>
@@ -297,8 +320,17 @@ text-align:center;</string>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
             </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">	background-color:#90C8AC;</string>
+            </property>
             <property name="text">
              <string>Login</string>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -325,6 +357,9 @@ text-align:center;</string>
             </property>
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color:#C4DFAA;</string>
             </property>
             <property name="text">
              <string>Sign up</string>
