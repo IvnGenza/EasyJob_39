@@ -484,6 +484,7 @@ class Homepage(QMainWindow):
                 self.chat_button.hide()
             if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child('Admin Fullstack').get().val() != None and userObj.Usertype != 'Admin':
                 self.admin_chat_button.hide()
+                self.line_5.hide()
 
         #setting an icon for search button
         self.search_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
@@ -1173,8 +1174,16 @@ class MsgStudentEmployer(QMainWindow):
         
         chats = db.child('Users').child(self.MyKey).child('messages').get() 
 
-        for person in chats.each():                               
-            self.chatlist.addItem(person.key())
+        for person in chats.each():  
+            flag = 0
+            for user in users.each():
+                if person.key() == user.val()['fullname']:
+                    flag = 1
+
+                if flag == 1:
+                    self.chatlist.addItem(person.key())
+                    break
+
         return True
 
 
@@ -1409,6 +1418,8 @@ class DeletePopup(QMainWindow): #add a commit here
 
                 auth.delete_user_account(CURRENTUSER['idToken']) #we delete the user from auth with his id
                 db.child('Users').child(user.key()).remove()  # we delete the user from database
+
+
 
                 self.close()
                 self.change_to_login() #when we delete the account we go back to login screen
