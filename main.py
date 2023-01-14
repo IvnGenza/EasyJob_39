@@ -1090,10 +1090,10 @@ class AdPopup(QMainWindow):
         mail = db.child('Jobs').child(self.PoPjobKey).get().val()['contactInfo'][2]     
         name = db.child('Jobs').child(self.PoPjobKey).get().val()['contactInfo'][0]
 
-        self.chat =  MsgStudentEmployer()
+        self.chat =  FirstMessage()
         self.chat.GetKeys(mail)
-        self.chat.show()
         self.chat.ShowName(name)
+        self.chat.show()
         return True 
 
 
@@ -1120,101 +1120,145 @@ class AdPopup(QMainWindow):
 #----------------------------------------Message to Employer----------------------------------
 
 class MsgStudentEmployer(QMainWindow):
-
     def __init__(self):
         super(MsgStudentEmployer, self).__init__()
+        loadUi("ui/StudentEmployerChat.ui", self)
+        self.handle_buttons()
         self.EmployerKey = None
-        #self.EmpMail = None
+        self.EmpMail = None
         self.MyKey = None
-        #self.myMail = None
-        self.flag = None
-
-
-        if self.flag != None:
-            loadUi("ui/Send_msg.ui", self)
-            self.first_msg_button.clicked.connect(self.CreateDialog)
-        else:
-            loadUi("ui/StudentEmployerChat.ui", self) 
-            self.send_msg_button.clicked.connect(self.SendMsg)
-            self.show_chats_button.clicked.connect(self.ShowAllChats)
-            self.chat_list.itemClicked.connect(self.ShowChat)
+        self.myMail = userObj.Email
 
 
 
-    def GetKeys(self,item):     # This function will save a keys of current user and employer. Item can be fullname or email.
-        self.flag = item
+    def GetKeys(self,mail):     # This function will save a keys of current user and employer. Item can be fullname or email.
+        self.EmpMail = mail
         users = db.child('Users').get()
 
         for user in users.each():
-
-            if user.val()['email'] == item:
+            if user.val()['email'] == mail:
                 self.EmployerKey = user.key()
-
-            if user.val()['fullname'] == item:
-                self.EmployerKey = user.key()
-
-            if user.val()['email'] == userObj.Email:
-                self.MyKey = user.key()
-
 
         return True
 
 
     def ShowAllChats(self):         # This function pushing all existing chats.
+        self.chatlist.clear()
+        users = db.child('Users').get()
+
+        for user in users.each():
+            if user.val()['email'] == self.myMail:
+                self.MyKey = user.key()
+        
         chats = db.child('Users').child(self.MyKey).child('messages').get() 
 
         for person in chats.each():                               
-            self.chat_list.addItem(person.key())
+            self.chatlist.addItem(person.key())
         return True
 
 
-    def ShowChat(self,item):
-        msgs = db.child('Users').child(self.MyKey).child('messages').child().get()  
-
-        for msg in msgs.each():                               
-            self.chat_area.addItem(msg)
+    def ShowChat(self,item): # This function will send some employer`s mail in order to get his key.
+        TargetMail = db.child('Users').child(self.MyKey).child('messages').child(item.text()).get().val()[0]
+        self.GetKeys(TargetMail)
+                            # after this it will add all messages between 2 persons into chat area.
+        msgs = db.child('Users').child(self.MyKey).child('messages').child(item.text()).get()
+        for msg in msgs.each():
+            if msg.val() != TargetMail:
+                self.chat_area.addItem(msg.val())
         return True
 
 
     def SendMsg(self):
-        usrName = db.child('Users').child(self.MyKey).child('messages').get().val()['username']
-        usrFullName = db.child('Users').child(self.MyKey).child('messages').get().val()['fullname']      # Saving user name for next indications.
-        empFullName = db.child('Users').child(self.EmployerKey).child('messages').get().val()['fullname']     # Saving employer name for next indications.
+
+        usrName = db.child('Users').child(self.MyKey).get().val()['username']
+        usrFullName = db.child('Users').child(self.MyKey).get().val()['fullname']      
+        empFullName = db.child('Users').child(self.EmployerKey).get().val()['fullname']
+
+        index = len(db.child('Users').child(self.MyKey).child('messages').child(empFullName).shallow().get().val())
 
         msg = self.msg_line.text()  # Current message.
         chatLine = usrName + ": " + msg # User name + message for indication in chat.
 
-        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update(chatLine)          ###########################################
-        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update(chatLine)     ### Saving this message for both users. ###    
-        return True                                                                         
-
-    def ShowName(self,fullname):
-        self.emp_fullname.setText('Message to'+fullname+'...')
-
-
-    def CreateDialog(self):
-
-        usrName = db.child('Users').child(self.MyKey).child('messages').get().val()['username']
-        usrFullName = db.child('Users').child(self.MyKey).child('messages').get().val()['fullname']      
-        empFullName = db.child('Users').child(self.EmployerKey).child('messages').get().val()['fullname']     
-
-        msg = self.first_text.toPlainText()  # Current message.
-        chatLine = usrName + ": " + msg # User name + message for indication in chat.
-
-        # db.child('Users').child(self.MyKey).child('messages').child(empFullName).update(self.myMail)          
-        # db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update(self.EmpMail)
-        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update(chatLine)          
-        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update(chatLine)
+        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update({index:chatLine})          
+        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update({index:chatLine})
         self.close()
+        return True                                                                       
 
-        return True                                                                         
+
+    def handle_buttons(self):
+        self.send_msg_button.clicked.connect(self.SendMsg)
+        self.show_chats_button.clicked.connect(self.ShowAllChats)
+        self.chatlist.itemClicked.connect(self.ShowChat)
+
+
+
+
+
+
+
 
 
 
 
 class FirstMessage(QMainWindow):
+    def __init__(self):
+        super(FirstMessage, self).__init__()
+        loadUi("ui/StudentEmployerChat.ui", self)
+        self.handle_buttons()
+        self.EmployerKey = None
+        self.EmpMail = None
+        self.MyKey = None
+        self.myMail = userObj.Email
 
-        pass
+
+
+    def GetKeys(self,mail):     # This function will save a keys of current user and employer. Item can be fullname or email.
+        self.EmpMail = mail
+        users = db.child('Users').get()
+
+        for user in users.each():
+
+            if user.val()['email'] == mail:
+                self.EmployerKey = user.key()
+
+            if user.val()['fullname'] == mail:
+                self.EmployerKey = user.key()
+
+            if user.val()['email'] == self.myMail:
+                self.MyKey = user.key()
+        return True
+
+
+    def ShowName(self,fullname):
+        self.msg_line.setText('Message to '+fullname+'...')
+
+
+    def CreateDialog(self):
+
+        usrName = db.child('Users').child(self.MyKey).get().val()['username']
+        usrFullName = db.child('Users').child(self.MyKey).get().val()['fullname']      
+        empFullName = db.child('Users').child(self.EmployerKey).get().val()['fullname']
+
+        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update({0:self.EmpMail})          
+        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update({0:self.myMail})
+
+
+        msg = self.msg_line.text()  # Current message.
+        chatLine = usrName + ": " + msg # User name + message for indication in chat.
+
+        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update({1:chatLine})          
+        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update({1:chatLine})
+        self.close()
+        return True                                                                         
+
+
+    def handle_buttons(self):
+        
+        self.send_msg_button.clicked.connect(self.CreateDialog)
+        self.chatlist.hide()
+        self.show_chats_button.hide()
+
+
 
 
 
