@@ -472,11 +472,17 @@ class Homepage(QMainWindow):
         self.chatpopup=None
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
-            self.my_ads_button.hide() #only for employer 
+            self.my_ads_button.hide() #only for employer
+            if(db.child('Users').child(self.MyKey).child('messages'))
             self.line_4.hide() 
 
         if userObj.Usertype == 'Employer' and userObj.PublicationPermission == 'block': #check if employer can create new ad.
             self.new_ad_button.setDisabled(True) #disable 'new ad' bottun if admin blocked this func for the user.
+
+        users = db.child('Users').get()
+        for user in users.each():
+            if user.val()['email'] == userObj.Email and user.val()['messages'] == None:
+                self.chat_button.hide()
 
         #setting an icon for search button
         self.search_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
