@@ -1416,6 +1416,13 @@ class DeletePopup(QMainWindow): #add a commit here
     def noButton(self):
         self.close()
     
+    
+    def change_to_login(self): # change to login screen
+        login = Login()
+        widget.addWidget(login)
+        widget.setCurrentIndex(widget.currentIndex()+1)
+        
+
     def change_to_homepage(self): # change to login screen
         homepage = Homepage()
         widget.addWidget(homepage)
