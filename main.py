@@ -480,7 +480,7 @@ class Homepage(QMainWindow):
 
         users = db.child('Users').get()
         for user in users.each():
-            if user.val()['email'] == userObj.Email and user.val()['messages'] == None:
+            if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').get().val() == None:
                 self.chat_button.hide()
 
         #setting an icon for search button
