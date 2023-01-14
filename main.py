@@ -654,9 +654,12 @@ class Homepage(QMainWindow):
         return True
 
     def openChat(self):
-        self.chatpopup = GeneralMessagePopup()
-        self.chatpopup.show()
-        self.chatpopup.ShowMessages()
+
+        self.chat =  MsgStudentEmployer()
+        self.chat.show()
+        # self.chatpopup = GeneralMessagePopup()
+        # self.chatpopup.show()
+        # self.chatpopup.ShowMessages()
         return True
 
     def handle_buttons(self): # this function handles the click of the signup button
@@ -1060,7 +1063,15 @@ class AdPopup(QMainWindow):
 
 
     def SendMessage(self):
-        return True
+
+        mail = db.child('Jobs').child(self.PoPjobKey).get().val()['contactInfo'][2]     
+        name = db.child('Jobs').child(self.PoPjobKey).get().val()['contactInfo'][0]
+
+        self.chat =  MsgStudentEmployer()
+        self.chat.GetKeys(mail)
+        self.chat.show()
+        self.chat.ShowName(name)
+        return True 
 
 
     def Change_to_EditAd(self):
@@ -1081,6 +1092,115 @@ class AdPopup(QMainWindow):
         self.visability_ad_button.clicked.connect(self.VisabilityPopUp)
         self.edit_ad_button.clicked.connect(self.Change_to_EditAd)
         self.delete_ad_button.clicked.connect(self.DeleteAd)
+
+
+#----------------------------------------Message to Employer----------------------------------
+
+class MsgStudentEmployer(QMainWindow):
+
+    def __init__(self):
+        super(MsgStudentEmployer, self).__init__()
+        self.EmployerKey = None
+        #self.EmpMail = None
+        self.MyKey = None
+        #self.myMail = None
+        self.flag = None
+
+
+        if self.flag != None:
+            loadUi("ui/Send_msg.ui", self)
+            self.first_msg_button.clicked.connect(self.CreateDialog)
+        else:
+            loadUi("ui/StudentEmployerChat.ui", self) 
+            self.send_msg_button.clicked.connect(self.SendMsg)
+            self.show_chats_button.clicked.connect(self.ShowAllChats)
+            self.chat_list.itemClicked.connect(self.ShowChat)
+
+
+
+    def GetKeys(self,item):     # This function will save a keys of current user and employer. Item can be fullname or email.
+        self.flag = item
+        users = db.child('Users').get()
+
+        for user in users.each():
+
+            if user.val()['email'] == item:
+                self.EmployerKey = user.key()
+
+            if user.val()['fullname'] == item:
+                self.EmployerKey = user.key()
+
+            if user.val()['email'] == userObj.Email:
+                self.MyKey = user.key()
+
+
+        return True
+
+
+    def ShowAllChats(self):         # This function pushing all existing chats.
+        chats = db.child('Users').child(self.MyKey).child('messages').get() 
+
+        for person in chats.each():                               
+            self.chat_list.addItem(person.key())
+        return True
+
+
+    def ShowChat(self,item):
+        msgs = db.child('Users').child(self.MyKey).child('messages').child().get()  
+
+        for msg in msgs.each():                               
+            self.chat_area.addItem(msg)
+        return True
+
+
+    def SendMsg(self):
+        usrName = db.child('Users').child(self.MyKey).child('messages').get().val()['username']
+        usrFullName = db.child('Users').child(self.MyKey).child('messages').get().val()['fullname']      # Saving user name for next indications.
+        empFullName = db.child('Users').child(self.EmployerKey).child('messages').get().val()['fullname']     # Saving employer name for next indications.
+
+        msg = self.msg_line.text()  # Current message.
+        chatLine = usrName + ": " + msg # User name + message for indication in chat.
+
+        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update(chatLine)          ###########################################
+        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update(chatLine)     ### Saving this message for both users. ###    
+        return True                                                                         
+
+    def ShowName(self,fullname):
+        self.emp_fullname.setText('Message to'+fullname+'...')
+
+
+    def CreateDialog(self):
+
+        usrName = db.child('Users').child(self.MyKey).child('messages').get().val()['username']
+        usrFullName = db.child('Users').child(self.MyKey).child('messages').get().val()['fullname']      
+        empFullName = db.child('Users').child(self.EmployerKey).child('messages').get().val()['fullname']     
+
+        msg = self.first_text.toPlainText()  # Current message.
+        chatLine = usrName + ": " + msg # User name + message for indication in chat.
+
+        # db.child('Users').child(self.MyKey).child('messages').child(empFullName).update(self.myMail)          
+        # db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update(self.EmpMail)
+        db.child('Users').child(self.MyKey).child('messages').child(empFullName).update(chatLine)          
+        db.child('Users').child(self.EmployerKey).child('messages').child(usrFullName).update(chatLine)
+        self.close()
+
+        return True                                                                         
+
+
+
+
+class FirstMessage(QMainWindow):
+
+        pass
+
+
+
+
+
+
+
+
+
 
 
 #----------------------------------------Ad Visability popUp----------------------------------
@@ -1378,6 +1498,7 @@ class MyAdsDetails(QMainWindow):
     #    if self.save_changes_button.clicked:
     #        self.save_changes_button.hide() #we hide the save changes button
     #        self.edit_button.show() #we unhide the edit button
+
 
     def handle_buttons(self):
         self.back_button.clicked.connect(self.change_to_MyAds)
