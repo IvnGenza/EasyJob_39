@@ -360,8 +360,8 @@ class NewAd(QMainWindow):
                         "location": location, 
                         "degree": degree, 
                         "jobType": jobType,
-                        "Visability": 'Visible for every user' # Ad Visability in homepage list. admin can change this param to 'Visible for creator only'.
-                        }
+                        },
+                    "Visability": 'Visible for every user' # Ad Visability in homepage list. admin can change this param to 'Visible for creator only'.
                 }
                 db.child('Jobs').push(data)
 
@@ -563,14 +563,15 @@ class Homepage(QMainWindow):
         jobs = db.child('Jobs').get()
         for job in jobs.each():
             if (
-                job.val()['search']['degree'] == Degree or 
+                (job.val()['search']['degree'] == Degree or 
                 job.val()['search']['jobType'] == JobType or 
                 job.val()['search']['location'] == Location or 
                 job.val()['search']['role'] == Role or 
                 job.val()['preferences']['workExperience'] == WorkExperience or 
                 job.val()['preferences']['daysPerWeek'] == DaysPerWeek or 
                 job.val()['preferences']['workingFrom'] == WorkingFrom or 
-                all(elem in job.val()['knowledge'] for elem in Knowledge) #"all" checks if the database list contains all elements in in the Knowledge parameter list
+                all(elem in job.val()['knowledge'] for elem in Knowledge)) and #"all" checks if the database list contains all elements in in the Knowledge parameter list
+                job.val()['Visability'] == 'Visible for every user'
                 ): 
 
                 flag = 1 #flag = 1 means that we found at least one job ad that fits the description
