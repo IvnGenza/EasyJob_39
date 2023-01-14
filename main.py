@@ -473,7 +473,6 @@ class Homepage(QMainWindow):
         if userObj.Usertype == 'Student': #if the user is NOT an employer, hide the "add new job ad" button
             self.new_ad_button.hide() #on buttons we can use the hide method to hide them
             self.my_ads_button.hide() #only for employer
-            if(db.child('Users').child(self.MyKey).child('messages'))
             self.line_4.hide() 
 
         if userObj.Usertype == 'Employer' and userObj.PublicationPermission == 'block': #check if employer can create new ad.
