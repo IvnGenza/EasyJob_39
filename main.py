@@ -1268,14 +1268,6 @@ class FirstMessage(QMainWindow):
 
 
 
-
-
-
-
-
-
-
-
 #----------------------------------------Ad Visability popUp----------------------------------
 
 class AdVisability(QMainWindow):
@@ -1326,10 +1318,16 @@ class UserPopup(QMainWindow): #this is a popup window that we see when the admin
 
 
     def SendMessage(self):
-        self.message = MessageBox()
-        self.message.label.setText('Message Context:')
-        self.message.email = self.email_textBox.toPlainText()
-        self.message.show()
+
+        mail = db.child('Users').child(self.UserKey).get().val()['email']     
+        name = db.child('Users').child(self.UserKey).get().val()['fullname']
+
+        self.chat =  FirstMessage()
+        self.chat.GetKeys(mail)
+        self.chat.ShowName(name)
+        self.chat.show()
+        return True 
+
 
     def DeleteAccount(self):
         self.deleteUserAcc = DeletePopup(self.UserKey)
@@ -1595,6 +1593,7 @@ class MyAdsResumePopup(QMainWindow):
         self.usersEmail=''
         self.Jobreference=None
         self.messagebox =None
+        self.usersFullname=''
 
     def SetParameters(self, item, jobreference):
         self.Jobreference = jobreference
@@ -1609,6 +1608,7 @@ class MyAdsResumePopup(QMainWindow):
                 self.email_textBox.setText(user.val()['email'])
                 self.age_textBox.setText(user.val()['age'])
                 self.resume_textBox.setText(user.val()['resume'])
+                self.usersFullname = user.val()['fullname']
         return True
 
 
@@ -1652,10 +1652,12 @@ class MyAdsResumePopup(QMainWindow):
         return True
     
     def SendMessage(self):
-        self.messagebox = MessageBox()
-        self.messagebox.label.setText('Message Context:')
-        self.messagebox.email = self.usersEmail
-        self.messagebox.show()
+        self.chat =  FirstMessage()
+        self.chat.GetKeys(self.usersEmail)
+        self.chat.ShowName(self.usersFullname)
+        self.chat.show()
+        return True 
+
 
     def handle_buttons(self):
         self.accept_resume_button.clicked.connect(self.AcceptResume)
