@@ -16,7 +16,7 @@ if userObj.Usertype == "Student":
         homepage = Homepage()
         password = Password()
         #==========Omer================#
-        deletepopup=DeletePopup()
+        #deletepopup=DeletePopup()  #<-- cant create object of this class
         homepage = Homepage()
         
         #===========Shay==============#
@@ -93,6 +93,7 @@ if userObj.Usertype == "Employer":
         myAds = MyAds()
         messagebox = MessageBox()
         generalmessage = GeneralMessagePopup()
+        generalmessagebox = GeneralMessageBox()
         myAdsDetails = MyAdsDetails()
         #newAd = NewAd() #<---- you cant create an object of this class without passing an argument, so try testing different class
         messageBox = MessageBox()
@@ -133,9 +134,9 @@ if userObj.Usertype == "Employer":
         #    self.assertTrue(self.newAd.handle_buttons)
         
 
-        # Unit Tests for Usersettings: 
-        def test_MessageBox_To_My_Ads(self):
-            self.assertTrue(self.messageBox.SendMessageToAdmin)
+        # Unit Tests for General Message: 
+        def test_GeneralMessageBox_To_My_Ads(self):
+            self.assertTrue(self.generalmessagebox.SendMessageToAdmin)
 
 
 
@@ -159,8 +160,8 @@ if userObj.Usertype == "Admin":
         generalmessage = GeneralMessagePopup()
         myAdsDetails = MyAdsDetails()
         generalMessageBox = GeneralMessageBox() #exclusive for admin
-        AdVisability = AdVisability()
-        UserPermission = UserPermission()
+        #AdVisability = AdVisability() #<-- cant create object of this class
+        #UserPermission = UserPermission() #<-- cant create object of this class
         #=-----------------------------=#
 
         # Unit Tests for Login:
