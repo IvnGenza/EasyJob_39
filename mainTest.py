@@ -228,6 +228,8 @@ class GeneralTests(unittest.TestCase):
     generalmessage = GeneralMessagePopup()
     myadsresume = MyAdsResumePopup()
     activityReport = Ui_MainWindow()
+    firstMessage = FirstMessage()
+    chat = MsgStudentEmployer()
     #=-----------------------------=#
 
 
