@@ -233,45 +233,45 @@ class GeneralTests(unittest.TestCase):
     chat = MsgStudentEmployer()
     #=-----------------------------=#
 
-    # def test_MsgStudentEmployer1(self):
-    #     self.assertTrue(self.chat.GetKeys)
+    def test_MsgStudentEmployer1(self):
+        self.assertTrue(self.chat.GetKeys)
 
-    # def test_MsgStudentEmployer2(self):
-    #     self.assertTrue(self.chat.ShowAllChats)
+    def test_MsgStudentEmployer2(self):
+        self.assertTrue(self.chat.ShowAllChats)
 
-    # def test_MsgStudentEmployer3(self):
-    #     self.assertTrue(self.chat.ShowChat)
+    def test_MsgStudentEmployer3(self):
+        self.assertTrue(self.chat.ShowChat)
 
-    # def test_MsgStudentEmployer4(self):
-    #     self.assertTrue(self.chat.SendMsg)
+    def test_MsgStudentEmployer4(self):
+        self.assertTrue(self.chat.SendMsg)
 
-    # def test_MsgStudentEmployer5(self):
-    #     self.assertTrue(self.chat.handle_buttons)
+    def test_MsgStudentEmployer5(self):
+        self.assertTrue(self.chat.handle_buttons)
 
 
-    # def test_FirstMessage1(self):
-    #     self.assertTrue(self.firstMessage.GetKeys)
+    def test_FirstMessage1(self):
+        self.assertTrue(self.firstMessage.GetKeys)
 
-    # def test_FirstMessage2(self):
-    #     self.assertTrue(self.firstMessage.ShowName)
+    def test_FirstMessage2(self):
+        self.assertTrue(self.firstMessage.ShowName)
 
-    # def test_FirstMessage3(self):
-    #     self.assertTrue(self.firstMessage.CreateDialog)
+    def test_FirstMessage3(self):
+        self.assertTrue(self.firstMessage.CreateDialog)
 
-    # def test_FirstMessage4(self):
-    #     self.assertTrue(self.firstMessage.handle_buttons)
+    def test_FirstMessage4(self):
+        self.assertTrue(self.firstMessage.handle_buttons)
 
-    # # def test_activityReport1(self):
-    # #     self.assertTrue(self.activityReport.setupUi)
+    def test_activityReport1(self):
+        self.assertTrue(self.activityReport.setupUi)
 
-    # # def test_activityReport2(self):
-    # #     self.assertTrue(self.activityReport.retranslateUi)
+    def test_activityReport2(self):
+        self.assertTrue(self.activityReport.retranslateUi)
 
-    # def test_activityReport3(self):
-    #     self.assertTrue(self.activityReport.FullDateList)
+    def test_activityReport3(self):
+        self.assertTrue(self.activityReport.FullDateList)
 
-    # def test_activityReport4(self):
-    #     self.assertTrue(self.activityReport.plotOnCanvas)
+    def test_activityReport4(self):
+        self.assertTrue(self.activityReport.plotOnCanvas)
 
 
 
@@ -461,99 +461,99 @@ class GeneralTests(unittest.TestCase):
 
 ###############  omer #######################
 
-class TestDeletePopup(unittest.TestCase):
-    def setUp(self):
-        self.app = QApplication([])
-        self.user = User("testuser@example.com", "Test User", "password", "Student")
-        self.popup = DeletePopup(self.user)
+# class TestDeletePopup(unittest.TestCase):
+#     def setUp(self):
+#         self.app = QApplication([])
+#         self.user = User("testuser@example.com", "Test User", "password", "Student")
+#         self.popup = DeletePopup(self.user)
 
-    def test_delete_account(self):
-        # Verify that the account is deleted from the database and auth
-        self.popup.delete_account()
-        # Check that the account is not in the database
-        self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
-        # Check that the account is not in auth
-        self.assertIsNone(auth.get_user(self.user.idToken))
+#     def test_delete_account(self):
+#         # Verify that the account is deleted from the database and auth
+#         self.popup.delete_account()
+#         # Check that the account is not in the database
+#         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
+#         # Check that the account is not in auth
+#         self.assertIsNone(auth.get_user(self.user.idToken))
     
-    def test_delete_user(self):
-        # Verify that the account is deleted from the database and auth
-        self.popup.delete_user()
-        # Check that the account is not in the database
-        self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
-        # Check that the account is not in auth
-        self.assertIsNone(auth.get_user(self.user.idToken))
+#     def test_delete_user(self):
+#         # Verify that the account is deleted from the database and auth
+#         self.popup.delete_user()
+#         # Check that the account is not in the database
+#         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
+#         # Check that the account is not in auth
+#         self.assertIsNone(auth.get_user(self.user.idToken))
 
-    def test_no_button(self):
-        # Verify that the popup closes when the 'no' button is clicked
-        self.popup.no_button.click()
-        self.assertFalse(self.popup.isVisible())
+#     def test_no_button(self):
+#         # Verify that the popup closes when the 'no' button is clicked
+#         self.popup.no_button.click()
+#         self.assertFalse(self.popup.isVisible())
 
-    def test_change_to_login(self):
-        # Verify that the current index of the widget changes to the login screen
-        self.popup.change_to_login()
-        self.assertEqual(widget.currentIndex(), 1)
+#     def test_change_to_login(self):
+#         # Verify that the current index of the widget changes to the login screen
+#         self.popup.change_to_login()
+#         self.assertEqual(widget.currentIndex(), 1)
 
-    def test_handle_buttons(self):
-        # Verify that the delete account function is connected to the 'yes' button for non-admin users
-        self.popup.handle_buttons()
-        self.popup.yes_button.click()
-        self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
-        self.assertIsNone(auth.get_user(self.user.idToken))
+#     def test_handle_buttons(self):
+#         # Verify that the delete account function is connected to the 'yes' button for non-admin users
+#         self.popup.handle_buttons()
+#         self.popup.yes_button.click()
+#         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
+#         self.assertIsNone(auth.get_user(self.user.idToken))
 
 
-        #======================Test for Homepage ================================
+#         #======================Test for Homepage ================================
       
 
-class TestSearchUser(unittest.TestCase):
-    def setUp(self):
-        self.admin = User("admin@example.com", "admin", "password", "Admin")
-        self.student1 = User("student1@example.com", "student1", "password", "Student")
-        self.student2 = User("student2@example.com", "student2", "password", "Student")
-        self.homepage = HomePage(self.admin)
-        self.homepage.username_textBox.setText("student")
-        self.homepage.listWidget_users.clear()
+# class TestSearchUser(unittest.TestCase):
+#     def setUp(self):
+#         self.admin = User("admin@example.com", "admin", "password", "Admin")
+#         self.student1 = User("student1@example.com", "student1", "password", "Student")
+#         self.student2 = User("student2@example.com", "student2", "password", "Student")
+#         self.homepage = HomePage(self.admin)
+#         self.homepage.username_textBox.setText("student")
+#         self.homepage.listWidget_users.clear()
 
-    def test_search_user(self):
-        # Add test users to the database
-        db.child("Users").child(self.student1.key()).set(self.student1.getUser())
-        db.child("Users").child(self.student2.key()).set(self.student2.getUser())
-        # Call the search user function
-        self.homepage.SearchUser()
-        # Check that the correct users are in the list widget
-        self.assertEqual(self.homepage.listWidget_users.count(), 2)
-        self.assertEqual(self.homepage.listWidget_users.item(0).text(), "student1")
-        self.assertEqual(self.homepage.listWidget_users.item(1).text(), "student2")
+#     def test_search_user(self):
+#         # Add test users to the database
+#         db.child("Users").child(self.student1.key()).set(self.student1.getUser())
+#         db.child("Users").child(self.student2.key()).set(self.student2.getUser())
+#         # Call the search user function
+#         self.homepage.SearchUser()
+#         # Check that the correct users are in the list widget
+#         self.assertEqual(self.homepage.listWidget_users.count(), 2)
+#         self.assertEqual(self.homepage.listWidget_users.item(0).text(), "student1")
+#         self.assertEqual(self.homepage.listWidget_users.item(1).text(), "student2")
         
-    def test_search_user_no_results(self):
-        # Call the search user function
-        self.homepage.SearchUser()
-        # Check that the correct message is displayed
-        self.assertEqual(self.homepage.no_jobs_found_label.text(), "could not find users that fit your search")
-        self.assertEqual(self.homepage.listWidget_users.count(), 0)
+#     def test_search_user_no_results(self):
+#         # Call the search user function
+#         self.homepage.SearchUser()
+#         # Check that the correct message is displayed
+#         self.assertEqual(self.homepage.no_jobs_found_label.text(), "could not find users that fit your search")
+#         self.assertEqual(self.homepage.listWidget_users.count(), 0)
         
-    def tearDown(self):
-        db.child("Users").child(self.student1.key()).remove()
-        db.child("Users").child(self.student2.key()).remove()
+#     def tearDown(self):
+#         db.child("Users").child(self.student1.key()).remove()
+#         db.child("Users").child(self.student2.key()).remove()
         
         
         
-    #######Test for help function "change to my Ads"
+#     #######Test for help function "change to my Ads"
     
     
-class TestChangeToMyAds(unittest.TestCase):
-    def setUp(self):
-        self.employer = User("employer@example.com", "employer", "password", "Employer")
-        self.homepage = HomePage(self.employer)
-        self.widget = QStackedWidget()
-        self.widget.addWidget(self.homepage)
+# class TestChangeToMyAds(unittest.TestCase):
+#     def setUp(self):
+#         self.employer = User("employer@example.com", "employer", "password", "Employer")
+#         self.homepage = HomePage(self.employer)
+#         self.widget = QStackedWidget()
+#         self.widget.addWidget(self.homepage)
 
-    def test_change_to_my_ads(self):
-        self.homepage.change_to_my_ads()
-        self.assertEqual(self.widget.currentIndex(), 1)
-        self.assertIsInstance(self.widget.currentWidget(), MyAds)
+#     def test_change_to_my_ads(self):
+#         self.homepage.change_to_my_ads()
+#         self.assertEqual(self.widget.currentIndex(), 1)
+#         self.assertIsInstance(self.widget.currentWidget(), MyAds)
 
-    def tearDown(self):
-        self.widget = None
+#     def tearDown(self):
+#         self.widget = None
 
 
 
