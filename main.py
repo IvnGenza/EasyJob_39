@@ -482,14 +482,14 @@ class Homepage(QMainWindow):
         for user in users.each():
             if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').get().val() == None:
                 self.chat_button.hide()
-            if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child('Admin Fullstack').get().val() != None:
+            if user.val()['email'] == userObj.Email and db.child('Users').child(user.key()).child('messages').child('Admin Fullstack').get().val() != None and userObj.Usertype != 'Admin':
                 self.admin_chat_button.hide()
 
         #setting an icon for search button
         self.search_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
         if userObj.Usertype == 'Admin':
             self.search_username_button.setIcon(QtGui.QIcon("ui/Images/search.png"))
-            self.admin_chat_button.hide()
+            #self.admin_chat_button.hide() #admin does not have this button in the ui file
     
     #--------------------Main Functionality Functions-----------------------#
 
@@ -685,16 +685,20 @@ class Homepage(QMainWindow):
         self.advanced_search_button.clicked.connect(self.change_to_advanced_search) #this is for the advanced search button
         self.listWidget.itemClicked.connect(self.change_to_AdPopup) #this is for opening the different job ads on the screen after search
         self.chat_button.clicked.connect(self.openChat)
-        self.admin_chat_button.clicked.connect(self.openAdminChat)
+        
+        if userObj.Usertype == 'Student':
+            self.admin_chat_button.clicked.connect(self.openAdminChat)
+
         if userObj.Usertype == 'Employer':
             self.new_ad_button.clicked.connect(self.change_to_NewAd) #only the employer has this button
             self.my_ads_button.clicked.connect(self.change_to_my_ads)
+            self.admin_chat_button.clicked.connect(self.openAdminChat)
 
         if userObj.Usertype == 'Admin': #only the admin has these buttons, thats why we check if the current user is admin or not
             self.search_username_button.clicked.connect(self.SearchUser)
             self.listWidget_users.itemClicked.connect(self.change_to_UserPopup)
             self.message_everyone_button.clicked.connect(self.change_to_messageBox)
-        
+
         return True
     
         #this gets an item from the list widget
@@ -1177,6 +1181,7 @@ class MsgStudentEmployer(QMainWindow):
 
 
     def ShowChat(self,item): # This function will send some employer`s mail in order to get his key.
+        self.chat_area.clear()
         TargetMail = db.child('Users').child(self.MyKey).child('messages').child(item.text()).get().val()[0]
         self.GetKeys(TargetMail)
                             # after this it will add all messages between 2 persons into chat area.
