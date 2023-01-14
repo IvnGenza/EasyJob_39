@@ -731,13 +731,49 @@ class Password(QMainWindow):
         return True
 
 #-------------------------------Employer Report class------------------------------------
-class Employer_Report(QMainWindow):
+#class Employer_Report(QMainWindow):
+#    def __init__(self):
+#        super(Employer_Report, self).__init__()
+#        loadUi("ui/Employer_Report.ui", self)
+
+
+class EmployerReport(QMainWindow):
     def __init__(self):
-        super(Employer_Report, self).__init__()
+        super(EmployerReport, self).__init__()
         loadUi("ui/Employer_Report.ui", self)
+        self.handle_buttons()
+        self.ShowReportInfo()
 
+    def ShowReportInfo(self):
 
+        self.tableWidget.clear()
+        jobs = db.child('Jobs').get()
+        for job in jobs.each():
+            try:
+                if job.val()['employerEmail'] == userObj.Email:
+                    #add a new row
+                    rowPosition = self.tableWidget.rowCount()
+                    self.tableWidget.insertRow(rowPosition)
+                
+                    #add information into the new row
+                    self.tableWidget.setItem(rowPosition , 0 , QtWidgets.QTableWidgetItem(job.val()['title'])) #title
+                    self.tableWidget.setItem(rowPosition , 1 , QtWidgets.QTableWidgetItem(job.val()['search']['location'])) #location
+                    self.tableWidget.setItem(rowPosition , 2 , QtWidgets.QTableWidgetItem(job.val()['search']['role'])) #role
+                    self.tableWidget.setItem(rowPosition , 3 , QtWidgets.QTableWidgetItem(job.val()['search']['jobType'])) #jobType
+                    
+                    buf = str(job.val()['jobNum'])
+                    self.tableWidget.setItem(rowPosition , 4 , QtWidgets.QTableWidgetItem(buf)) #jobNum
+                    buf = str(job.val()['applicants'])
+                    self.tableWidget.setItem(rowPosition , 5 , QtWidgets.QTableWidgetItem(buf)) #applicants
 
+                    self.tableWidget.setHorizontalHeaderLabels(['Title', 'Location', 'Role', 'Job Type','Job Number','Applicants'])
+
+            except: 
+                pass
+
+    def handle_buttons(self):
+        self.close_button.clicked.connect(self.close)
+        
 
 #------------------------------------Usersettings class------------------------------------
 
@@ -820,7 +856,7 @@ class Usersettings(QMainWindow):
         self.messageBox.show()
 
     def change_to_report(self):
-        self.employer_report = Employer_Report()
+        self.employer_report = EmployerReport()
         self.employer_report.show()
         return True
 
