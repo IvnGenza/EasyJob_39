@@ -461,32 +461,33 @@ class GeneralTests(unittest.TestCase):
 
 ###############  omer #######################
 
-# class TestDeletePopup(unittest.TestCase):
-#     def setUp(self):
-#         self.app = QApplication([])
-#         self.user = User("testuser@example.com", "Test User", "password", "Student")
-#         self.popup = DeletePopup(self.user)
+#-------------------test for class Login --------------------
+    def test_logging(self):
+        self.assertTrue(self.delete_account.Login)
 
-#     def test_delete_account(self):
-#         # Verify that the account is deleted from the database and auth
-#         self.popup.delete_account()
-#         # Check that the account is not in the database
-#         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
-#         # Check that the account is not in auth
-#         self.assertIsNone(auth.get_user(self.user.idToken))
-    
-#     def test_delete_user(self):
-#         # Verify that the account is deleted from the database and auth
-#         self.popup.delete_user()
-#         # Check that the account is not in the database
-#         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
-#         # Check that the account is not in auth
-#         self.assertIsNone(auth.get_user(self.user.idToken))
+        #all the other help function already checked
 
-#     def test_no_button(self):
-#         # Verify that the popup closes when the 'no' button is clicked
-#         self.popup.no_button.click()
-#         self.assertFalse(self.popup.isVisible())
+#-------------------test for class UserPopup --------------------
+    def test_DeletePopup(self):
+        self.assertTrue(self.delete_account.UserPopup)
+
+    def test_SendMessage(self):
+        self.assertTrue(self.SendMessage.UserPopup)
+
+#-------------------test for class Student Report --------------------
+    def test_ShowReportInfo(self):
+        self.assertTrue(self.ShowReportInfo.StudentReport)
+
+    def test_handle_buttons(self):
+        self.assertTrue(self.handle_buttons.StudentReport)
+
+
+#-------------------test for class MyAds line- 1238 --------------------
+    def test_ShowAds(self):
+        self.assertTrue(self.ShowAds.MyAds)
+
+
+
 
 #     def test_change_to_login(self):
 #         # Verify that the current index of the widget changes to the login screen
@@ -498,11 +499,7 @@ class GeneralTests(unittest.TestCase):
 #         self.popup.handle_buttons()
 #         self.popup.yes_button.click()
 #         self.assertIsNone(db.child('Users').child(self.user.key()).get().val())
-#         self.assertIsNone(auth.get_user(self.user.idToken))
-
-
-#         #======================Test for Homepage ================================
-      
+#         self.assertIsNone(auth.get_user(self.user.idToken))      
 
 # class TestSearchUser(unittest.TestCase):
 #     def setUp(self):
@@ -536,24 +533,6 @@ class GeneralTests(unittest.TestCase):
 #         db.child("Users").child(self.student2.key()).remove()
         
         
-        
-#     #######Test for help function "change to my Ads"
-    
-    
-# class TestChangeToMyAds(unittest.TestCase):
-#     def setUp(self):
-#         self.employer = User("employer@example.com", "employer", "password", "Employer")
-#         self.homepage = HomePage(self.employer)
-#         self.widget = QStackedWidget()
-#         self.widget.addWidget(self.homepage)
-
-#     def test_change_to_my_ads(self):
-#         self.homepage.change_to_my_ads()
-#         self.assertEqual(self.widget.currentIndex(), 1)
-#         self.assertIsInstance(self.widget.currentWidget(), MyAds)
-
-#     def tearDown(self):
-#         self.widget = None
 
 
 
