@@ -502,7 +502,7 @@ class GeneralTests(unittest.TestCase):
 
 
 #         #======================Test for Homepage ================================
-      
+
 
 # class TestSearchUser(unittest.TestCase):
 #     def setUp(self):
