@@ -1281,7 +1281,7 @@ class FirstMessage(QMainWindow):
         self.send_msg_button.clicked.connect(self.CreateDialog)
         self.chatlist.hide()
         self.show_chats_button.hide()
-
+        return True
 
 
 
