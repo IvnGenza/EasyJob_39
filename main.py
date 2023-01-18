@@ -1466,8 +1466,7 @@ class DeletePopup(QMainWindow): #add a commit here
 
         self.no_button.clicked.connect(self.noButton) # if press no close the
         return True
-### ===============================omer=====================================#### 
-### the end of deleting account ####
+
 #----------------------------------------MyAds---------------------------------------
 class MyAds(QMainWindow):
     def __init__(self):
